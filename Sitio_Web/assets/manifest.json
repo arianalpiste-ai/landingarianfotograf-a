@@ -1,0 +1,407 @@
+{
+  "hero": [
+    {
+      "src": "assets/images/hero/hero_01.jpg",
+      "w": 2400,
+      "h": 1600
+    },
+    {
+      "src": "assets/images/hero/hero_02.jpg",
+      "w": 2400,
+      "h": 1600
+    },
+    {
+      "src": "assets/images/hero/hero_03.jpg",
+      "w": 1600,
+      "h": 2400
+    },
+    {
+      "src": "assets/images/hero/hero_04.jpg",
+      "w": 2400,
+      "h": 1600
+    },
+    {
+      "src": "assets/images/hero/hero_05.jpg",
+      "w": 2400,
+      "h": 1600
+    },
+    {
+      "src": "assets/images/hero/hero_06.jpg",
+      "w": 2400,
+      "h": 1681
+    },
+    {
+      "src": "assets/images/hero/hero_07.jpg",
+      "w": 2400,
+      "h": 1600
+    },
+    {
+      "src": "assets/images/hero/hero_08.jpg",
+      "w": 2400,
+      "h": 1600
+    }
+  ],
+  "retratos": [
+    {
+      "src": "assets/images/retratos/retrato_01.jpg",
+      "w": 1200,
+      "h": 1800
+    },
+    {
+      "src": "assets/images/retratos/retrato_02.jpg",
+      "w": 1200,
+      "h": 1800
+    },
+    {
+      "src": "assets/images/retratos/retrato_03.jpg",
+      "w": 1800,
+      "h": 1200
+    },
+    {
+      "src": "assets/images/retratos/retrato_04.jpg",
+      "w": 1249,
+      "h": 1800
+    },
+    {
+      "src": "assets/images/retratos/retrato_05.jpg",
+      "w": 1327,
+      "h": 1800
+    },
+    {
+      "src": "assets/images/retratos/retrato_06.jpg",
+      "w": 1800,
+      "h": 1250
+    },
+    {
+      "src": "assets/images/retratos/retrato_07.jpg",
+      "w": 1152,
+      "h": 1800
+    },
+    {
+      "src": "assets/images/retratos/retrato_08.jpg",
+      "w": 1800,
+      "h": 1363
+    },
+    {
+      "src": "assets/images/retratos/retrato_09.jpg",
+      "w": 1800,
+      "h": 1132
+    },
+    {
+      "src": "assets/images/retratos/retrato_10.jpg",
+      "w": 1800,
+      "h": 1371
+    },
+    {
+      "src": "assets/images/retratos/retrato_11.jpg",
+      "w": 1800,
+      "h": 1200
+    }
+  ],
+  "paisaje": [
+    {
+      "src": "assets/images/paisaje/paisaje_01.jpg",
+      "w": 1900,
+      "h": 1302
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_02.jpg",
+      "w": 1900,
+      "h": 1386
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_03.jpg",
+      "w": 1900,
+      "h": 1267
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_04.jpg",
+      "w": 1900,
+      "h": 1294
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_05.jpg",
+      "w": 1900,
+      "h": 1245
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_06.jpg",
+      "w": 1900,
+      "h": 1274
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_07.jpg",
+      "w": 1267,
+      "h": 1900
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_08.jpg",
+      "w": 1900,
+      "h": 1267
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_09.jpg",
+      "w": 1900,
+      "h": 1307
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_10.jpg",
+      "w": 1316,
+      "h": 1900
+    },
+    {
+      "src": "assets/images/paisaje/paisaje_11.jpg",
+      "w": 1900,
+      "h": 1267
+    }
+  ],
+  "documental": [
+    {
+      "src": "assets/images/documental/documental_01.jpg",
+      "w": 1900,
+      "h": 1267
+    },
+    {
+      "src": "assets/images/documental/documental_02.jpg",
+      "w": 1267,
+      "h": 1900
+    },
+    {
+      "src": "assets/images/documental/documental_03.jpg",
+      "w": 1267,
+      "h": 1900
+    },
+    {
+      "src": "assets/images/documental/documental_04.jpg",
+      "w": 1900,
+      "h": 1267
+    },
+    {
+      "src": "assets/images/documental/documental_05.jpg",
+      "w": 1900,
+      "h": 1267
+    }
+  ],
+  "eventos": [
+    {
+      "title": "Bautizo de Zoe",
+      "items": [
+        {
+          "src": "assets/images/eventos/evento_01.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_02.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_03.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_04.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_05.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_13.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_15.jpg",
+          "w": 1267,
+          "h": 1900
+        },
+        {
+          "src": "assets/images/eventos/evento_16.jpg",
+          "w": 1900,
+          "h": 1331
+        },
+        {
+          "src": "assets/images/eventos/evento_17.jpg",
+          "w": 1900,
+          "h": 1267
+        }
+      ]
+    },
+    {
+      "title": "Fiesta de Yannick",
+      "items": [
+        {
+          "src": "assets/images/eventos/evento_29.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_30.jpg",
+          "w": 1899,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_31.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_32.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_33.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_34.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_35.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_36.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_37.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_38.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_39.jpg",
+          "w": 1900,
+          "h": 1266
+        },
+        {
+          "src": "assets/images/eventos/evento_40.jpg",
+          "w": 1266,
+          "h": 1900
+        }
+      ]
+    },
+    {
+      "title": "Fiesta de Zoe",
+      "items": [
+        {
+          "src": "assets/images/eventos/evento_06.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_07.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_08.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_09.jpg",
+          "w": 1267,
+          "h": 1900
+        },
+        {
+          "src": "assets/images/eventos/evento_10.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_11.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_12.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_14.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_18.jpg",
+          "w": 1900,
+          "h": 1267
+        }
+      ]
+    },
+    {
+      "title": "Cumpleaños de Maritza",
+      "items": [
+        {
+          "src": "assets/images/eventos/evento_19.jpg",
+          "w": 1267,
+          "h": 1900
+        },
+        {
+          "src": "assets/images/eventos/evento_20.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_21.jpg",
+          "w": 1267,
+          "h": 1900
+        },
+        {
+          "src": "assets/images/eventos/evento_22.jpg",
+          "w": 1267,
+          "h": 1900
+        },
+        {
+          "src": "assets/images/eventos/evento_23.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_24.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_25.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_26.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_27.jpg",
+          "w": 1900,
+          "h": 1267
+        },
+        {
+          "src": "assets/images/eventos/evento_28.jpg",
+          "w": 1900,
+          "h": 1267
+        }
+      ]
+    }
+  ]
+}
