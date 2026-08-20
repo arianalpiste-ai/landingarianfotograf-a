@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /.netlify/functions/
+
+Sitemap: https://arianalpiste.com/sitemap.xml
