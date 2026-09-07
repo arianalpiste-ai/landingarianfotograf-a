@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20260907">
 </head>
 <body class="light-hero">
 
@@ -33,7 +33,7 @@
       <a href="index.html#contacto" class="nav-link">Contacto</a>
       <a href="https://cal.com/arian-alpiste-sarmiento-gzfq0v" target="_blank" class="nav-cta">Agendar llamada</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-controls="mainNav" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -182,17 +182,17 @@
       <form class="cform" name="contacto" method="POST" netlify>
         <input type="hidden" name="form-name" value="contacto">
         <div class="form-row">
-          <input type="text" name="nombre" placeholder="Nombre completo" required>
-          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <div class="form-field"><label for="contacto-nombre">Nombre completo</label><input type="text" autocomplete="name" id="contacto-nombre" name="nombre" placeholder="Nombre completo" required></div>
+          <div class="form-field"><label for="contacto-email">Correo electrónico</label><input type="email" autocomplete="email" id="contacto-email" name="email" placeholder="Correo electrónico" required></div>
         </div>
-        <input type="tel" name="celular" placeholder="Número de celular">
-        <select name="evento" required>
+        <div class="form-field"><label for="contacto-celular">Número de celular (opcional)</label><input type="tel" autocomplete="tel" id="contacto-celular" name="celular" placeholder="Número de celular"></div>
+        <div class="form-field"><label for="contacto-evento">Tipo de evento o sesión</label><select id="contacto-evento" name="evento" required>
           <option value="" disabled selected>Tipo de evento</option>
           <option>Boda</option><option>Quinceañero</option><option>Bautizo</option>
-          <option>Graduación</option><option>Evento corporativo</option><option>Cumpleaños</option><option>Otro</option>
-        </select>
-        <input type="text" name="fecha" placeholder="Fecha tentativa del evento">
-        <textarea name="mensaje" placeholder="Cuéntame más sobre tu evento..."></textarea>
+          <option>Graduación</option><option>Evento corporativo</option><option>Cumpleaños</option><option>Sesión de retratos</option><option>Otro</option>
+        </select></div>
+        <div class="form-field"><label for="contacto-fecha">Fecha tentativa (opcional)</label><input type="date" id="contacto-fecha" name="fecha" placeholder="Fecha tentativa del evento"></div>
+        <div class="form-field"><label for="contacto-mensaje">Cuéntame más (opcional)</label><textarea id="contacto-mensaje" name="mensaje" placeholder="Cuéntame más sobre tu evento..."></textarea></div>
         <div class="form-actions">
           <button type="submit" class="btn-primary">
             Enviar mi consulta
@@ -315,16 +315,19 @@
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.833L.057 23.428a.5.5 0 0 0 .609.61l5.671-1.46A11.934 11.934 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.938 9.938 0 0 1-5.058-1.374l-.362-.214-3.742.964.99-3.666-.235-.375A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 5.477 10 10-4.477 10-10 10z"/></svg>
 </a>
 
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lightboxTitle">
   <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
   <button class="lightbox-prev" id="lightboxPrev" aria-label="Anterior">&#8249;</button>
   <button class="lightbox-next" id="lightboxNext" aria-label="Siguiente">&#8250;</button>
   <div class="lightbox-content">
-    <img id="lightboxImg" src="" alt="">
-    <p class="lightbox-count" id="lightboxCount"></p>
+    <h2 id="lightboxTitle" class="lightbox-title"></h2>
+    <img id="lightboxImg" alt="">
+    <p id="lightboxStatus" role="status"></p>
+    <p id="lightboxReference" class="lightbox-reference"></p>
+    <p class="lightbox-count" id="lightboxCount" aria-live="polite" aria-atomic="true"></p>
   </div>
 </div>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20260907"></script>
 </body>
 </html>

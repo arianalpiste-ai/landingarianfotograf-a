@@ -1,354 +1,298 @@
 (function () {
   'use strict';
-
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var selection = new URLSearchParams(location.search).has('seleccion');
+  var viewer = setupViewer();
+  var year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
   setupHeader();
-  setupNavToggle();
-  setupFadeIn();
-  setupScrollSpy();
-
-  var heroSlidesEl = document.getElementById('heroSlides');
-  if (heroSlidesEl) {
-    // Página de portafolio: carga el manifest y arma hero + galerías + lightbox
-    fetch('assets/manifest.json')
-      .then(function (r) { return r.json(); })
-      .then(initPortfolio)
-      .catch(function (err) { console.error('No se pudo cargar el manifest de imágenes', err); hidePreloader(); });
+  setupNav();
+  document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('in-view'); });
+  if (document.getElementById('heroSlides')) {
+    fetch('assets/manifest.json').then(function (r) {
+      if (!r.ok) throw new Error('No se pudo cargar la galería');
+      return r.json();
+    }).then(function (data) {
+      buildHero(data.hero);
+      ['eventos', 'retratos'].forEach(function (key) {
+        var container = document.getElementById(key + 'Groups');
+        data[key].forEach(function (group, i) {
+          var title = group.title || 'Retratos · Sesión ' + (i + 1);
+          var wrap = document.createElement('div');
+          wrap.className = 'event-group';
+          var heading = document.createElement('h3');
+          heading.className = 'event-group-title';
+          heading.textContent = title;
+          wrap.appendChild(heading);
+          container.appendChild(wrap);
+          buildGallery(wrap, group.items, title, group.featured, key + '-' + i);
+        });
+      });
+      ['paisaje', 'documental'].forEach(function (key) {
+        buildGallery(document.getElementById(key + 'Grid'), data[key], key === 'paisaje' ? 'Paisaje & Viajes' : 'Documental', (data.featured || {})[key], key);
+      });
+      setupCategoryNav();
+    }).catch(function () {
+      var error = document.createElement('p');
+      error.className = 'gallery-error';
+      error.textContent = 'No pudimos cargar las fotografías. Recarga la página para volver a intentarlo.';
+      document.getElementById('eventosGroups').appendChild(error);
+    }).finally(hidePreloader);
+    document.getElementById('heroScroll').addEventListener('click', function () {
+      document.getElementById('eventos').scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth' });
+    });
+    if (selection) {
+      var note = document.createElement('p');
+      note.className = 'selection-note';
+      note.textContent = 'Selección de fotos: abre cada sesión y anota los nombres de tus tres favoritas, en el orden que prefieras.';
+      document.querySelector('main').prepend(note);
+    }
   } else {
-    if (document.querySelector('.pp-item')) setupPreviewLightbox();
+    document.querySelectorAll('.pp-item').forEach(function (item) {
+      var title = item.querySelector('.pp-title').textContent;
+      item.setAttribute('role', 'button');
+      item.tabIndex = 0;
+      item.setAttribute('aria-label', 'Ver fotografías de ' + title);
+      var images = item.dataset.gallery.split(',').slice(0, 5).map(function (src, i) {
+        return { src: src.trim(), alt: title + ' · Fotografía ' + (i + 1) };
+      });
+      function open() { viewer.open(images, 0, title, item); }
+      item.addEventListener('click', open);
+      item.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    });
     hidePreloader();
   }
 
   function hidePreloader() {
-    var preloader = document.getElementById('preloader');
-    if (!preloader) return;
-    window.requestAnimationFrame(function () {
-      setTimeout(function () { preloader.classList.add('hidden'); }, 250);
-    });
+    var el = document.getElementById('preloader');
+    if (el) el.classList.add('hidden');
   }
 
-  function initPortfolio(data) {
-    buildHero(data.hero);
-    var eventosFlat = buildEventGroups('eventosGroups', data.eventos);
-    buildGrid('retratosGrid', data.retratos, 'Retrato');
-    buildGrid('paisajeGrid', data.paisaje, 'Paisaje & Viajes');
-    buildGrid('documentalGrid', data.documental, 'Documental');
-
-    var allImages = [].concat(eventosFlat, data.retratos, data.paisaje, data.documental);
-    setupLightbox(allImages);
-    setupHeroScrollButton();
-    hidePreloader();
-  }
-
-  /* ---------- Eventos: subgrupos con subtítulo por evento ---------- */
-  function buildEventGroups(containerId, groups) {
-    var container = document.getElementById(containerId);
-    if (!container || !groups) return [];
-    var flat = [];
-
-    groups.forEach(function (group, gi) {
-      var wrap = document.createElement('div');
-      wrap.className = 'event-group';
-
-      var title = document.createElement('h3');
-      title.className = 'event-group-title';
-      title.textContent = group.title;
-      wrap.appendChild(title);
-
-      var grid = document.createElement('div');
-      grid.className = 'masonry';
-      grid.id = containerId + gi;
-      wrap.appendChild(grid);
-
-      container.appendChild(wrap);
-      buildGrid(grid.id, group.items, group.title);
-      flat = flat.concat(group.items);
-    });
-
-    return flat;
-  }
-
-  /* ---------- Hero slideshow (portafolio.html) ---------- */
-  function buildHero(slides) {
-    var container = document.getElementById('heroSlides');
-    var dotsContainer = document.getElementById('heroDots');
-    if (!slides || !slides.length) return;
-
-    slides.forEach(function (slide, i) {
-      var div = document.createElement('div');
-      div.className = 'hero-slide' + (i === 0 ? ' active' : '');
-      div.style.backgroundImage = 'url(' + slide.src + ')';
-      container.appendChild(div);
-
-      if (dotsContainer) {
-        var dot = document.createElement('button');
-        dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', 'Imagen ' + (i + 1));
-        dot.addEventListener('click', function () { goToSlide(i); });
-        dotsContainer.appendChild(dot);
+  function buildGallery(container, items, title, featured, id) {
+    var chosen = (featured || []).map(function (src) { return items.find(function (im) { return im.src === src; }); }).filter(Boolean).slice(0, 3);
+    var ordered = chosen.concat(items.filter(function (im) { return chosen.indexOf(im) === -1; }));
+    var rows = [];
+    var wrap = document.createElement('div');
+    wrap.className = 'photo-rows-wrap';
+    wrap.id = 'photos-' + id;
+    container.appendChild(wrap);
+    ordered.forEach(function (item, i) {
+      if (i % 3 === 0) {
+        var row = document.createElement('div');
+        row.className = 'photo-row';
+        row.hidden = i >= 3;
+        wrap.appendChild(row);
+        rows.push(row);
       }
-    });
-
-    var slideEls = container.querySelectorAll('.hero-slide');
-    var dotEls = dotsContainer ? dotsContainer.querySelectorAll('.hero-dot') : [];
-    var current = 0;
-    var timer;
-
-    function goToSlide(index) {
-      slideEls[current].classList.remove('active');
-      if (dotEls[current]) dotEls[current].classList.remove('active');
-      current = index;
-      slideEls[current].classList.add('active');
-      if (dotEls[current]) dotEls[current].classList.add('active');
-      resetTimer();
-    }
-
-    function nextSlide() { goToSlide((current + 1) % slideEls.length); }
-
-    function resetTimer() {
-      clearInterval(timer);
-      timer = setInterval(nextSlide, 5500);
-    }
-
-    resetTimer();
-  }
-
-  function setupHeroScrollButton() {
-    var btn = document.getElementById('heroScroll');
-    if (!btn) return;
-    btn.addEventListener('click', function () {
-      var target = document.getElementById('eventos');
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
-
-  /* ---------- Masonry grids ---------- */
-  function buildGrid(containerId, items, altPrefix) {
-    var container = document.getElementById(containerId);
-    if (!container || !items) return;
-    items.forEach(function (item, i) {
-      var fig = document.createElement('div');
-      fig.className = 'masonry-item fade-up';
-      fig.dataset.src = item.src;
-
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'photo-item';
+      button.style.setProperty('--ratio', item.w / item.h);
+      button.dataset.src = item.src;
+      button.setAttribute('aria-label', 'Abrir ' + title + ', fotografía ' + (i + 1));
       var img = document.createElement('img');
       img.loading = 'lazy';
-      img.src = item.src;
-      img.alt = altPrefix + ' ' + (i + 1);
+      img.decoding = 'async';
       img.width = item.w;
       img.height = item.h;
-      img.style.aspectRatio = item.w + ' / ' + item.h;
-      img.addEventListener('load', function () { img.classList.add('loaded'); });
-
-      fig.appendChild(img);
-      container.appendChild(fig);
-    });
-    observeFadeUps(container.querySelectorAll('.fade-up'));
-  }
-
-  /* ---------- Lightbox ---------- */
-  function setupLightbox(allImages) {
-    var lightbox = document.getElementById('lightbox');
-    if (!lightbox) return;
-    var imgEl = document.getElementById('lightboxImg');
-    var countEl = document.getElementById('lightboxCount');
-    var closeBtn = document.getElementById('lightboxClose');
-    var prevBtn = document.getElementById('lightboxPrev');
-    var nextBtn = document.getElementById('lightboxNext');
-    var current = 0;
-
-    document.querySelectorAll('.masonry-item').forEach(function (item, index) {
-      item.addEventListener('click', function () { open(index); });
-    });
-
-    function open(index) {
-      current = index;
-      render(true);
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function close() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function render(isFirst) {
-      var data = allImages[current];
-      var swap = function () {
-        var tmp = new Image();
-        tmp.onload = function () {
-          imgEl.src = data.src;
-          requestAnimationFrame(function () { imgEl.classList.add('show'); });
-        };
-        tmp.src = data.src;
-        countEl.textContent = (current + 1) + ' / ' + allImages.length;
-      };
-      if (isFirst) {
-        swap();
-      } else {
-        imgEl.classList.remove('show');
-        setTimeout(swap, 300);
+      img.alt = item.alt || title + ' · Fotografía ' + (i + 1);
+      if (item.srcset) { img.srcset = item.srcset; img.sizes = '(max-width: 760px) calc(100vw - 48px), 45vw'; }
+      img.src = item.src;
+      button.appendChild(img);
+      if (selection) {
+        var label = document.createElement('span');
+        label.className = 'photo-reference';
+        label.textContent = item.src.split('/').pop();
+        button.appendChild(label);
       }
-    }
-
-    function prev() { current = (current - 1 + allImages.length) % allImages.length; render(); }
-    function next() { current = (current + 1) % allImages.length; render(); }
-
-    closeBtn.addEventListener('click', close);
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
-
-    document.addEventListener('keydown', function (e) {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
+      button.addEventListener('click', function () { viewer.open(ordered, i, title, button); });
+      rows[rows.length - 1].appendChild(button);
     });
-  }
-
-  /* ---------- Preview lightbox (home → "Trabajos recientes") ---------- */
-  function setupPreviewLightbox() {
-    var lightbox = document.getElementById('lightbox');
-    if (!lightbox) return;
-    var imgEl = document.getElementById('lightboxImg');
-    var countEl = document.getElementById('lightboxCount');
-    var closeBtn = document.getElementById('lightboxClose');
-    var prevBtn = document.getElementById('lightboxPrev');
-    var nextBtn = document.getElementById('lightboxNext');
-    var images = [];
-    var current = 0;
-
-    document.querySelectorAll('.pp-item').forEach(function (item) {
-      item.addEventListener('click', function () {
-        var gallery = (item.dataset.gallery || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-        if (!gallery.length) return;
-        images = gallery.slice(0, 5);
-        open(0);
+    if (ordered.length > 3) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'show-more-btn';
+      btn.setAttribute('aria-controls', wrap.id);
+      btn.setAttribute('aria-expanded', 'false');
+      var moreText = 'Ver fotos';
+      btn.textContent = moreText;
+      btn.addEventListener('click', function () {
+        var expand = btn.getAttribute('aria-expanded') !== 'true';
+        rows.forEach(function (row, i) { row.hidden = i > 0 && !expand; });
+        btn.setAttribute('aria-expanded', String(expand));
+        btn.textContent = expand ? 'Ocultar fotos' : moreText;
+        if (!expand) container.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth', block: 'start' });
       });
-    });
-
-    function open(index) {
-      current = index;
-      render(true);
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      container.appendChild(btn);
     }
-
-    function close() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function render(isFirst) {
-      var src = images[current];
-      var swap = function () {
-        var tmp = new Image();
-        tmp.onload = function () {
-          imgEl.src = src;
-          requestAnimationFrame(function () { imgEl.classList.add('show'); });
-        };
-        tmp.src = src;
-        countEl.textContent = (current + 1) + ' / ' + images.length;
-      };
-      if (isFirst) {
-        swap();
-      } else {
-        imgEl.classList.remove('show');
-        setTimeout(swap, 300);
-      }
-    }
-
-    function prev() { current = (current - 1 + images.length) % images.length; render(); }
-    function next() { current = (current + 1) % images.length; render(); }
-
-    closeBtn.addEventListener('click', close);
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
-
-    document.addEventListener('keydown', function (e) {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-    });
   }
 
-  /* ---------- Header ---------- */
+  function buildHero(slides) {
+    if (!slides || !slides.length) return;
+    var container = document.getElementById('heroSlides');
+    var dots = document.getElementById('heroDots');
+    var pause = document.getElementById('heroPause');
+    var current = 0, timer, paused = reduced.matches;
+    var nodes = [], controls = [];
+    slides.forEach(function (slide, i) {
+      var el = document.createElement('div');
+      el.className = 'hero-slide' + (i === 0 ? ' active' : '');
+      container.appendChild(el);
+      nodes.push(el);
+      var dot = document.createElement('button');
+      dot.className = 'hero-dot';
+      dot.setAttribute('aria-label', 'Mostrar imagen ' + (i + 1));
+      dot.setAttribute('aria-pressed', String(i === 0));
+      dot.addEventListener('click', function () { go(i); });
+      dots.appendChild(dot);
+      controls.push(dot);
+    });
+    function load(i) {
+      if (nodes[i].firstChild) return;
+      var im = document.createElement('img');
+      im.alt = '';
+      im.width = slides[i].w;
+      im.height = slides[i].h;
+      if (slides[i].srcset) { im.srcset = slides[i].srcset; im.sizes = '100vw'; }
+      im.fetchPriority = i === 0 ? 'high' : 'low';
+      im.src = slides[i].src;
+      nodes[i].appendChild(im);
+    }
+    function schedule() {
+      clearTimeout(timer);
+      pause.textContent = paused ? 'Reanudar presentación' : 'Pausar presentación';
+      pause.setAttribute('aria-pressed', String(paused));
+      if (!paused && !document.hidden) timer = setTimeout(function () { go((current + 1) % slides.length); }, 5500);
+    }
+    function go(i) {
+      load(i);
+      nodes[current].classList.remove('active');
+      controls[current].setAttribute('aria-pressed', 'false');
+      current = i;
+      nodes[current].classList.add('active');
+      controls[current].setAttribute('aria-pressed', 'true');
+      schedule();
+    }
+    pause.addEventListener('click', function () { paused = !paused; schedule(); });
+    reduced.addEventListener('change', function () { paused = reduced.matches; schedule(); });
+    document.addEventListener('visibilitychange', schedule);
+    go(0);
+  }
+
+  function setupViewer() {
+    var modal = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    var count = document.getElementById('lightboxCount');
+    var titleEl = document.getElementById('lightboxTitle');
+    var reference = document.getElementById('lightboxReference');
+    var status = document.getElementById('lightboxStatus');
+    var closeBtn = document.getElementById('lightboxClose');
+    var prev = document.getElementById('lightboxPrev');
+    var next = document.getElementById('lightboxNext');
+    var images = [], index = 0, title = '', opener, token = 0, inertStates = [], start;
+    function render() {
+      var ticket = ++token;
+      var data = images[index];
+      img.classList.remove('show');
+      count.textContent = (index + 1) + ' de ' + images.length;
+      titleEl.textContent = title;
+      reference.textContent = selection ? data.src.split('/').pop() : '';
+      status.textContent = 'Cargando fotografía…';
+      prev.hidden = next.hidden = images.length < 2;
+      var preload = new Image();
+      preload.onload = function () {
+        if (ticket !== token) return;
+        img.src = data.src;
+        img.alt = data.alt || title + ' · Fotografía ' + (index + 1) + ' de ' + images.length;
+        img.classList.add('show');
+        status.textContent = '';
+      };
+      preload.onerror = function () { if (ticket === token) status.textContent = 'No se pudo cargar esta foto. Puedes pasar a la siguiente.'; };
+      preload.src = data.src;
+    }
+    function move(delta) { index = (index + delta + images.length) % images.length; render(); }
+    function close() {
+      ++token;
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      inertStates.forEach(function (state) { state[0].inert = state[1]; });
+      if (opener) opener.focus({ preventScroll: true });
+    }
+    closeBtn.addEventListener('click', close);
+    prev.addEventListener('click', function () { move(-1); });
+    next.addEventListener('click', function () { move(1); });
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    modal.addEventListener('touchstart', function (e) { if (e.touches.length === 1) start = { x: e.touches[0].clientX, y: e.touches[0].clientY }; else start = null; }, { passive: true });
+    modal.addEventListener('touchend', function (e) {
+      if (!start || !e.changedTouches.length) return;
+      var dx = e.changedTouches[0].clientX - start.x, dy = e.changedTouches[0].clientY - start.y;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1);
+      start = null;
+    }, { passive: true });
+    document.addEventListener('keydown', function (e) {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') { e.preventDefault(); close(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); move(1); }
+      if (e.key === 'Tab') {
+        var buttons = [closeBtn, prev, next].filter(function (b) { return !b.hidden; });
+        var first = buttons[0], last = buttons[buttons.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+      }
+    });
+    return { open: function (list, selected, sessionTitle, trigger) {
+      images = list; index = selected; title = sessionTitle; opener = trigger;
+      inertStates = Array.from(document.body.children).filter(function (el) { return el !== modal && el.tagName !== 'SCRIPT'; }).map(function (el) { return [el, el.inert]; });
+      inertStates.forEach(function (state) { state[0].inert = true; });
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      render();
+      requestAnimationFrame(function () { if (modal.classList.contains('open')) closeBtn.focus(); });
+    } };
+  }
+
   function setupHeader() {
     var header = document.getElementById('siteHeader');
-    if (!header) return;
-    function onScroll() {
-      if (window.scrollY > 60) header.classList.add('solid');
-      else header.classList.remove('solid');
+    function update() { header.classList.toggle('solid', window.scrollY > 60); }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+  function setupNav() {
+    var toggle = document.getElementById('navToggle'), nav = document.getElementById('mainNav');
+    var mobile = window.matchMedia('(max-width: 1100px)');
+    function setOpen(open) {
+      document.body.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      nav.inert = mobile.matches && !open;
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    toggle.addEventListener('click', function () { setOpen(!document.body.classList.contains('nav-open')); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setOpen(false); toggle.focus(); } });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
+    mobile.addEventListener('change', function () { setOpen(false); });
+    setOpen(false);
+    var localLinks = Array.from(nav.querySelectorAll('a[href*="#"]')).filter(function (a) { return document.getElementById(a.hash.slice(1)); });
+    if (localLinks.length) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) localLinks.forEach(function (a) { a.classList.toggle('active', a.hash === '#' + entry.target.id); });
+        });
+      }, { rootMargin: '-20% 0px -65% 0px' });
+      localLinks.forEach(function (a) { observer.observe(document.getElementById(a.hash.slice(1))); });
+    }
   }
-
-  function setupNavToggle() {
-    var toggle = document.getElementById('navToggle');
-    var nav = document.getElementById('mainNav');
-    if (!toggle || !nav) return;
-    toggle.addEventListener('click', function () {
-      document.body.classList.toggle('nav-open');
-    });
-    nav.querySelectorAll('.nav-link').forEach(function (link) {
-      link.addEventListener('click', function () {
-        document.body.classList.remove('nav-open');
-      });
-    });
-  }
-
-  /* Observa solo los anchors cuyo id existe en la página actual
-     (así el mismo nav sirve para index.html y portafolio.html) */
-  function setupScrollSpy() {
-    var links = document.querySelectorAll('.nav-link[href*="#"]');
-    var map = {};
-    var targets = [];
-
-    links.forEach(function (link) {
-      var hash = link.getAttribute('href').split('#')[1];
-      if (!hash) return;
-      var el = document.getElementById(hash);
-      if (!el) return; // enlace a otra página, no aplica scrollspy aquí
-      map[hash] = map[hash] || [];
-      map[hash].push(link);
-      targets.push(el);
-    });
-
-    if (!targets.length) return;
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.nav-link').forEach(function (l) { l.classList.remove('active'); });
-          var activeLinks = map[entry.target.id] || [];
-          activeLinks.forEach(function (l) { l.classList.add('active'); });
-        }
-      });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-
-    targets.forEach(function (el) { observer.observe(el); });
-  }
-
-  function observeFadeUps(nodeList) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    nodeList.forEach(function (el) { observer.observe(el); });
-  }
-
-  function setupFadeIn() {
-    observeFadeUps(document.querySelectorAll('.fade-up'));
+  function setupCategoryNav() {
+    var links = Array.from(document.querySelectorAll('.category-nav a'));
+    function update() {
+      var active = links[0];
+      links.forEach(function (a) { if (document.querySelector(a.hash).getBoundingClientRect().top <= 200) active = a; });
+      links.forEach(function (a) { if (a === active) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
   }
 })();

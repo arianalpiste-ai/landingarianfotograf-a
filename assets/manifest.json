@@ -3,183 +3,346 @@
     {
       "src": "assets/images/hero/hero_01.jpg",
       "w": 2400,
-      "h": 1600
+      "h": 1600,
+      "srcset": "assets/images/hero/responsive/hero_01-480.webp 480w, assets/images/hero/responsive/hero_01-960.webp 960w, assets/images/hero/responsive/hero_01-1600.webp 1600w"
     },
     {
       "src": "assets/images/hero/hero_02.jpg",
       "w": 2400,
-      "h": 1600
+      "h": 1600,
+      "srcset": "assets/images/hero/responsive/hero_02-480.webp 480w, assets/images/hero/responsive/hero_02-960.webp 960w, assets/images/hero/responsive/hero_02-1600.webp 1600w"
     },
     {
       "src": "assets/images/hero/hero_03.jpg",
       "w": 1600,
-      "h": 2400
+      "h": 2400,
+      "srcset": "assets/images/hero/responsive/hero_03-480.webp 480w, assets/images/hero/responsive/hero_03-960.webp 960w, assets/images/hero/responsive/hero_03-1600.webp 1600w"
     },
     {
       "src": "assets/images/hero/hero_04.jpg",
       "w": 2400,
-      "h": 1600
+      "h": 1600,
+      "srcset": "assets/images/hero/responsive/hero_04-480.webp 480w, assets/images/hero/responsive/hero_04-960.webp 960w, assets/images/hero/responsive/hero_04-1600.webp 1600w"
     },
     {
       "src": "assets/images/hero/hero_05.jpg",
       "w": 2400,
-      "h": 1600
+      "h": 1600,
+      "srcset": "assets/images/hero/responsive/hero_05-480.webp 480w, assets/images/hero/responsive/hero_05-960.webp 960w, assets/images/hero/responsive/hero_05-1600.webp 1600w"
     },
     {
       "src": "assets/images/hero/hero_06.jpg",
       "w": 2400,
-      "h": 1681
+      "h": 1681,
+      "srcset": "assets/images/hero/responsive/hero_06-480.webp 480w, assets/images/hero/responsive/hero_06-960.webp 960w, assets/images/hero/responsive/hero_06-1600.webp 1600w"
     },
     {
       "src": "assets/images/hero/hero_07.jpg",
       "w": 2400,
-      "h": 1600
+      "h": 1600,
+      "srcset": "assets/images/hero/responsive/hero_07-480.webp 480w, assets/images/hero/responsive/hero_07-960.webp 960w, assets/images/hero/responsive/hero_07-1600.webp 1600w"
     },
     {
       "src": "assets/images/hero/hero_08.jpg",
       "w": 2400,
-      "h": 1600
+      "h": 1600,
+      "srcset": "assets/images/hero/responsive/hero_08-480.webp 480w, assets/images/hero/responsive/hero_08-960.webp 960w, assets/images/hero/responsive/hero_08-1600.webp 1600w"
     }
   ],
   "retratos": [
     {
-      "src": "assets/images/retratos/retrato_01.jpg",
-      "w": 1200,
-      "h": 1800
+      "items": [
+        {
+          "src": "assets/images/retratos/retrato_03.jpg",
+          "w": 1800,
+          "h": 1200,
+          "srcset": "assets/images/retratos/responsive/retrato_03-480.webp 480w, assets/images/retratos/responsive/retrato_03-960.webp 960w, assets/images/retratos/responsive/retrato_03-1600.webp 1600w",
+          "alt": "Retrato junto a una baranda y escaleras amarillas."
+        },
+        {
+          "src": "assets/images/retratos/retrato_04.jpg",
+          "w": 1249,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_04-480.webp 480w, assets/images/retratos/responsive/retrato_04-960.webp 960w",
+          "alt": "Retrato de una mujer apoyada en una baranda frente al mar."
+        },
+        {
+          "src": "assets/images/retratos/retrato_07.jpg",
+          "w": 1152,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_07-480.webp 480w, assets/images/retratos/responsive/retrato_07-960.webp 960w",
+          "alt": "Retrato de una mujer de pie, con camiseta negra y jeans."
+        },
+        {
+          "src": "assets/images/retratos/retrato_08.jpg",
+          "w": 1800,
+          "h": 1363,
+          "srcset": "assets/images/retratos/responsive/retrato_08-480.webp 480w, assets/images/retratos/responsive/retrato_08-960.webp 960w, assets/images/retratos/responsive/retrato_08-1600.webp 1600w",
+          "alt": "Una mujer sentada en escaleras amarillas apoya el rostro en la mano."
+        },
+        {
+          "src": "assets/images/retratos/retrato_09.jpg",
+          "w": 1800,
+          "h": 1132,
+          "srcset": "assets/images/retratos/responsive/retrato_09-480.webp 480w, assets/images/retratos/responsive/retrato_09-960.webp 960w, assets/images/retratos/responsive/retrato_09-1600.webp 1600w",
+          "alt": "Dos mujeres posan sentadas en escaleras amarillas."
+        }
+      ],
+      "featured": [
+        "assets/images/retratos/retrato_07.jpg",
+        "assets/images/retratos/retrato_04.jpg",
+        "assets/images/retratos/retrato_08.jpg"
+      ]
     },
     {
-      "src": "assets/images/retratos/retrato_02.jpg",
-      "w": 1200,
-      "h": 1800
+      "items": [
+        {
+          "src": "assets/images/retratos/retrato_02.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_02-480.webp 480w, assets/images/retratos/responsive/retrato_02-960.webp 960w",
+          "alt": "Retrato de un hombre de pie en una calle, con una tela de colores."
+        },
+        {
+          "src": "assets/images/retratos/retrato_10.jpg",
+          "w": 1800,
+          "h": 1371,
+          "srcset": "assets/images/retratos/responsive/retrato_10-480.webp 480w, assets/images/retratos/responsive/retrato_10-960.webp 960w, assets/images/retratos/responsive/retrato_10-1600.webp 1600w",
+          "alt": "Un hombre con camiseta verde posa sentado en un banco."
+        },
+        {
+          "src": "assets/images/retratos/retrato_11.jpg",
+          "w": 1800,
+          "h": 1200,
+          "srcset": "assets/images/retratos/responsive/retrato_11-480.webp 480w, assets/images/retratos/responsive/retrato_11-960.webp 960w, assets/images/retratos/responsive/retrato_11-1600.webp 1600w",
+          "alt": "Retrato a contraluz de un hombre con camiseta verde."
+        }
+      ],
+      "featured": [
+        "assets/images/retratos/retrato_10.jpg",
+        "assets/images/retratos/retrato_02.jpg",
+        "assets/images/retratos/retrato_11.jpg"
+      ]
     },
     {
-      "src": "assets/images/retratos/retrato_03.jpg",
-      "w": 1800,
-      "h": 1200
+      "items": [
+        {
+          "src": "assets/images/retratos/retrato_12.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_12-480.webp 480w, assets/images/retratos/responsive/retrato_12-960.webp 960w",
+          "alt": "Una mujer con vestido blanco posa sentada al aire libre."
+        },
+        {
+          "src": "assets/images/retratos/retrato_13.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_13-480.webp 480w, assets/images/retratos/responsive/retrato_13-960.webp 960w",
+          "alt": "Retrato de una mujer con vestido blanco frente a flores."
+        },
+        {
+          "src": "assets/images/retratos/retrato_14.jpg",
+          "w": 1800,
+          "h": 1199,
+          "srcset": "assets/images/retratos/responsive/retrato_14-480.webp 480w, assets/images/retratos/responsive/retrato_14-960.webp 960w, assets/images/retratos/responsive/retrato_14-1600.webp 1600w",
+          "alt": "Retrato de una mujer con vestido blanco iluminada de lado."
+        }
+      ],
+      "featured": [
+        "assets/images/retratos/retrato_13.jpg",
+        "assets/images/retratos/retrato_12.jpg",
+        "assets/images/retratos/retrato_14.jpg"
+      ]
     },
     {
-      "src": "assets/images/retratos/retrato_04.jpg",
-      "w": 1249,
-      "h": 1800
+      "items": [
+        {
+          "src": "assets/images/retratos/retrato_15.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_15-480.webp 480w, assets/images/retratos/responsive/retrato_15-960.webp 960w",
+          "alt": "Una mujer con falda blanca posa junto a flores rojas."
+        },
+        {
+          "src": "assets/images/retratos/retrato_16.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_16-480.webp 480w, assets/images/retratos/responsive/retrato_16-960.webp 960w",
+          "alt": "Una mujer posa agachada en una calle arbolada."
+        },
+        {
+          "src": "assets/images/retratos/retrato_17.jpg",
+          "w": 1800,
+          "h": 1200,
+          "srcset": "assets/images/retratos/responsive/retrato_17-480.webp 480w, assets/images/retratos/responsive/retrato_17-960.webp 960w, assets/images/retratos/responsive/retrato_17-1600.webp 1600w",
+          "alt": "Una mujer sentada frente a una puerta roja apoya el rostro en la mano."
+        },
+        {
+          "src": "assets/images/retratos/retrato_18.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_18-480.webp 480w, assets/images/retratos/responsive/retrato_18-960.webp 960w",
+          "alt": "Retrato de una mujer junto a una pared, con luz natural."
+        }
+      ],
+      "featured": [
+        "assets/images/retratos/retrato_17.jpg",
+        "assets/images/retratos/retrato_15.jpg",
+        "assets/images/retratos/retrato_18.jpg"
+      ]
     },
     {
-      "src": "assets/images/retratos/retrato_05.jpg",
-      "w": 1327,
-      "h": 1800
-    },
-    {
-      "src": "assets/images/retratos/retrato_06.jpg",
-      "w": 1800,
-      "h": 1250
-    },
-    {
-      "src": "assets/images/retratos/retrato_07.jpg",
-      "w": 1152,
-      "h": 1800
-    },
-    {
-      "src": "assets/images/retratos/retrato_08.jpg",
-      "w": 1800,
-      "h": 1363
-    },
-    {
-      "src": "assets/images/retratos/retrato_09.jpg",
-      "w": 1800,
-      "h": 1132
-    },
-    {
-      "src": "assets/images/retratos/retrato_10.jpg",
-      "w": 1800,
-      "h": 1371
-    },
-    {
-      "src": "assets/images/retratos/retrato_11.jpg",
-      "w": 1800,
-      "h": 1200
+      "items": [
+        {
+          "src": "assets/images/retratos/retrato_19.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_19-480.webp 480w, assets/images/retratos/responsive/retrato_19-960.webp 960w",
+          "alt": "Una mujer con lentes de sol posa frente a una pared de ladrillo."
+        },
+        {
+          "src": "assets/images/retratos/retrato_20.jpg",
+          "w": 1200,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_20-480.webp 480w, assets/images/retratos/responsive/retrato_20-960.webp 960w",
+          "alt": "Retrato de una mujer sentada entre árboles."
+        },
+        {
+          "src": "assets/images/retratos/retrato_21.jpg",
+          "w": 1199,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_21-480.webp 480w, assets/images/retratos/responsive/retrato_21-960.webp 960w",
+          "alt": "Retrato desde un ángulo bajo de una mujer frente a un edificio."
+        },
+        {
+          "src": "assets/images/retratos/retrato_22.jpg",
+          "w": 1199,
+          "h": 1800,
+          "srcset": "assets/images/retratos/responsive/retrato_22-480.webp 480w, assets/images/retratos/responsive/retrato_22-960.webp 960w",
+          "alt": "Una mujer sentada en un camino mira hacia los árboles."
+        }
+      ],
+      "featured": [
+        "assets/images/retratos/retrato_19.jpg",
+        "assets/images/retratos/retrato_22.jpg",
+        "assets/images/retratos/retrato_21.jpg"
+      ]
     }
   ],
   "paisaje": [
     {
       "src": "assets/images/paisaje/paisaje_01.jpg",
       "w": 1900,
-      "h": 1302
+      "h": 1302,
+      "srcset": "assets/images/paisaje/responsive/paisaje_01-480.webp 480w, assets/images/paisaje/responsive/paisaje_01-960.webp 960w, assets/images/paisaje/responsive/paisaje_01-1600.webp 1600w",
+      "alt": "Personas recorren una pradera con montañas nevadas al fondo."
     },
     {
       "src": "assets/images/paisaje/paisaje_02.jpg",
       "w": 1900,
-      "h": 1386
+      "h": 1386,
+      "srcset": "assets/images/paisaje/responsive/paisaje_02-480.webp 480w, assets/images/paisaje/responsive/paisaje_02-960.webp 960w, assets/images/paisaje/responsive/paisaje_02-1600.webp 1600w",
+      "alt": "Cumbres nevadas envueltas en nubes oscuras."
     },
     {
       "src": "assets/images/paisaje/paisaje_03.jpg",
       "w": 1900,
-      "h": 1267
+      "h": 1267,
+      "srcset": "assets/images/paisaje/responsive/paisaje_03-480.webp 480w, assets/images/paisaje/responsive/paisaje_03-960.webp 960w, assets/images/paisaje/responsive/paisaje_03-1600.webp 1600w",
+      "alt": "La luz del sol se refleja en las olas del mar."
     },
     {
       "src": "assets/images/paisaje/paisaje_04.jpg",
       "w": 1900,
-      "h": 1294
+      "h": 1294,
+      "srcset": "assets/images/paisaje/responsive/paisaje_04-480.webp 480w, assets/images/paisaje/responsive/paisaje_04-960.webp 960w, assets/images/paisaje/responsive/paisaje_04-1600.webp 1600w",
+      "alt": "Una calle estrecha entre fachadas de piedra."
     },
     {
       "src": "assets/images/paisaje/paisaje_05.jpg",
       "w": 1900,
-      "h": 1245
+      "h": 1245,
+      "srcset": "assets/images/paisaje/responsive/paisaje_05-480.webp 480w, assets/images/paisaje/responsive/paisaje_05-960.webp 960w, assets/images/paisaje/responsive/paisaje_05-1600.webp 1600w",
+      "alt": "Una ventana con rejas y flores en una pared roja."
     },
     {
       "src": "assets/images/paisaje/paisaje_06.jpg",
       "w": 1900,
-      "h": 1274
+      "h": 1274,
+      "srcset": "assets/images/paisaje/responsive/paisaje_06-480.webp 480w, assets/images/paisaje/responsive/paisaje_06-960.webp 960w, assets/images/paisaje/responsive/paisaje_06-1600.webp 1600w",
+      "alt": "Un letrero de altura frente a una extensa planicie y montañas."
     },
     {
       "src": "assets/images/paisaje/paisaje_07.jpg",
       "w": 1267,
-      "h": 1900
+      "h": 1900,
+      "srcset": "assets/images/paisaje/responsive/paisaje_07-480.webp 480w, assets/images/paisaje/responsive/paisaje_07-960.webp 960w",
+      "alt": "Una llama en un paisaje de montaña."
     },
     {
       "src": "assets/images/paisaje/paisaje_08.jpg",
       "w": 1900,
-      "h": 1267
+      "h": 1267,
+      "srcset": "assets/images/paisaje/responsive/paisaje_08-480.webp 480w, assets/images/paisaje/responsive/paisaje_08-960.webp 960w, assets/images/paisaje/responsive/paisaje_08-1600.webp 1600w",
+      "alt": "Un vehículo sale de un túnel excavado en la roca."
     },
     {
       "src": "assets/images/paisaje/paisaje_09.jpg",
       "w": 1900,
-      "h": 1307
+      "h": 1307,
+      "srcset": "assets/images/paisaje/responsive/paisaje_09-480.webp 480w, assets/images/paisaje/responsive/paisaje_09-960.webp 960w, assets/images/paisaje/responsive/paisaje_09-1600.webp 1600w",
+      "alt": "Un valle con campos de cultivo entre montañas."
     },
     {
       "src": "assets/images/paisaje/paisaje_10.jpg",
       "w": 1316,
-      "h": 1900
+      "h": 1900,
+      "srcset": "assets/images/paisaje/responsive/paisaje_10-480.webp 480w, assets/images/paisaje/responsive/paisaje_10-960.webp 960w",
+      "alt": "Una persona camina por la playa frente a un promontorio."
     },
     {
       "src": "assets/images/paisaje/paisaje_11.jpg",
       "w": 1900,
-      "h": 1267
+      "h": 1267,
+      "srcset": "assets/images/paisaje/responsive/paisaje_11-480.webp 480w, assets/images/paisaje/responsive/paisaje_11-960.webp 960w, assets/images/paisaje/responsive/paisaje_11-1600.webp 1600w",
+      "alt": "Olas que llegan a una playa con piedras."
     }
   ],
   "documental": [
     {
       "src": "assets/images/documental/documental_01.jpg",
       "w": 1900,
-      "h": 1267
+      "h": 1267,
+      "srcset": "assets/images/documental/responsive/documental_01-480.webp 480w, assets/images/documental/responsive/documental_01-960.webp 960w, assets/images/documental/responsive/documental_01-1600.webp 1600w",
+      "alt": "Siluetas de personas junto al mar al atardecer."
     },
     {
       "src": "assets/images/documental/documental_02.jpg",
       "w": 1267,
-      "h": 1900
+      "h": 1900,
+      "srcset": "assets/images/documental/responsive/documental_02-480.webp 480w, assets/images/documental/responsive/documental_02-960.webp 960w",
+      "alt": "Personas juegan junto a la orilla mientras llegan las olas."
     },
     {
       "src": "assets/images/documental/documental_03.jpg",
       "w": 1267,
-      "h": 1900
+      "h": 1900,
+      "srcset": "assets/images/documental/responsive/documental_03-480.webp 480w, assets/images/documental/responsive/documental_03-960.webp 960w",
+      "alt": "Una persona empuja un carro por la playa al atardecer."
     },
     {
       "src": "assets/images/documental/documental_04.jpg",
       "w": 1900,
-      "h": 1267
+      "h": 1267,
+      "srcset": "assets/images/documental/responsive/documental_04-480.webp 480w, assets/images/documental/responsive/documental_04-960.webp 960w, assets/images/documental/responsive/documental_04-1600.webp 1600w",
+      "alt": "Personas reunidas frente a la entrada de una iglesia."
     },
     {
       "src": "assets/images/documental/documental_05.jpg",
       "w": 1900,
-      "h": 1267
+      "h": 1267,
+      "srcset": "assets/images/documental/responsive/documental_05-480.webp 480w, assets/images/documental/responsive/documental_05-960.webp 960w, assets/images/documental/responsive/documental_05-1600.webp 1600w",
+      "alt": "Un grupo de personas de rodillas en una plaza al anochecer."
     }
   ],
   "eventos": [
@@ -189,48 +352,71 @@
         {
           "src": "assets/images/eventos/evento_01.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_01-480.webp 480w, assets/images/eventos/responsive/evento_01-960.webp 960w, assets/images/eventos/responsive/evento_01-1600.webp 1600w",
+          "alt": "Una pareja sostiene a Zoe durante la ceremonia de bautizo."
         },
         {
           "src": "assets/images/eventos/evento_02.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_02-480.webp 480w, assets/images/eventos/responsive/evento_02-960.webp 960w, assets/images/eventos/responsive/evento_02-1600.webp 1600w",
+          "alt": "Zoe, con vestido blanco, sentada en las escaleras de la iglesia."
         },
         {
           "src": "assets/images/eventos/evento_03.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_03-480.webp 480w, assets/images/eventos/responsive/evento_03-960.webp 960w, assets/images/eventos/responsive/evento_03-1600.webp 1600w",
+          "alt": "Retrato de una pareja con Zoe en brazos dentro de la iglesia."
         },
         {
           "src": "assets/images/eventos/evento_04.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_04-480.webp 480w, assets/images/eventos/responsive/evento_04-960.webp 960w, assets/images/eventos/responsive/evento_04-1600.webp 1600w",
+          "alt": "Retrato familiar frente al altar y los arreglos florales."
         },
         {
           "src": "assets/images/eventos/evento_05.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_05-480.webp 480w, assets/images/eventos/responsive/evento_05-960.webp 960w, assets/images/eventos/responsive/evento_05-1600.webp 1600w",
+          "alt": "El sacerdote acompaña a la familia junto a la pila bautismal."
         },
         {
           "src": "assets/images/eventos/evento_13.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_13-480.webp 480w, assets/images/eventos/responsive/evento_13-960.webp 960w, assets/images/eventos/responsive/evento_13-1600.webp 1600w",
+          "alt": "Dos adultos posan con Zoe frente al altar."
         },
         {
           "src": "assets/images/eventos/evento_15.jpg",
           "w": 1267,
-          "h": 1900
+          "h": 1900,
+          "srcset": "assets/images/eventos/responsive/evento_15-480.webp 480w, assets/images/eventos/responsive/evento_15-960.webp 960w",
+          "alt": "Zoe mira a la cámara sentada en las escaleras con su vestido de bautizo."
         },
         {
           "src": "assets/images/eventos/evento_16.jpg",
           "w": 1900,
-          "h": 1331
+          "h": 1331,
+          "srcset": "assets/images/eventos/responsive/evento_16-480.webp 480w, assets/images/eventos/responsive/evento_16-960.webp 960w, assets/images/eventos/responsive/evento_16-1600.webp 1600w",
+          "alt": "Retrato cercano de una pareja con Zoe frente al altar."
         },
         {
           "src": "assets/images/eventos/evento_17.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_17-480.webp 480w, assets/images/eventos/responsive/evento_17-960.webp 960w, assets/images/eventos/responsive/evento_17-1600.webp 1600w",
+          "alt": "La familia y el sacerdote posan junto a la pila bautismal."
         }
+      ],
+      "featured": [
+        "assets/images/eventos/evento_16.jpg",
+        "assets/images/eventos/evento_01.jpg",
+        "assets/images/eventos/evento_15.jpg"
       ]
     },
     {
@@ -239,63 +425,92 @@
         {
           "src": "assets/images/eventos/evento_29.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_29-480.webp 480w, assets/images/eventos/responsive/evento_29-960.webp 960w, assets/images/eventos/responsive/evento_29-1600.webp 1600w",
+          "alt": "Un adulto y los niños construyen una torre de bloques rosas."
         },
         {
           "src": "assets/images/eventos/evento_30.jpg",
           "w": 1899,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_30-480.webp 480w, assets/images/eventos/responsive/evento_30-960.webp 960w, assets/images/eventos/responsive/evento_30-1600.webp 1600w",
+          "alt": "Niños y adultos participan en un juego con bloques durante la fiesta."
         },
         {
           "src": "assets/images/eventos/evento_31.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_31-480.webp 480w, assets/images/eventos/responsive/evento_31-960.webp 960w, assets/images/eventos/responsive/evento_31-1600.webp 1600w",
+          "alt": "Un niño juega con bloques azules junto a los invitados."
         },
         {
           "src": "assets/images/eventos/evento_32.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_32-480.webp 480w, assets/images/eventos/responsive/evento_32-960.webp 960w, assets/images/eventos/responsive/evento_32-1600.webp 1600w",
+          "alt": "Niños observan una actividad durante la celebración."
         },
         {
           "src": "assets/images/eventos/evento_33.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_33-480.webp 480w, assets/images/eventos/responsive/evento_33-960.webp 960w, assets/images/eventos/responsive/evento_33-1600.webp 1600w",
+          "alt": "Invitados participan en la animación de la fiesta bajo globos de colores."
         },
         {
           "src": "assets/images/eventos/evento_34.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_34-480.webp 480w, assets/images/eventos/responsive/evento_34-960.webp 960w, assets/images/eventos/responsive/evento_34-1600.webp 1600w",
+          "alt": "Niñas y adultos reunidos junto a la mesa de cumpleaños."
         },
         {
           "src": "assets/images/eventos/evento_35.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_35-480.webp 480w, assets/images/eventos/responsive/evento_35-960.webp 960w, assets/images/eventos/responsive/evento_35-1600.webp 1600w",
+          "alt": "La familia celebra junto a la torta con luces encendidas."
         },
         {
           "src": "assets/images/eventos/evento_36.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_36-480.webp 480w, assets/images/eventos/responsive/evento_36-960.webp 960w, assets/images/eventos/responsive/evento_36-1600.webp 1600w",
+          "alt": "Una niña sopla las velas acompañada por adultos."
         },
         {
           "src": "assets/images/eventos/evento_37.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_37-480.webp 480w, assets/images/eventos/responsive/evento_37-960.webp 960w, assets/images/eventos/responsive/evento_37-1600.webp 1600w",
+          "alt": "Retrato de grupo alrededor de la mesa de cumpleaños."
         },
         {
           "src": "assets/images/eventos/evento_38.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_38-480.webp 480w, assets/images/eventos/responsive/evento_38-960.webp 960w, assets/images/eventos/responsive/evento_38-1600.webp 1600w",
+          "alt": "Invitadas posan con la cumpleañera frente a la decoración."
         },
         {
           "src": "assets/images/eventos/evento_39.jpg",
           "w": 1900,
-          "h": 1266
+          "h": 1266,
+          "srcset": "assets/images/eventos/responsive/evento_39-480.webp 480w, assets/images/eventos/responsive/evento_39-960.webp 960w, assets/images/eventos/responsive/evento_39-1600.webp 1600w",
+          "alt": "Retrato de la cumpleañera con invitadas y globos de colores."
         },
         {
           "src": "assets/images/eventos/evento_40.jpg",
           "w": 1266,
-          "h": 1900
+          "h": 1900,
+          "srcset": "assets/images/eventos/responsive/evento_40-480.webp 480w, assets/images/eventos/responsive/evento_40-960.webp 960w",
+          "alt": "Retrato de grupo frente a la decoración rosa de la fiesta."
         }
+      ],
+      "featured": [
+        "assets/images/eventos/evento_35.jpg",
+        "assets/images/eventos/evento_30.jpg",
+        "assets/images/eventos/evento_37.jpg"
       ]
     },
     {
@@ -304,104 +519,84 @@
         {
           "src": "assets/images/eventos/evento_06.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_06-480.webp 480w, assets/images/eventos/responsive/evento_06-960.webp 960w, assets/images/eventos/responsive/evento_06-1600.webp 1600w",
+          "alt": "Familia e invitados posan frente a la decoración del cumpleaños de Zoe."
         },
         {
           "src": "assets/images/eventos/evento_07.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_07-480.webp 480w, assets/images/eventos/responsive/evento_07-960.webp 960w, assets/images/eventos/responsive/evento_07-1600.webp 1600w",
+          "alt": "Un animador entretiene a los niños con una actividad de colores."
         },
         {
           "src": "assets/images/eventos/evento_08.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_08-480.webp 480w, assets/images/eventos/responsive/evento_08-960.webp 960w, assets/images/eventos/responsive/evento_08-1600.webp 1600w",
+          "alt": "Un hombre sostiene a Zoe mientras observan la celebración."
         },
         {
           "src": "assets/images/eventos/evento_09.jpg",
           "w": 1267,
-          "h": 1900
+          "h": 1900,
+          "srcset": "assets/images/eventos/responsive/evento_09-480.webp 480w, assets/images/eventos/responsive/evento_09-960.webp 960w",
+          "alt": "Una mujer con Zoe en brazos observa la animación entre los invitados."
         },
         {
           "src": "assets/images/eventos/evento_10.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_10-480.webp 480w, assets/images/eventos/responsive/evento_10-960.webp 960w, assets/images/eventos/responsive/evento_10-1600.webp 1600w",
+          "alt": "Una mujer acompaña a Zoe durante un juego de la fiesta."
         },
         {
           "src": "assets/images/eventos/evento_11.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_11-480.webp 480w, assets/images/eventos/responsive/evento_11-960.webp 960w, assets/images/eventos/responsive/evento_11-1600.webp 1600w",
+          "alt": "Adultos posan con Zoe junto a un animador."
         },
         {
           "src": "assets/images/eventos/evento_12.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_12-480.webp 480w, assets/images/eventos/responsive/evento_12-960.webp 960w, assets/images/eventos/responsive/evento_12-1600.webp 1600w",
+          "alt": "Un adulto participa en un juego con el animador."
         },
         {
           "src": "assets/images/eventos/evento_14.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_14-480.webp 480w, assets/images/eventos/responsive/evento_14-960.webp 960w, assets/images/eventos/responsive/evento_14-1600.webp 1600w",
+          "alt": "Una pareja se acerca a besar a Zoe junto a globos amarillos."
         },
         {
           "src": "assets/images/eventos/evento_18.jpg",
           "w": 1900,
-          "h": 1267
+          "h": 1267,
+          "srcset": "assets/images/eventos/responsive/evento_18-480.webp 480w, assets/images/eventos/responsive/evento_18-960.webp 960w, assets/images/eventos/responsive/evento_18-1600.webp 1600w",
+          "alt": "Retrato de todos los invitados al cumpleaños dentro del salón."
         }
-      ]
-    },
-    {
-      "title": "Cumpleaños de Maritza",
-      "items": [
-        {
-          "src": "assets/images/eventos/evento_19.jpg",
-          "w": 1267,
-          "h": 1900
-        },
-        {
-          "src": "assets/images/eventos/evento_20.jpg",
-          "w": 1900,
-          "h": 1267
-        },
-        {
-          "src": "assets/images/eventos/evento_21.jpg",
-          "w": 1267,
-          "h": 1900
-        },
-        {
-          "src": "assets/images/eventos/evento_22.jpg",
-          "w": 1267,
-          "h": 1900
-        },
-        {
-          "src": "assets/images/eventos/evento_23.jpg",
-          "w": 1900,
-          "h": 1267
-        },
-        {
-          "src": "assets/images/eventos/evento_24.jpg",
-          "w": 1900,
-          "h": 1267
-        },
-        {
-          "src": "assets/images/eventos/evento_25.jpg",
-          "w": 1900,
-          "h": 1267
-        },
-        {
-          "src": "assets/images/eventos/evento_26.jpg",
-          "w": 1900,
-          "h": 1267
-        },
-        {
-          "src": "assets/images/eventos/evento_27.jpg",
-          "w": 1900,
-          "h": 1267
-        },
-        {
-          "src": "assets/images/eventos/evento_28.jpg",
-          "w": 1900,
-          "h": 1267
-        }
+      ],
+      "featured": [
+        "assets/images/eventos/evento_14.jpg",
+        "assets/images/eventos/evento_10.jpg",
+        "assets/images/eventos/evento_06.jpg"
       ]
     }
-  ]
+  ],
+  "featured": {
+    "paisaje": [
+      "assets/images/paisaje/paisaje_02.jpg",
+      "assets/images/paisaje/paisaje_05.jpg",
+      "assets/images/paisaje/paisaje_09.jpg"
+    ],
+    "documental": [
+      "assets/images/documental/documental_01.jpg",
+      "assets/images/documental/documental_03.jpg",
+      "assets/images/documental/documental_05.jpg"
+    ]
+  }
 }
