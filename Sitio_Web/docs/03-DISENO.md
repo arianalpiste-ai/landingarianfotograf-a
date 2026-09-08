@@ -5,8 +5,8 @@ Se conserva la identidad navy/dorado y la tipografía editorial del portafolio.
 - Fondo blanco y alterno `#f4f5f9`.
 - Texto principal navy `#1b2a4e`, secundario `#4a5578`.
 - Texto terciario `#596681`.
-- Superficies doradas `#d9a441`, con texto navy.
-- Dorado para textos sobre blanco `#85601b`, más oscuro para mejorar la lectura.
+- Superficies amarillas `#f2c94c`, con texto navy.
+- Los textos destacados usan el amarillo luminoso `#f2c94c` para conservar una identidad visual clara y cálida.
 - Cormorant Garamond: títulos de galería y visor.
 - Poppins: títulos de servicios y marca.
 - Jost: texto, controles y navegación.
