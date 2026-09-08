@@ -7,6 +7,7 @@
   if (year) year.textContent = new Date().getFullYear();
   setupHeader();
   setupNav();
+  setupContactForm();
   document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('in-view'); });
   if (document.getElementById('heroSlides')) {
     fetch('assets/manifest.json').then(function (r) {
@@ -66,6 +67,46 @@
   function hidePreloader() {
     var el = document.getElementById('preloader');
     if (el) el.classList.add('hidden');
+  }
+
+  function setupContactForm() {
+    var form = document.querySelector('form[name="contacto"]');
+    if (!form) return;
+    var button = form.querySelector('button[type="submit"]');
+    var status = form.querySelector('.form-status');
+    var started = form.querySelector('[name="iniciado"]');
+
+    function resetStartedAt() { started.value = String(Date.now()); }
+    resetStartedAt();
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      status.className = 'form-status';
+      status.textContent = '';
+
+      var data = Object.fromEntries(new FormData(form).entries());
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (response) {
+        if (!response.ok) throw new Error('No se pudo enviar el formulario');
+        form.reset();
+        resetStartedAt();
+        status.className = 'form-status is-success';
+        status.textContent = '¡Gracias! Tu consulta fue enviada correctamente.';
+      }).catch(function () {
+        status.className = 'form-status is-error';
+        status.textContent = 'No pudimos enviar tu consulta. Inténtalo nuevamente o escríbenos por WhatsApp.';
+      }).finally(function () {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+      });
+    });
   }
 
   function buildGallery(container, items, title, featured, id) {

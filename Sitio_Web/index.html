@@ -179,25 +179,27 @@
       <h2 class="contact-full-title">Hablemos de<br>tu evento</h2>
       <p class="contact-full-desc">Cuéntame sobre la ocasión especial que quieres inmortalizar. Respondo en menos de 24 horas.</p>
       <p class="contact-zone">📍 Pueblo Libre, San Miguel y Magdalena del Mar</p>
-      <form class="cform" name="contacto" method="POST" netlify>
-        <input type="hidden" name="form-name" value="contacto">
+      <form class="cform" name="contacto" method="POST" action="/api/contacto">
+        <input type="hidden" name="iniciado" value="">
+        <div class="contact-trap" aria-hidden="true"><label for="contacto-empresa">Empresa</label><input type="text" id="contacto-empresa" name="empresa" tabindex="-1" autocomplete="off"></div>
         <div class="form-row">
-          <div class="form-field"><label for="contacto-nombre">Nombre completo</label><input type="text" autocomplete="name" id="contacto-nombre" name="nombre" placeholder="Nombre completo" required></div>
-          <div class="form-field"><label for="contacto-email">Correo electrónico</label><input type="email" autocomplete="email" id="contacto-email" name="email" placeholder="Correo electrónico" required></div>
+          <div class="form-field"><label for="contacto-nombre">Nombre completo</label><input type="text" autocomplete="name" id="contacto-nombre" name="nombre" placeholder="Nombre completo" minlength="2" maxlength="100" required></div>
+          <div class="form-field"><label for="contacto-email">Correo electrónico</label><input type="email" autocomplete="email" id="contacto-email" name="email" placeholder="Correo electrónico" maxlength="254" required></div>
         </div>
-        <div class="form-field"><label for="contacto-celular">Número de celular (opcional)</label><input type="tel" autocomplete="tel" id="contacto-celular" name="celular" placeholder="Número de celular"></div>
+        <div class="form-field"><label for="contacto-celular">Número de celular (opcional)</label><input type="tel" autocomplete="tel" id="contacto-celular" name="celular" placeholder="Número de celular" maxlength="40"></div>
         <div class="form-field"><label for="contacto-evento">Tipo de evento o sesión</label><select id="contacto-evento" name="evento" required>
           <option value="" disabled selected>Tipo de evento</option>
           <option>Boda</option><option>Quinceañero</option><option>Bautizo</option>
           <option>Graduación</option><option>Evento corporativo</option><option>Cumpleaños</option><option>Sesión de retratos</option><option>Otro</option>
         </select></div>
         <div class="form-field"><label for="contacto-fecha">Fecha tentativa (opcional)</label><input type="date" id="contacto-fecha" name="fecha" placeholder="Fecha tentativa del evento"></div>
-        <div class="form-field"><label for="contacto-mensaje">Cuéntame más (opcional)</label><textarea id="contacto-mensaje" name="mensaje" placeholder="Cuéntame más sobre tu evento..."></textarea></div>
+        <div class="form-field"><label for="contacto-mensaje">Cuéntame más (opcional)</label><textarea id="contacto-mensaje" name="mensaje" placeholder="Cuéntame más sobre tu evento..." maxlength="2000"></textarea></div>
         <div class="form-actions">
           <button type="submit" class="btn-primary">
             Enviar mi consulta
             <svg viewBox="0 0 16 16" stroke-width="1.5" stroke="currentColor" fill="none" width="13"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
           <a href="https://wa.link/4jqx34" target="_blank" class="btn-wa-text">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.833L.057 23.428a.5.5 0 0 0 .609.61l5.671-1.46A11.934 11.934 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.938 9.938 0 0 1-5.058-1.374l-.362-.214-3.742.964.99-3.666-.235-.375A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 5.477 10 10-4.477 10-10 10z"/></svg>
             <span>o escríbenos por WhatsApp</span>
@@ -216,7 +218,7 @@
         <span class="coc-icon">🗓️</span>
         <span class="coc-title">Agendar llamada</span>
       </a>
-      <a href="mailto:arianalpiste@gmail.com" class="contact-option-card">
+      <a href="mailto:hola@arianalpiste.com" class="contact-option-card">
         <span class="coc-icon">📧</span>
         <span class="coc-title">Email</span>
       </a>

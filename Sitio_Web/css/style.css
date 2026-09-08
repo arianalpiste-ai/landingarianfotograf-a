@@ -467,6 +467,12 @@ body.light-hero .site-header:not(.solid) .nav-cta:hover { background: var(--colo
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .form-actions { display: flex; flex-direction: column; gap: 0.85rem; align-items: flex-start; }
 .form-note { font-size: 0.72rem; color: var(--color-muted); margin-top: 0.4rem; }
+.contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { display: none; margin: 0; font-size: 0.875rem; line-height: 1.5; }
+.form-status.is-success, .form-status.is-error { display: block; }
+.form-status.is-success { color: #237a45; }
+.form-status.is-error { color: #a12b2b; }
+.cform button[aria-busy="true"] { cursor: wait; opacity: 0.72; }
 
 /* ============================================================
    SOBRE MÍ
