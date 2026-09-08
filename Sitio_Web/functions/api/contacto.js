@@ -77,7 +77,7 @@ export async function onRequestPost(context) {
 
   const startedAt = Number(input.iniciado);
   const elapsed = Date.now() - startedAt;
-  if (clean(input.empresa, 200) || (Number.isFinite(startedAt) && elapsed < 2500)) {
+  if (clean(input.website, 200) || (Number.isFinite(startedAt) && elapsed < 2500)) {
     return respond({ ok: true });
   }
 
@@ -87,6 +87,7 @@ export async function onRequestPost(context) {
     celular: clean(input.celular, 40),
     evento: clean(input.evento, 60),
     fecha: clean(input.fecha, 10),
+    empresa: clean(input.empresa, 100),
     mensaje: clean(input.mensaje, 2000)
   };
 
@@ -121,6 +122,7 @@ export async function onRequestPost(context) {
           <p><strong>Celular:</strong> ${safe.celular || 'No indicado'}</p>
           <p><strong>Evento:</strong> ${safe.evento}</p>
           <p><strong>Fecha tentativa:</strong> ${safe.fecha || 'No indicada'}</p>
+          <p><strong>Empresa:</strong> ${safe.empresa || 'No indicada'}</p>
           <p><strong>Mensaje:</strong><br>${safe.mensaje.replace(/\n/g, '<br>') || 'Sin mensaje adicional'}</p>`
       })
     });

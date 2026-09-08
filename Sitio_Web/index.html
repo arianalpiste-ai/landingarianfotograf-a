@@ -181,7 +181,7 @@
       <p class="contact-zone">📍 Pueblo Libre, San Miguel y Magdalena del Mar</p>
       <form class="cform" name="contacto" method="POST" action="/api/contacto">
         <input type="hidden" name="iniciado" value="">
-        <div class="contact-trap" aria-hidden="true"><label for="contacto-empresa">Empresa</label><input type="text" id="contacto-empresa" name="empresa" tabindex="-1" autocomplete="off"></div>
+        <div class="contact-trap" aria-hidden="true"><label for="contacto-web">Sitio web</label><input type="text" id="contacto-web" name="website" tabindex="-1" autocomplete="off"></div>
         <div class="form-row">
           <div class="form-field"><label for="contacto-nombre">Nombre completo</label><input type="text" autocomplete="name" id="contacto-nombre" name="nombre" placeholder="Nombre completo" minlength="2" maxlength="100" required></div>
           <div class="form-field"><label for="contacto-email">Correo electrónico</label><input type="email" autocomplete="email" id="contacto-email" name="email" placeholder="Correo electrónico" maxlength="254" required></div>
@@ -193,6 +193,7 @@
           <option>Graduación</option><option>Evento corporativo</option><option>Cumpleaños</option><option>Sesión de retratos</option><option>Otro</option>
         </select></div>
         <div class="form-field"><label for="contacto-fecha">Fecha tentativa (opcional)</label><input type="date" id="contacto-fecha" name="fecha" placeholder="Fecha tentativa del evento"></div>
+        <div class="form-field"><label for="contacto-empresa">Empresa (opcional)</label><input type="text" autocomplete="organization" id="contacto-empresa" name="empresa" placeholder="Empresa" maxlength="100"></div>
         <div class="form-field"><label for="contacto-mensaje">Cuéntame más (opcional)</label><textarea id="contacto-mensaje" name="mensaje" placeholder="Cuéntame más sobre tu evento..." maxlength="2000"></textarea></div>
         <div class="form-actions">
           <button type="submit" class="btn-primary">
