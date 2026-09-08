@@ -37,35 +37,48 @@ export async function onRequestPost(context) {
   const requestUrl = new URL(request.url);
   const origin = request.headers.get('Origin');
   const allowedOrigin = env.ALLOWED_ORIGIN || requestUrl.origin;
+  const contentType = request.headers.get('Content-Type') || '';
+  const wantsJson = contentType.includes('application/json') || request.headers.get('Accept')?.includes('application/json');
+  const respond = (body, status = 200) => {
+    if (wantsJson) return json(body, status);
+    const result = body.ok ? 'exito' : 'error';
+    return Response.redirect(new URL(`/?contacto=${result}#contacto`, request.url), 303);
+  };
 
   if (origin && origin !== allowedOrigin) {
-    return json({ ok: false, error: 'Origen no permitido.' }, 403);
+    return respond({ ok: false, error: 'Origen no permitido.' }, 403);
   }
 
-  if (!request.headers.get('Content-Type')?.includes('application/json')) {
-    return json({ ok: false, error: 'Formato no permitido.' }, 415);
+  const isJson = contentType.includes('application/json');
+  const isForm = contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data');
+  if (!isJson && !isForm) {
+    return respond({ ok: false, error: 'Formato no permitido.' }, 415);
   }
 
   const declaredLength = Number(request.headers.get('Content-Length') || 0);
   if (declaredLength > 12000) {
-    return json({ ok: false, error: 'Solicitud demasiado grande.' }, 413);
+    return respond({ ok: false, error: 'Solicitud demasiado grande.' }, 413);
   }
 
   let input;
   try {
-    const rawBody = await request.text();
-    if (rawBody.length > 12000) {
-      return json({ ok: false, error: 'Solicitud demasiado grande.' }, 413);
+    if (isJson) {
+      const rawBody = await request.text();
+      if (rawBody.length > 12000) {
+        return respond({ ok: false, error: 'Solicitud demasiado grande.' }, 413);
+      }
+      input = JSON.parse(rawBody);
+    } else {
+      input = Object.fromEntries((await request.formData()).entries());
     }
-    input = JSON.parse(rawBody);
   } catch {
-    return json({ ok: false, error: 'Solicitud inválida.' }, 400);
+    return respond({ ok: false, error: 'Solicitud inválida.' }, 400);
   }
 
   const startedAt = Number(input.iniciado);
   const elapsed = Date.now() - startedAt;
-  if (clean(input.empresa, 200) || !Number.isFinite(startedAt) || elapsed < 2500) {
-    return json({ ok: true });
+  if (clean(input.empresa, 200) || (Number.isFinite(startedAt) && elapsed < 2500)) {
+    return respond({ ok: true });
   }
 
   const submission = {
@@ -79,12 +92,12 @@ export async function onRequestPost(context) {
 
   if (submission.nombre.length < 2 || !EMAIL_PATTERN.test(submission.email) ||
       !EVENT_TYPES.has(submission.evento) || (submission.fecha && !DATE_PATTERN.test(submission.fecha))) {
-    return json({ ok: false, error: 'Revisa los campos obligatorios.' }, 400);
+    return respond({ ok: false, error: 'Revisa los campos obligatorios.' }, 400);
   }
 
   if (!env.RESEND_API_KEY) {
     console.error('Falta el secreto RESEND_API_KEY');
-    return json({ ok: false, error: 'El servicio de correo no está configurado.' }, 503);
+    return respond({ ok: false, error: 'El servicio de correo no está configurado.' }, 503);
   }
 
   const safe = Object.fromEntries(Object.entries(submission).map(([key, value]) => [key, escapeHtml(value)]));
@@ -113,15 +126,15 @@ export async function onRequestPost(context) {
     });
   } catch (error) {
     console.error('No se pudo conectar con Resend', error);
-    return json({ ok: false, error: 'No se pudo conectar con el servicio de correo.' }, 502);
+    return respond({ ok: false, error: 'No se pudo conectar con el servicio de correo.' }, 502);
   }
 
   if (!emailResponse.ok) {
     console.error('Resend rechazó el envío', emailResponse.status, await emailResponse.text());
-    return json({ ok: false, error: 'No se pudo enviar el correo.' }, 502);
+    return respond({ ok: false, error: 'No se pudo enviar el correo.' }, 502);
   }
 
-  return json({ ok: true });
+  return respond({ ok: true });
 }
 
 export function onRequest() {

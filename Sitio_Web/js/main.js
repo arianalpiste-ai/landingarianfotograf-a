@@ -79,6 +79,17 @@
     function resetStartedAt() { started.value = String(Date.now()); }
     resetStartedAt();
 
+    var contactResult = new URLSearchParams(location.search).get('contacto');
+    if (contactResult === 'exito' || contactResult === 'error') {
+      status.className = 'form-status ' + (contactResult === 'exito' ? 'is-success' : 'is-error');
+      status.textContent = contactResult === 'exito'
+        ? '¡Gracias! Tu consulta fue enviada correctamente.'
+        : 'No pudimos enviar tu consulta. Inténtalo nuevamente o escríbenos por WhatsApp.';
+      var cleanUrl = new URL(location.href);
+      cleanUrl.searchParams.delete('contacto');
+      history.replaceState(null, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+    }
+
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       if (!form.reportValidity()) return;
