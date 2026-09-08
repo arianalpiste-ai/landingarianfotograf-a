@@ -8,8 +8,8 @@
   --color-ink-soft: #4a5578;
   --color-muted: #8891a8;
   --color-line: #e3e6ee;
-  --color-accent: #d9a441;
-  --color-accent-soft: #e8c374;
+  --color-accent: #f2c94c;
+  --color-accent-soft: #f8dda0;
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-heading: 'Poppins', 'Helvetica Neue', sans-serif;
   --font-body: 'Jost', 'Helvetica Neue', sans-serif;
@@ -610,7 +610,7 @@ body.light-hero .f-copy { color: var(--color-muted); }
 }
 
 /* Portfolio refinement: preserve complete photographs and session order. */
-:root { --color-muted: #596681; --color-accent-text: #85601b; }
+:root { --color-muted: #596681; --color-accent-text: var(--color-accent); }
 html { scroll-padding-top: 150px; }
 :focus-visible { outline: 3px solid #477fd4; outline-offset: 5px; }
 .gallery-section, .event-group { scroll-margin-top: 16px; }
