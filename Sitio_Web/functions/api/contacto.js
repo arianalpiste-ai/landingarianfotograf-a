@@ -1,3 +1,5 @@
+import { normalizeEmail, normalizePhone, sendCapiEvent } from '../lib/meta-capi.js';
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const EVENT_TYPES = new Set([
@@ -136,7 +138,29 @@ export async function onRequestPost(context) {
     return respond({ ok: false, error: 'No se pudo enviar el correo.' }, 502);
   }
 
-  return respond({ ok: true });
+  const eventId = `contacto-${crypto.randomUUID()}`;
+  try {
+    const hashedEmail = await normalizeEmail(submission.email);
+    const hashedPhone = await normalizePhone(submission.celular, env.PHONE_DEFAULT_COUNTRY_CODE || '51');
+    await sendCapiEvent(env, {
+      eventName: 'Lead',
+      eventId,
+      eventSourceUrl: 'https://arianalpiste.com/#contacto',
+      actionSource: 'website',
+      userData: {
+        em: hashedEmail ? [hashedEmail] : undefined,
+        ph: hashedPhone ? [hashedPhone] : undefined,
+        client_ip_address: request.headers.get('CF-Connecting-IP') || undefined,
+        client_user_agent: request.headers.get('User-Agent') || undefined
+      },
+      customData: { content_name: submission.evento }
+    });
+  } catch (error) {
+    // El correo ya fue enviado: el fallo de medición no debe hacer que el visitante lo reenvíe.
+    console.error('contacto: no se pudo enviar Lead a Meta CAPI', error);
+  }
+
+  return respond({ ok: true, eventId });
 }
 
 export function onRequest() {

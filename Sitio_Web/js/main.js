@@ -7,6 +7,7 @@
   if (year) year.textContent = new Date().getFullYear();
   setupHeader();
   setupNav();
+  setupMetaTracking();
   setupContactForm();
   document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('in-view'); });
   if (document.getElementById('heroSlides')) {
@@ -106,6 +107,11 @@
         body: JSON.stringify(data)
       }).then(function (response) {
         if (!response.ok) throw new Error('No se pudo enviar el formulario');
+        return response.json();
+      }).then(function (result) {
+        if (result.eventId && typeof window.fbq === 'function') {
+          window.fbq('track', 'Lead', {}, { eventID: result.eventId });
+        }
         form.reset();
         resetStartedAt();
         status.className = 'form-status is-success';
@@ -116,6 +122,16 @@
       }).finally(function () {
         button.disabled = false;
         button.removeAttribute('aria-busy');
+      });
+    });
+  }
+
+  function setupMetaTracking() {
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('a[data-meta-event]');
+      if (!link || typeof window.fbq !== 'function') return;
+      window.fbq('track', link.dataset.metaEvent, {}, {
+        eventID: link.dataset.metaPrefix + '-' + Date.now()
       });
     });
   }
@@ -233,6 +249,7 @@
 
   function setupViewer() {
     var modal = document.getElementById('lightbox');
+    if (!modal) return { open: function () {} };
     var img = document.getElementById('lightboxImg');
     var count = document.getElementById('lightboxCount');
     var titleEl = document.getElementById('lightboxTitle');

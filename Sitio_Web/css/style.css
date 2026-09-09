@@ -474,6 +474,15 @@ body.light-hero .site-header:not(.solid) .nav-cta:hover { background: var(--colo
 .form-status.is-error { color: #a12b2b; }
 .cform button[aria-busy="true"] { cursor: wait; opacity: 0.72; }
 
+/* Página legal */
+.privacy-main { min-height: 70vh; padding: 150px 24px 90px; background: var(--color-bg-alt); }
+.privacy-article { max-width: 780px; margin: 0 auto; padding: clamp(28px, 5vw, 64px); background: var(--color-bg); border: 1px solid var(--color-line); }
+.privacy-article h1 { margin: 0 0 12px; font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.15; }
+.privacy-article h2 { margin: 42px 0 12px; font-family: var(--font-heading); font-size: clamp(1.25rem, 3vw, 1.6rem); }
+.privacy-article p { margin: 0 0 18px; color: var(--color-ink-soft); font-size: 1rem; line-height: 1.8; }
+.privacy-article a { color: var(--color-ink); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.privacy-updated { font-size: .875rem !important; color: var(--color-muted) !important; }
+
 /* ============================================================
    SOBRE MÍ
    ============================================================ */
