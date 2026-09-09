@@ -7,9 +7,15 @@ Sitio_Web/
 │                          sobre mí, FAQ.
 ├── portafolio.html        Página de galería completa: hero-slideshow +
 │                          secciones Eventos / Retratos / Paisaje & Viajes / Documental.
-├── css/style.css          Único stylesheet, compartido por ambas páginas.
-├── js/main.js             Único script, compartido. Detecta en qué página está
-│                          (por elementos del DOM) y arma lo que corresponde.
+├── privacidad.html        Información sobre datos, proveedores y medición.
+├── 404.html               Página de error personalizada, sin conversiones.
+├── blog/                  Índice y artículos SEO/GEO.
+├── recursos/              Guías gratuitas en HTML.
+├── gracias/               Confirmaciones no indexables; no prueban compras.
+├── css/style.css          Único stylesheet visual, compartido por todo el sitio.
+├── js/main.js             Interfaz, galerías, navegación y formulario.
+├── js/tracking.js         Meta Pixel y taxonomía central del embudo.
+├── functions/             Cloudflare Pages Functions para contacto, Cal y CAPI.
 ├── assets/
 │   ├── manifest.json       Fuente de verdad de TODAS las fotos y su orden/agrupación.
 │   └── images/
@@ -20,6 +26,9 @@ Sitio_Web/
 │       ├── documental/       documental_NN.jpg
 │       └── servicios/        imágenes propias de index.html (hero-blob, "sobre mí",
 │                              preview de portafolio, favicon) — no vienen del manifest.
+├── sitemap.xml            URLs públicas que deben indexarse.
+├── robots.txt             Reglas de rastreo y ubicación del sitemap.
+├── llms.txt / ai.txt      Índice factual y declaración informativa para IAs.
 └── docs/                  Esta documentación.
 ```
 

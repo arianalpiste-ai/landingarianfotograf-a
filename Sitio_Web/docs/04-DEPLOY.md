@@ -40,3 +40,39 @@ nunca se incluye en HTML ni JavaScript del navegador.
 
 Para desarrollo local de la Function se puede usar Wrangler con un archivo
 `.dev.vars`; ese archivo está ignorado por Git y nunca debe publicarse.
+
+## Meta Pixel y Conversions API
+
+`js/tracking.js` contiene únicamente el ID público del Pixel. Los secretos de
+Conversions API permanecen en Cloudflare y son utilizados por
+`functions/lib/meta-capi.js`.
+
+Variables necesarias para medición server-side:
+
+- `META_PIXEL_ID`: ID del dataset de Meta.
+- `META_ACCESS_TOKEN`: token cifrado de Conversions API.
+- `PHONE_DEFAULT_COUNTRY_CODE`: opcional; usa `51` si se omite.
+
+El formulario genera `Lead` en CAPI y devuelve el mismo `eventId` al navegador
+para que Meta deduplique ambos canales.
+
+## Webhook de Cal.com
+
+`functions/api/cal-webhook.js` acepta únicamente `BOOKING_CREATED`, valida la
+firma HMAC y registra `Schedule`. No crea ni modifica audiencias publicitarias.
+
+Variables necesarias:
+
+- `CALCOM_WEBHOOK_SECRET`: secreto cifrado usado para validar la firma.
+- `CAL_EVENT_SLUG`: opcional; usa `15min` si se omite.
+
+El UID de Cal.com forma el `event_id`, por lo que los reintentos conservan la
+misma identidad ante Meta. Una garantía persistente adicional requeriría KV o
+D1; no se añadió esa dependencia al sitio estático.
+
+## Pagos
+
+No existe proveedor ni flujo de pago. `InitiateCheckout` y `Purchase` están
+deliberadamente desactivados. Los clics en “Reservar” se miden como
+`HighIntentLead`, con paquete, valor publicado y moneda PEN, además de `Contact`
+por la salida a WhatsApp.

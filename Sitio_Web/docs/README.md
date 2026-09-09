@@ -11,13 +11,14 @@ perder contexto.
 3. [`03-DISENO.md`](03-DISENO.md) — colores, tipografías y patrones visuales (para mantener consistencia).
 4. [`04-DEPLOY.md`](04-DEPLOY.md) — GitHub + Cloudflare Pages, formulario y publicación.
 5. [`05-HISTORIAL.md`](05-HISTORIAL.md) — resumen cronológico de todo lo que se hizo hasta ahora.
+6. [`06-TRACKING.md`](06-TRACKING.md) — eventos del embudo, canales y deduplicación.
 
 ## Resumen de una línea
 
-Sitio estático (HTML/CSS/JS puro, sin build ni frameworks) de dos páginas:
-`index.html` (servicios/landing) y `portafolio.html` (galería completa),
-compartiendo `css/style.css` y `js/main.js`. Las fotos y su organización
-viven en `assets/manifest.json`, no hardcodeadas en el HTML.
+Sitio estático (HTML/CSS/JS puro, sin build ni frameworks) con landing,
+portafolio, blog, recursos y páginas legales, compartiendo `css/style.css`.
+La interfaz vive en `js/main.js` y el embudo de Meta en `js/tracking.js`.
+Las fotos y su organización viven en `assets/manifest.json`.
 
 ## Dato clave para no perder tiempo
 

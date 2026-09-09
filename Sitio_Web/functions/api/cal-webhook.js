@@ -1,6 +1,4 @@
 import {
-  addUserToAudience,
-  findOrCreateAudience,
   hashValue,
   normalizeEmail,
   normalizePhone,
@@ -11,7 +9,11 @@ const EVENT_SOURCE_URL = 'https://cal.com/arian-alpiste-sarmiento-gzfq0v/15min';
 
 const text = (body, status = 200) => new Response(body, {
   status,
-  headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' }
+  headers: {
+    'Content-Type': 'text/plain; charset=utf-8',
+    'Cache-Control': 'no-store',
+    'X-Content-Type-Options': 'nosniff'
+  }
 });
 
 const hexToBytes = (hex) => {
@@ -54,11 +56,12 @@ export async function onRequestPost({ request, env }) {
   const [firstName, ...lastNames] = String(attendee.name || '').trim().split(/\s+/).filter(Boolean);
   const hashedEmail = await normalizeEmail(attendee.email);
   const hashedPhone = await normalizePhone(attendee.phoneNumber, env.PHONE_DEFAULT_COUNTRY_CODE || '51');
-  const eventId = payload.uid ? `cal-${payload.uid}` : `cal-${crypto.randomUUID()}`;
+  if (!payload.uid) return text('Reserva sin UID; no se puede garantizar idempotencia', 422);
+  const eventId = `cal-${payload.uid}`;
 
   try {
     await sendCapiEvent(env, {
-      eventName: 'Lead',
+      eventName: 'Schedule',
       eventId,
       eventSourceUrl: EVENT_SOURCE_URL,
       userData: {
@@ -69,11 +72,9 @@ export async function onRequestPost({ request, env }) {
       },
       customData: { content_name: payload.title || trackedSlug }
     });
-    const audienceId = await findOrCreateAudience(env, env.CAL_AUDIENCE_NAME || 'Agendaron llamada - Arian Alpiste');
-    await addUserToAudience(env, audienceId, { hashedEmail, hashedPhone });
   } catch (error) {
     console.error('cal-webhook: error notificando a Meta:', error);
-    return text('Recibido, con errores al notificar a Meta (ver logs de Cloudflare Pages)');
+    return text('Error temporal al notificar a Meta; Cal.com puede reintentar', 502);
   }
   return text('OK');
 }
