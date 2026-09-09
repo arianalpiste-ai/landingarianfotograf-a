@@ -49,8 +49,8 @@ el sitio quedó como quedó, no para repetir el proceso.
    por proporción similar y nunca las recorta (`buildPhotoRows`, ver
    `02-CONTENIDO-Y-FOTOS.md` y `03-DISENO.md`).
 
-9. **Deploy a GitHub + Netlify** — repo creado, resuelto el 404 inicial de
-   Netlify (ver `04-DEPLOY.md`).
+9. **Primer deploy y migración a Cloudflare Pages** — repo creado y publicación
+   consolidada en Cloudflare Pages (ver `04-DEPLOY.md`).
 
 ## Aprendizajes / gotchas para la próxima sesión
 
@@ -81,7 +81,7 @@ Por solicitud del cliente se evolucionó la presentación:
 - Formulario con etiquetas visibles y mejoras de legibilidad.
 - Modo `?seleccion=1` con nombres de archivo para elegir fotografías. El contador ya no es global, por lo que el gotcha anterior sobre números globales es histórico.
 - No se incorporaron ejemplos de graduaciones/corporativos: el material actual no identifica esas coberturas.
-- Cambios preparados para revisión local; publicación en Netlify pendiente.
+- Cambios preparados para revisión local; publicación en Cloudflare Pages pendiente.
 
 ## 11. Simplificación antes de publicar
 

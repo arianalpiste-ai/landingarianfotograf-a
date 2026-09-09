@@ -6,7 +6,9 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
   setupHeader();
+  setupGuidesDropdown();
   setupNav();
+  setupContactForm();
   document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('in-view'); });
   if (document.getElementById('heroSlides')) {
     fetch('assets/manifest.json').then(function (r) {
@@ -66,6 +68,64 @@
   function hidePreloader() {
     var el = document.getElementById('preloader');
     if (el) el.classList.add('hidden');
+  }
+
+  function setupContactForm() {
+    var form = document.querySelector('form[name="contacto"]');
+    if (!form) return;
+    var button = form.querySelector('button[type="submit"]');
+    var status = form.querySelector('.form-status');
+    var started = form.querySelector('[name="iniciado"]');
+
+    function resetStartedAt() { started.value = String(Date.now()); }
+    resetStartedAt();
+
+    var contactResult = new URLSearchParams(location.search).get('contacto');
+    if (contactResult === 'exito' || contactResult === 'error') {
+      status.className = 'form-status ' + (contactResult === 'exito' ? 'is-success' : 'is-error');
+      status.textContent = contactResult === 'exito'
+        ? '¡Gracias! Tu consulta fue enviada correctamente.'
+        : 'No pudimos enviar tu consulta. Inténtalo nuevamente o escríbenos por WhatsApp.';
+      var cleanUrl = new URL(location.href);
+      cleanUrl.searchParams.delete('contacto');
+      history.replaceState(null, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      status.className = 'form-status';
+      status.textContent = '';
+
+      var data = Object.fromEntries(new FormData(form).entries());
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (response) {
+        if (!response.ok) throw new Error('No se pudo enviar el formulario');
+        return response.json();
+      }).then(function (result) {
+        if (result.eventId) {
+          document.dispatchEvent(new CustomEvent('meta:lead', {
+            detail: { eventId: result.eventId, contentName: data.evento || 'Formulario web' }
+          }));
+        }
+        form.reset();
+        resetStartedAt();
+        status.className = 'form-status is-success';
+        status.textContent = '¡Gracias! Tu consulta fue enviada correctamente.';
+      }).catch(function () {
+        status.className = 'form-status is-error';
+        status.textContent = 'No pudimos enviar tu consulta. Inténtalo nuevamente o escríbenos por WhatsApp.';
+      }).finally(function () {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+      });
+    });
   }
 
   function buildGallery(container, items, title, featured, id) {
@@ -181,6 +241,7 @@
 
   function setupViewer() {
     var modal = document.getElementById('lightbox');
+    if (!modal) return { open: function () {} };
     var img = document.getElementById('lightboxImg');
     var count = document.getElementById('lightboxCount');
     var titleEl = document.getElementById('lightboxTitle');
@@ -256,18 +317,62 @@
 
   function setupHeader() {
     var header = document.getElementById('siteHeader');
+    if (!header) return;
     function update() { header.classList.toggle('solid', window.scrollY > 60); }
     window.addEventListener('scroll', update, { passive: true });
     update();
   }
+  function setupGuidesDropdown() {
+    var nav = document.getElementById('mainNav');
+    if (!nav) return;
+    var dropdown = nav.querySelector('.nav-dropdown');
+    if (!dropdown) {
+      var guideLinks = Array.from(nav.querySelectorAll('a')).filter(function (link) {
+        var path = new URL(link.href, location.href).pathname;
+        return path.indexOf('/blog') === 0 || path.indexOf('/recursos') === 0;
+      });
+      if (!guideLinks.length) return;
+      dropdown = document.createElement('div');
+      dropdown.className = 'nav-dropdown';
+      dropdown.innerHTML = '<button type="button" class="nav-link nav-dropdown-toggle" aria-expanded="false">Contenido<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"/></svg></button><div class="nav-dropdown-menu"><a href="/blog/"><strong>Blog</strong><span>Consejos para planificar tus fotos</span></a><a href="/recursos/"><strong>Recursos gratuitos</strong><span>Checklists y guías prácticas</span></a></div>';
+      guideLinks[0].before(dropdown);
+      guideLinks.forEach(function (link) { link.remove(); });
+    }
+    var button = dropdown.querySelector('.nav-dropdown-toggle');
+    if (location.pathname.indexOf('/blog') === 0 || location.pathname.indexOf('/recursos') === 0) button.classList.add('active');
+    function setGuidesOpen(open) {
+      dropdown.classList.toggle('open', open);
+      button.setAttribute('aria-expanded', String(open));
+    }
+    button.addEventListener('click', function (event) {
+      event.stopPropagation();
+      setGuidesOpen(!dropdown.classList.contains('open'));
+    });
+    dropdown.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', function () { setGuidesOpen(false); }); });
+    document.addEventListener('click', function (event) { if (!dropdown.contains(event.target)) setGuidesOpen(false); });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && dropdown.classList.contains('open')) {
+        setGuidesOpen(false);
+        button.focus();
+      }
+    });
+  }
   function setupNav() {
     var toggle = document.getElementById('navToggle'), nav = document.getElementById('mainNav');
+    if (!toggle || !nav) return;
     var mobile = window.matchMedia('(max-width: 1100px)');
     function setOpen(open) {
       document.body.classList.toggle('nav-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
       nav.inert = mobile.matches && !open;
+      if (!open) {
+        var guides = nav.querySelector('.nav-dropdown');
+        if (guides) {
+          guides.classList.remove('open');
+          guides.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+        }
+      }
     }
     toggle.addEventListener('click', function () { setOpen(!document.body.classList.contains('nav-open')); });
     nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
