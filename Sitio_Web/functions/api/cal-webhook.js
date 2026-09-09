@@ -36,19 +36,31 @@ export async function onRequestPost({ request, env }) {
   const rawBody = await request.text();
   const signature = request.headers.get('x-cal-signature-256');
   if (!(await verifySignature(rawBody, signature, env.CALCOM_WEBHOOK_SECRET))) {
-    console.warn('cal-webhook: firma inválida o ausente');
+    console.error('cal-webhook: firma inválida o ausente', {
+      hasSignature: Boolean(signature),
+      hasConfiguredSecret: Boolean(env.CALCOM_WEBHOOK_SECRET)
+    });
     return text('Firma inválida', 401);
   }
 
   let event;
   try { event = JSON.parse(rawBody); } catch { return text('JSON inválido', 400); }
+  console.log('cal-webhook: payload autenticado recibido', {
+    triggerEvent: event.triggerEvent || null,
+    payloadType: event.payload?.type || null,
+    hasUid: Boolean(event.payload?.uid)
+  });
   if (event.triggerEvent && event.triggerEvent !== 'BOOKING_CREATED') {
+    console.log('cal-webhook: evento ignorado por trigger', { triggerEvent: event.triggerEvent });
     return text(`Ignorado: trigger "${event.triggerEvent}" no soportado`);
   }
 
   const payload = event.payload || {};
   const trackedSlug = env.CAL_EVENT_SLUG || '15min';
-  if (payload.type !== trackedSlug) return text(`Ignorado: slug "${payload.type}" no rastreado`);
+  if (payload.type !== trackedSlug) {
+    console.log('cal-webhook: evento ignorado por slug', { payloadType: payload.type || null, trackedSlug });
+    return text(`Ignorado: slug "${payload.type}" no rastreado`);
+  }
 
   const attendee = (payload.attendees || [])[0] || {};
   const [firstName, ...lastNames] = String(attendee.name || '').trim().split(/\s+/).filter(Boolean);
@@ -57,7 +69,13 @@ export async function onRequestPost({ request, env }) {
   const eventId = payload.uid ? `cal-${payload.uid}` : `cal-${crypto.randomUUID()}`;
 
   try {
-    await sendCapiEvent(env, {
+    console.log('cal-webhook: enviando Lead a Meta CAPI', {
+      eventId,
+      pixelId: env.META_PIXEL_ID || null,
+      hasEmail: Boolean(hashedEmail),
+      hasPhone: Boolean(hashedPhone)
+    });
+    const metaResult = await sendCapiEvent(env, {
       eventName: 'Lead',
       eventId,
       eventSourceUrl: EVENT_SOURCE_URL,
@@ -69,10 +87,20 @@ export async function onRequestPost({ request, env }) {
       },
       customData: { content_name: payload.title || trackedSlug }
     });
+    console.log('cal-webhook: Meta CAPI aceptó Lead', {
+      eventId,
+      eventsReceived: metaResult.events_received ?? null,
+      traceId: metaResult.fbtrace_id || null
+    });
     const audienceId = await findOrCreateAudience(env, env.CAL_AUDIENCE_NAME || 'Agendaron llamada - Arian Alpiste');
     await addUserToAudience(env, audienceId, { hashedEmail, hashedPhone });
   } catch (error) {
-    console.error('cal-webhook: error notificando a Meta:', error);
+    console.error('cal-webhook: error notificando a Meta', {
+      eventId,
+      name: error?.name,
+      message: error?.message,
+      stack: error?.stack
+    });
     return text('Recibido, con errores al notificar a Meta (ver logs de Cloudflare Pages)');
   }
   return text('OK');
