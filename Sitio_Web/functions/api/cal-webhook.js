@@ -61,7 +61,7 @@ export async function onRequestPost({ request, env }) {
 
   try {
     await sendCapiEvent(env, {
-      eventName: 'Schedule',
+      eventName: 'Lead',
       eventId,
       eventSourceUrl: EVENT_SOURCE_URL,
       userData: {

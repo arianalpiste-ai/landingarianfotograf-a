@@ -89,8 +89,9 @@
     if (link.dataset.sourceArticle) parameters.source_article = link.dataset.sourceArticle;
 
     actions.forEach(function (action) {
-      if (action === 'meeting-intent') trackCustom('MeetingIntent', parameters, eventId('meeting-intent'));
+      if (action === 'meeting-intent') trackStandard('Schedule', parameters, eventId('schedule-click'));
       if (action === 'contact') trackStandard('Contact', parameters, eventId('contact'));
+      if (action === 'initiate-checkout') trackStandard('InitiateCheckout', parameters, eventId('initiate-checkout'));
       if (action === 'high-intent') trackCustom('HighIntentLead', parameters, eventId('high-intent'));
       if (action === 'portfolio-click') trackCustom('PortfolioClick', parameters, eventId('portfolio-click'));
       if (action === 'blog-to-landing') trackCustom('BlogToLanding', parameters, eventId('blog-to-landing'));

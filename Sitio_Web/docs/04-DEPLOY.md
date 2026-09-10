@@ -59,7 +59,7 @@ para que Meta deduplique ambos canales.
 ## Webhook de Cal.com
 
 `functions/api/cal-webhook.js` acepta únicamente `BOOKING_CREATED`, valida la
-firma HMAC y registra `Schedule`. No crea ni modifica audiencias publicitarias.
+firma HMAC y registra `Lead`. No crea ni modifica audiencias publicitarias.
 
 Variables necesarias:
 
@@ -72,7 +72,6 @@ D1; no se añadió esa dependencia al sitio estático.
 
 ## Pagos
 
-No existe proveedor ni flujo de pago. `InitiateCheckout` y `Purchase` están
-deliberadamente desactivados. Los clics en “Reservar” se miden como
-`HighIntentLead`, con paquete, valor publicado y moneda PEN, además de `Contact`
-por la salida a WhatsApp.
+No existe proveedor ni flujo de pago. `Purchase` permanece desactivado. Los
+clics en “Reservar” disparan `InitiateCheckout` y `HighIntentLead`, con paquete,
+valor publicado y moneda PEN; no disparan `Contact`.
