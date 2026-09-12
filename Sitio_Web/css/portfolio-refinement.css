@@ -1,0 +1,5 @@
+/* Compatibilidad: los portafolios individuales cargan este archivo después del principal. */
+.portfolio-collection .collection-masonry{columns:auto}
+.portfolio-title-link{display:inline-flex;align-items:center;border-bottom:1px solid transparent;transition:color .2s ease,border-color .2s ease}
+.portfolio-title-link:hover{color:var(--color-accent-text);border-bottom-color:var(--color-accent)}
+.portfolio-title-link:focus-visible{outline:3px solid #477fd4;outline-offset:5px}

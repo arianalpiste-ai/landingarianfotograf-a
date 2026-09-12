@@ -30,9 +30,6 @@
           buildGallery(wrap, group.items, title, group.featured, key + '-' + i);
         });
       });
-      ['paisaje', 'documental'].forEach(function (key) {
-        buildGallery(document.getElementById(key + 'Grid'), data[key], key === 'paisaje' ? 'Paisaje & Viajes' : 'Documental', (data.featured || {})[key], key);
-      });
       setupCategoryNav();
     }).catch(function () {
       var error = document.createElement('p');
