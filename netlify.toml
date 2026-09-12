@@ -1,0 +1,212 @@
+# Netlify only: the current arianalpiste.com site is deployed separately on Cloudflare Pages.
+# This repository has no build step; the static site lives in Sitio_Web/.
+[build]
+  base = "."
+  publish = "Sitio_Web"
+
+# Exact routes precede the catch-all. force overrides existing static HTML and 404 files.
+[[redirects]]
+  from = "/"
+  to = "https://arianalpiste.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "https://arianalpiste.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolio"
+  to = "https://arianalpiste.com/portafolio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolio.html"
+  to = "https://arianalpiste.com/portafolio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacidad"
+  to = "https://arianalpiste.com/privacidad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacidad.html"
+  to = "https://arianalpiste.com/privacidad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/eventos-familiares"
+  to = "https://arianalpiste.com/portafolios/eventos-familiares"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/eventos-familiares.html"
+  to = "https://arianalpiste.com/portafolios/eventos-familiares"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/eventos-corporativos"
+  to = "https://arianalpiste.com/portafolios/eventos-corporativos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/eventos-corporativos.html"
+  to = "https://arianalpiste.com/portafolios/eventos-corporativos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/retratos"
+  to = "https://arianalpiste.com/portafolios/retratos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/retratos.html"
+  to = "https://arianalpiste.com/portafolios/retratos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/paisaje-viajes"
+  to = "https://arianalpiste.com/portafolios/paisaje-viajes"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/paisaje-viajes.html"
+  to = "https://arianalpiste.com/portafolios/paisaje-viajes"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/documental"
+  to = "https://arianalpiste.com/portafolios/documental"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/portafolios/documental.html"
+  to = "https://arianalpiste.com/portafolios/documental"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog"
+  to = "https://arianalpiste.com/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/"
+  to = "https://arianalpiste.com/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/index.html"
+  to = "https://arianalpiste.com/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/cuanto-cuesta-fotografo-eventos-lima"
+  to = "https://arianalpiste.com/blog/cuanto-cuesta-fotografo-eventos-lima"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/cuanto-cuesta-fotografo-eventos-lima.html"
+  to = "https://arianalpiste.com/blog/cuanto-cuesta-fotografo-eventos-lima"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/como-elegir-fotografo-para-bautizo-lima"
+  to = "https://arianalpiste.com/blog/como-elegir-fotografo-para-bautizo-lima"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/como-elegir-fotografo-para-bautizo-lima.html"
+  to = "https://arianalpiste.com/blog/como-elegir-fotografo-para-bautizo-lima"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/que-incluye-cobertura-fotografica-cumpleanos"
+  to = "https://arianalpiste.com/blog/que-incluye-cobertura-fotografica-cumpleanos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/que-incluye-cobertura-fotografica-cumpleanos.html"
+  to = "https://arianalpiste.com/blog/que-incluye-cobertura-fotografica-cumpleanos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/recursos"
+  to = "https://arianalpiste.com/recursos/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/recursos/"
+  to = "https://arianalpiste.com/recursos/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/recursos/index.html"
+  to = "https://arianalpiste.com/recursos/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/recursos/checklist-fotos-para-tu-evento"
+  to = "https://arianalpiste.com/recursos/checklist-fotos-para-tu-evento"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/recursos/checklist-fotos-para-tu-evento.html"
+  to = "https://arianalpiste.com/recursos/checklist-fotos-para-tu-evento"
+  status = 301
+  force = true
+
+# Confirmation and error pages have no useful destination for a fresh visitor.
+[[redirects]]
+  from = "/gracias/reunion"
+  to = "https://arianalpiste.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gracias/reunion.html"
+  to = "https://arianalpiste.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/404.html"
+  to = "https://arianalpiste.com/"
+  status = 301
+  force = true
+
+# Never carry an unknown path to the new domain.
+[[redirects]]
+  from = "/*"
+  to = "https://arianalpiste.com/"
+  status = 301
+  force = true
