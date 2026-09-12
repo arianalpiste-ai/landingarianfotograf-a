@@ -59,6 +59,7 @@
 }
 /* Portafolios: conservar el encuadre original, también en móvil y filas incompletas. */
 .portfolio-collection .photo-row{align-items:flex-start;justify-content:center}
+.portfolio-collection .photo-rows-wrap .photo-row{width:100%;max-width:none;margin-inline:0}
 .portfolio-collection .photo-item{height:auto;aspect-ratio:var(--ratio);max-width:calc(390px * var(--ratio))}
 .portfolio-collection .photo-item img{display:block;object-fit:contain}
 .portfolio-collection .collection-hero-media{height:auto;min-height:0;border-radius:0;overflow:visible}
