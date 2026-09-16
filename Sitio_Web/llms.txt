@@ -4,17 +4,22 @@
 
 ## Páginas principales
 - https://arianalpiste.com/: Servicios, paquetes publicados y formulario de contacto.
-- https://arianalpiste.com/portafolio.html: Galerías de eventos familiares, retratos, paisajes y fotografía documental.
+- https://arianalpiste.com/portafolio: Índice de portafolios: eventos familiares, retratos, paisaje y viajes, y documental.
+- https://arianalpiste.com/portafolios/eventos-familiares: Galería de eventos familiares, bautizos y cumpleaños.
+- https://arianalpiste.com/portafolios/retratos: Galería de sesiones de retratos.
+- https://arianalpiste.com/portafolios/paisaje-viajes: Galería de fotografía de paisaje y viajes.
+- https://arianalpiste.com/portafolios/documental: Galería de fotografía documental.
+- https://arianalpiste.com/privacidad: Política de privacidad y uso de datos.
 
 ## Blog
 - https://arianalpiste.com/blog/: Índice de guías sobre fotografía de eventos.
-- https://arianalpiste.com/blog/cuanto-cuesta-fotografo-eventos-lima.html: Precios publicados y criterios para comparar coberturas en Lima.
-- https://arianalpiste.com/blog/como-elegir-fotografo-para-bautizo-lima.html: Preguntas prácticas para elegir cobertura de bautizo.
-- https://arianalpiste.com/blog/que-incluye-cobertura-fotografica-cumpleanos.html: Entregables y momentos habituales de una cobertura de cumpleaños.
+- https://arianalpiste.com/blog/cuanto-cuesta-fotografo-eventos-lima: Precios publicados y criterios para comparar coberturas en Lima.
+- https://arianalpiste.com/blog/como-elegir-fotografo-para-bautizo-lima: Preguntas prácticas para elegir cobertura de bautizo.
+- https://arianalpiste.com/blog/que-incluye-cobertura-fotografica-cumpleanos: Entregables y momentos habituales de una cobertura de cumpleaños.
 
 ## Recursos
 - https://arianalpiste.com/recursos/: Índice de recursos gratuitos.
-- https://arianalpiste.com/recursos/checklist-fotos-para-tu-evento.html: Lista para preparar personas, momentos y detalles importantes.
+- https://arianalpiste.com/recursos/checklist-fotos-para-tu-evento: Lista para preparar personas, momentos y detalles importantes.
 
 ## Contacto
 - https://arianalpiste.com/#contacto: Formulario, WhatsApp y agenda de reunión.
