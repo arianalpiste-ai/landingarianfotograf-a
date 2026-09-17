@@ -9,6 +9,7 @@
   setupGuidesDropdown();
   setupNav();
   setupContactForm();
+  setupArticleToc();
   document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('in-view'); });
   if (document.getElementById('heroSlides')) {
     fetch('assets/manifest.json').then(function (r) {
@@ -386,6 +387,51 @@
       }, { rootMargin: '-20% 0px -65% 0px' });
       localLinks.forEach(function (a) { observer.observe(document.getElementById(a.hash.slice(1))); });
     }
+  }
+
+  function setupArticleToc() {
+    var toc = document.querySelector('.article-toc');
+    var body = document.querySelector('.article-body');
+    var list = toc && toc.querySelector('.article-toc-list');
+    var toggle = toc && toc.querySelector('.article-toc-toggle');
+    if (!toc || !body || !list || !toggle) return;
+    var headings = Array.from(body.querySelectorAll('h2'));
+    if (headings.length < 2) { toc.remove(); return; }
+    var usedIds = {};
+    var links = headings.map(function (h) {
+      if (!h.id) {
+        var base = h.textContent.trim().toLowerCase()
+          .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-') || 'seccion';
+        var id = base, n = 2;
+        while (usedIds[id]) { id = base + '-' + (n++); }
+        usedIds[id] = true;
+        h.id = id;
+      }
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.trim();
+      li.appendChild(a);
+      list.appendChild(li);
+      return a;
+    });
+    var narrow = window.matchMedia('(max-width: 899px)');
+    function setOpen(open) {
+      toc.setAttribute('data-open', String(open));
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    toggle.addEventListener('click', function () { setOpen(toc.getAttribute('data-open') === 'false'); });
+    setOpen(!narrow.matches);
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var link = links[headings.indexOf(entry.target)];
+        links.forEach(function (a) { a.classList.remove('is-active'); });
+        link.classList.add('is-active');
+      });
+    }, { rootMargin: '-20% 0px -65% 0px' });
+    headings.forEach(function (h) { observer.observe(h); });
   }
   function setupCategoryNav() {
     var links = Array.from(document.querySelectorAll('.category-nav a'));
