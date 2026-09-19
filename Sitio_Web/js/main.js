@@ -463,6 +463,9 @@
     window.Cal.config = window.Cal.config || {};
     window.Cal.config.forwardQueryParams = true;
     window.Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
+    document.querySelectorAll('[data-cal-link]').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); });
+    });
   }
   function setupCategoryNav() {
     var links = Array.from(document.querySelectorAll('.category-nav a'));
