@@ -10,6 +10,7 @@
   setupNav();
   setupContactForm();
   setupArticleToc();
+  setupCalEmbed();
   document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('in-view'); });
   if (document.getElementById('heroSlides')) {
     fetch('assets/manifest.json').then(function (r) {
@@ -432,6 +433,36 @@
       });
     }, { rootMargin: '-20% 0px -65% 0px' });
     headings.forEach(function (h) { observer.observe(h); });
+  }
+  function setupCalEmbed() {
+    (function (C, A, L) {
+      var p = function (a, ar) { a.q.push(ar); };
+      var d = C.document;
+      C.Cal = C.Cal || function () {
+        var cal = C.Cal; var ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {}; cal.q = cal.q || [];
+          d.head.appendChild(d.createElement('script')).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          var api = function () { p(api, arguments); };
+          var namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === 'string') {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ['initNamespace', namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
+    window.Cal('init', '15min', { origin: 'https://app.cal.com' });
+    window.Cal.config = window.Cal.config || {};
+    window.Cal.config.forwardQueryParams = true;
+    window.Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
   }
   function setupCategoryNav() {
     var links = Array.from(document.querySelectorAll('.category-nav a'));
