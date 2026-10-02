@@ -1,9 +1,10 @@
 # Arian Alpiste Fotografía
 
-> Fotografía de eventos, celebraciones, graduaciones y sesiones en Lima. El sitio reúne portafolio, precios publicados y guías para preparar una cobertura fotográfica.
+> Fotografía de eventos, celebraciones, graduaciones y sesiones familiares en Lima. El sitio reúne portafolio, precios publicados y guías para preparar una cobertura fotográfica.
 
 ## Páginas principales
-- https://arianalpiste.com/: Servicios, paquetes publicados y formulario de contacto.
+- https://arianalpiste.com/: Fotografía de eventos (cumpleaños, bautizos): servicios, paquetes publicados y formulario de contacto.
+- https://arianalpiste.com/sesiones-familiares: Sesiones de fotos familiares en Lima, en exteriores o en estudio. Paquetes publicados: Mini S/ 250, Clásica S/ 380 y Estudio S/ 520.
 - https://arianalpiste.com/portafolio: Índice de portafolios: eventos familiares, retratos, paisaje y viajes, y documental.
 - https://arianalpiste.com/portafolios/eventos-familiares: Galería de eventos familiares, bautizos y cumpleaños.
 - https://arianalpiste.com/portafolios/retratos: Galería de sesiones de retratos.

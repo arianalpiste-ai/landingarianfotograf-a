@@ -9,6 +9,7 @@ const EVENT_TYPES = new Set([
   'Graduación',
   'Evento corporativo',
   'Cumpleaños',
+  'Sesión familiar',
   'Sesión de retratos',
   'Otro'
 ]);

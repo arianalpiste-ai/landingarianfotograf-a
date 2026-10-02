@@ -88,3 +88,27 @@ Por solicitud del cliente se evolucionó la presentación:
 - Los controles de cada galería se redujeron a «Ver fotos» y «Ocultar fotos».
 - Se retiraron las llamadas de consulta ubicadas dentro de Eventos y Retratos.
 - Se retiraron del portafolio los grupos «Retratos · Sesión 6» y «Retratos · Sesión 7».
+
+## 12. Sesiones familiares como página propia — octubre de 2026
+
+- La home (`index.html`) sigue siendo la landing de eventos (cumpleaños, bautizos).
+  Se evaluó convertirla en landing de sesiones familiares y se descartó: ya está
+  indexándose con enfoque de eventos y el blog apunta a ella.
+- Nueva `sesiones-familiares.html` (URL pública `/sesiones-familiares`): menú reducido
+  a anclas internas + «Eventos», y WhatsApp como única acción.
+- Paquetes publicados como punto de partida, **pendientes de confirmar por Arian**:
+  Mini S/ 250, Clásica S/ 380 (exteriores) y Estudio S/ 520 (alquiler incluido).
+  Los precios aparecen en tres lugares que deben cambiarse juntos: las tarjetas,
+  el JSON-LD `Service` del `<head>` y `llms.txt` (más «desde S/ 250» en el hero,
+  la franja y la tarjeta de la home).
+- Fotos: 19 imágenes de la «Sesión Primavera» (carpetas `Finales` de cada familia).
+  No hay fotos de estudio todavía; la sección «¿Exteriores o estudio?» usa una sola
+  foto de exteriores. La imagen `familia_20` solo existe como WebP de 480 px (círculo del hero).
+- Las respuestas del FAQ se repiten en el JSON-LD `FAQPage`: si se edita una, editar la otra.
+- Home: la tarjeta y la franja «Sesión de Fotos Familiares» enlazan a la página nueva,
+  se agregó «Familias» al menú (index, portafolio, privacidad), «Sesiones familiares»
+  al footer y «Sesión familiar» al formulario (`functions/api/contacto.js` → `EVENT_TYPES`).
+- Menú: entre 1101 y 1320 px se compacta por CSS para que el enlace nuevo no parta líneas.
+- Pendiente: enlace de WhatsApp propio con mensaje prellenado de sesión familiar
+  (hoy reutiliza `wa.link/78mbqb` y `wa.link/4jqx34`), testimonios específicos de
+  sesiones y fotos de estudio.

@@ -12,6 +12,7 @@ al navegador.
 | Reserva creada en Cal.com | `Lead` | CAPI | Nombre del tipo de cita | UID de Cal.com como ID determinista |
 | Clic a WhatsApp | `Contact` | Pixel | Ubicación, destino y paquete si aplica | Un ID por clic |
 | Clic en “Reservar” | `InitiateCheckout` + `HighIntentLead` | Pixel, estándar + personalizado | Paquete, valor publicado, `PEN` | Un ID independiente por evento |
+| Apertura de landing de servicio (`data-content-type="service"`) | `ViewContent` | Pixel | Nombre del servicio, categoría `service` | Una vez por documento |
 | Apertura de portafolio | `ViewContent` | Pixel | Categoría `portfolio` | Una vez por documento |
 | Apertura de artículo | `ViewContent` | Pixel | Título, slug, categoría `blog` | Una vez por documento |
 | Apertura del índice del blog | `BlogView` | Pixel, personalizado | Categoría `blog` | Una vez por documento |

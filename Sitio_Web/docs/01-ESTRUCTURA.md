@@ -5,6 +5,9 @@ Sitio_Web/
 ├── index.html            Página de servicios (home). Hero, "por qué importa",
 │                          preview de portafolio, testimonio, paquetes, contacto,
 │                          sobre mí, FAQ.
+├── sesiones-familiares.html  Landing de sesiones familiares (exteriores y estudio):
+│                          hero, por qué, 3 pasos, galería, lugares, testimonios,
+│                          paquetes por sesión, FAQ y cierre. CTA único: WhatsApp.
 ├── portafolio.html        Página de galería completa: hero-slideshow +
 │                          secciones Eventos / Retratos / Paisaje & Viajes / Documental.
 ├── privacidad.html        Información sobre datos, proveedores y medición.
@@ -24,6 +27,8 @@ Sitio_Web/
 │       ├── retratos/         retrato_NN.jpg
 │       ├── paisaje/          paisaje_NN.jpg
 │       ├── documental/       documental_NN.jpg
+│       ├── familias/         familia_NN.jpg + responsive/ (WebP 480/960) y la imagen
+│       │                      Open Graph de sesiones-familiares.html — no vienen del manifest.
 │       └── servicios/        imágenes propias de index.html (hero-blob, "sobre mí",
 │                              preview de portafolio, favicon) — no vienen del manifest.
 ├── sitemap.xml            URLs públicas que deben indexarse.

@@ -52,6 +52,13 @@
       content_type: 'gallery'
     }, eventId('portfolio-view'));
   }
+  if (body.dataset.contentType === 'service') {
+    trackStandard('ViewContent', {
+      content_name: body.dataset.contentName || 'Servicio',
+      content_category: 'service',
+      content_type: 'landing'
+    }, eventId('service-view'));
+  }
   if (body.dataset.contentType === 'article') {
     trackStandard('ViewContent', {
       content_name: body.dataset.contentName,
