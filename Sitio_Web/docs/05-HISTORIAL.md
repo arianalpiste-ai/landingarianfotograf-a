@@ -101,9 +101,14 @@ Por solicitud del cliente se evolucionó la presentación:
   Los precios aparecen en tres lugares que deben cambiarse juntos: las tarjetas,
   el JSON-LD `Service` del `<head>` y `llms.txt` (más «desde S/ 250» en el hero,
   la franja y la tarjeta de la home).
-- Fotos: 19 imágenes de la «Sesión Primavera» (carpetas `Finales` de cada familia).
-  No hay fotos de estudio todavía; la sección «¿Exteriores o estudio?» usa una sola
-  foto de exteriores. La imagen `familia_20` solo existe como WebP de 480 px (círculo del hero).
+- Fotos de la «Sesión Primavera» (carpetas `Finales` de cada familia). Como todas son
+  de la misma locación, Arian pidió mostrar pocas: hero con 3 (principal `familia_22`,
+  círculos `familia_20` y `familia_11`) y galería de solo 6, alternando fotos con papás
+  (`01`, `04`, `07`) y bebés solos (`16`, `19`, `21`); cada tarjeta abre una sola foto.
+  No hay fotos de estudio todavía; «¿Exteriores o estudio?» usa `familia_17`.
+- Photobook: la página dice que, según el paquete, se entrega photobook impreso además
+  de la galería digital. **Falta definir qué paquetes lo incluyen** y reflejarlo en las
+  tarjetas de paquetes y en el FAQ.
 - Las respuestas del FAQ se repiten en el JSON-LD `FAQPage`: si se edita una, editar la otra.
 - Home: la tarjeta y la franja «Sesión de Fotos Familiares» enlazan a la página nueva,
   se agregó «Familias» al menú (index, portafolio, privacidad), «Sesiones familiares»
