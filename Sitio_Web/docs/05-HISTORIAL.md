@@ -108,7 +108,9 @@ Por solicitud del cliente se evolucionó la presentación:
 - La galería es un carrusel simple (`#familyCarousel`, `setupFamilyCarousel` en `js/main.js`,
   estilos `.fc-*`): 3 fotos a la vista (2 en tablet, 1 en celular) con su título debajo,
   flechas a los lados y puntos. Usa el desplazamiento nativo con `scroll-snap`, sin librerías
-  ni avance automático; al llegar al final, la flecha vuelve al inicio. El clic en una foto
+  ni avance automático. Es un bucle continuo: el script copia las fotos una vez antes y una
+  vez después, y cuando el desplazamiento se detiene sobre una copia salta sin animación a la
+  original (por eso en el DOM hay 18 `<li>` aunque el HTML tenga 6). El clic en una foto
   abre el visor con las 6. Antes se probaron un coverflow 3D y un carrusel de foto central;
   Arian los descartó y pidió este formato, tomando como referencia un «loop carousel» de
   tres tarjetas. Para agregar o quitar fotos basta editar los `<li class="fc-slide">`.

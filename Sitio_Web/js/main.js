@@ -468,56 +468,79 @@
       el.addEventListener('click', function (e) { e.preventDefault(); });
     });
   }
-  // Carrusel simple de la landing de sesiones familiares. El movimiento es el desplazamiento
-  // nativo del navegador (deslizar con el dedo funciona solo); aquí solo van flechas, puntos y visor.
+  // Carrusel simple de la landing de sesiones familiares, en bucle continuo. El movimiento es el
+  // desplazamiento nativo del navegador (deslizar con el dedo funciona solo). Para que no tenga
+  // principio ni fin, las fotos se copian una vez antes y una vez después; cuando el desplazamiento
+  // se detiene sobre una copia, se salta sin animación a la foto original equivalente.
   function setupFamilyCarousel() {
     var root = document.getElementById('familyCarousel');
     if (!root) return;
     var viewport = root.querySelector('.fc-viewport');
-    var slides = Array.from(root.querySelectorAll('.fc-slide'));
+    var track = root.querySelector('.fc-track');
     var dotsWrap = root.querySelector('.fc-dots');
-    if (slides.length < 2) return;
-    var images = slides.map(function (slide) { return { src: slide.dataset.full, alt: slide.querySelector('img').alt }; });
-    var dots = [], ticking = false;
+    var originals = Array.from(track.querySelectorAll('.fc-slide'));
+    var n = originals.length;
+    if (n < 2) return;
+    var images = originals.map(function (slide) { return { src: slide.dataset.full, alt: slide.querySelector('img').alt }; });
+    var target = null, settleTimer = null, touching = false, ticking = false;
+
+    function copy(slide) {
+      var clone = slide.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelector('.fc-card').tabIndex = -1;
+      return clone;
+    }
+    originals.forEach(function (slide) { track.insertBefore(copy(slide), originals[0]); });
+    originals.forEach(function (slide) { track.appendChild(copy(slide)); });
+    var slides = Array.from(track.querySelectorAll('.fc-slide')); // copias · originales · copias
+    slides.forEach(function (slide, i) {
+      var card = slide.querySelector('.fc-card');
+      card.addEventListener('click', function () { viewer.open(images, i % n, 'Sesiones recientes', card); });
+    });
+
+    var dots = originals.map(function (slide, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'fc-dot';
+      dot.setAttribute('aria-label', 'Ir a la foto ' + (i + 1) + ' de ' + n);
+      dot.addEventListener('click', function () { goTo(i); });
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
 
     function stepWidth() { return slides[1].offsetLeft - slides[0].offsetLeft; }
-    function lastIndex() { return Math.max(0, Math.round((viewport.scrollWidth - viewport.clientWidth) / stepWidth())); }
-    function index() { return Math.min(lastIndex(), Math.max(0, Math.round(viewport.scrollLeft / stepWidth()))); }
-    function goTo(i) { viewport.scrollTo({ left: i * stepWidth(), behavior: reduced.matches ? 'auto' : 'smooth' }); }
-    function move(dir) {
-      var i = index(), last = lastIndex();
-      goTo(dir > 0 ? (i >= last ? 0 : i + 1) : (i <= 0 ? last : i - 1)); // al llegar al final vuelve al inicio
+    function raw() { return Math.round(viewport.scrollLeft / stepWidth()); }
+    function logical(value) { return ((value % n) + n) % n; }
+    function jump(position) { viewport.scrollLeft = position * stepWidth(); }
+    function scrollToPosition(position) {
+      var last = slides.length - Math.max(1, Math.round(viewport.clientWidth / stepWidth()));
+      target = Math.max(0, Math.min(last, position));
+      viewport.scrollTo({ left: target * stepWidth(), behavior: reduced.matches ? 'auto' : 'smooth' });
+    }
+    function move(dir) { scrollToPosition((target === null ? raw() : target) + dir); }
+    function goTo(index) {
+      var from = target === null ? raw() : target;
+      var delta = index - logical(from);
+      delta -= n * Math.round(delta / n); // camino más corto
+      scrollToPosition(from + delta);
     }
     function update() {
       ticking = false;
-      var current = index();
+      var current = logical(raw());
       dots.forEach(function (dot, i) {
         if (i === current) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
       });
     }
-    function buildDots() {
-      var count = lastIndex() + 1;
-      if (count !== dots.length) {
-        dotsWrap.textContent = '';
-        dots = [];
-        for (var i = 0; i < count; i++) {
-          var dot = document.createElement('button');
-          dot.type = 'button';
-          dot.className = 'fc-dot';
-          dot.setAttribute('aria-label', 'Ir a la posición ' + (i + 1) + ' de ' + count);
-          dot.addEventListener('click', goTo.bind(null, i));
-          dotsWrap.appendChild(dot);
-          dots.push(dot);
-        }
-        dotsWrap.hidden = count < 2;
-      }
-      update();
+    // Al detenerse, vuelve al juego central de fotos. Es la misma imagen en el mismo lugar: no se nota.
+    function settle() {
+      clearTimeout(settleTimer);
+      if (touching) return;
+      target = null;
+      var position = raw();
+      if (position < n) jump(position + n);
+      else if (position >= 2 * n) jump(position - n);
     }
 
-    slides.forEach(function (slide, i) {
-      var card = slide.querySelector('.fc-card');
-      card.addEventListener('click', function () { viewer.open(images, i, 'Sesiones recientes', card); });
-    });
     root.querySelector('.fc-prev').addEventListener('click', function () { move(-1); });
     root.querySelector('.fc-next').addEventListener('click', function () { move(1); });
     root.addEventListener('keydown', function (e) {
@@ -525,12 +548,31 @@
       if (e.key === 'ArrowRight') { e.preventDefault(); move(1); }
     });
     viewport.addEventListener('scroll', function () {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(settle, 140);
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(update);
     }, { passive: true });
-    window.addEventListener('resize', buildDots);
-    buildDots();
+    viewport.addEventListener('scrollend', settle);
+    viewport.addEventListener('touchstart', function () { touching = true; }, { passive: true });
+    ['touchend', 'touchcancel'].forEach(function (type) {
+      viewport.addEventListener(type, function () { touching = false; clearTimeout(settleTimer); settleTimer = setTimeout(settle, 140); }, { passive: true });
+    });
+    window.addEventListener('resize', function () { var keep = logical(raw()); target = null; jump(n + keep); update(); });
+
+    // Las copias comparten archivo con las originales: se cargan todas al acercarse, para que el salto no parpadee.
+    function loadAll() { slides.forEach(function (slide) { var img = slide.querySelector('img'); img.loading = 'eager'; img.decoding = 'sync'; }); }
+    if ('IntersectionObserver' in window) {
+      var near = new IntersectionObserver(function (entries) {
+        if (entries.some(function (entry) { return entry.isIntersecting; })) { loadAll(); near.disconnect(); }
+      }, { rootMargin: '600px 0px' });
+      near.observe(root);
+    } else loadAll();
+
+    root.classList.add('is-loop');
+    jump(n);
+    update();
   }
   function setupCategoryNav() {
     var links = Array.from(document.querySelectorAll('.category-nav a'));
