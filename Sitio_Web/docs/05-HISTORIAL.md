@@ -105,11 +105,13 @@ Por solicitud del cliente se evolucionó la presentación:
   de la misma locación, Arian pidió mostrar pocas: hero con 3 (principal `familia_22`,
   círculos `familia_20` y `familia_11`) y galería de solo 6, alternando fotos con papás
   (`01`, `04`, `07`) y bebés solos (`16`, `19`, `21`).
-- La galería es un carrusel tipo coverflow (`#familyCarousel`, `setupFamilyCarousel` en
-  `js/main.js`, estilos `.fc-*`): foto central de frente y vecinas inclinadas, arrastre,
-  flechas, puntos, teclado y avance automático con botón de pausa. Sin librerías. El clic
-  en la foto central abre el visor con las 6; el clic en una lateral la trae al centro.
-  Para agregar o quitar fotos basta editar los `<li class="fc-slide">` (mínimo 3).
+- La galería es un carrusel plano (`#familyCarousel`, `setupFamilyCarousel` en `js/main.js`,
+  estilos `.fc-*`): foto activa al centro y vecinas asomando a los lados, más chicas y
+  atenuadas; arrastre, flechas y teclado, sin avance automático ni librerías. Primero se
+  probó un coverflow 3D con autoplay y Arian lo descartó por no ir con la estética del
+  sitio: pidió algo más minimalista. El clic en la foto central abre el visor con las 6;
+  el clic en una lateral la trae al centro. Para agregar o quitar fotos basta editar los
+  `<li class="fc-slide">` (mínimo 3).
 - La franja bajo el hero dice solo «Sesiones en exteriores o estudio».
   No hay fotos de estudio todavía; «¿Exteriores o estudio?» usa `familia_17`.
 - Photobook: la página dice que, según el paquete, se entrega photobook impreso además

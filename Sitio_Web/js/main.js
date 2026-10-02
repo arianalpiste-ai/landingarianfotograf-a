@@ -468,8 +468,8 @@
       el.addEventListener('click', function (e) { e.preventDefault(); });
     });
   }
-  // Carrusel coverflow de la landing de sesiones familiares: la foto del centro queda de frente
-  // y las vecinas se inclinan hacia atrás. Arrastre, teclado, puntos, flechas y avance automático.
+  // Carrusel de la landing de sesiones familiares: la foto activa al centro y las vecinas
+  // asomando a los lados, más pequeñas y atenuadas. Arrastre, flechas y teclado; sin avance automático.
   function setupFamilyCarousel() {
     var root = document.getElementById('familyCarousel');
     if (!root) return;
@@ -477,44 +477,29 @@
     var slides = Array.from(root.querySelectorAll('.fc-slide'));
     var n = slides.length;
     if (n < 3) return;
-    var caption = root.querySelector('.fc-caption');
-    var titleEl = root.querySelector('.fc-caption-title');
-    var dotsWrap = root.querySelector('.fc-dots');
-    var playBtn = root.querySelector('[data-fc="play"]');
-    var lightbox = document.getElementById('lightbox');
+    var titleEl = document.getElementById('fcTitle');
+    var countEl = document.getElementById('fcCount');
     var images = slides.map(function (slide) { return { src: slide.dataset.full, alt: slide.querySelector('img').alt }; });
-    var DELAY = 5500;
-    var pos = 0; // posición continua; la foto activa es round(pos) módulo n
-    var timer = null, drag = null, suppressClick = false, shown = -1;
-    var userPaused = reduced.matches, hover = false, focused = false, visible = false;
-
-    var dots = slides.map(function (slide, i) {
-      var dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'fc-dot';
-      dot.setAttribute('aria-label', 'Ver foto ' + (i + 1) + ': ' + slide.dataset.title);
-      dot.addEventListener('click', function () { goTo(i); });
-      dotsWrap.appendChild(dot);
-      return dot;
-    });
+    var SIDE = .88; // tamaño de las fotos vecinas respecto de la central
+    var pos = 0;    // posición continua; la foto activa es round(pos) módulo n
+    var drag = null, suppressClick = false, shown = -1;
 
     function mod(value) { return ((value % n) + n) % n; }
     function active() { return mod(Math.round(pos)); }
-    function spread() { return slides[0].offsetWidth * (window.innerWidth <= 760 ? .66 : .6); }
+    function gap() { return parseFloat(getComputedStyle(root).getPropertyValue('--fc-gap')) || 24; }
+    function stepWidth() { return slides[0].offsetWidth * (1 + SIDE) / 2 + gap(); }
 
     function render() {
-      var width = slides[0].offsetWidth;
-      var narrow = window.innerWidth <= 760;
+      var width = slides[0].offsetWidth, first = stepWidth(), next = width * SIDE + gap();
       slides.forEach(function (slide, i) {
         var d = i - pos;
         d -= n * Math.round(d / n); // distancia más corta al centro
         var a = Math.abs(d), near = Math.min(a, 1), far = Math.max(a - 1, 0);
-        var x = (d < 0 ? -1 : 1) * width * ((narrow ? .66 : .6) * near + .3 * far);
-        var z = -(near * 170 + far * 110);
-        var angle = -Math.max(-1, Math.min(1, d)) * (narrow ? 26 : 34);
-        slide.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,' + z.toFixed(1) + 'px) rotateY(' + angle.toFixed(2) + 'deg)';
-        slide.style.opacity = a >= 2.4 ? '0' : a > 1.5 ? String(1 - (a - 1.5) / .9) : '1';
-        slide.style.zIndex = String(100 - Math.round(a * 10));
+        var x = (d < 0 ? -1 : 1) * (first * near + next * far);
+        var scale = 1 - (1 - SIDE) * near;
+        slide.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0) scale(' + scale.toFixed(4) + ')';
+        slide.style.visibility = a > 2.5 ? 'hidden' : 'visible';
+        slide.style.zIndex = String(10 - Math.round(a));
         slide.style.setProperty('--fc-veil', (.55 * near).toFixed(3));
       });
       var current = active();
@@ -525,14 +510,13 @@
         slide.classList.toggle('is-active', on);
         slide.setAttribute('aria-hidden', String(!on));
         slide.querySelector('.fc-card').tabIndex = on ? 0 : -1;
-        dots[i].classList.toggle('is-active', on);
-        if (on) dots[i].setAttribute('aria-current', 'true'); else dots[i].removeAttribute('aria-current');
       });
       slides[current].querySelector('.fc-card').setAttribute('aria-label', 'Ampliar foto: ' + slides[current].dataset.title);
       titleEl.textContent = slides[current].dataset.title;
+      countEl.textContent = (current + 1) + ' / ' + n;
     }
 
-    function settle(target) { pos = target; render(); schedule(); }
+    function settle(target) { pos = target; render(); }
     function step(dir) { settle(Math.round(pos) + dir); }
     function goTo(index) {
       var delta = index - active();
@@ -540,23 +524,9 @@
       settle(Math.round(pos) + delta);
     }
 
-    function schedule() {
-      clearTimeout(timer);
-      var playing = !userPaused && !hover && !focused && !drag && visible && !document.hidden;
-      root.classList.toggle('is-playing', playing);
-      caption.setAttribute('aria-live', playing ? 'off' : 'polite');
-      playBtn.textContent = userPaused ? 'Reproducir' : 'Pausar';
-      playBtn.setAttribute('aria-pressed', String(userPaused));
-      if (!playing) return;
-      timer = setTimeout(function () {
-        if (lightbox && lightbox.classList.contains('open')) schedule(); else step(1);
-      }, DELAY);
-    }
-
     stage.addEventListener('pointerdown', function (e) {
       if (e.pointerType === 'mouse' && e.button !== 0) return;
       drag = { id: e.pointerId, x: e.clientX, from: pos, moved: false };
-      schedule();
     });
     stage.addEventListener('pointermove', function (e) {
       if (!drag || e.pointerId !== drag.id) return;
@@ -567,7 +537,7 @@
         root.classList.add('is-dragging');
         try { stage.setPointerCapture(drag.id); } catch (err) { /* el puntero ya no existe */ }
       }
-      pos = drag.from - dx / spread();
+      pos = drag.from - dx / stepWidth();
       render();
     });
     function endDrag(e) {
@@ -575,54 +545,35 @@
       var finished = drag;
       drag = null;
       root.classList.remove('is-dragging');
-      if (!finished.moved) { schedule(); return; }
+      if (!finished.moved) return;
       suppressClick = true;
       setTimeout(function () { suppressClick = false; }, 0);
       var travelled = pos - finished.from;
-      var steps = Math.abs(travelled) < .18 ? 0 : Math.max(1, Math.round(Math.abs(travelled)));
+      var steps = Math.abs(travelled) < .15 ? 0 : Math.max(1, Math.round(Math.abs(travelled)));
       settle(Math.round(finished.from) + (travelled < 0 ? -steps : steps));
     }
     stage.addEventListener('pointerup', endDrag);
     stage.addEventListener('pointercancel', endDrag);
     stage.addEventListener('click', function (e) {
       if (suppressClick) { suppressClick = false; return; }
-      // Las fotos laterales quedan detrás del plano en 3D y el navegador no siempre las detecta
-      // como destino del clic, así que se busca por coordenadas cuál está bajo el puntero.
-      var index = -1;
-      if (e.detail === 0) index = slides.indexOf(e.target.closest('.fc-slide'));
-      else slides.forEach(function (candidate, i) {
-        if (candidate.style.opacity === '0') return;
-        var box = candidate.getBoundingClientRect();
-        if (e.clientX < box.left || e.clientX > box.right || e.clientY < box.top || e.clientY > box.bottom) return;
-        if (index === -1 || Number(candidate.style.zIndex) > Number(slides[index].style.zIndex)) index = i;
-      });
-      if (index === -1) return;
-      var slide = slides[index];
+      var slide = e.target.closest('.fc-slide');
+      if (!slide) return;
+      var index = slides.indexOf(slide);
       if (index === active()) viewer.open(images, index, 'Sesiones recientes', slide.querySelector('.fc-card'));
       else goTo(index);
     });
 
     root.querySelector('[data-fc="prev"]').addEventListener('click', function () { step(-1); });
     root.querySelector('[data-fc="next"]').addEventListener('click', function () { step(1); });
-    playBtn.addEventListener('click', function () { userPaused = !userPaused; schedule(); });
     root.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
     });
-    root.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hover = true; schedule(); } });
-    root.addEventListener('pointerleave', function () { hover = false; schedule(); });
-    root.addEventListener('focusin', function (e) { focused = e.target !== playBtn && e.target.matches(':focus-visible'); schedule(); });
-    root.addEventListener('focusout', function () { focused = false; schedule(); });
-    document.addEventListener('visibilitychange', schedule);
     window.addEventListener('resize', render);
-    reduced.addEventListener('change', function () { if (reduced.matches) userPaused = true; schedule(); });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; schedule(); }, { threshold: .35 }).observe(stage);
-    } else visible = true;
 
     root.classList.add('is-ready', 'is-dragging'); // primera colocación sin animación
     render();
-    requestAnimationFrame(function () { root.classList.remove('is-dragging'); schedule(); });
+    requestAnimationFrame(function () { root.classList.remove('is-dragging'); });
   }
   function setupCategoryNav() {
     var links = Array.from(document.querySelectorAll('.category-nav a'));
