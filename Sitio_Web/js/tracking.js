@@ -52,12 +52,26 @@
       content_type: 'gallery'
     }, eventId('portfolio-view'));
   }
+  // Landing de servicio: ViewContent se envía una sola vez, cuando la persona llega a ver los
+  // paquetes y precios (no al abrir la página). Se observa la primera tarjeta porque en celular
+  // la sección entera es más alta que la pantalla.
   if (body.dataset.contentType === 'service') {
-    trackStandard('ViewContent', {
-      content_name: body.dataset.contentName || 'Servicio',
-      content_category: 'service',
-      content_type: 'landing'
-    }, eventId('service-view'));
+    var offer = document.querySelector('[data-track-offer]');
+    var sendOfferView = function () {
+      trackStandard('ViewContent', {
+        content_name: body.dataset.contentName || 'Servicio',
+        content_category: 'service',
+        content_type: 'pricing'
+      }, eventId('service-view'));
+    };
+    if (offer && 'IntersectionObserver' in window) {
+      var offerObserver = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        offerObserver.disconnect();
+        sendOfferView();
+      }, { threshold: 0.4 });
+      offerObserver.observe(offer);
+    } else if (offer) sendOfferView();
   }
   if (body.dataset.contentType === 'article') {
     trackStandard('ViewContent', {
@@ -94,6 +108,10 @@
       parameters.currency = link.dataset.currency || 'PEN';
     }
     if (link.dataset.sourceArticle) parameters.source_article = link.dataset.sourceArticle;
+    if (body.dataset.contentType === 'service') {
+      parameters.content_name = body.dataset.contentName || 'Servicio';
+      parameters.content_category = 'service';
+    }
 
     actions.forEach(function (action) {
       if (action === 'meeting-intent') trackStandard('Schedule', parameters, eventId('schedule-click'));

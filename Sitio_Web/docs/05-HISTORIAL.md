@@ -136,6 +136,6 @@ Por solicitud del cliente se evolucionó la presentación:
   se agregó «Familias» al menú (index, portafolio, privacidad), «Sesiones familiares»
   al footer y «Sesión familiar» al formulario (`functions/api/contacto.js` → `EVENT_TYPES`).
 - Menú: entre 1101 y 1320 px se compacta por CSS para que el enlace nuevo no parta líneas.
-- Pendiente: enlace de WhatsApp propio con mensaje prellenado de sesión familiar
-  (hoy reutiliza `wa.link/78mbqb` y `wa.link/4jqx34`), testimonios específicos de
-  sesiones y fotos de estudio.
+- WhatsApp: los botones de esta página abren `wa.me` con el número de Arian y un mensaje ya
+  escrito según el botón (la home sigue con `wa.link`). Eventos por botón: ver `06-TRACKING.md`.
+- Pendiente: testimonios específicos de sesiones y fotos de estudio.

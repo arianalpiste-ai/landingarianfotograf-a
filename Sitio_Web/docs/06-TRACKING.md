@@ -12,11 +12,29 @@ al navegador.
 | Reserva creada en Cal.com | `Lead` | CAPI | Nombre del tipo de cita | UID de Cal.com como ID determinista |
 | Clic a WhatsApp | `Contact` | Pixel | Ubicación, destino y paquete si aplica | Un ID por clic |
 | Clic en “Reservar” | `InitiateCheckout` + `HighIntentLead` | Pixel, estándar + personalizado | Paquete, valor publicado, `PEN` | Un ID independiente por evento |
-| Apertura de landing de servicio (`data-content-type="service"`) | `ViewContent` | Pixel | Nombre del servicio, categoría `service` | Una vez por documento |
 | Apertura de portafolio | `ViewContent` | Pixel | Categoría `portfolio` | Una vez por documento |
 | Apertura de artículo | `ViewContent` | Pixel | Título, slug, categoría `blog` | Una vez por documento |
 | Apertura del índice del blog | `BlogView` | Pixel, personalizado | Categoría `blog` | Una vez por documento |
 | Salida del blog hacia el embudo | `BlogToLanding` | Pixel, personalizado | Artículo, destino y ubicación | Un ID por clic |
+
+## Landing de sesiones familiares (`sesiones-familiares.html`)
+
+Embudo: landing → WhatsApp. El evento para optimizar campañas es `Contact`. Definido con Arian el 2 oct 2026.
+
+| Acción | Evento | Parámetros |
+|---|---|---|
+| Carga de página | `PageView` | — |
+| La primera tarjeta de paquete entra en pantalla (`data-track-offer`) | `ViewContent`, una vez por visita | `content_name: Sesiones familiares`, `content_category: service`, `content_type: pricing` |
+| Clic en WhatsApp del menú, hero, «Escríbeme», cierre o botón flotante | `Contact` | `button_location` (`header`, `hero`, `package-more-info`, `final-cta`, `floating-button`) |
+| Clic en «Reservar por WhatsApp» de un paquete | `Contact` (solo ese evento, por decisión de Arian) | `button_location: package-card`, `package_name` (incluye el lugar), `value`, `currency: PEN` |
+| Selector Exteriores / Estudio, carrusel, visor, FAQ, anclas internas, footer | Ninguno | — |
+
+- Todos los clics medidos en esta página llevan además `content_name: Sesiones familiares` y
+  `content_category: service`, para separarlos de los de la home al crear conversiones
+  personalizadas o públicos (también se puede filtrar por URL `/sesiones-familiares`).
+- En la home, «Reservar» sigue enviando `InitiateCheckout` + `HighIntentLead` (sin `Contact`).
+- Los botones abren `wa.me` con un mensaje ya escrito según el botón. En los paquetes el mensaje
+  y el `package_name` cambian con el selector (plantilla en `data-wa-text`, con `{lugar}`).
 
 ## Pagos futuros
 

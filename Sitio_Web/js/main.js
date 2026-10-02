@@ -576,7 +576,7 @@
     update();
   }
   // Selector Exteriores / Estudio de los paquetes: muestra los precios y detalles del lugar elegido
-  // y actualiza lo que se envía al Pixel al tocar «Reservar».
+  // y actualiza el mensaje de WhatsApp y lo que se envía al Pixel al tocar «Reservar».
   function setupPlaceToggle() {
     var buttons = Array.from(document.querySelectorAll('[data-place-btn]'));
     if (!buttons.length) return;
@@ -588,6 +588,9 @@
       document.querySelectorAll('[data-package-name]').forEach(function (link) {
         link.dataset.package = link.dataset.packageName + ' · ' + labels[place];
         link.dataset.value = place === 'estudio' ? link.dataset.valueEstudio : link.dataset.valueExteriores;
+        if (link.dataset.waText) {
+          link.href = link.href.split('?')[0] + '?text=' + encodeURIComponent(link.dataset.waText.replace('{lugar}', place));
+        }
       });
     }
     buttons.forEach(function (button) { button.addEventListener('click', function () { setPlace(button.dataset.placeBtn); }); });
