@@ -98,17 +98,19 @@ Por solicitud del cliente se evolucionó la presentación:
   a anclas internas + «Eventos», y WhatsApp como única acción.
 - Paquetes y precios (definidos por Arian el 2 oct 2026, exteriores / estudio con alquiler
   incluido): Esencial S/ 320 / S/ 470, Clásica S/ 450 / S/ 600, Recuerdo S/ 720 / S/ 950
-  (único con photobook 20x20). Hasta 5 personas. Los precios aparecen en cuatro lugares que
+  (único con photobook 20x20). Los precios aparecen en tres lugares que
   deben cambiarse juntos: las tarjetas (cada precio va dos veces, `data-place="exteriores"` y
-  `data-place="estudio"`, más `data-value-*` en el botón), las notas bajo las tarjetas, el
+  `data-place="estudio"`, más `data-value-*` en el botón), el
   JSON-LD `Service` del `<head>` y `llms.txt` (más «desde S/ 320» en la tarjeta de la home).
 - Selector Exteriores / Estudio (`setupPlaceToggle` en `js/main.js`): muestra u oculta todo
   elemento con `data-place` y actualiza `data-package` / `data-value` de los botones «Reservar»
   para el Pixel. Los enlaces con `data-place-pick` (sección «¿Exteriores o estudio?») eligen
   el lugar y bajan a los paquetes.
-- Secciones nuevas después de los paquetes: «Cómo es cada sesión» (tres desplegables con el
-  minuto a minuto y cuándo elegir cada uno) y «Estilos» + «Adicionales». Solo se publican los
-  sets ya armados (Set Tipi); Picnic y Navidad quedan fuera hasta tener kit y fotos.
+- Debajo de los paquetes hay un bloque con botón de WhatsApp («¿Quieres conocer más sobre cómo
+  son estas sesiones?»). El detalle de cada sesión, los estilos y sets, y los adicionales
+  estuvieron un momento en la página y Arian los retiró: los enviará en un PDF a quien le escriba.
+- Personas por paquete, en las tarjetas: Esencial y Clásica «Hasta 5 personas»; Recuerdo
+  «7 personas o más».
 - Se quitó «entrega en 5 días» de toda la página: el plazo de las fotos digitales no está definido.
 - Fotos de la «Sesión Primavera» (carpetas `Finales` de cada familia). Como todas son
   de la misma locación, Arian pidió mostrar pocas: hero con 3 (principal `familia_22`,
