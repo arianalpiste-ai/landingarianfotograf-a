@@ -41,6 +41,9 @@
   }
 
   loadPixel();
+  // Sin esto, Meta inventa eventos por su cuenta (por ejemplo SubscribedButtonClick en cada clic
+  // a un botón). Debe ir antes de init. Así el Pixel solo envía los eventos definidos en este archivo.
+  window.fbq('set', 'autoConfig', false, PIXEL_ID);
   window.fbq('init', PIXEL_ID);
   trackStandard('PageView', {}, eventId('pageview'));
 

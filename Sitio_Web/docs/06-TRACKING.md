@@ -17,6 +17,14 @@ al navegador.
 | Apertura del índice del blog | `BlogView` | Pixel, personalizado | Categoría `blog` | Una vez por documento |
 | Salida del blog hacia el embudo | `BlogToLanding` | Pixel, personalizado | Artículo, destino y ubicación | Un ID por clic |
 
+## Eventos automáticos de Meta, desactivados
+
+`js/tracking.js` llama a `fbq('set', 'autoConfig', false, PIXEL_ID)` antes de `init`. Sin esa línea
+Meta agrega por su cuenta eventos como `SubscribedButtonClick` (uno por cada clic en un botón o
+enlace) y `Microdata`. No están en el código del sitio y ensucian «Probar eventos». El interruptor
+equivalente en Events Manager está en el dataset → Configuración → «Hacer un seguimiento de los
+eventos automáticamente sin código».
+
 ## Landing de sesiones familiares (`sesiones-familiares.html`)
 
 Embudo: landing → WhatsApp. El evento para optimizar campañas es `Contact`. Definido con Arian el 2 oct 2026.
