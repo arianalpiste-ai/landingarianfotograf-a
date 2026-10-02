@@ -888,8 +888,9 @@ body { font-weight: 400; }
 
 .places { padding: 110px 40px; background: var(--color-bg); }
 .places-grid { margin-top: 3rem; display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.5rem; align-items: stretch; }
-.place-media { border-radius: 24px; overflow: hidden; border: 1px solid var(--color-line); min-height: 320px; }
-.place-media img { width: 100%; height: 100%; object-fit: cover; }
+.place-media { border-radius: 24px; overflow: hidden; border: 1px solid var(--color-line); min-height: 320px; position: relative; }
+.place-media picture { display: contents; }
+.place-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .place-cards { display: grid; gap: 1.5rem; }
 .place-card { background: #fff; border: 1px solid var(--color-line); border-radius: 24px; padding: 2rem 2rem 1.2rem; }
 .place-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; color: var(--color-ink); margin: 0 0 .5rem; }

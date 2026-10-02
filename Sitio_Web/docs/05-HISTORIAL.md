@@ -112,8 +112,12 @@ Por solicitud del cliente se evolucionó la presentación:
 - Debajo de los paquetes hay un bloque con botón de WhatsApp («¿Quieres conocer más sobre cómo
   son estas sesiones?»). El detalle de cada sesión, los estilos y sets, y los adicionales
   estuvieron un momento en la página y Arian los retiró: los enviará en un PDF a quien le escriba.
-- Personas por paquete, en las tarjetas: Esencial y Clásica «Hasta 5 personas»; Recuerdo
-  «7 personas o más».
+- Personas por paquete, en las tarjetas: Esencial «Hasta 5 personas», Clásica «Hasta 6 personas»
+  y Recuerdo «7 personas o más».
+- Las preguntas frecuentes ya no mencionan adicionales (fotos extra, Set Tipi): van en el PDF.
+- La foto de «¿Exteriores o estudio?» usa en escritorio un recorte vertical propio
+  (`familia_17-v-*.webp`, hasta 2000 px) porque el marco es más alto que ancho y el archivo
+  horizontal se veía ampliado y borroso.
 - Se quitó «entrega en 5 días» de toda la página: el plazo de las fotos digitales no está definido.
 - Fotos de la «Sesión Primavera» (carpetas `Finales` de cada familia). Como todas son
   de la misma locación, Arian pidió mostrar pocas: hero con 3 (principal `familia_22`,
