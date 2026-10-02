@@ -106,7 +106,7 @@ Por solicitud del cliente se evolucionó la presentación:
   círculos `familia_20` y `familia_11`) y galería de solo 6, alternando fotos con papás
   (`01`, `04`, `07`) y bebés solos (`16`, `19`, `21`).
 - La galería es un carrusel simple (`#familyCarousel`, `setupFamilyCarousel` en `js/main.js`,
-  estilos `.fc-*`): 3 fotos a la vista (2 en tablet, 1 en celular) con su título debajo,
+  estilos `.fc-*`): 3 fotos a la vista (2 en tablet, 1 en celular),
   flechas a los lados y puntos. Usa el desplazamiento nativo con `scroll-snap`, sin librerías
   ni avance automático. Es un bucle continuo: el script copia las fotos una vez antes y una
   vez después, y cuando el desplazamiento se detiene sobre una copia salta sin animación a la
