@@ -98,7 +98,7 @@ Por solicitud del cliente se evolucionó la presentación:
   a anclas internas + «Eventos», y WhatsApp como única acción.
 - Paquetes y precios (definidos por Arian el 2 oct 2026, exteriores / estudio con alquiler
   incluido): Esencial S/ 320 / S/ 470, Clásica S/ 450 / S/ 600, Recuerdo S/ 720 / S/ 950
-  (único con photobook 20x20). Los precios aparecen en tres lugares que
+  (único con photobook de tapa dura 15x20). Los precios aparecen en tres lugares que
   deben cambiarse juntos: las tarjetas (cada precio va dos veces, `data-place="exteriores"` y
   `data-place="estudio"`, más `data-value-*` en el botón), el
   JSON-LD `Service` del `<head>` y `llms.txt` (más «desde S/ 320» en la tarjeta de la home).
