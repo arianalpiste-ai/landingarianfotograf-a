@@ -897,35 +897,28 @@ body { font-weight: 400; }
 .place-card .pkg-features { margin-bottom: 0; }
 .place-card .pkg-features li:last-child { border-bottom: 0; }
 
-/* Carrusel de «Sesiones recientes» (lógica en setupFamilyCarousel, js/main.js): plano y sobrio,
-   con el mismo lenguaje de las tarjetas del sitio. Sin JavaScript queda como fila deslizable. */
-.family-gallery { padding-left: 0; padding-right: 0; overflow: hidden; }
-.family-gallery .portfolio-preview-inner { padding: 0 40px; }
-.family-gallery .portfolio-preview-header { margin-bottom: 2.4rem; }
-.fc { --fc-w: min(760px, 58vw); --fc-gap: 24px; position: relative; }
-.fc-stage { padding: 0 24px; overflow-x: auto; scroll-snap-type: x mandatory; }
+/* Carrusel simple de «Sesiones recientes» (setupFamilyCarousel, js/main.js): tres fotos a la vista,
+   flechas a los lados y puntos debajo. Usa el desplazamiento nativo, así que también funciona sin JavaScript. */
+.fc { --fc-per: 3; --fc-gap: 24px; display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; grid-template-areas: "prev view next" ". dots ."; column-gap: 16px; row-gap: 1.4rem; }
+.fc-viewport { grid-area: view; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
+.fc-viewport::-webkit-scrollbar { display: none; }
 .fc-track { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--fc-gap); }
-.fc-slide { flex: 0 0 var(--fc-w); width: var(--fc-w); aspect-ratio: 3 / 2; scroll-snap-align: center; }
-.fc-card { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 1px solid var(--color-line); border-radius: 20px; overflow: hidden; background: var(--color-line); cursor: inherit; }
-.fc-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; }
-.fc-card::after { content: ''; position: absolute; inset: 0; background: var(--color-bg-alt); opacity: var(--fc-veil, 0); transition: opacity .5s ease; pointer-events: none; }
-.fc-card:focus-visible { outline: 3px solid #477fd4; outline-offset: 4px; }
-.fc-footer { display: none; }
-
-.fc.is-ready .fc-stage { position: relative; height: calc(var(--fc-w) * 2 / 3); padding: 0; overflow: visible; scroll-snap-type: none; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
-.fc.is-ready .fc-track { display: block; position: absolute; inset: 0; }
-.fc.is-ready .fc-slide { position: absolute; top: 0; left: 50%; margin-left: calc(var(--fc-w) / -2); transition: transform .6s cubic-bezier(.2,.8,.2,1); will-change: transform; }
-.fc.is-ready.is-dragging .fc-stage { cursor: grabbing; }
-.fc.is-ready.is-dragging .fc-slide, .fc.is-ready.is-dragging .fc-card::after { transition: none; }
-.fc.is-ready:not(.is-dragging) .fc-slide.is-active .fc-card { cursor: zoom-in; }
-
-.fc.is-ready .fc-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: var(--fc-w); max-width: calc(100% - 48px); margin: 1.4rem auto 0; }
-.fc-caption { margin: 0; min-width: 0; font-family: var(--font-heading); font-weight: 600; font-size: 1.05rem; line-height: 1.35; color: var(--color-ink); }
-.fc-count { display: block; margin-top: .2rem; font-family: var(--font-body); font-weight: 400; font-size: .8125rem; letter-spacing: .08em; color: var(--color-muted); font-variant-numeric: tabular-nums; }
-.fc-controls { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-.fc-arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(32,30,28,.25); background: transparent; color: var(--color-ink); display: grid; place-items: center; transition: border-color .25s ease, background .25s ease; }
-.fc-arrow svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
-.fc-arrow:hover { border-color: var(--color-ink); background: #fff; }
+.fc-slide { flex: 0 0 calc((100% - var(--fc-gap) * (var(--fc-per) - 1)) / var(--fc-per)); min-width: 0; scroll-snap-align: start; }
+.fc-card { display: block; width: 100%; aspect-ratio: 3 / 2; padding: 0; border: 1px solid var(--color-line); border-radius: 20px; overflow: hidden; background: var(--color-line); cursor: zoom-in; }
+.fc-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.fc-card:hover img { transform: scale(1.03); }
+.fc-card:focus-visible { outline: 3px solid #477fd4; outline-offset: -3px; }
+.fc-title { margin: .9rem 0 0; font-family: var(--font-heading); font-weight: 600; font-size: 1rem; line-height: 1.35; color: var(--color-ink); }
+.fc-arrow { width: 44px; height: 44px; align-self: center; margin-bottom: 2.3rem; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--color-ink); display: grid; place-items: center; transition: background .25s ease; }
+.fc-arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+.fc-arrow:hover { background: #fff; }
+.fc-prev { grid-area: prev; }
+.fc-next { grid-area: next; }
+.fc-dots { grid-area: dots; display: flex; justify-content: center; align-items: center; gap: 2px; min-height: 24px; }
+.fc-dot { width: 24px; height: 24px; padding: 0; border: 0; background: transparent; display: grid; place-items: center; }
+.fc-dot::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #c3cbda; transition: background .25s ease; }
+.fc-dot:hover::before { background: #8c98b0; }
+.fc-dot[aria-current="true"]::before { background: var(--color-ink); }
 
 /* Tarjeta de servicio enlazada (home → sesiones familiares) */
 a.impact-card { color: inherit; }
@@ -943,13 +936,12 @@ a.impact-card { color: inherit; }
 
 @media (max-width: 980px) {
   .steps, .places { padding-left: 24px; padding-right: 24px; }
-  .family-gallery { padding-left: 0; padding-right: 0; }
-  .family-gallery .portfolio-preview-inner { padding: 0 24px; }
+  .fc { --fc-per: 2; --fc-gap: 18px; }
 }
 @media (max-width: 760px) {
   .steps, .places { padding-top: 72px; padding-bottom: 72px; }
   .steps-grid, .places-grid { grid-template-columns: 1fr; }
   .place-media { min-height: 0; aspect-ratio: 3/2; }
-  .fc { --fc-w: 84vw; --fc-gap: 12px; }
-  .fc-card { border-radius: 16px; }
+  .fc { --fc-per: 1; --fc-gap: 14px; grid-template-columns: 44px minmax(0, 1fr) 44px; grid-template-areas: "view view view" "prev dots next"; column-gap: 8px; row-gap: .6rem; }
+  .fc-arrow { margin-bottom: 0; }
 }

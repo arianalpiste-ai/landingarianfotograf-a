@@ -468,112 +468,69 @@
       el.addEventListener('click', function (e) { e.preventDefault(); });
     });
   }
-  // Carrusel de la landing de sesiones familiares: la foto activa al centro y las vecinas
-  // asomando a los lados, más pequeñas y atenuadas. Arrastre, flechas y teclado; sin avance automático.
+  // Carrusel simple de la landing de sesiones familiares. El movimiento es el desplazamiento
+  // nativo del navegador (deslizar con el dedo funciona solo); aquí solo van flechas, puntos y visor.
   function setupFamilyCarousel() {
     var root = document.getElementById('familyCarousel');
     if (!root) return;
-    var stage = root.querySelector('.fc-stage');
+    var viewport = root.querySelector('.fc-viewport');
     var slides = Array.from(root.querySelectorAll('.fc-slide'));
-    var n = slides.length;
-    if (n < 3) return;
-    var titleEl = document.getElementById('fcTitle');
-    var countEl = document.getElementById('fcCount');
+    var dotsWrap = root.querySelector('.fc-dots');
+    if (slides.length < 2) return;
     var images = slides.map(function (slide) { return { src: slide.dataset.full, alt: slide.querySelector('img').alt }; });
-    var SIDE = .88; // tamaño de las fotos vecinas respecto de la central
-    var pos = 0;    // posición continua; la foto activa es round(pos) módulo n
-    var drag = null, suppressClick = false, shown = -1;
+    var dots = [], ticking = false;
 
-    function mod(value) { return ((value % n) + n) % n; }
-    function active() { return mod(Math.round(pos)); }
-    function gap() { return parseFloat(getComputedStyle(root).getPropertyValue('--fc-gap')) || 24; }
-    function stepWidth() { return slides[0].offsetWidth * (1 + SIDE) / 2 + gap(); }
-
-    function render() {
-      var width = slides[0].offsetWidth, first = stepWidth(), next = width * SIDE + gap();
-      slides.forEach(function (slide, i) {
-        var d = i - pos;
-        d -= n * Math.round(d / n); // distancia más corta al centro
-        var a = Math.abs(d), near = Math.min(a, 1), far = Math.max(a - 1, 0);
-        var x = (d < 0 ? -1 : 1) * (first * near + next * far);
-        var scale = 1 - (1 - SIDE) * near;
-        slide.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0) scale(' + scale.toFixed(4) + ')';
-        slide.style.visibility = a > 2.5 ? 'hidden' : 'visible';
-        slide.style.zIndex = String(10 - Math.round(a));
-        slide.style.setProperty('--fc-veil', (.55 * near).toFixed(3));
-      });
-      var current = active();
-      if (current === shown) return;
-      shown = current;
-      slides.forEach(function (slide, i) {
-        var on = i === current;
-        slide.classList.toggle('is-active', on);
-        slide.setAttribute('aria-hidden', String(!on));
-        slide.querySelector('.fc-card').tabIndex = on ? 0 : -1;
-      });
-      slides[current].querySelector('.fc-card').setAttribute('aria-label', 'Ampliar foto: ' + slides[current].dataset.title);
-      titleEl.textContent = slides[current].dataset.title;
-      countEl.textContent = (current + 1) + ' / ' + n;
+    function stepWidth() { return slides[1].offsetLeft - slides[0].offsetLeft; }
+    function lastIndex() { return Math.max(0, Math.round((viewport.scrollWidth - viewport.clientWidth) / stepWidth())); }
+    function index() { return Math.min(lastIndex(), Math.max(0, Math.round(viewport.scrollLeft / stepWidth()))); }
+    function goTo(i) { viewport.scrollTo({ left: i * stepWidth(), behavior: reduced.matches ? 'auto' : 'smooth' }); }
+    function move(dir) {
+      var i = index(), last = lastIndex();
+      goTo(dir > 0 ? (i >= last ? 0 : i + 1) : (i <= 0 ? last : i - 1)); // al llegar al final vuelve al inicio
     }
-
-    function settle(target) { pos = target; render(); }
-    function step(dir) { settle(Math.round(pos) + dir); }
-    function goTo(index) {
-      var delta = index - active();
-      delta -= n * Math.round(delta / n);
-      settle(Math.round(pos) + delta);
+    function update() {
+      ticking = false;
+      var current = index();
+      dots.forEach(function (dot, i) {
+        if (i === current) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+      });
     }
-
-    stage.addEventListener('pointerdown', function (e) {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      drag = { id: e.pointerId, x: e.clientX, from: pos, moved: false };
-    });
-    stage.addEventListener('pointermove', function (e) {
-      if (!drag || e.pointerId !== drag.id) return;
-      var dx = e.clientX - drag.x;
-      if (!drag.moved) {
-        if (Math.abs(dx) < 6) return;
-        drag.moved = true;
-        root.classList.add('is-dragging');
-        try { stage.setPointerCapture(drag.id); } catch (err) { /* el puntero ya no existe */ }
+    function buildDots() {
+      var count = lastIndex() + 1;
+      if (count !== dots.length) {
+        dotsWrap.textContent = '';
+        dots = [];
+        for (var i = 0; i < count; i++) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'fc-dot';
+          dot.setAttribute('aria-label', 'Ir a la posición ' + (i + 1) + ' de ' + count);
+          dot.addEventListener('click', goTo.bind(null, i));
+          dotsWrap.appendChild(dot);
+          dots.push(dot);
+        }
+        dotsWrap.hidden = count < 2;
       }
-      pos = drag.from - dx / stepWidth();
-      render();
-    });
-    function endDrag(e) {
-      if (!drag || e.pointerId !== drag.id) return;
-      var finished = drag;
-      drag = null;
-      root.classList.remove('is-dragging');
-      if (!finished.moved) return;
-      suppressClick = true;
-      setTimeout(function () { suppressClick = false; }, 0);
-      var travelled = pos - finished.from;
-      var steps = Math.abs(travelled) < .15 ? 0 : Math.max(1, Math.round(Math.abs(travelled)));
-      settle(Math.round(finished.from) + (travelled < 0 ? -steps : steps));
+      update();
     }
-    stage.addEventListener('pointerup', endDrag);
-    stage.addEventListener('pointercancel', endDrag);
-    stage.addEventListener('click', function (e) {
-      if (suppressClick) { suppressClick = false; return; }
-      var slide = e.target.closest('.fc-slide');
-      if (!slide) return;
-      var index = slides.indexOf(slide);
-      if (index === active()) viewer.open(images, index, 'Sesiones recientes', slide.querySelector('.fc-card'));
-      else goTo(index);
-    });
 
-    root.querySelector('[data-fc="prev"]').addEventListener('click', function () { step(-1); });
-    root.querySelector('[data-fc="next"]').addEventListener('click', function () { step(1); });
+    slides.forEach(function (slide, i) {
+      var card = slide.querySelector('.fc-card');
+      card.addEventListener('click', function () { viewer.open(images, i, 'Sesiones recientes', card); });
+    });
+    root.querySelector('.fc-prev').addEventListener('click', function () { move(-1); });
+    root.querySelector('.fc-next').addEventListener('click', function () { move(1); });
     root.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); move(1); }
     });
-    window.addEventListener('resize', render);
-
-    root.classList.add('is-ready', 'is-dragging'); // primera colocación sin animación
-    render();
-    requestAnimationFrame(function () { root.classList.remove('is-dragging'); });
+    viewport.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+    window.addEventListener('resize', buildDots);
+    buildDots();
   }
   function setupCategoryNav() {
     var links = Array.from(document.querySelectorAll('.category-nav a'));
