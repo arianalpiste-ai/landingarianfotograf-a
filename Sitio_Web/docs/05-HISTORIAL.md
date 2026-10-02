@@ -106,8 +106,9 @@ Por solicitud del cliente se evolucionó la presentación:
   elemento con `data-place` y actualiza `data-package` / `data-value` de los botones «Reservar»
   para el Pixel. Los enlaces con `data-place-pick` (sección «¿Exteriores o estudio?») eligen
   el lugar y bajan a los paquetes.
-- Sección «Sobre mí» entre «¿Exteriores o estudio?» y los testimonios: misma foto y cifras de la
-  home (`about-photo.jpg`, 3+ años, 100+ eventos), con texto adaptado a sesiones familiares.
+- Sección «Sobre mí» casi al final, entre las preguntas frecuentes y el cierre: misma foto de la
+  home (`about-photo.jpg`), texto adaptado a sesiones familiares y cifras «3+ años de
+  experiencia» y «100+ sesiones y eventos fotografiados».
 - Debajo de los paquetes hay un bloque con botón de WhatsApp («¿Quieres conocer más sobre cómo
   son estas sesiones?»). El detalle de cada sesión, los estilos y sets, y los adicionales
   estuvieron un momento en la página y Arian los retiró: los enviará en un PDF a quien le escriba.
