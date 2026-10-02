@@ -12,6 +12,7 @@
   setupArticleToc();
   setupCalEmbed();
   setupFamilyCarousel();
+  setupPlaceToggle();
   document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('in-view'); });
   if (document.getElementById('heroSlides')) {
     fetch('assets/manifest.json').then(function (r) {
@@ -574,6 +575,27 @@
     jump(n);
     update();
   }
+  // Selector Exteriores / Estudio de los paquetes: muestra los precios y detalles del lugar elegido
+  // y actualiza lo que se envía al Pixel al tocar «Reservar».
+  function setupPlaceToggle() {
+    var buttons = Array.from(document.querySelectorAll('[data-place-btn]'));
+    if (!buttons.length) return;
+    var labels = { exteriores: 'Exteriores', estudio: 'Estudio' };
+    function setPlace(place) {
+      if (!labels[place]) return;
+      buttons.forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.placeBtn === place)); });
+      document.querySelectorAll('[data-place]').forEach(function (el) { el.hidden = el.dataset.place !== place; });
+      document.querySelectorAll('[data-package-name]').forEach(function (link) {
+        link.dataset.package = link.dataset.packageName + ' · ' + labels[place];
+        link.dataset.value = place === 'estudio' ? link.dataset.valueEstudio : link.dataset.valueExteriores;
+      });
+    }
+    buttons.forEach(function (button) { button.addEventListener('click', function () { setPlace(button.dataset.placeBtn); }); });
+    document.querySelectorAll('[data-place-pick]').forEach(function (link) {
+      link.addEventListener('click', function () { setPlace(link.dataset.placePick); });
+    });
+  }
+
   function setupCategoryNav() {
     var links = Array.from(document.querySelectorAll('.category-nav a'));
     function update() {

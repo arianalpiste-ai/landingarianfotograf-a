@@ -920,6 +920,57 @@ body { font-weight: 400; }
 .fc-dot:hover::before { background: #8c98b0; }
 .fc-dot[aria-current="true"]::before { background: var(--color-ink); }
 
+/* Paquetes: selector Exteriores / Estudio (setupPlaceToggle, js/main.js) */
+[data-place][hidden] { display: none !important; }
+.pkg-header.with-toggle { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; }
+.place-toggle { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-bg-alt); }
+.place-toggle button { min-height: 44px; padding: 0 1.7rem; border: 0; border-radius: 999px; background: transparent; color: var(--color-ink-soft); font-family: var(--font-body); font-size: .875rem; letter-spacing: .055em; text-transform: uppercase; transition: background .25s ease, color .25s ease; }
+.place-toggle button:hover { color: var(--color-ink); }
+.place-toggle button[aria-pressed="true"] { background: var(--color-ink); color: #fff; }
+.pkg-notes { max-width: var(--max-width); margin: 1.8rem auto 0; display: grid; gap: .5rem; }
+.pkg-notes p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--color-ink-soft); }
+.place-card .text-link { margin-top: .4rem; }
+
+/* Cómo es cada sesión */
+.guide { padding: 110px 40px; background: var(--color-bg-alt); border-top: 1px solid var(--color-line); }
+.guide-inner { max-width: 900px; margin: 0 auto; }
+.guide .section-body { max-width: 640px; }
+.guide-list { margin-top: 2.2rem; padding: .4rem 2.3rem; background: #fff; border: 1px solid var(--color-line); border-radius: 16px; }
+.guide-item { padding: 1.3rem 0; border-bottom: 1px solid var(--color-line); }
+.guide-item:last-child { border-bottom: 0; }
+.guide-item summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; }
+.guide-item summary::-webkit-details-marker { display: none; }
+.guide-item summary::after { content: '+'; flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: var(--color-accent-text); transition: transform .3s ease; }
+.guide-item[open] summary::after { transform: rotate(45deg); }
+.guide-name { font-family: var(--font-heading); font-weight: 600; font-size: 1.05rem; color: var(--color-ink); }
+.guide-name small { display: block; margin-top: .15rem; font-family: var(--font-body); font-weight: 400; font-size: .875rem; color: var(--color-muted); }
+.guide-steps { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: .65rem; }
+.guide-steps li { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; font-size: 1rem; line-height: 1.6; color: var(--color-ink-soft); }
+.guide-steps strong { font-weight: 600; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.guide-pick { margin: 1.2rem 0 .2rem; font-size: 1rem; line-height: 1.7; color: var(--color-ink-soft); }
+.guide-notes { margin: 1.8rem 0 0; padding: 0 0 0 1.2rem; display: grid; gap: .5rem; font-size: 1rem; line-height: 1.6; color: var(--color-ink-soft); }
+.guide-notes li::marker { color: var(--color-accent-text); }
+
+/* Estilos de sesión y adicionales */
+.styles { padding: 110px 40px; background: var(--color-bg); }
+.styles-inner { max-width: var(--max-width); margin: 0 auto; }
+.styles-lead { max-width: 640px; }
+.styles-grid { margin-top: 2.4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.style-card { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; padding: 1.8rem; background: #fff; border: 1px solid var(--color-line); border-radius: 24px; }
+.style-tag { padding: .3rem .8rem; border-radius: 999px; background: var(--color-bg-alt); color: var(--color-ink-soft); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+.style-tag.is-paid { background: var(--color-accent); color: var(--color-ink); }
+.style-name { margin: .3rem 0 0; font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; color: var(--color-ink); }
+.style-desc { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--color-ink-soft); }
+.style-desc .text-link { display: inline; min-height: 0; margin: 0; }
+.styles-note { margin: 1.6rem 0 0; font-size: 1rem; line-height: 1.6; color: var(--color-ink-soft); }
+.extras { margin-top: 4rem; padding-top: 3.5rem; border-top: 1px solid var(--color-line); display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; }
+.extras-title { margin: 0 0 .6rem; font-family: var(--font-heading); font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 1.8rem); color: var(--color-ink); }
+.extras-list { list-style: none; margin: 0; padding: .4rem 1.8rem; background: #fff; border: 1px solid var(--color-line); border-radius: 24px; }
+.extras-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--color-line); font-size: 1rem; line-height: 1.5; color: var(--color-ink-soft); }
+.extras-list li:last-child { border-bottom: 0; }
+.extras-list span { min-width: 0; }
+.extras-list strong { flex: 0 0 auto; max-width: 55%; text-align: right; font-weight: 600; color: var(--color-ink); }
+
 /* Tarjeta de servicio enlazada (home → sesiones familiares) */
 a.impact-card { color: inherit; }
 .impact-card-link { margin-top: .3rem; font-size: .8125rem; font-weight: 500; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
@@ -935,12 +986,21 @@ a.impact-card { color: inherit; }
 }
 
 @media (max-width: 980px) {
-  .steps, .places { padding-left: 24px; padding-right: 24px; }
+  .steps, .places, .guide, .styles { padding-left: 24px; padding-right: 24px; }
+  .styles-grid { grid-template-columns: repeat(2, 1fr); }
   .fc { --fc-per: 2; --fc-gap: 18px; }
 }
 @media (max-width: 760px) {
-  .steps, .places { padding-top: 72px; padding-bottom: 72px; }
-  .steps-grid, .places-grid { grid-template-columns: 1fr; }
+  .steps, .places, .guide, .styles { padding-top: 72px; padding-bottom: 72px; }
+  .steps-grid, .places-grid, .styles-grid, .extras { grid-template-columns: 1fr; }
+  .extras { gap: 1.2rem; margin-top: 3rem; padding-top: 2.6rem; }
+  .place-toggle { width: 100%; }
+  .place-toggle button { flex: 1 1 0; padding: 0 .8rem; }
+  .guide-list { padding: .2rem 1.3rem; }
+  .guide-steps li { grid-template-columns: 3.4rem minmax(0, 1fr); gap: .7rem; }
+  .extras-list { padding: .2rem 1.2rem; }
+  .extras-list li { flex-direction: column; gap: .2rem; }
+  .extras-list strong { max-width: none; text-align: left; }
   .place-media { min-height: 0; aspect-ratio: 3/2; }
   .fc { --fc-per: 1; --fc-gap: 14px; grid-template-columns: 44px minmax(0, 1fr) 44px; grid-template-areas: "view view view" "prev dots next"; column-gap: 8px; row-gap: .6rem; }
 }

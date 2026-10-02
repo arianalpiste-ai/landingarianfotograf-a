@@ -96,11 +96,20 @@ Por solicitud del cliente se evolucionó la presentación:
   indexándose con enfoque de eventos y el blog apunta a ella.
 - Nueva `sesiones-familiares.html` (URL pública `/sesiones-familiares`): menú reducido
   a anclas internas + «Eventos», y WhatsApp como única acción.
-- Paquetes publicados como punto de partida, **pendientes de confirmar por Arian**:
-  Mini S/ 250, Clásica S/ 380 (exteriores) y Estudio S/ 520 (alquiler incluido).
-  Los precios aparecen en tres lugares que deben cambiarse juntos: las tarjetas,
-  el JSON-LD `Service` del `<head>` y `llms.txt` (más «desde S/ 250» en el hero,
-  la franja y la tarjeta de la home).
+- Paquetes y precios (definidos por Arian el 2 oct 2026, exteriores / estudio con alquiler
+  incluido): Esencial S/ 320 / S/ 470, Clásica S/ 450 / S/ 600, Recuerdo S/ 720 / S/ 950
+  (único con photobook 20x20). Hasta 5 personas. Los precios aparecen en cuatro lugares que
+  deben cambiarse juntos: las tarjetas (cada precio va dos veces, `data-place="exteriores"` y
+  `data-place="estudio"`, más `data-value-*` en el botón), las notas bajo las tarjetas, el
+  JSON-LD `Service` del `<head>` y `llms.txt` (más «desde S/ 320» en la tarjeta de la home).
+- Selector Exteriores / Estudio (`setupPlaceToggle` en `js/main.js`): muestra u oculta todo
+  elemento con `data-place` y actualiza `data-package` / `data-value` de los botones «Reservar»
+  para el Pixel. Los enlaces con `data-place-pick` (sección «¿Exteriores o estudio?») eligen
+  el lugar y bajan a los paquetes.
+- Secciones nuevas después de los paquetes: «Cómo es cada sesión» (tres desplegables con el
+  minuto a minuto y cuándo elegir cada uno) y «Estilos» + «Adicionales». Solo se publican los
+  sets ya armados (Set Tipi); Picnic y Navidad quedan fuera hasta tener kit y fotos.
+- Se quitó «entrega en 5 días» de toda la página: el plazo de las fotos digitales no está definido.
 - Fotos de la «Sesión Primavera» (carpetas `Finales` de cada familia). Como todas son
   de la misma locación, Arian pidió mostrar pocas: hero con 3 (principal `familia_22`,
   círculos `familia_20` y `familia_11`) y galería de solo 6, alternando fotos con papás
@@ -116,9 +125,7 @@ Por solicitud del cliente se evolucionó la presentación:
   tres tarjetas. Para agregar o quitar fotos basta editar los `<li class="fc-slide">`.
 - La franja bajo el hero dice solo «Sesiones en exteriores o estudio».
   No hay fotos de estudio todavía; «¿Exteriores o estudio?» usa `familia_17`.
-- Photobook: la página dice que, según el paquete, se entrega photobook impreso además
-  de la galería digital. **Falta definir qué paquetes lo incluyen** y reflejarlo en las
-  tarjetas de paquetes y en el FAQ.
+- Photobook: incluido solo en Recuerdo; adicional de S/ 250 en Esencial y Clásica; llega a las 3 o 4 semanas.
 - Las respuestas del FAQ se repiten en el JSON-LD `FAQPage`: si se edita una, editar la otra.
 - Home: la tarjeta y la franja «Sesión de Fotos Familiares» enlazan a la página nueva,
   se agregó «Familias» al menú (index, portafolio, privacidad), «Sesiones familiares»
