@@ -187,3 +187,12 @@ Por solicitud del cliente se evolucionó la presentación:
   un paquete?», con el mismo tono: se conversa, no se promete cotización a medida.
 - Arian pidió no usar más las vistas previas de Cloudflare (ramas subidas a GitHub). Los cambios
   se le muestran en una página privada de Claude o con capturas, y solo se sube a `main` al aprobar.
+
+## 15. Sesiones familiares: los paquetes suben — octubre de 2026
+
+- En `sesiones-familiares.html` la sección Paquetes (con su selector y el bloque «¿Quieres conocer
+  más…?») pasó de estar después de Testimonios a ir justo después de «Por qué ahora».
+  Orden: hero, franja, Por qué ahora, Paquetes, Cómo funciona, Galería, ¿Exteriores o estudio?,
+  Testimonios, Preguntas frecuentes, Sobre mí, cierre.
+- Los enlaces «Ver paquetes en exteriores/estudio» ahora suben hasta los paquetes.
+- `ViewContent` se envía al ver los paquetes: al estar más arriba, lo recibirán más visitas.
