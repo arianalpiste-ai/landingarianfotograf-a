@@ -153,8 +153,9 @@ Por solicitud del cliente se evolucionó la presentación:
   y «Paquetes». Queda: Servicios, FAQ, Contacto y Política de Privacidad.
 - La home sigue enlazando a sesiones familiares desde la franja y la tarjeta de servicios.
   El blog y los recursos ya no tienen enlace desde la home.
-- El cambio de menú y footer es solo de la home: portafolio, privacidad y las demás páginas
-  conservan su menú.
+- Portafolio, menú: solo Inicio, Portafolio, Contacto y «Agendar llamada», para que quien
+  entra a ver fotos vuelva a la landing principal sin perderse. Su footer no cambió.
+- Privacidad y las demás páginas conservan su menú.
 - Portafolio (`portafolio.html`): se quitó la sección «Retratos» (Arian tiene una landing
   aparte para retratos), su enlace en el hero y la barra de categorías, que quedaba con un
   solo enlace. `main.js` ahora ignora una categoría si su contenedor no está en la página.
