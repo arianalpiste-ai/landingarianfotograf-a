@@ -161,3 +161,23 @@ Por solicitud del cliente se evolucionó la presentación:
   solo enlace. `main.js` ahora ignora una categoría si su contenedor no está en la página.
 - `portafolios/retratos.html` sigue existiendo (y en `sitemap.xml` y `llms.txt`), pero ya no
   está enlazada desde `portafolio.html`.
+
+## 14. Paquetes de eventos: Solo foto / Foto y video — octubre de 2026
+
+- Home, sección Paquetes: selector «Solo foto» / «Foto y video» encima de las tarjetas. Usa el
+  mismo componente que sesiones familiares (`.place-toggle`, elementos `data-place` con `hidden`,
+  `setupPlaceToggle()` en `main.js`); aquí los valores son `foto` y `foto-video`.
+- Precios (solo foto / foto y video): Básico S/ 450 / S/ 650, Estándar S/ 600 / S/ 850,
+  Premium S/ 850 / S/ 1,400. Lo que incluye cada paquete no cambió.
+- Foto y video suma: reel resumen (1 min en Básico, hasta 2 en Estándar, hasta 3 en Premium) y,
+  solo en Premium, video extendido de 10 a 15 minutos. Debajo de las tarjetas aparece la nota
+  de condiciones (video a los 10 días; el reel resume, no registra todo).
+- Los videos para historias siguen en las dos modalidades. Nueva pregunta frecuente
+  «¿Qué video incluye cada paquete?».
+- Botones «Reservar»: ahora abren `wa.me` con mensaje según paquete y modalidad (antes
+  `wa.link/78mbqb`, que no podía decir la modalidad). Siguen enviando `InitiateCheckout` +
+  `HighIntentLead`; `package_name` pasa a ser, por ejemplo, «Estándar · Foto y video» y `value`
+  el precio de la modalidad elegida.
+- Para cambiar un precio: tarjeta (dos `.pkg-price`), `data-value-foto` / `data-value-foto-video`
+  del botón, `<noscript>` bajo las tarjetas, `priceRange` del JSON-LD y `llms.txt`.
+- El artículo del blog sobre precios sigue hablando de S/ 450 a S/ 850 (solo foto).

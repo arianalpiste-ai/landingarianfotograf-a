@@ -59,3 +59,10 @@ webhook del proveedor, con `order_id`, `value`, `currency` y un `event_id` estab
 4. Crear una reserva de prueba en Cal.com y confirmar `Lead` desde servidor.
 5. Revisar en Cloudflare los logs de `/api/contacto` y `/api/cal-webhook` sin
    imprimir secretos ni datos personales completos.
+
+## Home: paquetes con selector Solo foto / Foto y video
+
+Los botones «Reservar» de la home envían `InitiateCheckout` + `HighIntentLead` como antes. Desde
+octubre de 2026 `package_name` incluye la modalidad («Básico · Solo foto», «Premium · Foto y video»)
+y `value` es el precio de la modalidad elegida (`data-value-foto` / `data-value-foto-video`).
+El selector en sí no envía ningún evento.

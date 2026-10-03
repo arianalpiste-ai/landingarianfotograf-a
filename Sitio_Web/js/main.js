@@ -581,16 +581,17 @@
   function setupPlaceToggle() {
     var buttons = Array.from(document.querySelectorAll('[data-place-btn]'));
     if (!buttons.length) return;
-    var labels = { exteriores: 'Exteriores', estudio: 'Estudio' };
+    var labels = {};
+    buttons.forEach(function (button) { labels[button.dataset.placeBtn] = button.textContent.trim(); });
     function setPlace(place) {
       if (!labels[place]) return;
       buttons.forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.placeBtn === place)); });
       document.querySelectorAll('[data-place]').forEach(function (el) { el.hidden = el.dataset.place !== place; });
       document.querySelectorAll('[data-package-name]').forEach(function (link) {
         link.dataset.package = link.dataset.packageName + ' · ' + labels[place];
-        link.dataset.value = place === 'estudio' ? link.dataset.valueEstudio : link.dataset.valueExteriores;
+        link.dataset.value = link.getAttribute('data-value-' + place);
         if (link.dataset.waText) {
-          link.href = link.href.split('?')[0] + '?text=' + encodeURIComponent(link.dataset.waText.replace('{lugar}', place));
+          link.href = link.href.split('?')[0] + '?text=' + encodeURIComponent(link.dataset.waText.replace('{lugar}', labels[place].toLowerCase()));
         }
       });
     }
