@@ -196,3 +196,5 @@ Por solicitud del cliente se evolucionó la presentación:
   Testimonios, Preguntas frecuentes, Sobre mí, cierre.
 - Los enlaces «Ver paquetes en exteriores/estudio» ahora suben hasta los paquetes.
 - `ViewContent` se envía al ver los paquetes: al estar más arriba, lo recibirán más visitas.
+- Fondos alternados: Paquetes pasa a gris (`.packages.alt`) y «Cómo funciona» a blanco, para que
+  no queden dos secciones blancas seguidas («Por qué ahora» y Paquetes).
