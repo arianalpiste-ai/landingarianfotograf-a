@@ -22,6 +22,7 @@
       buildHero(data.hero);
       ['eventos', 'retratos'].forEach(function (key) {
         var container = document.getElementById(key + 'Groups');
+        if (!container) return;
         data[key].forEach(function (group, i) {
           var title = group.title || 'Retratos · Sesión ' + (i + 1);
           var wrap = document.createElement('div');
