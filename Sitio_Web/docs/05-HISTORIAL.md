@@ -181,3 +181,5 @@ Por solicitud del cliente se evolucionó la presentación:
 - Para cambiar un precio: tarjeta (dos `.pkg-price`), `data-value-foto` / `data-value-foto-video`
   del botón, `<noscript>` bajo las tarjetas, `priceRange` del JSON-LD y `llms.txt`.
 - El artículo del blog sobre precios sigue hablando de S/ 450 a S/ 850 (solo foto).
+- Bloque bajo las tarjetas: «¿Quieres cambiar algo de un paquete?» con botón «Conversemos».
+  Arian no quiere prometer una propuesta a medida, solo dejar claro que se puede conversar.
