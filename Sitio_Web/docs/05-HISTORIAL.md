@@ -183,3 +183,7 @@ Por solicitud del cliente se evolucionó la presentación:
 - El artículo del blog sobre precios sigue hablando de S/ 450 a S/ 850 (solo foto).
 - Bloque bajo las tarjetas: «¿Quieres cambiar algo de un paquete?» con botón «Conversemos».
   Arian no quiere prometer una propuesta a medida, solo dejar claro que se puede conversar.
+- La pregunta frecuente «¿Puedo armar un paquete personalizado?» pasó a «¿Puedo cambiar algo de
+  un paquete?», con el mismo tono: se conversa, no se promete cotización a medida.
+- Arian pidió no usar más las vistas previas de Cloudflare (ramas subidas a GitHub). Los cambios
+  se le muestran en una página privada de Claude o con capturas, y solo se sube a `main` al aprobar.
