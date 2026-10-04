@@ -207,3 +207,5 @@ Por solicitud del cliente se evolucionó la presentación:
 - Cierre: «La foto de todos juntos empieza con una llamada». Paso 1 de «Cómo funciona»: «Agendas
   una llamada o me escribes por WhatsApp…».
 - Eventos: ver `06-TRACKING.md`.
+- Paquete Recuerdo: la tarjeta dice «Photobook de tapa dura 15x20, incluido». Arian pidió no
+  especificar el número de páginas.
