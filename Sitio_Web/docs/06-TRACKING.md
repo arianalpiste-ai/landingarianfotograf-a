@@ -9,7 +9,7 @@ al navegador.
 | Carga de página | `PageView` | Pixel | Ruta implícita | Una inicialización por documento |
 | Clic hacia Cal.com | `MeetingIntent` | Pixel, personalizado | `button_location`, `destination`, `page_path` | Un ID por clic |
 | Formulario aceptado | `Lead` | Pixel + CAPI | `content_name`; datos normalizados en servidor | Mismo `event_name` y `event_id` |
-| Reserva creada en Cal.com | `Lead` | CAPI | Nombre del tipo de cita | UID de Cal.com como ID determinista |
+| Reserva creada en Cal.com | `Lead` + `Schedule` | CAPI | Nombre del tipo de cita | UID de Cal.com como ID determinista, uno por evento |
 | Clic a WhatsApp | `Contact` | Pixel | Ubicación, destino y paquete si aplica | Un ID por clic |
 | Clic en “Reservar” | `Contact` + `InitiateCheckout` + `HighIntentLead` | Pixel, estándar + personalizado | Paquete, valor publicado, `PEN` | Un ID independiente por evento |
 | Los paquetes de la home entran en pantalla | `ViewContent` | Pixel | `content_name: Cobertura de eventos`, categoría `service`, tipo `pricing` | Una vez por documento |
@@ -71,7 +71,7 @@ webhook del proveedor, con `order_id`, `value`, `currency` y un `event_id` estab
 1. Meta Events Manager → Probar eventos.
 2. Abrir cada tipo de página y confirmar un solo `PageView`.
 3. Enviar el formulario y comprobar que `Lead` aparece deduplicado.
-4. Crear una reserva de prueba en Cal.com y confirmar `Lead` desde servidor.
+4. Crear una reserva de prueba en Cal.com y confirmar `Lead` y `Schedule` desde servidor.
 5. Revisar en Cloudflare los logs de `/api/contacto` y `/api/cal-webhook` sin
    imprimir secretos ni datos personales completos.
 
@@ -86,8 +86,8 @@ El selector en sí no envía ningún evento.
 
 El botón principal del menú, de la portada y del cierre abre Cal.com y envía `MeetingIntent`
 (`button_location`: `header`, `hero` o `final-cta`; `content_name: Sesiones familiares`). La reserva
-confirmada llega como `Lead` desde el servidor, igual que en la home: usa el mismo tipo de cita
-(`15min`), así que ese `Lead` no distingue si vino de eventos o de sesiones familiares.
+confirmada llega como `Lead` y `Schedule` desde el servidor, igual que en la home: usa el mismo tipo
+de cita (`15min`), así que esos eventos no distinguen si vino de eventos o de sesiones familiares.
 WhatsApp queda como opción secundaria («o escríbeme por WhatsApp») y sigue enviando `Contact`,
 igual que los botones «Reservar por WhatsApp» de los paquetes, el bloque «Escríbeme» y el flotante.
 
@@ -104,5 +104,8 @@ familiares. Definido con Arian el 4 oct 2026, antes de la primera campaña de Me
 - «Reservar» abre WhatsApp, así que también cuenta como `Contact`. Conserva `InitiateCheckout` y
   `HighIntentLead` con paquete y valor, para armar públicos de mayor intención.
 - El clic a Cal.com dejó de llamarse `Schedule`: era un clic, no una cita, y en septiembre hubo
-  24 `Schedule` contra 7 reservas reales. Ahora es `MeetingIntent` (personalizado). La reserva
-  confirmada sigue llegando como `Lead` desde el webhook. No optimizar campañas por `MeetingIntent`.
+  24 `Schedule` contra 7 reservas reales. Ahora es `MeetingIntent` (personalizado). No optimizar
+  campañas por `MeetingIntent`.
+- `Schedule` queda reservado para la cita real: el webhook de Cal.com envía `Lead` y `Schedule`
+  por cada reserva creada (pedido de Arian, 4 oct 2026). `Lead` = formularios + citas;
+  `Schedule` = solo citas. No sumar los dos en un reporte: una cita aparece en ambos.

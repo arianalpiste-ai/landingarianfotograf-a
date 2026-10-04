@@ -57,21 +57,30 @@ export async function onRequestPost({ request, env }) {
   const hashedEmail = await normalizeEmail(attendee.email);
   const hashedPhone = await normalizePhone(attendee.phoneNumber, env.PHONE_DEFAULT_COUNTRY_CODE || '51');
   if (!payload.uid) return text('Reserva sin UID; no se puede garantizar idempotencia', 422);
-  const eventId = `cal-${payload.uid}`;
+  // Una reserva confirmada cuenta dos veces a propósito: como Lead (junto con el formulario) y como
+  // Schedule (solo citas reales). Cada evento tiene su ID determinista a partir del UID de Cal.com,
+  // así que un reintento de Cal.com repite los mismos IDs y Meta no los vuelve a contar.
+  const events = [
+    { eventName: 'Lead', eventId: `cal-${payload.uid}` },
+    { eventName: 'Schedule', eventId: `cal-schedule-${payload.uid}` }
+  ];
+  const userData = {
+    em: hashedEmail ? [hashedEmail] : undefined,
+    ph: hashedPhone ? [hashedPhone] : undefined,
+    fn: firstName ? [await hashValue(firstName)] : undefined,
+    ln: lastNames.length ? [await hashValue(lastNames.join(' '))] : undefined
+  };
 
   try {
-    await sendCapiEvent(env, {
-      eventName: 'Lead',
-      eventId,
-      eventSourceUrl: EVENT_SOURCE_URL,
-      userData: {
-        em: hashedEmail ? [hashedEmail] : undefined,
-        ph: hashedPhone ? [hashedPhone] : undefined,
-        fn: firstName ? [await hashValue(firstName)] : undefined,
-        ln: lastNames.length ? [await hashValue(lastNames.join(' '))] : undefined
-      },
-      customData: { content_name: payload.title || trackedSlug }
-    });
+    for (const { eventName, eventId } of events) {
+      await sendCapiEvent(env, {
+        eventName,
+        eventId,
+        eventSourceUrl: EVENT_SOURCE_URL,
+        userData,
+        customData: { content_name: payload.title || trackedSlug }
+      });
+    }
   } catch (error) {
     console.error('cal-webhook: error notificando a Meta:', error);
     return text('Error temporal al notificar a Meta; Cal.com puede reintentar', 502);

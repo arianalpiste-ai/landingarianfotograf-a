@@ -131,7 +131,7 @@
 
     actions.forEach(function (action) {
       // Clic hacia Cal.com: es intención, no una reserva. Va como evento propio para no confundirlo
-      // con una cita agendada; la reserva confirmada llega como Lead desde el servidor (webhook).
+      // con una cita agendada; la reserva confirmada llega como Lead y Schedule desde el servidor (webhook).
       if (action === 'meeting-intent') trackCustom('MeetingIntent', parameters, eventId('meeting-intent'));
       if (action === 'contact') trackStandard('Contact', parameters, eventId('contact'));
       if (action === 'initiate-checkout') trackStandard('InitiateCheckout', parameters, eventId('initiate-checkout'));

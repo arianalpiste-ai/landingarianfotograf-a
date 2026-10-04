@@ -218,5 +218,6 @@ Por solicitud del cliente se evolucionó la presentación:
   eventos optimiza por `Contact`.
 - Home: `ViewContent` al llegar a los paquetes, como en sesiones familiares.
 - El clic a Cal.com pasa de `Schedule` a `MeetingIntent`, en todo el sitio.
+- La reserva confirmada en Cal.com llega como `Lead` y `Schedule` desde el webhook.
 - `tracking.js` pasa a `?v=20261004-dominio` en todas las páginas.
 - Detalle en `06-TRACKING.md`.

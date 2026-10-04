@@ -62,14 +62,15 @@ vistas previas y en local no llega nada a Meta (ver `06-TRACKING.md`).
 ## Webhook de Cal.com
 
 `functions/api/cal-webhook.js` acepta únicamente `BOOKING_CREATED`, valida la
-firma HMAC y registra `Lead`. No crea ni modifica audiencias publicitarias.
+firma HMAC y registra `Lead` y `Schedule`. No crea ni modifica audiencias publicitarias.
 
 Variables necesarias:
 
 - `CALCOM_WEBHOOK_SECRET`: secreto cifrado usado para validar la firma.
 - `CAL_EVENT_SLUG`: opcional; usa `15min` si se omite.
 
-El UID de Cal.com forma el `event_id`, por lo que los reintentos conservan la
+El UID de Cal.com forma el `event_id` de cada evento (`cal-<uid>` para `Lead`,
+`cal-schedule-<uid>` para `Schedule`), por lo que los reintentos conservan la
 misma identidad ante Meta. Una garantía persistente adicional requeriría KV o
 D1; no se añadió esa dependencia al sitio estático.
 
