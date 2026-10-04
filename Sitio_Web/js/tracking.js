@@ -6,6 +6,12 @@
 
   var PIXEL_ID = '1595821982250654';
 
+  // El Pixel solo envía desde el dominio público. En localhost, 127.0.0.1 y las vistas previas
+  // (*.pages.dev, netlify.app) no se carga: cada evento se escribe en la consola del navegador,
+  // para poder revisar los botones sin ensuciar los datos ni los públicos de Meta.
+  var PRODUCTION_HOSTS = ['arianalpiste.com', 'www.arianalpiste.com'];
+  var isProduction = PRODUCTION_HOSTS.indexOf(window.location.hostname) !== -1;
+
   function eventId(prefix) {
     var id = window.crypto && typeof window.crypto.randomUUID === 'function'
       ? window.crypto.randomUUID()
@@ -30,21 +36,28 @@
     firstScript.parentNode.insertBefore(script, firstScript);
   }
 
-  function trackStandard(name, parameters, id) {
+  function send(method, name, parameters, id) {
+    if (!isProduction) {
+      if (window.console && console.info) {
+        console.info('[tracking] ' + name + ' (no enviado a Meta desde ' + window.location.hostname + ')', parameters || {});
+      }
+      return;
+    }
     if (typeof window.fbq !== 'function') return;
-    window.fbq('track', name, parameters || {}, id ? { eventID: id } : undefined);
+    window.fbq(method, name, parameters || {}, id ? { eventID: id } : undefined);
   }
 
-  function trackCustom(name, parameters, id) {
-    if (typeof window.fbq !== 'function') return;
-    window.fbq('trackCustom', name, parameters || {}, id ? { eventID: id } : undefined);
-  }
+  function trackStandard(name, parameters, id) { send('track', name, parameters, id); }
 
-  loadPixel();
-  // Sin esto, Meta inventa eventos por su cuenta (por ejemplo SubscribedButtonClick en cada clic
-  // a un botón). Debe ir antes de init. Así el Pixel solo envía los eventos definidos en este archivo.
-  window.fbq('set', 'autoConfig', false, PIXEL_ID);
-  window.fbq('init', PIXEL_ID);
+  function trackCustom(name, parameters, id) { send('trackCustom', name, parameters, id); }
+
+  if (isProduction) {
+    loadPixel();
+    // Sin esto, Meta inventa eventos por su cuenta (por ejemplo SubscribedButtonClick en cada clic
+    // a un botón). Debe ir antes de init. Así el Pixel solo envía los eventos definidos en este archivo.
+    window.fbq('set', 'autoConfig', false, PIXEL_ID);
+    window.fbq('init', PIXEL_ID);
+  }
   trackStandard('PageView', {}, eventId('pageview'));
 
   var body = document.body;
@@ -117,7 +130,9 @@
     }
 
     actions.forEach(function (action) {
-      if (action === 'meeting-intent') trackStandard('Schedule', parameters, eventId('schedule-click'));
+      // Clic hacia Cal.com: es intención, no una reserva. Va como evento propio para no confundirlo
+      // con una cita agendada; la reserva confirmada llega como Lead desde el servidor (webhook).
+      if (action === 'meeting-intent') trackCustom('MeetingIntent', parameters, eventId('meeting-intent'));
       if (action === 'contact') trackStandard('Contact', parameters, eventId('contact'));
       if (action === 'initiate-checkout') trackStandard('InitiateCheckout', parameters, eventId('initiate-checkout'));
       if (action === 'high-intent') trackCustom('HighIntentLead', parameters, eventId('high-intent'));

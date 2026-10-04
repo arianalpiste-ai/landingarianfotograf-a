@@ -56,6 +56,9 @@ Variables necesarias para medición server-side:
 El formulario genera `Lead` en CAPI y devuelve el mismo `eventId` al navegador
 para que Meta deduplique ambos canales.
 
+El Pixel y el `Lead` del formulario solo se envían desde `arianalpiste.com`. En
+vistas previas y en local no llega nada a Meta (ver `06-TRACKING.md`).
+
 ## Webhook de Cal.com
 
 `functions/api/cal-webhook.js` acepta únicamente `BOOKING_CREATED`, valida la
@@ -73,5 +76,5 @@ D1; no se añadió esa dependencia al sitio estático.
 ## Pagos
 
 No existe proveedor ni flujo de pago. `Purchase` permanece desactivado. Los
-clics en “Reservar” disparan `InitiateCheckout` y `HighIntentLead`, con paquete,
-valor publicado y moneda PEN; no disparan `Contact`.
+clics en “Reservar” disparan `Contact`, `InitiateCheckout` y `HighIntentLead`, con
+paquete, valor publicado y moneda PEN.

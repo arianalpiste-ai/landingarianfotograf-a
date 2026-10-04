@@ -209,3 +209,14 @@ Por solicitud del cliente se evolucionó la presentación:
 - Eventos: ver `06-TRACKING.md`.
 - Paquete Recuerdo: la tarjeta dice «Photobook de tapa dura 15x20, incluido». Arian pidió no
   especificar el número de páginas.
+
+## 17. Tracking listo para la primera campaña de Meta Ads — octubre de 2026
+
+- El Pixel solo envía desde `arianalpiste.com`. En local y en vistas previas los eventos se
+  escriben en la consola y no llegan a Meta; el formulario tampoco envía `Lead` desde ahí.
+- Home: los tres botones «Reservar» suman `Contact` (abren WhatsApp). La campaña de cobertura de
+  eventos optimiza por `Contact`.
+- Home: `ViewContent` al llegar a los paquetes, como en sesiones familiares.
+- El clic a Cal.com pasa de `Schedule` a `MeetingIntent`, en todo el sitio.
+- `tracking.js` pasa a `?v=20261004-dominio` en todas las páginas.
+- Detalle en `06-TRACKING.md`.

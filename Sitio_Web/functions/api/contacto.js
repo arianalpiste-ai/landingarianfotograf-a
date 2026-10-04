@@ -1,5 +1,9 @@
 import { normalizeEmail, normalizePhone, sendCapiEvent } from '../lib/meta-capi.js';
 
+// Meta solo recibe el Lead cuando el formulario se envía desde el dominio público, igual que
+// el Pixel en js/tracking.js. Las vistas previas y las pruebas locales envían el correo, no el evento.
+const PRODUCTION_HOSTS = new Set(['arianalpiste.com', 'www.arianalpiste.com']);
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const EVENT_TYPES = new Set([
@@ -140,6 +144,7 @@ export async function onRequestPost(context) {
   }
 
   const eventId = `contacto-${crypto.randomUUID()}`;
+  if (!PRODUCTION_HOSTS.has(requestUrl.hostname)) return respond({ ok: true, eventId });
   try {
     const hashedEmail = await normalizeEmail(submission.email);
     const hashedPhone = await normalizePhone(submission.celular, env.PHONE_DEFAULT_COUNTRY_CODE || '51');
