@@ -66,3 +66,12 @@ Los botones «Reservar» de la home envían `InitiateCheckout` + `HighIntentLead
 octubre de 2026 `package_name` incluye la modalidad («Básico · Solo foto», «Premium · Foto y video»)
 y `value` es el precio de la modalidad elegida (`data-value-foto` / `data-value-foto-video`).
 El selector en sí no envía ningún evento.
+
+## Sesiones familiares: botón principal «Agendar llamada» (octubre de 2026)
+
+El botón principal del menú, de la portada y del cierre abre Cal.com y envía `Schedule`
+(`button_location`: `header`, `hero` o `final-cta`; `content_name: Sesiones familiares`). La reserva
+confirmada llega como `Lead` desde el servidor, igual que en la home: usa el mismo tipo de cita
+(`15min`), así que ese `Lead` no distingue si vino de eventos o de sesiones familiares.
+WhatsApp queda como opción secundaria («o escríbeme por WhatsApp») y sigue enviando `Contact`,
+igual que los botones «Reservar por WhatsApp» de los paquetes, el bloque «Escríbeme» y el flotante.

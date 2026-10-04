@@ -875,6 +875,9 @@ body { font-weight: 400; }
    SESIONES FAMILIARES (sesiones-familiares.html)
    ============================================================ */
 .btn-note { margin: 0; font-size: .8125rem; line-height: 1.5; color: var(--color-muted); }
+.cta-band-alt { display: flex; justify-content: center; margin-top: 1.1rem; }
+.cta-band .btn-wa-text { color: #cfc7bd; }
+.cta-band .btn-wa-text:hover { color: #fff; }
 .cta-band .btn-note { margin-top: 1rem; color: #cfc7bd; }
 .gallery-hint { margin: 0; font-size: .875rem; color: var(--color-muted); }
 

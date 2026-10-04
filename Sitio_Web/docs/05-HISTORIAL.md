@@ -198,3 +198,12 @@ Por solicitud del cliente se evolucionó la presentación:
 - `ViewContent` se envía al ver los paquetes: al estar más arriba, lo recibirán más visitas.
 - Fondos alternados: Paquetes pasa a gris (`.packages.alt`) y «Cómo funciona» a blanco, para que
   no queden dos secciones blancas seguidas («Por qué ahora» y Paquetes).
+
+## 16. Sesiones familiares: «Agendar llamada» como botón principal — octubre de 2026
+
+- Menú, portada y cierre: el botón principal pasa de WhatsApp a «Agendar llamada» / «Agenda una
+  llamada gratis» (Cal.com, mismo enlace que la home). Debajo queda «o escríbeme por WhatsApp».
+- Los paquetes («Reservar por WhatsApp»), el bloque «Escríbeme» y el botón flotante siguen en WhatsApp.
+- Cierre: «La foto de todos juntos empieza con una llamada». Paso 1 de «Cómo funciona»: «Agendas
+  una llamada o me escribes por WhatsApp…».
+- Eventos: ver `06-TRACKING.md`.
