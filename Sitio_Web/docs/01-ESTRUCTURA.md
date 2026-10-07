@@ -81,5 +81,6 @@ Los posts se escriben en la carpeta de diseño `Claude/blog/`: cada post es una 
 (título, portada, índice, posts relacionados) más su texto en `_prosa-<id>.html`. `python3 build_blog.py` arma
 los HTML con la plantilla común (`_head.html`, `_header.html`, `_footer.html`) y todos comparten `blog.css`.
 Después `python3 integrar.py` los copia a `blog/` con rutas limpias, GTM, Pixel y `data-track`.
-Para un post nuevo: agrega su entrada en `POSTS`, crea su `_prosa-<id>.html`, corre ambos scripts y súmalo al
-sitemap y a `llms.txt`. La portada del blog (`blog/index.html`) se actualiza sola.
+Para un post nuevo: agrega su entrada en `POSTS`, crea su `_prosa-<id>.html` y corre ambos scripts. La portada
+del blog, el sitemap (solo las líneas `/blog/`, con la fecha `modified` de cada post) y la sección «Blog» de
+`llms.txt` se actualizan solos. No hace falta reenviar el sitemap en Search Console.
