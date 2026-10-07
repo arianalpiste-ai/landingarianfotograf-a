@@ -613,7 +613,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
       <div class="hero-visual reveal">
         <div class="hero-circle" aria-hidden="true"></div>
-        <div class="hero-photo"><img src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_1000/landing/servicio-sesion-familiar-lima" alt="Sesión de fotos familiar en Lima: bebé con vestido rosado ríe junto a un oso de peluche frente a una carpa blanca" width="1000" height="667"></div>
+        <div class="hero-photo"><img fetchpriority="high" src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_1000/landing/servicio-sesion-familiar-lima" alt="Sesión de fotos familiar en Lima: bebé con vestido rosado ríe junto a un oso de peluche frente a una carpa blanca" width="1000" height="667"></div>
         <div class="badge-float badge-1"><span class="ico"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div><b>Sin poses forzadas</b>Juego y momentos reales</div></div>
         <div class="badge-float badge-2"><span class="ico"><svg width="20" height="20"><use href="#i-sun"/></svg></span><div><b>Exteriores o estudio</b>Tú eliges</div></div>
       </div>
@@ -981,6 +981,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   // Aparición al hacer scroll
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script>
+  // Fotos de más abajo: el navegador espera a que llegues para pedirlas (en iPhone casi al borde) y se ven vacías un momento.
+  // Cuando la página ya cargó, se piden todas en segundo plano para que estén listas al hacer scroll o deslizar los carruseles.
+  window.addEventListener('load',()=>{
+    const go=()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>{ i.loading='eager'; });
+    ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
+  });
 </script>
 <script src="/js/tracking.js?v=20261004-dominio" defer></script>
 </body>

@@ -736,6 +736,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
+<script>
+  // Fotos de más abajo: el navegador espera a que llegues para pedirlas (en iPhone casi al borde) y se ven vacías un momento.
+  // Cuando la página ya cargó, se piden todas en segundo plano para que estén listas al hacer scroll o deslizar los carruseles.
+  window.addEventListener('load',()=>{
+    const go=()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>{ i.loading='eager'; });
+    ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
+  });
+</script>
 <script src="/js/tracking.js?v=20261004-dominio" defer></script>
 </body>
 </html>

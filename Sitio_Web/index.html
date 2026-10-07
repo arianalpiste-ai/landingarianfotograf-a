@@ -605,7 +605,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
       <div class="hero-visual reveal">
         <div class="hero-circle" aria-hidden="true"></div>
-        <div class="hero-photo"><img src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_900/landing/fotografia-bautizo-lima-hero" alt="Fotografía de bautizo en Lima: papá y mamá con su bebé en la iglesia" width="900" height="600"></div>
+        <div class="hero-photo"><img fetchpriority="high" src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_900/landing/fotografia-bautizo-lima-hero" alt="Fotografía de bautizo en Lima: papá y mamá con su bebé en la iglesia" width="900" height="600"></div>
         <div class="badge-float badge-1"><span class="ico"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div><b>Momentos reales</b>Emoción genuina</div></div>
         <div class="badge-float badge-2"><span class="ico"><svg width="20" height="20"><use href="#i-sun"/></svg></span><div><b>Videos el mismo día</b>Listos para historias</div></div>
       </div>
@@ -973,6 +973,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }));
 </script>
 
+<script>
+  // Fotos de más abajo: el navegador espera a que llegues para pedirlas (en iPhone casi al borde) y se ven vacías un momento.
+  // Cuando la página ya cargó, se piden todas en segundo plano para que estén listas al hacer scroll o deslizar los carruseles.
+  window.addEventListener('load',()=>{
+    const go=()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>{ i.loading='eager'; });
+    ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
+  });
+</script>
 <script src="/js/tracking.js?v=20261004-dominio" defer></script>
 </body>
 </html>
