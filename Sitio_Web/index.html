@@ -75,7 +75,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  html{overflow-x:clip}
+  html{overflow-x:clip;-webkit-tap-highlight-color:transparent}
+  a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
   body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--mint-50);line-height:1.6;font-size:17px;overflow-x:hidden;overflow-x:clip}
   img{max-width:100%;display:block}
   a{color:inherit}
@@ -461,6 +462,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
     .reveal{opacity:1;transform:none}
+  }
+  /* Sobre mí en celular: foto más chica para que respire a los lados */
+  @media (max-width:640px){
+    .about-visual{width:80%;max-width:300px;margin:28px auto 36px}
+    /* Testimonios en celular: foto y cajitas más compactas */
+    .quote-photo{width:92%;justify-self:center}
+    .quote-list{width:92%;justify-self:center;gap:14px}
+    .quote{padding:16px;gap:12px}
+    .quote img{width:42px;height:42px}
+    .quote p{font-size:.92rem}
+    .quote cite{font-size:.82rem}
   }
   .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   .form-status{font-size:.92rem;font-weight:700;min-height:1.2em}
