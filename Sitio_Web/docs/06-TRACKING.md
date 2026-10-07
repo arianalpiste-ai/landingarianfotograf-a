@@ -138,3 +138,11 @@ Mismo `js/tracking.js`, mismos nombres de evento. Lo nuevo:
 - **`<noscript>` del Pixel** en las páginas nuevas, para navegadores sin JavaScript.
 - Google Tag Manager (`GTM-MKJXCMSL`) solo contiene Google Analytics; no carga el Pixel de Meta (revisado el 6 oct 2026).
 
+
+## Blog rediseñado (octubre de 2026)
+
+`integrar.py` marca los botones del blog: `/reservar` → `high-intent blog-to-landing`; WhatsApp (incluido
+«Enviar mi lista por WhatsApp» del checklist) → `contact blog-to-landing`; enlaces a la home o a sesiones dentro
+del contenido → `blog-to-landing`. Todos llevan `data-source-article` con el slug del post y `data-track-location`
+según la zona (`article-hero`, `article-body`, `checklist`, `article-mid`, `author`, `article-end`, `header`, `footer`).
+Las páginas mantienen `data-content-type="article"` (ViewContent) y `blog-index` (BlogView).

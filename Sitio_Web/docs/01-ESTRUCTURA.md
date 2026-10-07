@@ -13,8 +13,8 @@ Sitio_Web/
 ├── reservar.html         Cómo reservar: llamada (Cal.com flotante) o WhatsApp. Rediseño 2026.
 ├── privacidad.html        Información sobre datos, proveedores y medición.
 ├── 404.html               Página de error personalizada, sin conversiones.
-├── blog/                  Índice y artículos SEO/GEO.
-├── recursos/              Guías gratuitas en HTML.
+├── blog/                  Índice, artículos SEO/GEO y checklist interactivo; blog.css compartido.
+├── _redirects             301 de /recursos/* al checklist del blog.
 ├── gracias/               Confirmaciones no indexables; no prueban compras.
 ├── css/style.css          Único stylesheet visual, compartido por todo el sitio.
 ├── js/main.js             Interfaz, galerías, navegación y formulario.
@@ -72,5 +72,14 @@ Para revisión del fotógrafo: `http://localhost:8751/portafolio.html?seleccion=
 
 `index.html`, `sesiones-familiares.html`, `reservar.html`, `privacidad.html`, `gracias/reunion.html` y `404.html`
 llevan su CSS y JS dentro de la propia página y **no** usan `css/style.css` ni `js/main.js` (que siguen sirviendo
-a blog, recursos y portafolio). Sí usan `js/tracking.js`. Se generan con `integrar.py` a partir de la carpeta de
+al portafolio). Sí usan `js/tracking.js`. Se generan con `integrar.py` a partir de la carpeta de
 diseño, que agrega rutas absolutas, GTM, Pixel, `data-track` y la conexión del formulario.
+
+## Blog (rediseño octubre 2026)
+
+Los posts se escriben en la carpeta de diseño `Claude/blog/`: cada post es una entrada en `build_blog.py`
+(título, portada, índice, posts relacionados) más su texto en `_prosa-<id>.html`. `python3 build_blog.py` arma
+los HTML con la plantilla común (`_head.html`, `_header.html`, `_footer.html`) y todos comparten `blog.css`.
+Después `python3 integrar.py` los copia a `blog/` con rutas limpias, GTM, Pixel y `data-track`.
+Para un post nuevo: agrega su entrada en `POSTS`, crea su `_prosa-<id>.html`, corre ambos scripts y súmalo al
+sitemap y a `llms.txt`. La portada del blog (`blog/index.html`) se actualiza sola.

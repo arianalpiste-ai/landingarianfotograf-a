@@ -241,3 +241,14 @@ Por solicitud del cliente se evolucionó la presentación:
 - Eventos: ver `06-TRACKING.md`, sección «Rediseño de octubre de 2026».
 - Sin botón flotante de WhatsApp en las páginas nuevas (decisión de Arian).
 
+
+## 19. Blog con la nueva identidad y Recursos dentro del blog — octubre de 2026
+
+- Los tres posts y la portada del blog pasan a la plantilla Cielo aire (`blog/blog.css` compartido): respuesta
+  corta arriba, índice, consejos, tabla de precios actualizada (sin tiempos de entrega ni oferta de lanzamiento),
+  autor, «Sigue leyendo» con 2 posts y cierre hacia /reservar. Mismas URLs de siempre.
+- El checklist deja Recursos y se vuelve un post interactivo: `/blog/checklist-fotos-para-tu-evento`
+  (6 eventos, lista personal, envío por WhatsApp y guardado en PDF). Se quitaron quinceañero, graduación,
+  boda civil y aniversario.
+- `recursos/` se eliminó; `_redirects` manda `/recursos/*` al checklist con 301. Sitemap y `llms.txt` actualizados.
+- El blog no aparece en el menú ni en el pie de la home: es para tráfico orgánico.
