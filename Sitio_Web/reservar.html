@@ -11,9 +11,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Página no encontrada | Arian Alpiste Fotografía</title>
-<meta name="description" content="La página que buscas no está disponible.">
-<meta name="robots" content="noindex">
+<title>Reserva tu Fecha | Arian Alpiste Fotografía</title>
+<meta name="description" content="Reserva tu fecha con Arian Alpiste, fotógrafo de eventos familiares en Lima: agenda una llamada gratis de 15 minutos o escríbeme por WhatsApp.">
+<link rel="canonical" href="https://arianalpiste.com/reservar">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%231D4C8A'/><text x='32' y='45' text-anchor='middle' font-family='Arial Rounded MT Bold,Helvetica,Arial,sans-serif' font-weight='800' font-size='38' letter-spacing='-4'><tspan fill='white'>a</tspan><tspan fill='%23FF9A7E'>a</tspan></text></svg>">
 <link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -440,39 +440,69 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
     .reveal{opacity:1;transform:none}
   }
-  /* ===== Páginas cortas (gracias / 404) ===== */
-  .simple{min-height:calc(100svh - var(--header-h));display:flex;align-items:center;padding:56px 0 var(--section-space);background:#FFFFFF;text-align:center}
-  .simple .wrap{width:100%}
-  .simple h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;max-width:16ch;margin:0 auto}
-  .simple h1 span{color:var(--green-600);position:relative;white-space:nowrap}
-  .simple h1 span::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.28em;background:var(--sun);opacity:.55;z-index:-1;border-radius:6px}
-  .simple .lead{margin:18px auto 0;max-width:52ch}
-  .simple .hero-actions{justify-content:center;margin-top:30px;flex-wrap:wrap}
-  .big-ico{width:96px;height:96px;border-radius:30px;background:var(--green-700);color:#fff;display:grid;place-items:center;margin:0 auto 24px;box-shadow:var(--shadow-lg);position:relative}
-  .big-ico svg{width:46px;height:46px}
-  .big-ico::after{content:"";position:absolute;right:-8px;top:-8px;width:22px;height:22px;border-radius:50%;background:var(--sun)}
-  .next-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:40px auto 0;text-align:left}
-  .next-step{background:#EEF6FD;border:1px solid #DCEBF8;border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
-  .next-step::before{content:"";position:absolute;left:0;right:0;top:0;height:5px}
-  .next-step:nth-child(1)::before{background:var(--coral)}
-  .next-step:nth-child(2)::before{background:var(--sky)}
-  .next-step:nth-child(3)::before{background:var(--sun)}
-  .next-step b{display:block;font-family:var(--font-head);font-size:1.05rem;margin-bottom:6px}
-  .next-step p{color:var(--ink-soft);font-size:.93rem}
-  .next-step .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--green-700);color:#fff;font-weight:800;font-size:.85rem;margin-bottom:10px}
-  .num404{font-family:var(--font-head);font-weight:800;font-size:clamp(5rem,16vw,9rem);line-height:1;color:var(--green-700);display:flex;justify-content:center;align-items:center;gap:.08em;margin-bottom:10px}
-  .num404 .zero{width:.78em;height:.78em;border-radius:50%;background:var(--sun);display:grid;place-items:center;color:var(--green-700)}
-  .num404 .zero svg{width:.42em;height:.42em}
+  /* ===== Página reservar ===== */
+  .book-hero{padding:56px 0 24px;text-align:center;background:#fff}
+  .book-hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800}
+  .book-hero h1 span{color:var(--green-600);position:relative;white-space:nowrap}
+  .book-hero h1 span::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.28em;background:var(--sun);opacity:.55;z-index:-1;border-radius:6px}
+  .book-hero .lead{margin:16px auto 0;max-width:54ch}
+  .options{background:#fff;padding:32px 0 var(--section-space)}
+  .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px;margin:0 auto}
+  .option{position:relative;border-radius:var(--radius-lg);padding:32px 30px;display:flex;flex-direction:column;border:2px solid #DCEBF8;background:#fff;box-shadow:var(--shadow)}
+  .option.main{border-color:var(--green-700)}
+  .option .ribbon{position:absolute;top:-14px;left:30px;background:var(--coral);color:#fff;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+  .option .ico{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;color:#fff;margin-bottom:18px}
+  .option .ico svg{width:26px;height:26px}
+  .option h2{font-size:1.6rem}
+  .option > p{color:var(--ink-soft);margin:10px 0 18px}
+  .option ul{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:9px;font-size:.96rem}
+  .option li{display:flex;gap:10px}
+  .option li svg{flex:none;width:20px;height:20px;color:var(--green-600);margin-top:1px}
+  .option .btn{margin-top:auto}
+  .option .note{margin-top:12px;font-size:.84rem;color:var(--ink-soft);text-align:center}
+  .confirm{background:#E6F1FC;padding:var(--section-space) 0}
+  [data-theme="bosque-aire"] .option{border-color:#E4E1C8}
+  [data-theme="bosque-aire"] .option.main{border-color:var(--green-700)}
+  [data-theme="bosque-aire"] .confirm{background:#E8EFDC}
+  .confirm-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  .confirm-step{background:#fff;border-radius:var(--radius);padding:24px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .confirm-step::before{content:"";position:absolute;left:0;right:0;top:0;height:5px}
+  .confirm-step:nth-child(1)::before{background:var(--coral)}
+  .confirm-step:nth-child(2)::before{background:var(--sky)}
+  .confirm-step:nth-child(3)::before{background:var(--sun)}
+  .confirm-step .n{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--green-700);color:#fff;font-weight:800;font-size:.9rem;margin-bottom:12px}
+  .confirm-step b{display:block;font-family:var(--font-head);font-size:1.1rem;margin-bottom:6px}
+  .confirm-step p{color:var(--ink-soft);font-size:.95rem}
+  @media (max-width:860px){
+    .options-grid,.confirm-steps{grid-template-columns:1fr}
+  }
   @media (max-width:640px){
-    .simple{min-height:0;padding:40px 0 64px}
-    .next-steps{grid-template-columns:1fr;gap:10px;margin-top:28px}
-    .next-step{display:flex;gap:12px;align-items:flex-start;padding:16px}
-    .next-step .n{flex:none;margin:0}
-    .simple .hero-actions{flex-direction:column;align-items:stretch}
+    .book-hero{padding:44px 0 20px}
+    .book-hero .lead{margin-top:20px}
+    .options{padding:24px 0 72px}
+    .options-grid{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;padding:24px 16px 26px;margin:0;max-width:none;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .options-grid::-webkit-scrollbar{display:none}
+    .option{flex:0 0 86%;scroll-snap-align:start;padding:30px 22px 26px}
+    .option > p{margin:12px 0 20px}
+    .option ul{gap:12px;margin-bottom:28px}
+    .confirm-steps{gap:18px;margin-top:28px}
+    .confirm-step{display:flex;gap:14px;align-items:flex-start;padding:22px 20px 20px}
+    .confirm-step .n{flex:none;margin:0}
   }
 </style>
+<script>
+  // /reservar toma los colores de la página de origen: verde (Bosque) si viene de sesiones familiares, azul (Cielo) si viene de eventos
+  (function(){
+    var q=new URLSearchParams(location.search).get('desde'), r='';
+    try{ r=new URL(document.referrer).pathname }catch(e){}
+    if(q==='sesiones'||(!q&&r.indexOf('/sesiones-familiares')===0)){
+      document.documentElement.setAttribute('data-theme','bosque-aire');
+      var l=document.querySelector('link[rel=icon]'); if(l) l.href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%233D5A2A'/><text x='32' y='45' text-anchor='middle' font-family='Arial Rounded MT Bold,Helvetica,Arial,sans-serif' font-weight='800' font-size='38' letter-spacing='-4'><tspan fill='white'>a</tspan><tspan fill='%23FF9A7E'>a</tspan></text></svg>";
+    }
+  })();
+</script>
 </head>
-<body>
+<body data-content-name="Reservar">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKJXCMSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Meta Pixel (noscript): solo para navegadores sin JavaScript; el Pixel principal vive en js/tracking.js -->
@@ -512,7 +542,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </ul>
     <div class="nav-cta">
       <a href="https://wa.link/4jqx34" class="btn btn-ghost" target="_blank" rel="noopener" data-track="contact" data-track-location="header" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>WhatsApp</a>
-      <a href="/reservar" class="btn btn-primary" data-track="high-intent" data-track-location="header" data-destination="reservar">Reservar<span class="hide-sm"> mi fecha</span></a>
+      <a href="#opciones" class="btn btn-primary">Reservar<span class="hide-sm"> mi fecha</span></a>
     </div>
     <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><svg width="26" height="26"><use href="#i-menu"/></svg></button>
   </nav>
@@ -528,15 +558,53 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </header>
 <main>
-  <section class="simple" data-confetti="34">
+  <section class="book-hero" data-confetti="18">
     <div class="wrap reveal">
-      <div class="num404" aria-hidden="true">4<span class="zero"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/></svg></span>4</div>
-      <span class="eyebrow">Página no encontrada</span>
-      <h1>Este momento no quedó en la <span>galería</span></h1>
-      <p class="lead">Es posible que el enlace haya cambiado o que la dirección esté incompleta.</p>
-      <div class="hero-actions">
-        <a href="/" class="btn btn-primary">Volver al inicio <svg><use href="#i-arrow"/></svg></a>
-        <a href="/sesiones-familiares" class="btn btn-ghost">Ver sesiones familiares</a>
+      <span class="eyebrow">Reserva tu fecha</span>
+      <h1>¿Cómo prefieres <span>reservar</span>?</h1>
+      <p class="lead">Elige la forma que te quede más cómoda. En las dos te cuento los paquetes, vemos la disponibilidad y separamos tu fecha.</p>
+    </div>
+  </section>
+
+  <section class="options" id="opciones">
+    <div class="wrap options-grid">
+      <article class="option main reveal">
+        <span class="ribbon">Lo más rápido</span>
+        <span class="ico" style="background:var(--green-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span>
+        <h2>Agenda una llamada</h2>
+        <p>La forma más rápida y clara de resolver todo. En 15 minutos te explico los paquetes, vemos tu fecha y respondo todas tus dudas.</p>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Solo 15 minutos, gratis y sin compromiso</li>
+          <li><svg><use href="#i-check"/></svg>Eliges el día y la hora que te acomode</li>
+          <li><svg><use href="#i-check"/></svg>Sales de la llamada con todo claro</li>
+        </ul>
+        <a href="https://cal.com/arian-alpiste-sarmiento-gzfq0v" data-cal-link="arian-alpiste-sarmiento-gzfq0v/15min" data-cal-namespace="15min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}' class="btn btn-primary" data-track="meeting-intent" data-track-location="reservar-call" data-destination="cal.com">Agendar mi llamada <svg><use href="#i-arrow"/></svg></a>
+      </article>
+      <article class="option reveal">
+        <span class="ico" style="background:#25A35A"><svg><use href="#i-wa"/></svg></span>
+        <h2>Escríbeme por WhatsApp</h2>
+        <p>Ideal si prefieres escribir. Respondo rápido, pero si estoy en una sesión o en un evento quizá no pueda contarte todos los detalles al momento.</p>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Te respondo apenas pueda</li>
+          <li><svg><use href="#i-check"/></svg>Perfecto para dudas puntuales</li>
+          <li><svg><use href="#i-check"/></svg>El mensaje ya va escrito, solo envíalo</li>
+        </ul>
+        <a href="https://wa.me/51989789691?text=Hola%20Arian%2C%20quiero%20reservar%20una%20fecha.%20%C2%BFMe%20cuentas%20la%20disponibilidad%3F" class="btn btn-ghost" target="_blank" rel="noopener" data-track="contact" data-track-location="reservar-whatsapp" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+      </article>
+    </div>
+    <div class="wrap"><div class="carousel-dots" role="group" aria-label="Elegir opción"><button aria-label="Agendar llamada" aria-current="true"></button><button aria-label="WhatsApp"></button></div></div>
+  </section>
+
+  <section class="confirm" data-confetti="12">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">Después de conversar</span>
+        <h2>Así se confirma tu reserva</h2>
+      </div>
+      <div class="confirm-steps">
+        <div class="confirm-step reveal"><span class="n">1</span><div><b>Elegimos fecha y paquete</b><p>Vemos juntos el que mejor encaja con tu evento o sesión.</p></div></div>
+        <div class="confirm-step reveal"><span class="n">2</span><div><b>Separas tu fecha</b><p>Con el 50% de adelanto por Yape, Plin o transferencia. El saldo, el día de tu evento o sesión.</p></div></div>
+        <div class="confirm-step reveal"><span class="n">3</span><div><b>Preparamos todo</b><p>Te comparto tips y una guía para que el gran día todo fluya.</p></div></div>
       </div>
     </div>
   </section>
@@ -594,6 +662,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     btn.addEventListener('click',()=>set(menu.hidden));
     menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
     addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+  })();
+
+  // Calendario de Cal.com en ventana flotante
+  (function (C, A, L) {
+    var p = function (a, ar) { a.q.push(ar); };
+    var d = C.document;
+    C.Cal = C.Cal || function () {
+      var cal = C.Cal; var ar = arguments;
+      if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
+      if (ar[0] === L) {
+        var api = function () { p(api, arguments); };
+        var namespace = ar[1]; api.q = api.q || [];
+        if (typeof namespace === 'string') { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ['initNamespace', namespace]); }
+        else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, 'https://app.cal.com/embed/embed.js', 'init');
+  Cal('init', '15min', { origin: 'https://app.cal.com' });
+  Cal.config = Cal.config || {}; Cal.config.forwardQueryParams = true;
+  Cal.ns['15min']('ui', { theme: 'light', hideEventTypeDetails: false, layout: 'month_view', cssVarsPerTheme: { light: { 'cal-brand': getComputedStyle(document.documentElement).getPropertyValue('--green-700').trim() || '#1D4C8A' } } });
+  document.querySelectorAll('[data-cal-link]').forEach(el => el.addEventListener('click', e => e.preventDefault()));
+
+  // Carrusel de opciones (móvil)
+  (function(){
+    const track=document.querySelector('.options-grid'), cards=[...track.children], dots=[...document.querySelectorAll('.options .carousel-dots button')];
+    const step=()=>(cards[1].offsetLeft-cards[0].offsetLeft)||1;
+    const update=()=>{const max=track.scrollWidth-track.clientWidth;let i=Math.round(track.scrollLeft/step());if(max>0&&track.scrollLeft>=max-4)i=cards.length-1;dots.forEach((d,j)=>d.setAttribute('aria-current',j===i))};
+    track.addEventListener('scroll',()=>requestAnimationFrame(update),{passive:true});
+    dots.forEach((d,i)=>d.addEventListener('click',()=>track.scrollTo({left:i*step(),behavior:'smooth'})));
+  })();
+
+  // Cita confirmada en el calendario flotante → Lead en el navegador con el mismo ID que usa el webhook de Cal.com (cal-<uid>),
+  // así Meta junta ambos envíos en uno solo. El clic en "Agendar" sigue siendo solo MeetingIntent.
+  (function(){
+    const sent=new Set();
+    const onBooked=e=>{
+      const d=(e&&e.detail&&e.detail.data)||{}; const uid=d.uid||(d.booking&&d.booking.uid);
+      if(!uid||sent.has(uid)) return; sent.add(uid);
+      document.dispatchEvent(new CustomEvent('meta:lead',{detail:{eventId:'cal-'+uid,contentName:'Reunión Cal.com'}}));
+    };
+    Cal.ns['15min']('on',{action:'bookingSuccessfulV2',callback:onBooked});
+    Cal.ns['15min']('on',{action:'bookingSuccessful',callback:onBooked});
   })();
 
   // Aparición al hacer scroll

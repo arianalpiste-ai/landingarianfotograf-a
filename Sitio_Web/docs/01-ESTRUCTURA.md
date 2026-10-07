@@ -10,6 +10,7 @@ Sitio_Web/
 │                          paquetes por sesión, FAQ y cierre. CTA único: WhatsApp.
 ├── portafolio.html        Página de galería completa: hero-slideshow +
 │                          secciones Eventos / Retratos / Paisaje & Viajes / Documental.
+├── reservar.html         Cómo reservar: llamada (Cal.com flotante) o WhatsApp. Rediseño 2026.
 ├── privacidad.html        Información sobre datos, proveedores y medición.
 ├── 404.html               Página de error personalizada, sin conversiones.
 ├── blog/                  Índice y artículos SEO/GEO.
@@ -66,3 +67,10 @@ El script detecta `#heroSlides` para cargar el manifest en el portafolio.
 `scripts/optimize-images.py` genera las variantes WebP y actualiza el manifest. Las carpetas `responsive/` de cada categoría son archivos derivados; los JPEG originales se conservan.
 
 Para revisión del fotógrafo: `http://localhost:8751/portafolio.html?seleccion=1`.
+
+## Páginas del rediseño 2026
+
+`index.html`, `sesiones-familiares.html`, `reservar.html`, `privacidad.html`, `gracias/reunion.html` y `404.html`
+llevan su CSS y JS dentro de la propia página y **no** usan `css/style.css` ni `js/main.js` (que siguen sirviendo
+a blog, recursos y portafolio). Sí usan `js/tracking.js`. Se generan con `integrar.py` a partir de la carpeta de
+diseño, que agrega rutas absolutas, GTM, Pixel, `data-track` y la conexión del formulario.

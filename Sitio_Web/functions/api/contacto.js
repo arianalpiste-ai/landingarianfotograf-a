@@ -15,6 +15,9 @@ const EVENT_TYPES = new Set([
   'Cumpleaños',
   'Sesión familiar',
   'Sesión de retratos',
+  'Sesión en exteriores',
+  'Sesión en estudio',
+  'Smash cake',
   'Otro'
 ]);
 
@@ -38,6 +41,15 @@ const escapeHtml = (value) => value.replace(/[&<>"']/g, (character) => ({
   '"': '&quot;',
   "'": '&#039;'
 })[character]);
+
+// Página desde la que se envió el formulario (la principal o sesiones familiares), solo si es de este sitio.
+const sourcePage = (request) => {
+  try {
+    const referer = new URL(request.headers.get('Referer') || '');
+    if (PRODUCTION_HOSTS.has(referer.hostname)) return `https://arianalpiste.com${referer.pathname}#contacto`;
+  } catch {}
+  return 'https://arianalpiste.com/#contacto';
+};
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -97,6 +109,9 @@ export async function onRequestPost(context) {
     empresa: clean(input.empresa, 100),
     mensaje: clean(input.mensaje, 2000)
   };
+  // Cookies del Pixel que manda el navegador: mejoran la coincidencia del Lead en Meta.
+  const fbp = /^fb\.\d\.\d+\.\d+$/.test(clean(input.fbp, 120)) ? clean(input.fbp, 120) : undefined;
+  const fbc = /^fb\.\d\.\d+\.[\w-]+$/.test(clean(input.fbc, 500)) ? clean(input.fbc, 500) : undefined;
 
   if (submission.nombre.length < 2 || !EMAIL_PATTERN.test(submission.email) ||
       !EVENT_TYPES.has(submission.evento) || (submission.fecha && !DATE_PATTERN.test(submission.fecha))) {
@@ -151,13 +166,15 @@ export async function onRequestPost(context) {
     await sendCapiEvent(env, {
       eventName: 'Lead',
       eventId,
-      eventSourceUrl: 'https://arianalpiste.com/#contacto',
+      eventSourceUrl: sourcePage(request),
       actionSource: 'website',
       userData: {
         em: hashedEmail ? [hashedEmail] : undefined,
         ph: hashedPhone ? [hashedPhone] : undefined,
         client_ip_address: request.headers.get('CF-Connecting-IP') || undefined,
-        client_user_agent: request.headers.get('User-Agent') || undefined
+        client_user_agent: request.headers.get('User-Agent') || undefined,
+        fbp,
+        fbc
       },
       customData: { content_name: submission.evento }
     });

@@ -109,3 +109,32 @@ familiares. Definido con Arian el 4 oct 2026, antes de la primera campaña de Me
 - `Schedule` queda reservado para la cita real: el webhook de Cal.com envía `Lead` y `Schedule`
   por cada reserva creada (pedido de Arian, 4 oct 2026). `Lead` = formularios + citas;
   `Schedule` = solo citas. No sumar los dos en un reporte: una cita aparece en ambos.
+
+## Rediseño de octubre de 2026 (home, sesiones familiares y /reservar)
+
+Mismo `js/tracking.js`, mismos nombres de evento. Lo nuevo:
+
+| Acción | Evento | `button_location` |
+|---|---|---|
+| «Reservar mi fecha» / «Reserva tu sesión» (llevan a /reservar) | `HighIntentLead` (personalizado) | `header`, `hero` |
+| «Agendar mi llamada» en /reservar (abre el calendario flotante) | `MeetingIntent` | `reservar-call` |
+| Cita confirmada dentro del calendario flotante | `Lead` en el navegador con `eventID: cal-<uid>` | — |
+| WhatsApp en /reservar | `Contact` | `reservar-whatsapp` |
+| Otros WhatsApp (menú, menú móvil, hero, sobre mí, contacto, footer, smash cake) | `Contact` | `header`, `mobile-menu`, `hero`, `about`, `contact-section`, `footer`, `services` |
+| «Reservar» de un paquete | `Contact` + `InitiateCheckout` + `HighIntentLead` con `package_name` y `value` en PEN | `package-card` |
+| Bloque bajo los paquetes | `Contact` | `package-more-info` |
+
+- **Lead = hechos confirmados:** formulario aceptado y cita creada en Cal.com. El clic a WhatsApp (también en /reservar)
+  es `Contact`, no `Lead` (decisión de Arian, opción A, 6 oct 2026). Para ver los contactos desde /reservar, crear en Meta
+  una conversión personalizada `Contact` con URL que contiene `/reservar`.
+- **Deduplicación de la cita:** el webhook manda `Lead` con `event_id` `cal-<uid>`; el navegador manda el mismo ID al
+  terminar la reserva en el calendario flotante, así Meta los une y suma la señal del navegador.
+- **`package_name`** combina paquete y modalidad: «Básico · Solo foto», «Esencial · Estudio», etc. Hay un enlace por
+  modalidad; se muestra el que corresponde al selector.
+- **`ViewContent`**: la primera tarjeta de paquetes lleva `data-track-offer` en la home («Cobertura de eventos») y en
+  sesiones familiares («Sesiones familiares»).
+- **Formulario:** el navegador envía `_fbp` y `_fbc`; el servidor los agrega al `Lead` de Conversions API y usa como
+  `event_source_url` la página real del envío.
+- **`<noscript>` del Pixel** en las páginas nuevas, para navegadores sin JavaScript.
+- Google Tag Manager (`GTM-MKJXCMSL`) solo contiene Google Analytics; no carga el Pixel de Meta (revisado el 6 oct 2026).
+

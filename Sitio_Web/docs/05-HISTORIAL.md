@@ -221,3 +221,23 @@ Por solicitud del cliente se evolucionó la presentación:
 - La reserva confirmada en Cal.com llega como `Lead` y `Schedule` desde el webhook.
 - `tracking.js` pasa a `?v=20261004-dominio` en todas las páginas.
 - Detalle en `06-TRACKING.md`.
+
+## 18. Rediseño de la home y sesiones familiares — octubre de 2026
+
+- Nueva identidad visual (paletas Cielo aire y Bosque aire, logo «aa», confeti) en `index.html`,
+  `sesiones-familiares.html`, `privacidad.html`, `gracias/reunion.html` y `404.html`. Ver `03-DISENO.md`.
+- Nueva página `reservar.html` (/reservar): explica cómo reservar con dos opciones, llamada de 15 minutos
+  (calendario de Cal.com flotante) o WhatsApp, y cómo se confirma la reserva (50% de adelanto).
+  «Reservar mi fecha» (home) y «Reserva tu sesión» (sesiones) llevan ahí.
+- Home: bautizos, cumpleaños y sesión familiar; paquetes con selector Solo foto / Foto y video, sin tiempos de
+  entrega ni oferta de lanzamiento; FAQ de 5 preguntas; formulario con celular.
+- Sesiones familiares: exteriores, estudio y smash cake (próximamente); paquetes con selector Exteriores / Estudio,
+  todas las fotos con retoque básico y 12/20/30 con edición profesional; FAQ de 5 preguntas; formulario propio.
+- Fotos servidas desde Cloudinary (`res.cloudinary.com/kxitlq1g`, carpeta `landing/`) con `f_auto,q_auto`.
+- SEO: H1 con «Fotografía de eventos familiares en Lima», FAQPage y LocalBusiness en JSON-LD, canonical, sitemap y llms.txt actualizados.
+- Privacidad: suma Cloudinary y Google Tag Manager; fecha 6 de octubre de 2026.
+- Formulario: el servidor acepta «Sesión en exteriores», «Sesión en estudio» y «Smash cake», registra la página
+  real de envío y suma las cookies `_fbp`/`_fbc` al Lead de Conversions API.
+- Eventos: ver `06-TRACKING.md`, sección «Rediseño de octubre de 2026».
+- Sin botón flotante de WhatsApp en las páginas nuevas (decisión de Arian).
+

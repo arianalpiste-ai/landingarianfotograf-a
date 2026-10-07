@@ -1,5 +1,23 @@
 # Diseño: colores, tipografías y patrones
 
+## Rediseño 2026 (home, sesiones familiares, reservar, privacidad, gracias y 404)
+
+Desde octubre de 2026 estas seis páginas usan una identidad propia, colorida y pensada para familias:
+
+- **Paletas:** «Cielo aire» (azul `#1D4C8A`, celeste `#E6F1FC`, amarillo `#FFF1C9`) en la home y páginas generales;
+  «Bosque aire» (verde `#3D5A2A`, crema `#F7F6EC`, salvia `#E8EFDC`) en sesiones familiares. Se elige con
+  `data-theme` en `<html>`. Las secciones alternan blanco y color; la franja del portafolio no se toca.
+- **Tipografías:** Bricolage Grotesque (títulos) y DM Sans (texto).
+- **Logo:** iniciales «aa» (blanca y coral `#FF9A7E`) sobre un cuadrado redondeado del color de la paleta.
+- **Confeti:** decorativo; en celular aparece solo en los bordes para no tapar texto.
+- **Celular:** título antes que la foto; las filas de tarjetas (servicios, pasos, portafolio, paquetes) son carruseles con puntitos.
+- **Espacio entre secciones:** una sola variable, `--section-space`.
+- El CSS va dentro de cada página. La fuente editable está fuera del repo (carpeta del rediseño) y se integra con `integrar.py`.
+
+Blog, recursos y portafolio conservan por ahora el diseño anterior, descrito abajo.
+
+## Diseño anterior (blog, recursos, portafolio)
+
 Se conserva la identidad navy/dorado y la tipografía editorial del portafolio.
 
 - Fondo blanco y alterno `#f4f5f9`.
