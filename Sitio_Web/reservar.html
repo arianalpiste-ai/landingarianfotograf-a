@@ -716,7 +716,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const d=(e&&e.detail&&e.detail.data)||{}; const uid=d.uid||(d.booking&&d.booking.uid);
       if(!uid||sent.has(uid)) return; sent.add(uid);
       document.dispatchEvent(new CustomEvent('meta:lead',{detail:{eventId:'cal-'+uid,contentName:'Reunión Cal.com'}}));
+      goToThanks();
     };
+    // Sin redirección de pago en Cal.com: tras reservar, deja ver la confirmación unos segundos y lleva a /gracias/reunion,
+    // o de inmediato si la persona cierra la ventana flotante antes (se espera un instante para que salga el Lead).
+    let leaving=false;
+    const leave=delay=>{ if(leaving) return; leaving=true; setTimeout(()=>{ location.href='/gracias/reunion'; },delay); };
+    const modalOpen=()=>[...document.querySelectorAll('cal-modal-box')].some(m=>m.isConnected&&m.getAttribute('state')!=='closed'&&getComputedStyle(m).display!=='none'&&m.getClientRects().length>0);
+    function goToThanks(){
+      setTimeout(()=>leave(0),4000);
+      const watch=setInterval(()=>{ if(leaving) return clearInterval(watch); if(!modalOpen()){ clearInterval(watch); leave(400); } },300);
+    }
+    Cal.ns['15min']('on',{action:'__closeIframe',callback:()=>{ if(sent.size) leave(400); }});
     Cal.ns['15min']('on',{action:'bookingSuccessfulV2',callback:onBooked});
     Cal.ns['15min']('on',{action:'bookingSuccessful',callback:onBooked});
   })();
