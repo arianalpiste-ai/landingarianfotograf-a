@@ -483,6 +483,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .quote p{font-size:.92rem}
     .quote cite{font-size:.82rem}
   }
+  /* ===== iPad ===== */
+  .logo,.nav-cta .btn{white-space:nowrap}
+  @media (min-width:641px) and (max-width:1180px){.nav-cta{margin-left:auto}}
+  /* iPad horizontal / iPad Pro (981–1180 px): diseño de escritorio con menú ☰ y más margen */
+  @media (min-width:981px) and (max-width:1180px){
+    .wrap{padding:0 40px}
+    .nav-links,.nav-cta .btn-ghost{display:none}
+    .menu-btn{display:grid;place-items:center}
+    .hero-grid{gap:40px}
+    .hero-visual{max-width:440px}
+    .badge-1{left:-2%}
+    .badge-2{right:2%}
+    .services-card{padding:24px;gap:22px}
+    .plans{gap:18px}
+    .plan{padding:30px 24px}
+  }
+  /* iPad vertical (641–980 px): portada centrada, carruseles de 2 tarjetas y anchos moderados */
+  @media (min-width:641px) and (max-width:980px){
+    :root{--section-space:96px}
+    .wrap{padding:0 40px}
+    .hero{min-height:0;display:block;padding:40px 0 var(--section-space)}
+    .hero-grid{display:flex;flex-direction:column;align-items:stretch;gap:0}
+    .hero-grid > .reveal:first-child{display:contents}
+    .hero .eyebrow{order:1;align-self:center}
+    .hero .hero-title{order:2;text-align:center}
+    .hero-visual{order:3;max-width:380px;margin:36px auto 32px;align-self:center}
+    .hero .lead{order:4;text-align:center;margin:0 auto 28px;max-width:56ch}
+    .hero .hero-actions{order:5;justify-content:center}
+    .hero-stats{order:6;justify-content:center;gap:48px}
+    .hero-stats > div{text-align:center}
+    /* Servicios y paquetes: carrusel con 2 tarjetas a la vista */
+    .services-card{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 40px;background:none;box-shadow:none;border-radius:0;padding:6px 40px 22px;margin:40px -40px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .services-card::-webkit-scrollbar{display:none}
+    .services-card .service{flex:0 0 46%;scroll-snap-align:start;background:var(--white);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .plans{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 40px;padding:22px 40px 22px;margin:28px -40px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch}
+    .plans::-webkit-scrollbar{display:none}
+    .plans .plan{flex:0 0 46%;scroll-snap-align:start;padding:28px 24px}
+    .plan:hover{transform:none}
+    .carousel-dots{display:flex}
+    /* Testimonios y Sobre mí: columnas centradas, sin ocupar todo el ancho */
+    .quote-photo{width:100%;max-width:560px;justify-self:center}
+    .quote-list{width:100%;max-width:560px;justify-self:center}
+    .about-visual{max-width:360px}
+    .about .lead,.about .checklist{max-width:620px}
+  }
 </style>
 </head>
 <body>
