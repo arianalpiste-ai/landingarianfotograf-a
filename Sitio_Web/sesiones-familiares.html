@@ -547,6 +547,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .price-promo{display:flex;align-items:center;gap:8px;margin:-2px 0 8px;font-size:.9rem;color:var(--ink-soft)}
   .price-promo b{color:var(--coral);font-family:var(--font-head);font-size:1.05rem}
   .price-promo .promo-tag{font-size:.68rem;padding:2px 7px}
+  .service-meta s{color:var(--ink-soft);opacity:.7;font-size:.85em;margin-right:4px}
   .money-promo{display:block;font-size:.78rem;font-weight:700;color:var(--coral);white-space:nowrap}
   @media (max-width:640px){
     .promo-bar{font-size:.82rem}
@@ -709,13 +710,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="service-img"><img src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_800/landing/servicio-sesion-exteriores-lima" alt="Sesión de fotos familiar en exteriores en Lima: una mamá levanta a su bebé frente a un tipi con vista al mar" loading="lazy" width="800" height="533"><span class="service-tag" style="background:var(--green-600)"><svg width="18" height="18"><use href="#i-sun"/></svg></span></div>
           <h3>Sesión en exteriores</h3>
           <p>Luz natural y espacio para que los peques se muevan. En parques de Lima o en la playa, también al atardecer.</p>
-          <div class="service-meta"><span>desde <strong>S/ 320</strong></span><a href="#paquetes">Ver más →</a></div>
+          <div class="service-meta"><span>desde <s>S/ 320</s><strong>S/ 256</strong></span><a href="#paquetes">Ver más →</a></div>
         </article>
         <article class="service">
           <div class="service-img"><img src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_800/landing/referencia-sesion-estudio-familiar" alt="Sesión de fotos familiar en estudio: papá, mamá y su hija frente a un fondo gris" loading="lazy" width="800" height="1200" style="object-position:45% 55%"><span class="service-tag" style="background:var(--sky)"><svg width="18" height="18"><use href="#i-camera"/></svg></span><span class="ref-tag">Foto de referencia</span></div>
           <h3>Sesión en estudio</h3>
           <p>Fondo limpio, luz controlada y sin depender del clima. Ideal con bebés, con abuelos o en días de garúa.</p>
-          <div class="service-meta"><span>desde <strong>S/ 470</strong></span><a href="#paquetes">Ver más →</a></div>
+          <div class="service-meta"><span>desde <s>S/ 470</s><strong>S/ 376</strong></span><a href="#paquetes">Ver más →</a></div>
         </article>
         <article class="service">
           <div class="service-img"><img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=700&h=580&fit=crop" alt="Bebé durmiendo envuelto en una manta" loading="lazy" width="700" height="580"><span class="service-tag" style="background:var(--berry)"><svg width="18" height="18"><use href="#i-cake"/></svg></span><span class="ref-tag">Foto de referencia</span></div>
@@ -1072,7 +1073,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script>
   // Aviso de promoción: se apaga solo al terminar; se puede cerrar y no vuelve a salir en esta visita
   (function(){
-    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){ document.querySelectorAll('.promo-bar,.price-promo').forEach(e=>e.remove()); return; }
+    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){
+      document.querySelectorAll('.promo-bar,.price-promo,.money-promo').forEach(e=>e.remove());
+      // «desde S/ 450 S/ 350» vuelve a «desde S/ 450»
+      document.querySelectorAll('.service-meta s').forEach(s=>{ const st=s.nextElementSibling; if(st) st.textContent=s.textContent; s.remove(); });
+      return;
+    }
     const bar=document.querySelector('.promo-bar'); if(!bar) return;
     try{ if(sessionStorage.getItem('promo-cerrado')) bar.hidden=true }catch(e){}
     bar.querySelector('.promo-close').addEventListener('click',()=>{ bar.hidden=true; try{sessionStorage.setItem('promo-cerrado','1')}catch(e){} });

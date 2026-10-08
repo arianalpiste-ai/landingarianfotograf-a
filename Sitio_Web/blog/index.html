@@ -42,6 +42,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .price-promo{display:flex;align-items:center;gap:8px;margin:-2px 0 8px;font-size:.9rem;color:var(--ink-soft)}
   .price-promo b{color:var(--coral);font-family:var(--font-head);font-size:1.05rem}
   .price-promo .promo-tag{font-size:.68rem;padding:2px 7px}
+  .service-meta s{color:var(--ink-soft);opacity:.7;font-size:.85em;margin-right:4px}
   .money-promo{display:block;font-size:.78rem;font-weight:700;color:var(--coral);white-space:nowrap}
   @media (max-width:640px){
     .promo-bar{font-size:.82rem}
@@ -261,7 +262,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script>
   // Aviso de promoción: se apaga solo al terminar; se puede cerrar y no vuelve a salir en esta visita
   (function(){
-    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){ document.querySelectorAll('.promo-bar,.price-promo').forEach(e=>e.remove()); return; }
+    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){
+      document.querySelectorAll('.promo-bar,.price-promo,.money-promo').forEach(e=>e.remove());
+      // «desde S/ 450 S/ 350» vuelve a «desde S/ 450»
+      document.querySelectorAll('.service-meta s').forEach(s=>{ const st=s.nextElementSibling; if(st) st.textContent=s.textContent; s.remove(); });
+      return;
+    }
     const bar=document.querySelector('.promo-bar'); if(!bar) return;
     try{ if(sessionStorage.getItem('promo-cerrado')) bar.hidden=true }catch(e){}
     bar.querySelector('.promo-close').addEventListener('click',()=>{ bar.hidden=true; try{sessionStorage.setItem('promo-cerrado','1')}catch(e){} });

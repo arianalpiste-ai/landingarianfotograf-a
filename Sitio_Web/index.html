@@ -539,6 +539,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .price-promo{display:flex;align-items:center;gap:8px;margin:-2px 0 8px;font-size:.9rem;color:var(--ink-soft)}
   .price-promo b{color:var(--coral);font-family:var(--font-head);font-size:1.05rem}
   .price-promo .promo-tag{font-size:.68rem;padding:2px 7px}
+  .service-meta s{color:var(--ink-soft);opacity:.7;font-size:.85em;margin-right:4px}
   .money-promo{display:block;font-size:.78rem;font-weight:700;color:var(--coral);white-space:nowrap}
   @media (max-width:640px){
     .promo-bar{font-size:.82rem}
@@ -701,19 +702,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="service-img"><img src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_800/landing/servicio-fotografia-bautizo-lima" alt="Fotografía de bautizo en Lima: padres con su bebé durante la ceremonia" loading="lazy" width="1900" height="1267"><span class="service-tag" style="background:var(--berry)"><svg width="18" height="18"><use href="#i-heart"/></svg></span></div>
           <h3>Bautizo</h3>
           <p>Un momento único para toda la familia. La ceremonia, los abrazos y esos detalles que no quieres olvidar.</p>
-          <div class="service-meta"><span>desde <strong>S/ 450</strong></span><a href="#paquetes">Ver más →</a></div>
+          <div class="service-meta"><span>desde <s>S/ 450</s><strong>S/ 350</strong></span><a href="#paquetes">Ver más →</a></div>
         </article>
         <article class="service">
           <div class="service-img"><img src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_800/landing/servicio-fotografia-cumpleanos-lima" alt="Fotografía de cumpleaños infantil en Lima: cumpleañera con sus amigas junto a la torta" loading="lazy" width="1900" height="1266"><span class="service-tag" style="background:var(--coral)"><svg width="18" height="18"><use href="#i-cake"/></svg></span></div>
           <h3>Cumpleaños</h3>
           <p>Fiestas infantiles y de adultos. La torta, los juegos, las risas… y videos listos para historias el mismo día.</p>
-          <div class="service-meta"><span>desde <strong>S/ 450</strong></span><a href="#paquetes">Ver más →</a></div>
+          <div class="service-meta"><span>desde <s>S/ 450</s><strong>S/ 350</strong></span><a href="#paquetes">Ver más →</a></div>
         </article>
         <article class="service">
           <div class="service-img"><img src="https://res.cloudinary.com/kxitlq1g/image/upload/f_auto,q_auto,c_limit,w_800/landing/servicio-sesion-familiar-lima" alt="Sesión de fotos familiar en Lima: bebé sonriendo junto a un oso de peluche al aire libre" loading="lazy" width="1200" height="800"><span class="service-tag" style="background:var(--sky)"><svg width="18" height="18"><use href="#i-users"/></svg></span></div>
           <h3>Sesión familiar</h3>
           <p>En exteriores o en estudio. Toda la familia junta, a su ritmo y sin poses forzadas.</p>
-          <div class="service-meta"><span>desde <strong>S/ 320</strong></span><a href="https://arianalpiste.com/sesiones-familiares" target="_blank" rel="noopener">Ver precios →</a></div>
+          <div class="service-meta"><span>desde <s>S/ 320</s><strong>S/ 256</strong></span><a href="https://arianalpiste.com/sesiones-familiares" target="_blank" rel="noopener">Ver precios →</a></div>
         </article>
       </div>
       <div class="carousel-dots" role="group" aria-label="Elegir sesión"><button aria-label="Bautizo" aria-current="true"></button><button aria-label="Cumpleaños"></button><button aria-label="Sesión familiar"></button></div>
@@ -1063,7 +1064,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script>
   // Aviso de promoción: se apaga solo al terminar; se puede cerrar y no vuelve a salir en esta visita
   (function(){
-    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){ document.querySelectorAll('.promo-bar,.price-promo').forEach(e=>e.remove()); return; }
+    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){
+      document.querySelectorAll('.promo-bar,.price-promo,.money-promo').forEach(e=>e.remove());
+      // «desde S/ 450 S/ 350» vuelve a «desde S/ 450»
+      document.querySelectorAll('.service-meta s').forEach(s=>{ const st=s.nextElementSibling; if(st) st.textContent=s.textContent; s.remove(); });
+      return;
+    }
     const bar=document.querySelector('.promo-bar'); if(!bar) return;
     try{ if(sessionStorage.getItem('promo-cerrado')) bar.hidden=true }catch(e){}
     bar.querySelector('.promo-close').addEventListener('click',()=>{ bar.hidden=true; try{sessionStorage.setItem('promo-cerrado','1')}catch(e){} });
