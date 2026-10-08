@@ -532,6 +532,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .form-status.is-success{color:var(--green-600)}
   .form-status.is-error{color:#C0392B}
   form button[aria-busy="true"]{opacity:.7;cursor:progress}
+
+  /* ===== Promoción temporal (promo.py) ===== */
+  .promo-bar{background:#FFF1C9;color:var(--ink);font-size:.9rem;border-bottom:1px solid #F5DFA0}
+  .promo-inner{display:flex;align-items:center;justify-content:center;gap:12px;min-height:42px;position:relative;padding-right:44px;padding-left:44px}
+  .promo-tag{flex:none;background:var(--coral);color:#fff;font-weight:800;font-size:.74rem;letter-spacing:.04em;border-radius:999px;padding:3px 9px}
+  .promo-text a{color:var(--green-700);font-weight:700;text-decoration:none;white-space:nowrap}
+  .promo-text a:hover{text-decoration:underline}
+  .promo-text .sm{display:none}
+  .promo-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;background:none;border-radius:50%;font-size:1.3rem;line-height:1;color:var(--ink-soft);cursor:pointer}
+  .promo-close:hover{background:rgba(0,0,0,.06)}
+  .promo-bar[hidden]{display:none}
+  /* Precio con descuento: una línea discreta bajo el precio normal */
+  .price-promo{display:flex;align-items:center;gap:8px;margin:-2px 0 8px;font-size:.9rem;color:var(--ink-soft)}
+  .price-promo b{color:var(--coral);font-family:var(--font-head);font-size:1.05rem}
+  .price-promo .promo-tag{font-size:.68rem;padding:2px 7px}
+  .money-promo{display:block;font-size:.78rem;font-weight:700;color:var(--coral);white-space:nowrap}
+  @media (max-width:640px){
+    .promo-bar{font-size:.82rem}
+    .promo-inner{gap:8px;min-height:38px;padding-left:12px;padding-right:40px;justify-content:flex-start}
+    .promo-text{white-space:nowrap}
+    .promo-text .lg{display:none}
+    .promo-text .sm{display:inline}
+    .promo-close{right:4px}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -610,6 +634,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
 </svg>
 
+<div class="promo-bar" role="note" aria-label="Promoción">
+  <div class="wrap promo-inner">
+    <span class="promo-tag">-20%</span>
+    <span class="promo-text"><span class="lg">Todo octubre: <b>20% de descuento</b> en todas las coberturas y sesiones, hasta el 31 de octubre.</span><span class="sm">Hasta el 31 de octubre.</span> <a href="#paquetes">Ver precios →</a></span>
+    <button class="promo-close" type="button" aria-label="Cerrar aviso">×</button>
+  </div>
+</div>
 <header>
   <nav class="wrap nav" aria-label="Principal">
     <a href="/" class="logo"><span class="logo-mark" aria-hidden="true"></span>Arian Alpiste</a>
@@ -769,6 +800,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="plan reveal" data-track-offer>
           <h3>Esencial</h3>
           <div class="price"><span class="x-only">S/ 320</span><span class="s-only">S/ 470</span><small> / sesión</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 256</b></span><span class="s-only"><b>S/ 376</b></span><span>en octubre</span></div>
           <p>La foto familiar actualizada.</p>
           <p class="plan-note"><span class="x-only">Pago único · en exteriores</span><span class="s-only">Pago único · alquiler del estudio incluido</span></p>
           <ul>
@@ -786,6 +818,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <span class="ribbon">Recomendado</span>
           <h3>Clásica</h3>
           <div class="price"><span class="x-only">S/ 450</span><span class="s-only">S/ 600</span><small> / sesión</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 360</b></span><span class="s-only"><b>S/ 480</b></span><span>en octubre</span></div>
           <p>La sesión completa.</p>
           <p class="plan-note"><span class="x-only">Pago único · en exteriores</span><span class="s-only">Pago único · alquiler del estudio incluido</span></p>
           <ul>
@@ -802,6 +835,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="plan reveal">
           <h3>Recuerdo</h3>
           <div class="price"><span class="x-only">S/ 720</span><span class="s-only">S/ 950</span><small> / sesión</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 576</b></span><span class="s-only"><b>S/ 760</b></span><span>en octubre</span></div>
           <p>La historia en un libro.</p>
           <p class="plan-note"><span class="x-only">Pago único · en exteriores</span><span class="s-only">Pago único · alquiler del estudio incluido</span></p>
           <ul>
@@ -1034,6 +1068,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     const go=()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>{ i.loading='eager'; });
     ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
   });
+</script>
+<script>
+  // Aviso de promoción: se apaga solo al terminar; se puede cerrar y no vuelve a salir en esta visita
+  (function(){
+    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){ document.querySelectorAll('.promo-bar,.price-promo').forEach(e=>e.remove()); return; }
+    const bar=document.querySelector('.promo-bar'); if(!bar) return;
+    try{ if(sessionStorage.getItem('promo-cerrado')) bar.hidden=true }catch(e){}
+    bar.querySelector('.promo-close').addEventListener('click',()=>{ bar.hidden=true; try{sessionStorage.setItem('promo-cerrado','1')}catch(e){} });
+  })();
 </script>
 <script src="/js/tracking.js?v=20261004-dominio" defer></script>
 </body>
