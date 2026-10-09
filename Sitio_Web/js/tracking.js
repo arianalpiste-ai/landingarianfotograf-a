@@ -29,11 +29,23 @@
     fbq.loaded = true;
     fbq.version = '2.0';
     fbq.queue = [];
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://connect.facebook.net/en_US/fbevents.js';
-    var firstScript = document.getElementsByTagName('script')[0];
-    firstScript.parentNode.insertBefore(script, firstScript);
+    // La cola (fbq) existe desde ya y guarda los eventos; el archivo de Meta se descarga después
+    // (primera interacción o 3 s tras la carga, ver el script del <head>) para no frenar la portada.
+    afterIdle(function () {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(script);
+    });
+  }
+
+  function afterIdle(fn) {
+    if (typeof window.__afterIdle === 'function') window.__afterIdle(fn); else fn();
+  }
+
+  // ¿El archivo de Meta ya llegó y procesó la cola? (fbevents.js define callMethod al cargar)
+  function pixelReady() {
+    return !isProduction || (typeof window.fbq === 'function' && typeof window.fbq.callMethod === 'function');
   }
 
   function send(method, name, parameters, id) {
@@ -139,5 +151,21 @@
       if (action === 'portfolio-click') trackCustom('PortfolioClick', parameters, eventId('portfolio-click'));
       if (action === 'blog-to-landing') trackCustom('BlogToLanding', parameters, eventId('blog-to-landing'));
     });
+
+    // Si el clic cambia de página en la misma pestaña (por ejemplo «Reservar mi fecha») y el archivo de Meta
+    // todavía no llegó, se espera un momento (máximo 1,2 s) para que el evento salga antes de navegar.
+    var sameTab = !link.target || link.target === '_self';
+    var href = link.getAttribute('href') || '';
+    if (sameTab && !pixelReady() && href.charAt(0) !== '#' && !link.hasAttribute('data-cal-link') &&
+        !event.defaultPrevented && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+      event.preventDefault();
+      if (typeof window.__tagsNow === 'function') window.__tagsNow();
+      var started = Date.now();
+      (function wait() {
+        if (pixelReady()) return setTimeout(function () { window.location.href = link.href; }, 300);
+        if (Date.now() - started > 1200) return (window.location.href = link.href);
+        setTimeout(wait, 50);
+      })();
+    }
   });
 })();

@@ -1,13 +1,21 @@
 <!doctype html>
 <html lang="es" data-theme="cielo-aire">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MKJXCMSL');</script>
-<!-- End Google Tag Manager -->
+<!-- Etiquetas diferidas: GTM (GA4) y el archivo del Meta Pixel se descargan con la primera interacción
+     (scroll, toque, tecla) o 3 s después de que carga la página, para no frenar la portada en celular.
+     El dataLayer y la cola del Pixel existen desde ya: ningún evento se pierde mientras la persona siga en la página. -->
+<script>
+window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+(function(w,d){
+  var q=[],done=false,ev=['scroll','pointerdown','keydown','touchstart'];
+  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); q.splice(0).forEach(function(f){f()}); }
+  w.__afterIdle=function(f){ done?f():q.push(f); };
+  w.__tagsNow=run;
+  ev.forEach(function(e){w.addEventListener(e,run,{passive:true})});
+  w.addEventListener('load',function(){ setTimeout(function(){ 'requestIdleCallback' in w?requestIdleCallback(run,{timeout:1500}):run(); },3000); });
+  w.__afterIdle(function(){ var j=d.createElement('script'); j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=GTM-MKJXCMSL'; d.head.appendChild(j); });
+})(window,document);
+</script>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -484,6 +492,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     bar.querySelector('.promo-close').addEventListener('click',()=>{ bar.hidden=true; try{sessionStorage.setItem('promo-cerrado','1')}catch(e){} });
   })();
 </script>
-<script src="/js/tracking.js?v=20261004-dominio" defer></script>
+<script src="/js/tracking.js?v=20261009-diferido" defer></script>
 </body>
 </html>
