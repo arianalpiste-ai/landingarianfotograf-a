@@ -300,6 +300,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* Reveal al hacer scroll */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
   .reveal.in{opacity:1;transform:none}
+  /* La primera sección (portada) se ve desde el primer pintado: sin esperar a los scripts ni a la animación */
+  main > section:first-of-type .reveal,main > article > section:first-of-type .reveal{opacity:1;transform:none;transition:none}
 
 
   /* ===== PALETAS =====
