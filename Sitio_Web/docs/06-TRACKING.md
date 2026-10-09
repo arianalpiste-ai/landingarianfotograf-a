@@ -146,3 +146,20 @@ Mismo `js/tracking.js`, mismos nombres de evento. Lo nuevo:
 del contenido → `blog-to-landing`. Todos llevan `data-source-article` con el slug del post y `data-track-location`
 según la zona (`article-hero`, `article-body`, `checklist`, `article-mid`, `author`, `article-end`, `header`, `footer`).
 Las páginas mantienen `data-content-type="article"` (ViewContent) y `blog-index` (BlogView).
+
+## Carga diferida de etiquetas (octubre de 2026, rendimiento móvil)
+
+Para bajar el LCP y el TBT en celular, GTM (que trae GA4) y el archivo `fbevents.js` del Meta Pixel ya no se
+descargan al abrir la página. El script del `<head>` (lo genera `integrar.py`) define `window.__afterIdle(fn)`, que
+ejecuta las cargas con lo primero que pase: la primera interacción (scroll, toque, tecla) o 3 s después de `load`
+(+ `requestIdleCallback`).
+
+- El `dataLayer` y la cola `fbq` existen desde el inicio: `init`, PageView, ViewContent, clics y el Lead del
+  formulario se encolan y salen cuando llega cada archivo. Mismos nombres de evento, parámetros y `eventID`.
+- Clics que cambian de página en la misma pestaña (por ejemplo «Reservar mi fecha» → /reservar) con el Pixel aún
+  sin cargar: `tracking.js` adelanta la carga (`window.__tagsNow`), espera a que Meta procese la cola (máximo 1,2 s)
+  y luego navega. WhatsApp y Cal.com abren otra pestaña/ventana y no necesitan esperar.
+- Probado en local con un ID de Pixel falso: PageView, Contact, InitiateCheckout, HighIntentLead (antes de navegar)
+  y Lead (con su eventID de deduplicación) llegan a `facebook.com/tr`.
+- Las páginas viejas (portafolio) siguen cargando GTM como antes; `tracking.js` carga el Pixel al instante si no
+  encuentra `__afterIdle`.
