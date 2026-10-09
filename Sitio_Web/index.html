@@ -32,16 +32,195 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Arian Alpiste Fotografía",
-  "description": "Fotografía de bautizos, cumpleaños infantiles, sesiones familiares y smash cake en Lima.",
-  "url": "https://arianalpiste.com/",
-  "image": "https://res.cloudinary.com/kxitlq1g/image/upload/f_jpg,q_auto,c_fill,g_faces,w_1200,h_630/landing/fotografia-bautizo-lima-hero",
-  "telephone": "+51989789691",
-  "email": "hola@arianalpiste.com",
-  "areaServed": "Lima, Perú",
-  "address": { "@type": "PostalAddress", "addressLocality": "Lima", "addressCountry": "PE" },
-  "sameAs": ["https://instagram.com/arianalpiste", "https://www.facebook.com/profile.php?id=61591928847612"]
+  "@graph": [
+    {
+      "@type": "Photographer",
+      "@id": "https://arianalpiste.com/#negocio",
+      "name": "Arian Alpiste Fotografía",
+      "url": "https://arianalpiste.com/",
+      "description": "Fotografía de bautizos, cumpleaños infantiles, sesiones familiares y smash cake en Lima. Fotos y videos para historias el mismo día.",
+      "image": "https://res.cloudinary.com/kxitlq1g/image/upload/f_jpg,q_auto,c_fill,g_faces,w_1200,h_630/landing/fotografia-bautizo-lima-hero",
+      "telephone": "+51989789691",
+      "email": "hola@arianalpiste.com",
+      "priceRange": "S/ 320 - S/ 1,400",
+      "currenciesAccepted": "PEN",
+      "paymentAccepted": "Yape, Plin, transferencia bancaria",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lima",
+        "addressCountry": "PE"
+      },
+      "areaServed": [
+        {
+          "@id": "https://arianalpiste.com/#zona"
+        },
+        {
+          "@type": "City",
+          "name": "Pueblo Libre"
+        },
+        {
+          "@type": "City",
+          "name": "San Miguel"
+        },
+        {
+          "@type": "City",
+          "name": "Magdalena del Mar"
+        }
+      ],
+      "knowsAbout": [
+        "Fotografía de bautizos",
+        "Fotografía de cumpleaños infantiles",
+        "Sesiones de fotos familiares",
+        "Smash cake"
+      ],
+      "founder": {
+        "@id": "https://arianalpiste.com/#arian"
+      },
+      "sameAs": [
+        "https://instagram.com/arianalpiste",
+        "https://www.facebook.com/profile.php?id=61591928847612",
+        "https://www.google.com/search?kgmid=/g/11zxjb2vq3"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cobertura de eventos familiares (bautizos y cumpleaños)",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Cobertura de eventos Básico, solo foto",
+            "price": "450",
+            "priceCurrency": "PEN",
+            "availability": "https://schema.org/InStock",
+            "url": "https://arianalpiste.com/#paquetes",
+            "description": "Cobertura fotográfica de bautizo o cumpleaños en Lima. Incluye videos para historias el mismo día y galería digital privada.",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cobertura de eventos Básico, solo foto",
+              "provider": {
+                "@id": "https://arianalpiste.com/#negocio"
+              },
+              "areaServed": {
+                "@id": "https://arianalpiste.com/#zona"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Cobertura de eventos Básico, foto y video",
+            "price": "650",
+            "priceCurrency": "PEN",
+            "availability": "https://schema.org/InStock",
+            "url": "https://arianalpiste.com/#paquetes",
+            "description": "Cobertura fotográfica de bautizo o cumpleaños en Lima. Incluye videos para historias el mismo día y galería digital privada.",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cobertura de eventos Básico, foto y video",
+              "provider": {
+                "@id": "https://arianalpiste.com/#negocio"
+              },
+              "areaServed": {
+                "@id": "https://arianalpiste.com/#zona"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Cobertura de eventos Estándar, solo foto",
+            "price": "600",
+            "priceCurrency": "PEN",
+            "availability": "https://schema.org/InStock",
+            "url": "https://arianalpiste.com/#paquetes",
+            "description": "Cobertura fotográfica de bautizo o cumpleaños en Lima. Incluye videos para historias el mismo día y galería digital privada.",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cobertura de eventos Estándar, solo foto",
+              "provider": {
+                "@id": "https://arianalpiste.com/#negocio"
+              },
+              "areaServed": {
+                "@id": "https://arianalpiste.com/#zona"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Cobertura de eventos Estándar, foto y video",
+            "price": "850",
+            "priceCurrency": "PEN",
+            "availability": "https://schema.org/InStock",
+            "url": "https://arianalpiste.com/#paquetes",
+            "description": "Cobertura fotográfica de bautizo o cumpleaños en Lima. Incluye videos para historias el mismo día y galería digital privada.",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cobertura de eventos Estándar, foto y video",
+              "provider": {
+                "@id": "https://arianalpiste.com/#negocio"
+              },
+              "areaServed": {
+                "@id": "https://arianalpiste.com/#zona"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Cobertura de eventos Premium, solo foto",
+            "price": "850",
+            "priceCurrency": "PEN",
+            "availability": "https://schema.org/InStock",
+            "url": "https://arianalpiste.com/#paquetes",
+            "description": "Cobertura fotográfica de bautizo o cumpleaños en Lima. Incluye videos para historias el mismo día y galería digital privada.",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cobertura de eventos Premium, solo foto",
+              "provider": {
+                "@id": "https://arianalpiste.com/#negocio"
+              },
+              "areaServed": {
+                "@id": "https://arianalpiste.com/#zona"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Cobertura de eventos Premium, foto y video",
+            "price": "1400",
+            "priceCurrency": "PEN",
+            "availability": "https://schema.org/InStock",
+            "url": "https://arianalpiste.com/#paquetes",
+            "description": "Cobertura fotográfica de bautizo o cumpleaños en Lima. Incluye videos para historias el mismo día y galería digital privada.",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cobertura de eventos Premium, foto y video",
+              "provider": {
+                "@id": "https://arianalpiste.com/#negocio"
+              },
+              "areaServed": {
+                "@id": "https://arianalpiste.com/#zona"
+              }
+            }
+          }
+        ]
+      },
+      "alternateName": "Arian Alpiste - Fotografía de Sesiones y Eventos"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://arianalpiste.com/#arian",
+      "name": "Arian Alpiste",
+      "jobTitle": "Fotógrafo",
+      "worksFor": {
+        "@id": "https://arianalpiste.com/#negocio"
+      },
+      "sameAs": [
+        "https://instagram.com/arianalpiste"
+      ]
+    },
+    {
+      "@type": "AdministrativeArea",
+      "@id": "https://arianalpiste.com/#zona",
+      "name": "Lima, Perú"
+    }
+  ]
 }
 </script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%231D4C8A'/><text x='32' y='45' text-anchor='middle' font-family='Arial Rounded MT Bold,Helvetica,Arial,sans-serif' font-weight='800' font-size='38' letter-spacing='-4'><tspan fill='white'>a</tspan><tspan fill='%23FF9A7E'>a</tspan></text></svg>">
