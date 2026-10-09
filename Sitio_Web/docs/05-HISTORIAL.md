@@ -252,3 +252,12 @@ Por solicitud del cliente se evolucionó la presentación:
   boda civil y aniversario.
 - `recursos/` se eliminó; `_redirects` manda `/recursos/*` al checklist con 301. Sitemap y `llms.txt` actualizados.
 - El blog no aparece en el menú ni en el pie de la home: es para tráfico orgánico.
+
+## 20. Portafolios retirados: retratos, paisaje y viajes, y documental — octubre de 2026
+
+- Se borraron `portafolios/retratos.html`, `paisaje-viajes.html` y `documental.html`, sus 131 imágenes
+  (`assets/images/retratos|paisaje|documental`, 18,2 MB) y sus listas en `assets/manifest.json`. Ninguna otra
+  página usaba esas fotos.
+- `_redirects` manda las 3 URLs (con y sin `.html`) a `/portafolio` con 301; `netlify.toml` también apunta ahí.
+- Fuera del sitemap y de `llms.txt`. Se quedan `/portafolio` (índice, con la sección Eventos familiares) y
+  `/portafolios/eventos-familiares`; el índice se reorganizará más adelante por tipo de evento.

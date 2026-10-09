@@ -9,12 +9,12 @@ Sitio_Web/
 │                          hero, por qué, 3 pasos, galería, lugares, testimonios,
 │                          paquetes por sesión, FAQ y cierre. CTA único: WhatsApp.
 ├── portafolio.html        Página de galería completa: hero-slideshow +
-│                          secciones Eventos / Retratos / Paisaje & Viajes / Documental.
+│                          sección Eventos familiares (se reorganizará por tipo de evento).
 ├── reservar.html         Cómo reservar: llamada (Cal.com flotante) o WhatsApp. Rediseño 2026.
 ├── privacidad.html        Información sobre datos, proveedores y medición.
 ├── 404.html               Página de error personalizada, sin conversiones.
 ├── blog/                  Índice, artículos SEO/GEO y checklist interactivo; blog.css compartido.
-├── _redirects             301 de /recursos/* al checklist del blog.
+├── _redirects             301 de /recursos/* al checklist del blog y de los portafolios retirados a /portafolio.
 ├── gracias/               Confirmaciones no indexables; no prueban compras.
 ├── css/style.css          Único stylesheet visual, compartido por todo el sitio.
 ├── js/main.js             Interfaz, galerías, navegación y formulario.
@@ -25,9 +25,6 @@ Sitio_Web/
 │   └── images/
 │       ├── hero/            hero_01.jpg … hero_08.jpg (slideshow del hero de portafolio.html)
 │       ├── eventos/          evento_NN.jpg (Bautizo, cumpleaños, etc.)
-│       ├── retratos/         retrato_NN.jpg
-│       ├── paisaje/          paisaje_NN.jpg
-│       ├── documental/       documental_NN.jpg
 │       ├── familias/         familia_NN.jpg + responsive/ (WebP 480/960) y la imagen
 │       │                      Open Graph de sesiones-familiares.html — no vienen del manifest.
 │       └── servicios/        imágenes propias de index.html (hero-blob, "sobre mí",

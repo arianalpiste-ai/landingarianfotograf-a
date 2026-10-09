@@ -2,7 +2,7 @@
 
 ## Fuente de verdad
 
-`assets/manifest.json` contiene las imágenes y su organización. Eventos y Retratos conservan grupos independientes; Paisaje y Documental son listas. No se mezclan personas o eventos entre grupos.
+`assets/manifest.json` contiene las imágenes y su organización: `hero` (slideshow de portafolio.html) y `eventos`, con grupos independientes. No se mezclan personas o eventos entre grupos. (Retratos, Paisaje y Documental se retiraron en octubre de 2026.)
 
 Cada imagen conserva `src`, `w`, `h` e incorpora:
 - `alt`: descripción visual de la fotografía.
@@ -12,7 +12,7 @@ Los originales JPEG se mantienen para el visor ampliado.
 
 ## Elegir las tres primeras fotografías
 
-Cada grupo de Eventos y Retratos tiene un array `featured` con hasta tres rutas completas, en el orden elegido. Paisaje y Documental usan `featured.paisaje` y `featured.documental` en la raíz del manifest.
+Cada grupo de Eventos tiene un array `featured` con hasta tres rutas completas, en el orden elegido.
 
 Ejemplo dentro del grupo Bautizo de Zoe:
 
