@@ -163,3 +163,10 @@ ejecuta las cargas con lo primero que pase: la primera interacción (scroll, toq
   y Lead (con su eventID de deduplicación) llegan a `facebook.com/tr`.
 - Las páginas viejas (portafolio) siguen cargando GTM como antes; `tracking.js` carga el Pixel al instante si no
   encuentra `__afterIdle`.
+
+### Ajuste: el Pixel carga antes que GTM (octubre de 2026)
+
+Para no perder PageViews de visitantes de anuncios que se van en pocos segundos, el Pixel tiene su propio
+disparador `window.__afterLoad(fn)`: corre en `load` + `requestIdleCallback` (timeout 800 ms; en Safari, 200 ms
+después de `load`) o con la primera interacción, lo que pase primero. GTM/GA4 sigue con `__afterIdle` (primera
+interacción o 3 s tras `load`). `__tagsNow` dispara ambos. Cola, nombres de eventos, parámetros y `eventID` no cambian.

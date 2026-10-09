@@ -30,8 +30,8 @@
     fbq.version = '2.0';
     fbq.queue = [];
     // La cola (fbq) existe desde ya y guarda los eventos; el archivo de Meta se descarga después
-    // (primera interacción o 3 s tras la carga, ver el script del <head>) para no frenar la portada.
-    afterIdle(function () {
+    // (al terminar la carga, máx. 0,8 s, o con la primera interacción; ver el script del <head>) para no frenar la portada.
+    afterLoad(function () {
       var script = document.createElement('script');
       script.async = true;
       script.src = 'https://connect.facebook.net/en_US/fbevents.js';
@@ -39,8 +39,12 @@
     });
   }
 
-  function afterIdle(fn) {
-    if (typeof window.__afterIdle === 'function') window.__afterIdle(fn); else fn();
+  // Carga del Pixel: usa el disparador propio del Pixel (__afterLoad); si la página no lo tiene, el general
+  // (__afterIdle); y en páginas sin carga diferida (portafolio), al instante.
+  function afterLoad(fn) {
+    if (typeof window.__afterLoad === 'function') window.__afterLoad(fn);
+    else if (typeof window.__afterIdle === 'function') window.__afterIdle(fn);
+    else fn();
   }
 
   // ¿El archivo de Meta ya llegó y procesó la cola? (fbevents.js define callMethod al cargar)
