@@ -170,3 +170,10 @@ Para no perder PageViews de visitantes de anuncios que se van en pocos segundos,
 disparador `window.__afterLoad(fn)`: corre en `load` + `requestIdleCallback` (timeout 800 ms; en Safari, 200 ms
 después de `load`) o con la primera interacción, lo que pase primero. GTM/GA4 sigue con `__afterIdle` (primera
 interacción o 3 s tras `load`). `__tagsNow` dispara ambos. Cola, nombres de eventos, parámetros y `eventID` no cambian.
+
+### Ajuste: GTM usa el mismo disparador que el Pixel (octubre de 2026)
+
+Un solo disparador para las dos etiquetas: `load` + `requestIdleCallback` (timeout 800 ms; Safari: 200 ms) o la
+primera interacción. `window.__afterLoad` y `window.__afterIdle` son la misma cola (se mantiene el nombre viejo por
+compatibilidad) y `run()` se ejecuta una sola vez, así que GTM y fbevents.js se insertan una única vez.
+GA4 agrupa sus envíos unos segundos (o los manda al cerrar la página): es su comportamiento normal.
