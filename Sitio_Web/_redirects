@@ -4,3 +4,11 @@
 /recursos/index.html                          /blog/checklist-fotos-para-tu-evento 301
 /recursos/checklist-fotos-para-tu-evento      /blog/checklist-fotos-para-tu-evento 301
 /recursos/checklist-fotos-para-tu-evento.html /blog/checklist-fotos-para-tu-evento 301
+
+# Portafolios retirados (octubre 2026): retratos, paisaje y viajes, y documental → índice del portafolio
+/portafolios/retratos                         /portafolio 301
+/portafolios/retratos.html                    /portafolio 301
+/portafolios/paisaje-viajes                   /portafolio 301
+/portafolios/paisaje-viajes.html              /portafolio 301
+/portafolios/documental                       /portafolio 301
+/portafolios/documental.html                  /portafolio 301

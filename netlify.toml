@@ -67,37 +67,37 @@
 
 [[redirects]]
   from = "/portafolios/retratos"
-  to = "https://arianalpiste.com/portafolios/retratos"
+  to = "https://arianalpiste.com/portafolio"
   status = 301
   force = true
 
 [[redirects]]
   from = "/portafolios/retratos.html"
-  to = "https://arianalpiste.com/portafolios/retratos"
+  to = "https://arianalpiste.com/portafolio"
   status = 301
   force = true
 
 [[redirects]]
   from = "/portafolios/paisaje-viajes"
-  to = "https://arianalpiste.com/portafolios/paisaje-viajes"
+  to = "https://arianalpiste.com/portafolio"
   status = 301
   force = true
 
 [[redirects]]
   from = "/portafolios/paisaje-viajes.html"
-  to = "https://arianalpiste.com/portafolios/paisaje-viajes"
+  to = "https://arianalpiste.com/portafolio"
   status = 301
   force = true
 
 [[redirects]]
   from = "/portafolios/documental"
-  to = "https://arianalpiste.com/portafolios/documental"
+  to = "https://arianalpiste.com/portafolio"
   status = 301
   force = true
 
 [[redirects]]
   from = "/portafolios/documental.html"
-  to = "https://arianalpiste.com/portafolios/documental"
+  to = "https://arianalpiste.com/portafolio"
   status = 301
   force = true
 
