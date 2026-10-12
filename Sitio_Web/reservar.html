@@ -584,6 +584,116 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .logo,.logo-mark{font-family:"Bricolage Grotesque",system-ui,sans-serif}
   .post-hero h1,.blog-hero h1,.book-hero h1,.legal-hero h1,.simple h1,.price-table .money,.tool-step .num,.confirm-step .n,.next-step .n,.num404{font-weight:600}
 
+  /* ===== PRECIOS EN /reservar (oct 2026): para que no tengan que preguntar por WhatsApp ===== */
+  .rprices{padding:8px 0 40px;background:#fff}
+  .rprices .head{text-align:center;margin-bottom:20px}
+  .rprices h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+  .rprices .tabs{margin-top:16px}
+  .rprices .modes{margin-top:10px;background:none;padding:0}
+  .rprices .modes button{min-height:40px;font-size:.88rem;border:1.5px solid var(--mint-200)}
+  .rprices .modes button[aria-pressed="true"]{border-color:var(--green-700)}
+  .rp-panel[hidden]{display:none}
+  .rp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:980px;margin:22px auto 0}
+  .rp-card{background:#fff;border:1.5px solid var(--mint-200);border-radius:var(--radius);padding:20px 22px;display:flex;flex-direction:column;gap:2px}
+  .rp-card.featured{border-color:var(--green-700)}
+  .rp-card h3{font-size:1.1rem}
+  .rp-card .price{font-family:var(--font-head);font-weight:600;font-size:1.9rem;color:var(--green-700);line-height:1.2;margin:4px 0 2px}
+  .rp-card .price small{font-size:.9rem;color:var(--ink-soft);font-weight:500}
+  .rp-card .incl{font-size:.9rem;color:var(--ink-soft);line-height:1.5;margin-top:4px}
+  .rp-panel[data-mode="foto"] .v-only,.rp-panel[data-mode="video"] .f-only,.rp-panel[data-mode="ext"] .s-only,.rp-panel[data-mode="est"] .x-only{display:none!important}
+  .rp-foot{text-align:center;margin-top:18px;font-size:.92rem;color:var(--ink-soft)}
+  .rp-foot a{color:var(--green-700);font-weight:600;text-decoration:none}
+  .rp-foot a:hover{text-decoration:underline}
+  @media(max-width:640px){
+    .rprices{padding:0 0 28px}
+    .rp-grid{grid-template-columns:1fr;gap:10px;margin-top:16px}
+    .rp-card{padding:14px 16px}
+    .rp-card .price{font-size:1.5rem}
+    .rprices .tabs button{font-size:.82rem;padding:0 12px}
+  }
+
+  /* ===== RESERVA EN 3 PASOS (oct 2026) ===== */
+  .stepper{list-style:none;padding:0;margin:0 auto 22px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-size:.86rem;color:var(--ink-soft)}
+  .stepper li{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;background:var(--mint-100);border:1px solid var(--mint-200)}
+  .stepper li span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--green-700);font-weight:600;font-size:.8rem;border:1px solid var(--mint-200)}
+  .stepper li.done{color:var(--green-700);font-weight:500}
+  .stepper li.done span,.stepper li.on span{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+  .stepper li.on{color:var(--ink);font-weight:500}
+  .rprices .lead{margin:8px auto 0;max-width:46ch}
+  .rp-card .btn{margin-top:14px;min-height:44px}
+  .rp-card.picked{border-color:var(--green-700);box-shadow:0 0 0 2px var(--green-700)}
+  .rp-changes{text-align:center;margin-top:22px;font-size:.95rem;color:var(--ink-soft)}
+  .rp-changes a{color:var(--green-700);font-weight:600}
+  .step3-head{text-align:center;margin-bottom:28px}
+  .step3-head h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+  .step3-head .lead{margin:10px auto 0;max-width:50ch}
+  .chosen{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px;padding:8px 16px;border-radius:12px;background:var(--mint-100);border:1px solid var(--mint-200);font-size:.95rem}
+  .chosen b{color:var(--green-700)}
+  .rp-nochoice{margin-top:10px;font-size:.92rem;color:var(--ink-soft)}
+  .rp-nochoice a{color:var(--green-700);font-weight:600}
+  .options{scroll-margin-top:var(--header-h)}
+  .rprices{scroll-margin-top:var(--header-h)}
+  @media(max-width:640px){
+    .stepper{gap:6px;font-size:.78rem}
+    .stepper li{padding:4px 10px 4px 4px}
+    .stepper li span{width:20px;height:20px;font-size:.72rem}
+  }
+
+  /* ===== ASISTENTE: un paso a la vez ===== */
+  .js-wizard #paso-2:not(.on),.js-wizard section.options:not(.on){display:none}
+  .js-wizard #paso-1:not(.on){display:none}
+  .rstep.enter,.options.enter{animation:stepIn 320ms cubic-bezier(.23,1,.32,1) both}
+  @keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.rstep.enter,.options.enter{animation:stepFade 200ms ease both}@keyframes stepFade{from{opacity:0}}}
+  .book-hero{padding-bottom:64px}
+  .date-box{max-width:380px;margin:26px auto 0;display:grid;gap:10px;text-align:left;background:#fff;border:1.5px solid var(--mint-200);border-radius:var(--radius);padding:22px}
+  .date-box > label{font-weight:500;font-size:.95rem}
+  .date-box input[type=date]{font:inherit;font-size:1.05rem;color:var(--ink);min-height:52px;padding:10px 14px;border:2px solid var(--mint-200);border-radius:var(--radius-sm);background:#fff;width:100%}
+  .date-box input[type=date]:focus{outline:none;border-color:var(--green-600)}
+  .date-box .nodate{display:flex;align-items:center;gap:10px;font-weight:400;font-size:.92rem;color:var(--ink-soft);min-height:44px;cursor:pointer}
+  .date-box .nodate input{width:20px;height:20px;accent-color:var(--green-700)}
+  .date-box .btn{margin-top:6px;width:100%}
+  .date-error{color:#C0392B;font-size:.88rem;margin:0}
+  .date-error[hidden]{display:none}
+  .pick-date,.back-link{margin-top:10px;font-size:.92rem;color:var(--ink-soft)}
+  .pick-date b{color:var(--ink)}
+  .pick-date a,.back-link a{color:var(--green-700);font-weight:600}
+  .chosen{flex-direction:column;align-items:center;gap:2px}
+  .rprices{padding-top:40px}
+  .options .step3-head{padding-top:8px}
+
+  /* Paso 2 ordenado: lista por paquete, aviso de que no se paga, pie único */
+  .rp-card .incl{list-style:none;padding:12px 0 0;margin:10px 0 0;border-top:1px solid var(--mint-200);display:grid;gap:7px;font-size:.92rem;color:var(--ink)}
+  .rp-card .incl li{position:relative;padding-left:18px;line-height:1.35}
+  .rp-card .incl li::before{content:"";position:absolute;left:2px;top:.5em;width:7px;height:7px;border-radius:50%;background:var(--green-600)}
+  .rp-card .btn{margin-top:auto}
+  .rp-card .incl{margin-bottom:16px}
+  .rp-note{max-width:620px;margin:18px auto 0;padding:12px 16px;border-radius:12px;background:#FFF6DB;border:1px solid #F5DFA0;font-size:.92rem;color:var(--ink);text-align:center;line-height:1.5}
+  .rp-note b{font-weight:600}
+  .rp-foot,.rp-changes{margin-top:10px}
+  .rp-panel .rp-foot{margin-top:20px}
+
+  .date-box .eyebrow{margin-bottom:0}
+  .date-box > label[for=fecha]{font-size:1.05rem;font-weight:600;color:var(--ink)}
+  .book-hero .lead{max-width:56ch;text-wrap:pretty}
+  .book-hero .lead.intro{font-size:clamp(1.15rem,2.2vw,1.35rem);line-height:1.5;color:var(--ink);font-weight:500;max-width:42ch;margin-top:14px}
+
+  /* Pasos de arriba: los ya hechos se pueden tocar para volver */
+  .stepper button{all:unset;display:flex;align-items:center;gap:8px;cursor:pointer;border-radius:999px;min-height:28px}
+  .stepper button:disabled{cursor:default}
+  .stepper button:focus-visible{outline:2px solid var(--green-700);outline-offset:4px}
+  .stepper li.done{transition:background-color .15s ease}
+  @media(hover:hover) and (pointer:fine){ .stepper li.done:hover{background:#fff} .stepper li.done:hover button{text-decoration:underline} }
+
+  /* Paquetes en celular: carrusel deslizable con puntitos */
+  .rp-dots{display:none}
+  @media(max-width:640px){
+    .rp-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;margin:16px -16px 0;padding:4px 16px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .rp-grid::-webkit-scrollbar{display:none}
+    .rp-card{flex:0 0 84%;scroll-snap-align:start}
+    .rp-dots{display:flex}
+  }
+
   /* ===== Promoción temporal (promo.py) ===== */
   .promo-bar{background:#FFF1C9;color:var(--ink);font-size:.9rem;border-bottom:1px solid #F5DFA0}
   .promo-inner{display:flex;align-items:center;justify-content:center;gap:12px;min-height:42px;position:relative;padding-right:44px;padding-left:44px}
@@ -610,6 +720,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   }
 </style>
 <script>
+  document.documentElement.classList.add('js-wizard');
   // /reservar toma los colores de la página de origen: verde (Bosque) si viene de sesiones familiares, azul (Cielo) si viene de eventos
   (function(){
     var q=new URLSearchParams(location.search).get('desde'), r='';
@@ -652,7 +763,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 <div class="promo-bar" role="note" aria-label="Promoción">
   <div class="wrap promo-inner">
     <span class="promo-tag">-20%</span>
-    <span class="promo-text"><span class="lg">Todo octubre: <b>20% de descuento</b> en todas las coberturas y sesiones, hasta el 31 de octubre.</span><span class="sm">Hasta el 31 de octubre.</span> <a href="/#paquetes">Ver precios →</a></span>
+    <span class="promo-text"><span class="lg">Todo octubre: <b>20% de descuento</b> en todas las coberturas y sesiones, hasta el 31 de octubre.</span><span class="sm">Hasta el 31 de octubre.</span> <a href="#precios">Ver precios →</a></span>
     <button class="promo-close" type="button" aria-label="Cerrar aviso">×</button>
   </div>
 </div>
@@ -668,7 +779,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     </ul>
     <div class="nav-cta">
       <a href="https://wa.link/4jqx34" class="btn btn-ghost" target="_blank" rel="noopener" data-track="contact" data-track-location="header" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>WhatsApp</a>
-      <a href="#opciones" class="btn btn-primary">Reservar<span class="hide-sm"> mi fecha</span></a>
+      <a href="#paso-1" class="btn btn-primary">Reservar<span class="hide-sm"> mi fecha</span></a>
     </div>
     <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><svg width="26" height="26"><use href="#i-menu"/></svg></button>
   </nav>
@@ -684,39 +795,138 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   </div>
 </header>
 <main>
-  <section class="book-hero" data-confetti="18">
-    <div class="wrap reveal">
-      <span class="eyebrow">Reserva tu fecha</span>
-      <h1>¿Cómo prefieres <span>reservar</span>?</h1>
-      <p class="lead">Elige la forma que te quede más cómoda. En las dos te cuento los paquetes, vemos la disponibilidad y separamos tu fecha.</p>
+  <section class="book-hero rstep" id="paso-1" data-confetti="18">
+    <div class="wrap">
+      <ol class="stepper" aria-label="Pasos para reservar"><li class="on"><button type="button" data-go="1"><span>1</span>Fecha</button></li><li><button type="button" data-go="2"><span>2</span>Paquete</button></li><li><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
+      <h1>¡Genial, reservemos tu <span data-txt="tipo">evento</span>!</h1>
+      <p class="lead intro">Solo necesito dos cosas: la fecha y el paquete que te gusta. Con eso te confirmo si ese día estoy libre.</p>
+      <div class="date-box">
+        <span class="eyebrow">Paso 1 de 3</span>
+        <label for="fecha">¿Para qué fecha es tu <span data-txt="tipo">evento</span>?</label>
+        <input type="date" id="fecha" name="fecha">
+        <label class="nodate"><input type="checkbox" id="sin-fecha"> Todavía no tengo la fecha exacta</label>
+        <p class="date-error" id="fecha-error" role="alert" hidden>Elige una fecha o marca que todavía no la tienes.</p>
+        <button type="button" class="btn btn-primary" id="ir-paso-2">Continuar</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="rprices rstep" id="paso-2" aria-labelledby="t-precios">
+    <div class="wrap">
+      <div class="head">
+        <ol class="stepper" aria-label="Pasos para reservar"><li class="done"><button type="button" data-go="1"><span>1</span>Fecha</button></li><li class="on"><button type="button" data-go="2"><span>2</span>Paquete</button></li><li class=""><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
+        <span class="eyebrow">Paso 2 de 3</span>
+        <h2 id="t-precios">Escoge tu paquete</h2>
+        <p class="pick-date">Fecha: <b data-sum-date></b> · <a href="#paso-1" data-go="1">Cambiar</a></p>
+        <div class="pills tabs" role="group" aria-label="Tipo de servicio">
+          <button type="button" aria-pressed="true" data-tab="eventos">Bautizos y cumpleaños</button>
+          <button type="button" aria-pressed="false" data-tab="sesiones">Sesiones familiares</button>
+        </div>
+      </div>
+
+      <div class="rp-panel" data-panel="eventos" data-mode="foto">
+        <div class="pills modes" role="group" aria-label="Tipo de paquete">
+          <button type="button" aria-pressed="true" data-mode="foto" data-label="Solo foto">Solo foto</button>
+          <button type="button" aria-pressed="false" data-mode="video" data-label="Foto y video">Foto y video</button>
+        </div>
+        <p class="rp-note"><b>Aquí no pagas nada.</b> Elegir un paquete solo me dice qué buscas para tu <span data-txt="tipo">evento</span>. El adelanto del 50% lo vemos recién cuando te confirme la fecha.</p>
+        <div class="rp-grid">
+          <div class="rp-card" data-name="Básico">
+            <h3>Básico</h3>
+            <div class="price"><span class="f-only">S/ 450</span><span class="v-only">S/ 650</span><small> / evento</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="f-only"><b>S/ 350</b></span><span class="v-only"><b>S/ 520</b></span><span>en octubre</span></div>
+            <ul class="incl"><li>2 horas de cobertura</li><li>50 fotos editadas</li><li>3 videos para historias el mismo día</li><li class="v-only">Reel resumen de 1 min</li></ul>
+            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Básico · Solo foto" data-value="450" data-currency="PEN">Elegir Básico</a>
+          </div>
+          <div class="rp-card featured" data-name="Estándar">
+            <h3>Estándar</h3>
+            <div class="price"><span class="f-only">S/ 600</span><span class="v-only">S/ 850</span><small> / evento</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="f-only"><b>S/ 480</b></span><span class="v-only"><b>S/ 680</b></span><span>en octubre</span></div>
+            <ul class="incl"><li>3 horas de cobertura</li><li>100 fotos editadas</li><li>5 videos para historias el mismo día</li><li class="v-only">Reel resumen de hasta 2 min</li></ul>
+            <a href="#opciones" class="btn btn-primary rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Estándar · Solo foto" data-value="600" data-currency="PEN">Elegir Estándar</a>
+          </div>
+          <div class="rp-card" data-name="Premium">
+            <h3>Premium</h3>
+            <div class="price"><span class="f-only">S/ 850</span><span class="v-only">S/ 1,400</span><small> / evento</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="f-only"><b>S/ 680</b></span><span class="v-only"><b>S/ 1,120</b></span><span>en octubre</span></div>
+            <ul class="incl"><li>Todo el evento</li><li>Fotos ilimitadas editadas</li><li>10 videos para historias el mismo día</li><li>Sesión previa y álbum impreso</li><li class="v-only">Reel resumen de hasta 3 min</li><li class="v-only">Video de 10 a 15 min</li></ul>
+            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Premium · Solo foto" data-value="850" data-currency="PEN">Elegir Premium</a>
+          </div>
+        </div>
+        <div class="carousel-dots rp-dots" role="group" aria-label="Elegir paquete"></div>
+        <p class="rp-foot">Todos incluyen galería digital privada. <a href="/#paquetes">Ver todo lo que incluye cada uno</a></p>
+      </div>
+
+      <div class="rp-panel" data-panel="sesiones" data-mode="ext" hidden>
+        <div class="pills modes" role="group" aria-label="Lugar de la sesión">
+          <button type="button" aria-pressed="true" data-mode="ext" data-label="Exteriores">Exteriores</button>
+          <button type="button" aria-pressed="false" data-mode="est" data-label="Estudio">Estudio</button>
+        </div>
+        <p class="rp-note"><b>Aquí no pagas nada.</b> Elegir un paquete solo me dice qué buscas para tu <span data-txt="tipo">evento</span>. El adelanto del 50% lo vemos recién cuando te confirme la fecha.</p>
+        <div class="rp-grid">
+          <div class="rp-card" data-name="Esencial">
+            <h3>Esencial</h3>
+            <div class="price"><span class="x-only">S/ 320</span><span class="s-only">S/ 470</span><small> / sesión</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 256</b></span><span class="s-only"><b>S/ 376</b></span><span>en octubre</span></div>
+            <ul class="incl"><li>45 minutos de sesión</li><li>12 fotos con edición profesional</li><li>Hasta 5 personas</li></ul>
+            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Esencial · Exteriores" data-value="320" data-currency="PEN">Elegir Esencial</a>
+          </div>
+          <div class="rp-card featured" data-name="Clásica">
+            <h3>Clásica</h3>
+            <div class="price"><span class="x-only">S/ 450</span><span class="s-only">S/ 600</span><small> / sesión</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 360</b></span><span class="s-only"><b>S/ 480</b></span><span>en octubre</span></div>
+            <ul class="incl"><li>60 minutos de sesión</li><li>20 fotos con edición profesional</li><li>Hasta 6 personas</li></ul>
+            <a href="#opciones" class="btn btn-primary rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Clásica · Exteriores" data-value="450" data-currency="PEN">Elegir Clásica</a>
+          </div>
+          <div class="rp-card" data-name="Recuerdo">
+            <h3>Recuerdo</h3>
+            <div class="price"><span class="x-only">S/ 720</span><span class="s-only">S/ 950</span><small> / sesión</small></div>
+          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 576</b></span><span class="s-only"><b>S/ 760</b></span><span>en octubre</span></div>
+            <ul class="incl"><li>90 minutos de sesión</li><li>30 fotos con edición profesional</li><li>7 personas o más</li><li>Photobook de tapa dura 15x20</li></ul>
+            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Recuerdo · Exteriores" data-value="720" data-currency="PEN">Elegir Recuerdo</a>
+          </div>
+        </div>
+        <div class="carousel-dots rp-dots" role="group" aria-label="Elegir paquete"></div>
+        <p class="rp-foot">Todas incluyen las fotos con retoque básico y galería digital. <a href="/sesiones-familiares#paquetes">Ver todo lo que incluye cada una</a></p>
+      </div>
+
+      <p class="rp-changes">¿Quieres cambiar algo de un paquete? <a href="https://wa.me/51989789691?text=Hola%20Arian%2C%20quiero%20reservar%20pero%20me%20gustar%C3%ADa%20cambiar%20algo%20de%20un%20paquete." target="_blank" rel="noopener" data-track="contact" data-track-location="reservar-package-changes" data-destination="whatsapp">Escríbeme por WhatsApp</a></p>
     </div>
   </section>
 
   <section class="options" id="opciones">
+    <div class="wrap step3-head">
+      <ol class="stepper" aria-label="Pasos para reservar"><li class="done"><button type="button" data-go="1"><span>1</span>Fecha</button></li><li class="done"><button type="button" data-go="2"><span>2</span>Paquete</button></li><li class="on"><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
+      <span class="eyebrow">Paso 3 de 3</span>
+      <h2 class="step3-title">¡Perfecto! ¿Por dónde prefieres que conversemos?</h2>
+      <p class="chosen"><span>Fecha: <b data-sum-date></b></span><span>Paquete: <b data-chosen-name></b> <span data-chosen-price></span></span></p>
+      <p class="lead step3-lead">Te confirmo si tu fecha está libre por llamada o por WhatsApp, como te quede mejor.</p>
+      <p class="back-link"><a href="#paso-2" data-go="2">Cambiar paquete</a></p>
+    </div>
     <div class="wrap options-grid">
       <article class="option main reveal">
         <span class="ribbon">Lo más rápido</span>
         <span class="ico" style="background:var(--green-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span>
         <h2>Agenda una llamada</h2>
-        <p>La forma más rápida y clara de resolver todo. En 15 minutos te explico los paquetes, vemos tu fecha y respondo todas tus dudas.</p>
+        <p>Una llamada corta para revisar tu paquete, confirmar la fecha y resolver lo que te falte saber.</p>
         <ul>
-          <li><svg><use href="#i-check"/></svg>Solo 15 minutos, gratis y sin compromiso</li>
-          <li><svg><use href="#i-check"/></svg>Eliges el día y la hora que te acomode</li>
-          <li><svg><use href="#i-check"/></svg>Sales de la llamada con todo claro</li>
+          <li><svg><use href="#i-check"/></svg>Dura 15 minutos y es gratis</li>
+          <li><svg><use href="#i-check"/></svg>Eliges el día y la hora en el calendario</li>
+          <li><svg><use href="#i-check"/></svg>Tu fecha y tu paquete ya me llegan anotados</li>
         </ul>
         <a href="https://cal.com/arian-alpiste-sarmiento-gzfq0v" data-cal-link="arian-alpiste-sarmiento-gzfq0v/15min" data-cal-namespace="15min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}' class="btn btn-primary" data-track="meeting-intent" data-track-location="reservar-call" data-destination="cal.com">Agendar mi llamada <svg><use href="#i-arrow"/></svg></a>
       </article>
       <article class="option reveal">
         <span class="ico" style="background:#25A35A"><svg><use href="#i-wa"/></svg></span>
         <h2>Escríbeme por WhatsApp</h2>
-        <p>Ideal si prefieres escribir. Respondo rápido, pero si estoy en una sesión o en un evento quizá no pueda contarte todos los detalles al momento.</p>
+        <p>Escríbeme si te queda más cómodo. Si estoy en una sesión o en un evento, te respondo apenas termine.</p>
         <ul>
-          <li><svg><use href="#i-check"/></svg>Te respondo apenas pueda</li>
-          <li><svg><use href="#i-check"/></svg>Perfecto para dudas puntuales</li>
-          <li><svg><use href="#i-check"/></svg>El mensaje ya va escrito, solo envíalo</li>
+          <li><svg><use href="#i-check"/></svg>El mensaje ya lleva tu fecha y tu paquete</li>
+          <li><svg><use href="#i-check"/></svg><span>Puedes mandarme fotos o ideas de tu <span data-txt="tipo">evento</span></span></li>
         </ul>
         <a href="https://wa.me/51989789691?text=Hola%20Arian%2C%20quiero%20reservar%20una%20fecha.%20%C2%BFMe%20cuentas%20la%20disponibilidad%3F" class="btn btn-ghost" target="_blank" rel="noopener" data-track="contact" data-track-location="reservar-whatsapp" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
       </article>
+    </div>
     </div>
     <div class="wrap"><div class="carousel-dots" role="group" aria-label="Elegir opción"><button aria-label="Agendar llamada" aria-current="true"></button><button aria-label="WhatsApp"></button></div></div>
   </section>
@@ -728,9 +938,9 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
         <h2>Así se confirma tu reserva</h2>
       </div>
       <div class="confirm-steps">
-        <div class="confirm-step reveal"><span class="n">1</span><div><b>Elegimos fecha y paquete</b><p>Vemos juntos el que mejor encaja con tu evento o sesión.</p></div></div>
+        <div class="confirm-step reveal"><span class="n">1</span><div><b>Te confirmo la fecha</b><p>Reviso mi agenda y te digo si ese día está libre.</p></div></div>
         <div class="confirm-step reveal"><span class="n">2</span><div><b>Separas tu fecha</b><p>Con el 50% de adelanto por Yape, Plin o transferencia. El saldo, el día de tu evento o sesión.</p></div></div>
-        <div class="confirm-step reveal"><span class="n">3</span><div><b>Preparamos todo</b><p>Te comparto tips y una guía para que el gran día todo fluya.</p></div></div>
+        <div class="confirm-step reveal"><span class="n">3</span><div><b>Preparamos todo</b><p>Te mando tips y una guía para preparar a los peques antes del día.</p></div></div>
       </div>
     </div>
   </section>
@@ -819,6 +1029,98 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     const update=()=>{const max=track.scrollWidth-track.clientWidth;let i=Math.round(track.scrollLeft/step());if(max>0&&track.scrollLeft>=max-4)i=cards.length-1;dots.forEach((d,j)=>d.setAttribute('aria-current',j===i))};
     track.addEventListener('scroll',()=>requestAnimationFrame(update),{passive:true});
     dots.forEach((d,i)=>d.addEventListener('click',()=>track.scrollTo({left:i*step(),behavior:'smooth'})));
+  })();
+
+  // Reserva en 3 pasos, uno a la vez: 1) fecha tentativa  2) paquete  3) por dónde conversar
+  (function(){
+    var sesiones=document.documentElement.getAttribute('data-theme')==='bosque-aire';
+    var tipo=sesiones?'sesión':'evento';
+    document.querySelectorAll('[data-txt="tipo"]').forEach(function(e){ e.textContent=tipo });
+    var s1=document.getElementById('paso-1'), s2=document.getElementById('paso-2'), s3=document.querySelector('section.options');
+    if(!s1||!s2||!s3) return;
+    var steps=[s1,s2,s3];
+    // Dentro del asistente, el contenido ya entra con su propia animación
+    steps.forEach(function(st){ st.querySelectorAll('.reveal').forEach(function(e){ e.classList.remove('reveal') }) });
+    var data={fecha:'', paquete:'', precio:''};
+    function go(n, scroll){
+      steps.forEach(function(st,i){ st.classList.toggle('on', i===n-1); st.classList.remove('enter') });
+      document.querySelectorAll('.stepper button').forEach(function(b){ b.disabled = +b.dataset.go >= n });
+      var cur=steps[n-1]; void cur.offsetWidth; cur.classList.add('enter');
+      if(scroll!==false){ var top=cur.getBoundingClientRect().top+scrollY-((document.querySelector('header')||{}).offsetHeight||0); window.scrollTo({top:Math.max(0,top), behavior:'auto'}); }
+      var h=cur.querySelector('h1,h2'); if(h&&scroll!==false){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); }
+    }
+    s1.classList.add('on');
+    document.querySelectorAll('.stepper button').forEach(function(b){ b.disabled = true });
+    document.querySelectorAll('[data-go]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); go(+a.dataset.go) }) });
+    // Paso 1: fecha
+    var inp=document.getElementById('fecha'), none=document.getElementById('sin-fecha'), err=document.getElementById('fecha-error');
+    var t=new Date(); inp.min=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
+    none.addEventListener('change', function(){ inp.disabled=none.checked; if(none.checked) inp.value=''; err.hidden=true });
+    inp.addEventListener('input', function(){ err.hidden=true });
+    function fechaTexto(v){
+      var d=new Date(v+'T12:00:00');
+      return d.toLocaleDateString('es-PE',{weekday:'long', day:'numeric', month:'long', year:'numeric'});
+    }
+    document.getElementById('ir-paso-2').addEventListener('click', function(){
+      if(!inp.value && !none.checked){ err.hidden=false; inp.focus(); return; }
+      data.fecha = none.checked ? 'por definir' : fechaTexto(inp.value);
+      document.querySelectorAll('[data-sum-date]').forEach(function(e){ e.textContent=data.fecha });
+      go(2);
+    });
+    // Paso 2: paquetes
+    var tabs=s2.querySelectorAll('[data-tab]'), panels=s2.querySelectorAll('[data-panel]');
+    function show(tb){ tabs.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.tab===tb) }); panels.forEach(function(p){ p.hidden=p.dataset.panel!==tb }); document.querySelectorAll('[data-txt="tipo"]').forEach(function(e){ e.textContent = tb==='sesiones' ? 'sesión' : 'evento' }) }
+    tabs.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.tab) }) });
+    if(sesiones) show('sesiones');
+    var VALUES={'Básico':{foto:450,video:650},'Estándar':{foto:600,video:850},'Premium':{foto:850,video:1400},'Esencial':{ext:320,est:470},'Clásica':{ext:450,est:600},'Recuerdo':{ext:720,est:950}};
+    function syncPanel(p){
+      var mode=p.dataset.mode, label=p.querySelector('.modes button[data-mode="'+mode+'"]').dataset.label;
+      p.querySelectorAll('.rp-pick').forEach(function(a){ var name=a.closest('.rp-card').dataset.name; a.dataset.package=name+' · '+label; a.dataset.value=String(VALUES[name][mode]) });
+    }
+    panels.forEach(function(p){
+      p.querySelectorAll('.modes button').forEach(function(b){ b.addEventListener('click', function(){
+        p.querySelectorAll('.modes button').forEach(function(x){ x.setAttribute('aria-pressed', x===b) });
+        p.dataset.mode=b.dataset.mode; syncPanel(p);
+      }) });
+      syncPanel(p);
+    });
+    // Carrusel de paquetes en celular: puntitos que siguen el deslizamiento
+    panels.forEach(function(p){
+      var grid=p.querySelector('.rp-grid'), dotsBox=p.querySelector('.rp-dots'); if(!grid||!dotsBox) return;
+      var cards=[].slice.call(grid.children);
+      cards.forEach(function(c,i){
+        var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label', c.dataset.name);
+        b.addEventListener('click', function(){ grid.scrollTo({left:c.offsetLeft-grid.offsetLeft-16, behavior:'smooth'}) });
+        dotsBox.appendChild(b);
+      });
+      var dots=[].slice.call(dotsBox.children);
+      function upd(){
+        var max=grid.scrollWidth-grid.clientWidth, step=(cards[1].offsetLeft-cards[0].offsetLeft)||1;
+        var i=Math.round(grid.scrollLeft/step); if(max>0&&grid.scrollLeft>=max-4) i=cards.length-1;
+        dots.forEach(function(d,j){ d.setAttribute('aria-current', j===i) });
+      }
+      grid.addEventListener('scroll', function(){ requestAnimationFrame(upd) }, {passive:true});
+      upd();
+    });
+    var wa=s3.querySelector('a[href*="wa.me/"]'), cal=s3.querySelector('[data-cal-link]');
+    s2.querySelectorAll('.rp-pick').forEach(function(a){ a.addEventListener('click', function(e){
+      e.preventDefault();  // el InitiateCheckout lo registra tracking.js igual
+      var card=a.closest('.rp-card'), panel=a.closest('.rp-panel');
+      s2.querySelectorAll('.rp-card').forEach(function(c){ c.classList.toggle('picked', c===card) });
+      var vis=function(sel){ return [].filter.call(card.querySelectorAll(sel), function(x){ return x.offsetParent!==null }).map(function(x){ return x.textContent.trim() })[0]||'' };
+      var normal=vis('.price > span'), oct=document.querySelector('.price-promo')? vis('.price-promo b') : '';
+      data.paquete=a.dataset.package; data.precio= oct ? oct+' en octubre (normal '+normal+')' : normal;
+      document.querySelector('[data-chosen-name]').textContent=data.paquete;
+      document.querySelector('[data-chosen-price]').textContent='· '+data.precio;
+      var kind = panel.dataset.panel==='sesiones' ? 'sesión' : 'evento';
+      var fechaMsg = data.fecha==='por definir' ? ' (todavía no tengo la fecha exacta)' : ' para el '+data.fecha;
+      var msg='Hola Arian, quiero reservar mi '+kind+fechaMsg+' con el paquete '+data.paquete+' ('+(oct?oct+' en octubre':normal)+'). ¿Me confirmas la disponibilidad?';
+      if(wa) wa.href='https://wa.me/51989789691?text='+encodeURIComponent(msg);
+      if(cal){ try{ var cfg=JSON.parse(cal.getAttribute('data-cal-config')||'{}'); cfg.notes='Paquete: '+data.paquete+' ('+(oct?oct+' en octubre':normal)+'). Fecha tentativa: '+data.fecha+'.'; cal.setAttribute('data-cal-config', JSON.stringify(cfg)); }catch(_){} }
+      go(3);
+    }) });
+    // El botón «Reservar» de la barra vuelve al inicio del asistente
+    document.querySelectorAll('header a[href="#paso-2"],header a[href="#paso-1"]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); go(s3.classList.contains('on')||s2.classList.contains('on')?(s3.classList.contains('on')?3:2):1) }) });
   })();
 
   // Cita confirmada en el calendario flotante → Lead en el navegador con el mismo ID que usa el webhook de Cal.com (cal-<uid>),
