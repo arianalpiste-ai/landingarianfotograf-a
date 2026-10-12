@@ -77,6 +77,17 @@
   trackStandard('PageView', {}, eventId('pageview'));
 
   var body = document.body;
+
+  // «Vio los precios»: la persona llegó a las tarjetas de paquetes de la landing o de Sesiones familiares.
+  // Se recuerda durante la visita (sessionStorage) para que también cuente si luego escribe desde otra página.
+  var PRICES_SEEN_KEY = 'arian_saw_prices';
+  function markPricesSeen() {
+    try { window.sessionStorage.setItem(PRICES_SEEN_KEY, '1'); } catch (e) {}
+  }
+  function pricesSeen() {
+    try { return window.sessionStorage.getItem(PRICES_SEEN_KEY) === '1'; } catch (e) { return false; }
+  }
+
   if (body.dataset.contentType === 'portfolio') {
     trackStandard('ViewContent', {
       content_name: body.dataset.contentName || 'Portafolio',
@@ -90,6 +101,7 @@
   if (body.dataset.contentType === 'service') {
     var offer = document.querySelector('[data-track-offer]');
     var sendOfferView = function () {
+      markPricesSeen();
       trackStandard('ViewContent', {
         content_name: body.dataset.contentName || 'Servicio',
         content_category: 'service',
@@ -140,6 +152,11 @@
       parameters.currency = link.dataset.currency || 'PEN';
     }
     if (link.dataset.sourceArticle) parameters.source_article = link.dataset.sourceArticle;
+    // Solo se informa donde tiene sentido: en las páginas de servicio (landing y sesiones), o en cualquier
+    // página si ya vio los precios antes en esta visita. Así «no» significa «escribió sin haber visto los precios».
+    if (body.dataset.contentType === 'service' || pricesSeen()) {
+      parameters.saw_prices = pricesSeen() ? 'yes' : 'no';
+    }
     if (body.dataset.contentType === 'service') {
       parameters.content_name = body.dataset.contentName || 'Servicio';
       parameters.content_category = 'service';
