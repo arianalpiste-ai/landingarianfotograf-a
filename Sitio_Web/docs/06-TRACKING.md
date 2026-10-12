@@ -10,7 +10,7 @@ al navegador.
 | Clic hacia Cal.com | `MeetingIntent` | Pixel, personalizado | `button_location`, `destination`, `page_path` | Un ID por clic |
 | Formulario aceptado | `Lead` | Pixel + CAPI | `content_name`; datos normalizados en servidor | Mismo `event_name` y `event_id` |
 | Reserva creada en Cal.com | `Lead` + `Schedule` | CAPI | Nombre del tipo de cita | UID de Cal.com como ID determinista, uno por evento |
-| Clic a WhatsApp | `Contact` | Pixel | Ubicación, destino y paquete si aplica | Un ID por clic |
+| Clic a WhatsApp | `Contact` | Pixel | Ubicación, destino, paquete si aplica y `saw_prices` | Un ID por clic |
 | Clic en “Reservar” | `Contact` + `InitiateCheckout` + `HighIntentLead` | Pixel, estándar + personalizado | Paquete, valor publicado, `PEN` | Un ID independiente por evento |
 | Los paquetes de la home entran en pantalla | `ViewContent` | Pixel | `content_name: Cobertura de eventos`, categoría `service`, tipo `pricing` | Una vez por documento |
 | Apertura de portafolio | `ViewContent` | Pixel | Categoría `portfolio` | Una vez por documento |
@@ -131,6 +131,13 @@ Mismo `js/tracking.js`, mismos nombres de evento. Lo nuevo:
   terminar la reserva en el calendario flotante, así Meta los une y suma la señal del navegador.
 - **`package_name`** combina paquete y modalidad: «Básico · Solo foto», «Esencial · Estudio», etc. Hay un enlace por
   modalidad; se muestra el que corresponde al selector.
+- **`saw_prices`** (`yes` / `no`, desde el 12 oct 2026): va en los eventos de clic de botón (`Contact`,
+  `InitiateCheckout`, `HighIntentLead`, `MeetingIntent`, etc.). Indica si la persona llegó a las tarjetas de paquetes
+  antes de hacer clic. `tracking.js` lo marca en `sessionStorage` (`arian_saw_prices`) cuando se dispara el `ViewContent`
+  de precios, así que también cuenta si luego escribe desde otra página de la misma visita. Solo se envía en páginas de
+  servicio (home y sesiones familiares) o, en cualquier página, si ya vio los precios antes; en el resto se omite, para
+  que `no` signifique «escribió sin haber visto los precios». No cambia nombres de evento, `eventID` ni conteo. Uso:
+  conversión personalizada en Meta `Contact` con `saw_prices` = `yes`. Los contactos anteriores a esa fecha no lo llevan.
 - **`ViewContent`**: la primera tarjeta de paquetes lleva `data-track-offer` en la home («Cobertura de eventos») y en
   sesiones familiares («Sesiones familiares»).
 - **Formulario:** el navegador envía `_fbp` y `_fbc`; el servidor los agrega al `Lead` de Conversions API y usa como
