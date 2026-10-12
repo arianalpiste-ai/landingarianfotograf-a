@@ -29,8 +29,8 @@
     /* Espacio entre secciones: cambia SOLO este valor y se ajusta toda la página */
     --section-space:clamp(96px,9vw,136px);
     --header-h:76px;
-    --font-head:"Bricolage Grotesque", system-ui, sans-serif;
-    --font-body:"DM Sans", system-ui, sans-serif;
+    --font-head:"Lexend Deca", system-ui, sans-serif;
+    --font-body:"Poppins", system-ui, sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -857,3 +857,13 @@
 .post-faq .faq-list{margin:24px auto 0}
 .post-faq details{background:#FFFFFF}
 .post-faq summary{font-family:var(--font-body);color:var(--ink)}
+
+
+  /* ===== LETRA (oct 2026): Lexend Deca en títulos + Poppins en textos, como referencia wedly.cl =====
+     El logo "aa Arian Alpiste" se queda en Bricolage. Los grosores bajan de 800/700 a 600. */
+  body{font-size:16px}
+  h1,h2,h3,.post-title{font-weight:600;letter-spacing:-.01em}
+  .plan .price,.sticker,.hero-stats strong,.badge-float b,.step::before{font-weight:600}
+  .btn,summary,.pills button,label{font-weight:500}
+  .logo,.logo-mark{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .post-hero h1,.blog-hero h1,.book-hero h1,.legal-hero h1,.simple h1,.price-table .money,.tool-step .num,.confirm-step .n,.next-step .n,.num404{font-weight:600}

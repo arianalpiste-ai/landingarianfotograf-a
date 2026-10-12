@@ -28,7 +28,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 <link rel="preconnect" href="https://connect.facebook.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Lexend+Deca:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     /* Paleta — inspirada en la referencia: menta + verde profundo + rosa + toques de confeti */
@@ -59,8 +59,8 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     /* Espacio entre secciones: cambia SOLO este valor y se ajusta toda la página */
     --section-space:clamp(96px,9vw,136px);
     --header-h:76px;
-    --font-head:"Bricolage Grotesque", system-ui, sans-serif;
-    --font-body:"DM Sans", system-ui, sans-serif;
+    --font-head:"Lexend Deca", system-ui, sans-serif;
+    --font-body:"Poppins", system-ui, sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -555,6 +555,15 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     .hero-stats{order:6;justify-content:center;gap:56px}
     .hero-stats > div{text-align:center}
   }
+
+  /* ===== LETRA (oct 2026): Lexend Deca en títulos + Poppins en textos, como referencia wedly.cl =====
+     El logo "aa Arian Alpiste" se queda en Bricolage. Los grosores bajan de 800/700 a 600. */
+  body{font-size:16px}
+  h1,h2,h3,.hero .hero-title{font-weight:600;letter-spacing:-.01em}
+  .plan .price,.sticker,.hero-stats strong,.badge-float b,.step::before{font-weight:600}
+  .btn,summary,.pills button,label{font-weight:500}
+  .logo,.logo-mark{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .post-hero h1,.blog-hero h1,.book-hero h1,.legal-hero h1,.simple h1,.price-table .money,.tool-step .num,.confirm-step .n,.next-step .n,.num404{font-weight:600}
 </style>
 </head>
 <body>
