@@ -756,12 +756,17 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .x-title b{color:var(--green-700)}
   .x-go{display:flex;width:100%;justify-content:center;margin-top:14px;min-height:50px}
   .x-free{text-align:center;font-size:.85rem;color:var(--ink-soft);margin:8px 0 0}
-  .svc-tabs{max-width:560px;margin:22px auto 0;gap:22px}
   #paso-2 .picker{margin-top:18px}
-  @media(max-width:480px){ .svc-tabs{gap:0} .svc-tabs button{flex:1 1 0;flex-direction:column;gap:4px;padding:8px 2px 10px;font-size:.92rem;white-space:nowrap} .hide-xs{display:none} }
   @media(hover:hover) and (pointer:fine){ button.xrow:not([aria-pressed="true"]):hover{border-color:#A9C6E8} .xstep button:not(:disabled):hover{background:var(--aqua)} }
   @media(max-width:520px){ .extras-pick{padding:12px;margin-bottom:8px} .xrow{padding:10px 12px;gap:10px} .xic{display:none} .xt b{font-size:.92rem} .xt small{font-size:.8rem} .xpr{font-size:.88rem} .xstep button{width:32px;height:32px} .xstep output{min-width:48px} }
   @media(prefers-reduced-motion:reduce){ .xrow,.xchk,.xchk svg,.xstep button{transition:none} }
+  /* Paso 1: qué se celebra */
+  .ev-q{margin:2px 0 0;font-weight:600;font-size:1.05rem;color:var(--ink)}
+  .ev-wrap{position:relative;margin-bottom:6px}
+  .ev-ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--green-700);color:#fff;pointer-events:none}
+  .ev-ic svg{width:18px;height:18px}
+  .ev-select{font:inherit;font-size:1.05rem;font-weight:500;color:var(--ink);min-height:54px;width:100%;padding:0 44px 0 54px;border:2px solid var(--mint-200);border-radius:var(--radius-sm);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231D4C8A' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center;-webkit-appearance:none;appearance:none;cursor:pointer}
+  .ev-select:focus{outline:none;border-color:var(--green-600)}
 </style>
 <script>
   document.documentElement.classList.add('js-wizard');
@@ -834,11 +839,24 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 <main>
   <section class="book-hero rstep" id="paso-1" data-confetti="18">
     <div class="wrap">
-      <ol class="stepper" aria-label="Pasos para reservar"><li class="on"><button type="button" data-go="1"><span>1</span>Fecha</button></li><li><button type="button" data-go="2"><span>2</span>Paquete</button></li><li><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
+      <ol class="stepper" aria-label="Pasos para reservar"><li class="on"><button type="button" data-go="1"><span>1</span>Evento</button></li><li><button type="button" data-go="2"><span>2</span>Paquete</button></li><li><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
       <h1>¡Genial, reservemos tu <span data-txt="tipo">evento</span>!</h1>
-      <p class="lead intro">Solo necesito dos cosas: la fecha y el paquete que te gusta. Con eso te confirmo si ese día estoy libre.</p>
+      <p class="lead intro">Cuéntame qué celebras y la fecha. Con eso te muestro los paquetes y te confirmo si ese día estoy libre.</p>
       <div class="date-box">
         <span class="eyebrow">Paso 1 de 3</span>
+        <label class="ev-q" for="evento">¿Qué vas a celebrar?</label>
+        <div class="ev-wrap"><span class="ev-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V13a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M4 16c1.3 0 1.3 1 2.7 1s1.3-1 2.6-1 1.3 1 2.7 1 1.3-1 2.7-1 1.3 1 2.6 1 1.4-1 2.7-1"/><path d="M2 21h20M8 11V8M12 11V8M16 11V8"/></svg></span>
+          <select id="evento" class="ev-select" aria-label="Qué vas a celebrar">
+            <option data-tab="eventos" data-event="cumple" data-label="Cumpleaños" data-phrase="un cumpleaños" selected>Cumpleaños</option>
+            <option data-tab="eventos" data-event="bautizo" data-label="Bautizo" data-phrase="un bautizo">Bautizo</option>
+            <option data-tab="eventos" data-event="cumple" data-label="Baby shower" data-phrase="un baby shower">Baby shower</option>
+            <option data-tab="eventos" data-event="cumple" data-label="Gender reveal" data-phrase="un gender reveal">Gender reveal</option>
+            <option data-tab="eventos" data-event="cumple" data-label="Aniversario" data-phrase="un aniversario">Aniversario</option>
+            <option data-tab="eventos" data-event="cumple" data-label="Otra celebración" data-phrase="otra celebración">Otra celebración</option>
+            <option data-tab="sesiones" data-label="Sesión familiar" data-phrase="una sesión">Sesión familiar</option>
+          </select>
+        </div>
+        <template data-ic="Cumpleaños"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V13a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M4 16c1.3 0 1.3 1 2.7 1s1.3-1 2.6-1 1.3 1 2.7 1 1.3-1 2.7-1 1.3 1 2.6 1 1.4-1 2.7-1"/><path d="M2 21h20M8 11V8M12 11V8M16 11V8"/></svg></template><template data-ic="Bautizo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9h4M12 7v5M14 22v-4a2 2 0 0 0-4 0v4"/><path d="M18 22V5.6a1 1 0 0 0-.55-.9l-4.56-2.27a2 2 0 0 0-1.78 0L6.55 4.72a1 1 0 0 0-.55.9V22"/><path d="m18 7 3.45 1.72a1 1 0 0 1 .55.9V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9.38a1 1 0 0 1 .55-.9L6 7"/></svg></template><template data-ic="Baby shower"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h.01M15 12h.01M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></svg></template><template data-ic="Gender reveal"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a6 6 0 0 0-6 6c0 4.2 3.4 7 6 7s6-2.8 6-7a6 6 0 0 0-6-6z"/><path d="m12 15-1 2h2zM12 17c0 2-2 3-1 5"/></svg></template><template data-ic="Aniversario"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></svg></template><template data-ic="Otra celebración"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 4 20M12 4l1.5 3.5L17 9l-3.5 1.5L12 14l-1.5-3.5L7 9l3.5-1.5zM19 2v4M21 4h-4"/></svg></template><template data-ic="Sesión familiar"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></template>
         <label for="fecha">¿Para qué fecha es tu <span data-txt="tipo">evento</span>?</label>
         <input type="date" id="fecha" name="fecha">
         <label class="nodate"><input type="checkbox" id="sin-fecha"> Todavía no tengo la fecha exacta</label>
@@ -851,15 +869,10 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   <section class="rprices rstep" id="paso-2" aria-labelledby="t-precios">
     <div class="wrap">
       <div class="head">
-        <ol class="stepper" aria-label="Pasos para reservar"><li class="done"><button type="button" data-go="1"><span>1</span>Fecha</button></li><li class="on"><button type="button" data-go="2"><span>2</span>Paquete</button></li><li class=""><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
+        <ol class="stepper" aria-label="Pasos para reservar"><li class="done"><button type="button" data-go="1"><span>1</span>Evento</button></li><li class="on"><button type="button" data-go="2"><span>2</span>Paquete</button></li><li class=""><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
         <span class="eyebrow">Paso 2 de 3</span>
         <h2 id="t-precios">Escoge tu paquete</h2>
-        <p class="pick-date">Fecha: <b data-sum-date></b> · <a href="#paso-1" data-go="1">Cambiar</a></p>
-        <div class="pick-tabs svc-tabs" role="group" aria-label="Qué vas a celebrar">
-          <button type="button" aria-pressed="true" data-tab="eventos" data-event="cumple"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V13a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M4 16c1.3 0 1.3 1 2.7 1s1.3-1 2.6-1 1.3 1 2.7 1 1.3-1 2.7-1 1.3 1 2.6 1 1.4-1 2.7-1"/><path d="M2 21h20M8 11V8M12 11V8M16 11V8M8 4.5a1 1 0 0 0 0 1.5M12 4.5a1 1 0 0 0 0 1.5M16 4.5a1 1 0 0 0 0 1.5"/></svg>Cumpleaños</button>
-          <button type="button" aria-pressed="false" data-tab="eventos" data-event="bautizo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 9h4M12 7v5M14 22v-4a2 2 0 0 0-4 0v4"/><path d="M18 22V5.6a1 1 0 0 0-.55-.9l-4.56-2.27a2 2 0 0 0-1.78 0L6.55 4.72a1 1 0 0 0-.55.9V22"/><path d="m18 7 3.45 1.72a1 1 0 0 1 .55.9V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9.38a1 1 0 0 1 .55-.9L6 7"/></svg>Bautizo</button>
-          <button type="button" aria-pressed="false" data-tab="sesiones"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Sesión<span class="hide-xs"> familiar</span></span></button>
-        </div>
+        <p class="pick-date"><b data-sum-event>Cumpleaños</b> · Fecha: <b data-sum-date></b> · <a href="#paso-1" data-go="1">Cambiar</a></p>
       </div>
 
       <div class="rp-panel" data-panel="eventos" data-mode="foto" data-event="cumple">
@@ -965,7 +978,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 
   <section class="options" id="opciones">
     <div class="wrap step3-head">
-      <ol class="stepper" aria-label="Pasos para reservar"><li class="done"><button type="button" data-go="1"><span>1</span>Fecha</button></li><li class="done"><button type="button" data-go="2"><span>2</span>Paquete</button></li><li class="on"><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
+      <ol class="stepper" aria-label="Pasos para reservar"><li class="done"><button type="button" data-go="1"><span>1</span>Evento</button></li><li class="done"><button type="button" data-go="2"><span>2</span>Paquete</button></li><li class="on"><button type="button" data-go="3"><span>3</span>Conversar</button></li></ol>
       <span class="eyebrow">Paso 3 de 3</span>
       <h2 class="step3-title">¡Perfecto! ¿Por dónde prefieres que conversemos?</h2>
       <p class="chosen"><span>Fecha: <b data-sum-date></b></span><span>Paquete: <b data-chosen-name></b> <span data-chosen-price></span></span></p>
@@ -1137,17 +1150,19 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
       go(2);
     });
     // Paso 2: paquetes
-    var tabs=s2.querySelectorAll('[data-tab]'), panels=s2.querySelectorAll('[data-panel]');
+    var evSel=document.getElementById('evento'), tabs=evSel.querySelectorAll('option'), panels=s2.querySelectorAll('[data-panel]'), evOpt=evSel.options[0];
     function show(tb){ panels.forEach(function(p){ p.hidden=p.dataset.panel!==tb }); document.querySelectorAll('[data-txt="tipo"]').forEach(function(e){ e.textContent = tb==='sesiones' ? 'sesión' : 'evento' }) }
     function pickTab(b){
-      tabs.forEach(function(x){ x.setAttribute('aria-pressed', x===b) });
+      evSel.value=b.value; evOpt=b;
+      var t=document.querySelector('template[data-ic="'+b.dataset.label+'"]'), ic=document.querySelector('.ev-ic'); if(t&&ic) ic.innerHTML=t.innerHTML;
       show(b.dataset.tab);
+      document.querySelectorAll('[data-sum-event]').forEach(function(e){ e.textContent=b.dataset.label });
       if(b.dataset.event){ var p=s2.querySelector('[data-panel="eventos"]'); p.dataset.event=b.dataset.event; var g=p.querySelector('.rp-grid'); if(g) g.scrollLeft=0; if(p._carouselUpd) p._carouselUpd(); }
       if(typeof resetPick==='function') resetPick();
       if(typeof alignCards==='function') setTimeout(alignCards,0);
     }
-    tabs.forEach(function(b){ b.addEventListener('click', function(){ pickTab(b) }) });
-    if(sesiones) pickTab(s2.querySelector('[data-tab="sesiones"]'));
+    evSel.addEventListener('change', function(){ pickTab(evSel.options[evSel.selectedIndex]) });
+    pickTab(sesiones ? evSel.querySelector('[data-tab="sesiones"]') : evSel.options[evSel.selectedIndex]);
     var VALUES={'Mini':{foto:170,video:240},'Básico':{foto:250,video:380},'Estándar':{foto:330,video:550},'Premium':{foto:410,video:720},'Esencial':{ext:320,est:470},'Clásica':{ext:450,est:600},'Recuerdo':{ext:720,est:950}};
     function syncPanel(p){
       var mode=p.dataset.mode, label=p.querySelector('.modes button[data-mode="'+mode+'"]').dataset.label;
@@ -1208,7 +1223,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
         document.getElementById('x-sum').textContent='Total '+soles(total);
       }
       var fechaMsg = data.fecha==='por definir' ? ' (todavía no tengo la fecha exacta)' : ' para el '+data.fecha;
-      var msg='Hola Arian, quiero reservar '+(data.kind==='sesión'?'una ':'un ')+data.kind+fechaMsg+' con el paquete '+data.pkg+' ('+data.precioTxt+')';
+      var msg='Hola Arian, quiero reservar '+data.kindPhrase+fechaMsg+' con el paquete '+data.pkg+' ('+data.precioTxt+')';
       if(ex.length) msg+='. Le sumo: '+ex.map(function(e){ return e[0] }).join(', ')+'. Total: '+soles(total);
       msg+='. ¿Me confirmas la disponibilidad?';
       if(wa){ wa.href='https://wa.me/51989789691?text='+encodeURIComponent(msg); }
@@ -1216,6 +1231,8 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
       if(cal){ try{ var cfg=JSON.parse(cal.getAttribute('data-cal-config')||'{}'); cfg.notes='Paquete: '+data.paquete+' ('+data.precioTxt+')'+(ex.length?'. Extras: '+ex.map(function(e){return e[0]}).join(', ')+'. Total: '+soles(total):'')+'. Fecha tentativa: '+data.fecha+'.'; cal.setAttribute('data-cal-config', JSON.stringify(cfg)); }catch(_){} }
     }
     function resetPick(){ if(xbox) xbox.hidden=true; s2.querySelectorAll('.rp-card.picked').forEach(function(c){ c.classList.remove('picked') }); }
+    function evPhrase(p){ return evOpt.dataset.phrase }
+    function evLabel(p){ return evOpt.dataset.label }
     var xgo=document.getElementById('x-go'); if(xgo) xgo.addEventListener('click', function(){ go(3) });
     if(xbox){
       xbox.querySelectorAll('[data-x]').forEach(function(b){ b.addEventListener('click', function(){ var k=b.dataset.x; xs[k]=!xs[k]; b.setAttribute('aria-pressed', xs[k]); updateMsg() }) });
@@ -1227,10 +1244,11 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
       s2.querySelectorAll('.rp-card').forEach(function(c){ c.classList.toggle('picked', c===card) });
       var vis=function(sel){ return [].filter.call(card.querySelectorAll(sel), function(x){ return x.offsetParent!==null }).map(function(x){ return x.textContent.trim() })[0]||'' };
       var normal=vis('.price > span'), oct=document.querySelector('.price-promo')? vis('.price-promo b') : '';
-      data.paquete=a.dataset.package+(panel.dataset.panel==='eventos' ? ' · '+(panel.dataset.event==='cumple'?'Cumpleaños':'Bautizo') : ''); data.precio= oct ? oct+' en octubre (normal '+normal+')' : normal;
+      data.paquete=a.dataset.package+(panel.dataset.panel==='eventos' ? ' · '+evLabel(panel) : ''); data.precio= oct ? oct+' en octubre (normal '+normal+')' : normal;
       document.querySelector('[data-chosen-name]').textContent=data.paquete;
       document.querySelector('[data-chosen-price]').textContent='· '+data.precio;
       data.kind = panel.dataset.panel==='sesiones' ? 'sesión' : (panel.dataset.event==='cumple' ? 'cumpleaños' : 'bautizo');
+      data.kindPhrase = panel.dataset.panel==='sesiones' ? 'una sesión' : evPhrase(panel);
       data.pkg=a.dataset.package; data.precioTxt=(oct?oct+' en octubre':normal); data.base=Number(a.dataset.value)||0; data.video=panel.dataset.mode==='video';
       xs.time=0; xs.print=0; xs.book=false; xs.usb=false;
       if(xbox){ xbox.querySelectorAll('[data-x]').forEach(function(b){ b.setAttribute('aria-pressed','false') }); }
