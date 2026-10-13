@@ -624,6 +624,10 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .rp-card.picked{border-color:var(--green-700);box-shadow:0 0 0 2px var(--green-700)}
   .rp-changes{text-align:center;margin-top:22px;font-size:.95rem;color:var(--ink-soft)}
   .rp-changes a{color:var(--green-700);font-weight:600}
+  .rp-changes.nocharge{display:flex;align-items:center;gap:12px;max-width:560px;margin:26px auto 0;padding:14px 18px;border-radius:16px;background:#EEF6FD;border:1.5px solid #B9D6F2;color:var(--ink);text-align:left;font-size:.95rem;line-height:1.45}
+  .nocharge b{display:block;color:var(--green-700);font-weight:600;font-size:1rem}
+  .nc-ic{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--green-700);color:#fff}
+  @media(max-width:520px){ .rp-changes.nocharge{margin:20px 0 0;padding:12px 14px;font-size:.9rem} }
   .step3-head{text-align:center;margin-bottom:28px}
   .step3-head h2{font-size:clamp(1.6rem,3vw,2.2rem)}
   .step3-head .lead{margin:10px auto 0;max-width:50ch}
@@ -699,30 +703,65 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     .rp-dots{display:flex}
   }
 
-  /* ===== Promoción temporal (promo.py) ===== */
-  .promo-bar{background:#FFF1C9;color:var(--ink);font-size:.9rem;border-bottom:1px solid #F5DFA0}
-  .promo-inner{display:flex;align-items:center;justify-content:center;gap:12px;min-height:42px;position:relative;padding-right:44px;padding-left:44px}
-  .promo-tag{flex:none;background:var(--coral);color:#fff;font-weight:800;font-size:.74rem;letter-spacing:.04em;border-radius:999px;padding:3px 9px}
-  .promo-text a{color:var(--green-700);font-weight:700;text-decoration:none;white-space:nowrap}
-  .promo-text a:hover{text-decoration:underline}
-  .promo-text .sm{display:none}
-  .promo-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;background:none;border-radius:50%;font-size:1.3rem;line-height:1;color:var(--ink-soft);cursor:pointer}
-  .promo-close:hover{background:rgba(0,0,0,.06)}
-  .promo-bar[hidden]{display:none}
-  /* Precio con descuento: una línea discreta bajo el precio normal */
-  .price-promo{display:flex;align-items:center;gap:8px;margin:-2px 0 8px;font-size:.9rem;color:var(--ink-soft)}
-  .price-promo b{color:var(--coral);font-family:var(--font-head);font-size:1.05rem}
-  .price-promo .promo-tag{font-size:.68rem;padding:2px 7px}
-  .service-meta s{color:var(--ink-soft);opacity:.7;font-size:.85em;margin-right:4px}
-  .money-promo{display:block;font-size:.78rem;font-weight:700;color:var(--coral);white-space:nowrap}
-  @media (max-width:640px){
-    .promo-bar{font-size:.82rem}
-    .promo-inner{gap:8px;min-height:38px;padding-left:40px;padding-right:40px;justify-content:center}
-    .promo-text{white-space:nowrap}
-    .promo-text .lg{display:none}
-    .promo-text .sm{display:inline}
-    .promo-close{right:4px}
-  }
+  /* Bautizo / cumpleaños: mismos paquetes, cambia lo que cubre */
+  .rp-panel[data-event="bautizo"] .c-only,.rp-panel[data-event="cumple"] .b-only{display:none!important}
+  /* Selector igual al de la página principal: pestañas + cápsula foto/video */
+  .picker{max-width:440px;margin:22px auto 0;display:grid;gap:14px;justify-items:center}
+  .pick-tabs{display:flex;justify-content:center;gap:28px;width:100%;border-bottom:1.5px solid var(--mint-200)}
+  .pick-tabs button{position:relative;display:flex;align-items:center;gap:8px;padding:10px 4px 12px;border:0;background:none;font-family:var(--font-head);font-weight:600;font-size:1.1rem;color:var(--ink-soft);cursor:pointer;transition:color .2s cubic-bezier(.23,1,.32,1)}
+  .pick-tabs button::after{content:"";position:absolute;left:0;right:0;bottom:-1.5px;height:3px;border-radius:3px;background:var(--green-700);transform:scaleX(0);transition:transform .25s cubic-bezier(.23,1,.32,1)}
+  .pick-tabs button[aria-pressed="true"]{color:var(--green-700)}
+  .pick-tabs button[aria-pressed="true"]::after{transform:scaleX(1)}
+  .pick-modes{display:inline-flex;gap:4px;padding:4px;background:#F3F8FE;border-radius:999px}
+  .pick-modes button{display:flex;align-items:center;gap:7px;min-height:40px;padding:0 16px;border:0;border-radius:999px;background:transparent;font:inherit;font-size:.9rem;font-weight:500;color:var(--ink-soft);cursor:pointer;transition:background-color .2s cubic-bezier(.23,1,.32,1),color .2s cubic-bezier(.23,1,.32,1),box-shadow .2s cubic-bezier(.23,1,.32,1),transform .12s ease-out}
+  .pick-modes button[aria-pressed="true"]{background:#fff;color:var(--green-700);font-weight:600;box-shadow:0 2px 8px rgba(19,42,69,.12)}
+  .pick-modes button:active{transform:scale(.97)}
+  .picker svg{flex:none}
+  @media(hover:hover) and (pointer:fine){ .pick-tabs button:not([aria-pressed="true"]):hover{color:var(--ink)} .pick-modes button:not([aria-pressed="true"]):hover{background:rgba(29,76,138,.08)} }
+  @media(prefers-reduced-motion:reduce){ .pick-tabs button::after,.pick-modes button{transition:none} }
+  .rp-card .hours{align-self:flex-start;margin:4px 0 6px;padding:4px 10px;border-radius:8px;background:#EEF6FD;color:var(--green-700);font-size:.85rem;font-weight:500;white-space:nowrap}
+  .rp-card .plan-sub{color:var(--ink-soft);font-size:.9rem;line-height:1.4}
+  .rp-card .price{white-space:nowrap}
+  .rp-panel[data-event="bautizo"] .rp-grid{grid-template-columns:repeat(4,minmax(0,1fr));max-width:1180px}
+  .rp-panel[data-event="bautizo"] .rp-card{padding:20px 16px}
+  .rp-panel[data-event="bautizo"] .rp-card .hours{font-size:.78rem;padding:4px 8px}
+  @media(max-width:1100px) and (min-width:641px){ .rp-panel[data-event="bautizo"] .rp-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:720px} }
+  @media(max-width:640px){ .rp-panel[data-event="bautizo"] .rp-card .hours{font-size:.85rem} }
+  /* Extras en el paso 3 (solo bautizos y cumpleaños) */
+  .extras-pick{max-width:640px;margin:22px auto 0;scroll-margin-top:calc(var(--header-h,72px) + 16px);background:#fff;border:1.5px solid var(--mint-200);border-radius:var(--radius);padding:18px}
+  .x-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 12px;font-family:var(--font-head);font-weight:600;font-size:1.05rem;color:var(--ink)}
+  .x-title small{font-family:var(--font-body);font-weight:400;font-size:.85rem;color:var(--ink-soft)}
+  .xrow{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:1.5px solid var(--mint-200);border-radius:16px;background:#fff;text-align:left;font:inherit;color:var(--ink);transition:border-color .2s cubic-bezier(.23,1,.32,1),background-color .2s cubic-bezier(.23,1,.32,1),transform .12s ease-out}
+  button.xrow{cursor:pointer}
+  button.xrow:active{transform:scale(.99)}
+  .xrow + .xrow{margin-top:8px}
+  .xic{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:12px;background:#F3F8FE;color:var(--green-700);transition:background-color .2s ease,color .2s ease}
+  .xt{flex:1;min-width:0;line-height:1.3}
+  .xt b{display:block;font-weight:600;font-size:.96rem}
+  .xt small{display:block;font-size:.83rem;color:var(--ink-soft);margin-top:2px}
+  .xpr{font-family:var(--font-head);font-weight:600;font-size:.93rem;color:var(--green-700);white-space:nowrap}
+  .xchk{display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:8px;border:1.5px solid #B7CBE2;color:#fff;transition:background-color .2s ease,border-color .2s ease}
+  .xchk svg{opacity:0;transform:scale(.6);transition:opacity .15s ease-out,transform .2s cubic-bezier(.23,1,.32,1)}
+  .xrow[aria-pressed="true"],.xrow.has{border-color:var(--green-700);background:#F3F8FE}
+  .xrow[aria-pressed="true"] .xic,.xrow.has .xic{background:var(--green-700);color:#fff}
+  .xrow[aria-pressed="true"] .xchk{background:var(--green-700);border-color:var(--green-700)}
+  .xrow[aria-pressed="true"] .xchk svg{opacity:1;transform:none}
+  .xstep{display:flex;align-items:center;gap:2px;flex:none;border:1.5px solid var(--mint-200);border-radius:999px;padding:3px;background:#fff}
+  .xstep button{display:grid;place-items:center;width:34px;height:34px;border:0;border-radius:50%;background:#F3F8FE;color:var(--green-700);font:inherit;font-size:1.1rem;font-weight:600;cursor:pointer;transition:transform .12s ease-out}
+  .xstep button:active{transform:scale(.92)}
+  .xstep button:disabled{opacity:.35;cursor:default}
+  .xstep output{min-width:58px;text-align:center;font-size:.86rem;font-weight:600}
+  .x-total{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 2px 0;padding-top:14px;border-top:1px solid var(--mint-200);font-size:.9rem;color:var(--ink-soft)}
+  .x-total b{font-family:var(--font-head);font-weight:600;font-size:1.35rem;color:var(--green-700)}
+  .x-title b{color:var(--green-700)}
+  .x-go{display:flex;width:100%;justify-content:center;margin-top:14px;min-height:50px}
+  .x-free{text-align:center;font-size:.85rem;color:var(--ink-soft);margin:8px 0 0}
+  .svc-tabs{max-width:560px;margin:22px auto 0;gap:22px}
+  #paso-2 .picker{margin-top:18px}
+  @media(max-width:480px){ .svc-tabs{gap:0} .svc-tabs button{flex:1 1 0;flex-direction:column;gap:4px;padding:8px 2px 10px;font-size:.92rem;white-space:nowrap} .hide-xs{display:none} }
+  @media(hover:hover) and (pointer:fine){ button.xrow:not([aria-pressed="true"]):hover{border-color:#A9C6E8} .xstep button:not(:disabled):hover{background:var(--aqua)} }
+  @media(max-width:520px){ .extras-pick{padding:12px;margin-bottom:8px} .xrow{padding:10px 12px;gap:10px} .xic{display:none} .xt b{font-size:.92rem} .xt small{font-size:.8rem} .xpr{font-size:.88rem} .xstep button{width:32px;height:32px} .xstep output{min-width:48px} }
+  @media(prefers-reduced-motion:reduce){ .xrow,.xchk,.xchk svg,.xstep button{transition:none} }
 </style>
 <script>
   document.documentElement.classList.add('js-wizard');
@@ -765,13 +804,6 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
 </svg>
 
-<div class="promo-bar" role="note" aria-label="Promoción">
-  <div class="wrap promo-inner">
-    <span class="promo-tag">-20%</span>
-    <span class="promo-text"><span class="lg">Todo octubre: <b>20% de descuento</b> en todas las coberturas y sesiones, hasta el 31 de octubre.</span><span class="sm">Hasta el 31 de octubre.</span> <a href="#precios">Ver precios →</a></span>
-    <button class="promo-close" type="button" aria-label="Cerrar aviso">×</button>
-  </div>
-</div>
 <header>
   <nav class="wrap nav" aria-label="Principal">
     <a href="/" class="logo"><span class="logo-mark" aria-hidden="true"></span>Arian Alpiste</a>
@@ -823,79 +855,111 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
         <span class="eyebrow">Paso 2 de 3</span>
         <h2 id="t-precios">Escoge tu paquete</h2>
         <p class="pick-date">Fecha: <b data-sum-date></b> · <a href="#paso-1" data-go="1">Cambiar</a></p>
-        <div class="pills tabs" role="group" aria-label="Tipo de servicio">
-          <button type="button" aria-pressed="true" data-tab="eventos">Bautizos y cumpleaños</button>
-          <button type="button" aria-pressed="false" data-tab="sesiones">Sesiones familiares</button>
+        <div class="pick-tabs svc-tabs" role="group" aria-label="Qué vas a celebrar">
+          <button type="button" aria-pressed="true" data-tab="eventos" data-event="cumple"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V13a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M4 16c1.3 0 1.3 1 2.7 1s1.3-1 2.6-1 1.3 1 2.7 1 1.3-1 2.7-1 1.3 1 2.6 1 1.4-1 2.7-1"/><path d="M2 21h20M8 11V8M12 11V8M16 11V8M8 4.5a1 1 0 0 0 0 1.5M12 4.5a1 1 0 0 0 0 1.5M16 4.5a1 1 0 0 0 0 1.5"/></svg>Cumpleaños</button>
+          <button type="button" aria-pressed="false" data-tab="eventos" data-event="bautizo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 9h4M12 7v5M14 22v-4a2 2 0 0 0-4 0v4"/><path d="M18 22V5.6a1 1 0 0 0-.55-.9l-4.56-2.27a2 2 0 0 0-1.78 0L6.55 4.72a1 1 0 0 0-.55.9V22"/><path d="m18 7 3.45 1.72a1 1 0 0 1 .55.9V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9.38a1 1 0 0 1 .55-.9L6 7"/></svg>Bautizo</button>
+          <button type="button" aria-pressed="false" data-tab="sesiones"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Sesión<span class="hide-xs"> familiar</span></span></button>
         </div>
       </div>
 
-      <div class="rp-panel" data-panel="eventos" data-mode="foto">
-        <div class="pills modes" role="group" aria-label="Tipo de paquete">
-          <button type="button" aria-pressed="true" data-mode="foto" data-label="Solo foto">Solo foto</button>
-          <button type="button" aria-pressed="false" data-mode="video" data-label="Foto y video">Foto y video</button>
+      <div class="rp-panel" data-panel="eventos" data-mode="foto" data-event="cumple">
+        <div class="picker">
+          <div class="pick-modes modes" role="group" aria-label="Cobertura">
+            <button type="button" aria-pressed="true" data-mode="foto" data-label="Solo foto"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7.5 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.5z"/><circle cx="12" cy="13" r="3.5"/></svg>Solo foto</button>
+            <button type="button" aria-pressed="false" data-mode="video" data-label="Foto y video"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3z"/></svg>Foto y video</button>
+          </div>
         </div>
-        <p class="rp-note"><b>Aquí no pagas nada.</b> Elegir un paquete solo me dice qué buscas para tu <span data-txt="tipo">evento</span>. El adelanto del 50% lo vemos recién cuando te confirme la fecha.</p>
         <div class="rp-grid">
+          <div class="rp-card b-only" data-name="Mini">
+            <h3>Mini</h3>
+            <div class="price"><span class="f-only">S/ 170</span><span class="v-only">S/ 240</span><small> / evento</small></div>
+            <p class="hours">1 hora (ceremonia)</p>
+            <p class="plan-sub">Si solo necesitas fotos de la ceremonia.</p>
+            <ul class="incl"><li>Hasta 35 fotos editadas</li><li>Galería digital privada</li><li class="v-only">Video de la ceremonia editado</li><li class="v-only">Reel vertical de 30 s con música</li></ul>
+            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Mini · Solo foto" data-value="170" data-currency="PEN">Elegir Mini</a>
+          </div>
           <div class="rp-card" data-name="Básico">
             <h3>Básico</h3>
-            <div class="price"><span class="f-only">S/ 450</span><span class="v-only">S/ 650</span><small> / evento</small></div>
-          <div class="price-promo"><span class="promo-tag">-20%</span><span class="f-only"><b>S/ 350</b></span><span class="v-only"><b>S/ 520</b></span><span>en octubre</span></div>
-            <ul class="incl"><li>2 horas de cobertura</li><li>50 fotos editadas</li><li>3 videos para historias el mismo día</li><li class="v-only">Reel resumen de 1 min</li></ul>
-            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Básico · Solo foto" data-value="450" data-currency="PEN">Elegir Básico</a>
+            <div class="price"><span class="f-only">S/ 250</span><span class="v-only">S/ 380</span><small> / evento</small></div>
+            <p class="hours"><span class="b-only">2 horas (ceremonia y recepción)</span><span class="c-only">2 horas de fiesta</span></p>
+            <p class="plan-sub"><span class="b-only">Si después de la iglesia hay un brindis corto.</span><span class="c-only">Si es una fiesta corta en casa.</span></p>
+            <ul class="incl"><li>Hasta 60 fotos editadas</li><li>3 videos para historias el mismo día</li><li class="v-only">Video largo del evento editado</li><li class="v-only">Reel vertical de 1 min con música</li></ul>
+            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Básico · Solo foto" data-value="250" data-currency="PEN">Elegir Básico</a>
           </div>
           <div class="rp-card featured" data-name="Estándar">
             <h3>Estándar</h3>
-            <div class="price"><span class="f-only">S/ 600</span><span class="v-only">S/ 850</span><small> / evento</small></div>
-          <div class="price-promo"><span class="promo-tag">-20%</span><span class="f-only"><b>S/ 480</b></span><span class="v-only"><b>S/ 680</b></span><span>en octubre</span></div>
-            <ul class="incl"><li>3 horas de cobertura</li><li>100 fotos editadas</li><li>5 videos para historias el mismo día</li><li class="v-only">Reel resumen de hasta 2 min</li></ul>
-            <a href="#opciones" class="btn btn-primary rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Estándar · Solo foto" data-value="600" data-currency="PEN">Elegir Estándar</a>
+            <div class="price"><span class="f-only">S/ 330</span><span class="v-only">S/ 550</span><small> / evento</small></div>
+            <p class="hours"><span class="b-only">3 horas (ceremonia y recepción)</span><span class="c-only">3 horas de fiesta</span></p>
+            <p class="plan-sub"><span class="b-only">Si hay recepción con torta y baile.</span><span class="c-only">Si hay show, piñata y torta.</span></p>
+            <ul class="incl"><li>Fotos editadas sin límite</li><li>5 videos para historias el mismo día</li><li class="v-only">Video largo del evento editado</li><li class="v-only">Reel vertical de 1 min con música</li></ul>
+            <a href="#opciones" class="btn btn-primary rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Estándar · Solo foto" data-value="330" data-currency="PEN">Elegir Estándar</a>
           </div>
           <div class="rp-card" data-name="Premium">
             <h3>Premium</h3>
-            <div class="price"><span class="f-only">S/ 850</span><span class="v-only">S/ 1,400</span><small> / evento</small></div>
-          <div class="price-promo"><span class="promo-tag">-20%</span><span class="f-only"><b>S/ 680</b></span><span class="v-only"><b>S/ 1,120</b></span><span>en octubre</span></div>
-            <ul class="incl"><li>Todo el evento</li><li>Fotos ilimitadas editadas</li><li>10 videos para historias el mismo día</li><li>Sesión previa y álbum impreso</li><li class="v-only">Reel resumen de hasta 3 min</li><li class="v-only">Video de 10 a 15 min</li></ul>
-            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Premium · Solo foto" data-value="850" data-currency="PEN">Elegir Premium</a>
+            <div class="price"><span class="f-only">S/ 410</span><span class="v-only">S/ 720</span><small> / evento</small></div>
+            <p class="hours"><span class="b-only">4 horas (ceremonia y recepción)</span><span class="c-only">4 horas de fiesta</span></p>
+            <p class="plan-sub"><span class="b-only">Si la recepción va para largo.</span><span class="c-only">Si la fiesta llega hasta la hora loca.</span></p>
+            <ul class="incl"><li>Fotos editadas sin límite</li><li>8 videos para historias el mismo día</li><li class="v-only">Video largo del evento editado</li><li class="v-only">Reel vertical de 1 min con música</li></ul>
+            <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Premium · Solo foto" data-value="410" data-currency="PEN">Elegir Premium</a>
           </div>
         </div>
         <div class="carousel-dots rp-dots" role="group" aria-label="Elegir paquete"></div>
-        <p class="rp-foot">Todos incluyen galería digital privada. <a href="/#paquetes">Ver todo lo que incluye cada uno</a></p>
+        <div class="extras-pick" id="extras" hidden>
+          <p class="x-title"><span>¿Le sumas algo al <b id="x-pkg">paquete</b>?</span> <small>Opcional</small></p>
+          <div class="xrow" id="x-time">
+            <span class="xic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg></span>
+            <span class="xt"><b>Tiempo extra</b><small id="x-time-rate">S/ 45 cada 30 min</small></span>
+            <span class="xstep"><button type="button" data-d="-1" aria-label="Quitar 30 minutos">−</button><output id="x-time-n" aria-live="polite">0 min</output><button type="button" data-d="1" aria-label="Sumar 30 minutos">+</button></span>
+          </div>
+          <button type="button" class="xrow" aria-pressed="false" data-x="book">
+            <span class="xic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6.5a2.5 2.5 0 0 0 0 5H20"/></svg></span>
+            <span class="xt"><b>Photobook de tapa dura</b><small>20x20, hasta 40 fotos</small></span>
+            <span class="xpr">+S/ 210</span><span class="xchk" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+          </button>
+          <button type="button" class="xrow" aria-pressed="false" data-x="usb">
+            <span class="xic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="13" rx="2"/><path d="M9 9V3h6v6M11 5v1M13 5v1"/></svg></span>
+            <span class="xt"><b>USB físico personalizado</b><small>Con todas tus fotos y videos</small></span>
+            <span class="xpr">+S/ 95</span><span class="xchk" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+          </button>
+          <div class="xrow" id="x-print">
+            <span class="xic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>
+            <span class="xt"><b>Fotos impresas 10x15</b><small>S/ 2.50 c/u</small></span>
+            <span class="xstep"><button type="button" data-d="-1" aria-label="Quitar 10 fotos">−</button><output id="x-print-n" aria-live="polite">0</output><button type="button" data-d="1" aria-label="Sumar 10 fotos">+</button></span>
+          </div>
+          <div class="x-total"><span id="x-break">Paquete S/ 0</span><b id="x-sum">Total S/ 0</b></div>
+          <button type="button" class="btn btn-primary x-go" id="x-go">Continuar <svg><use href="#i-arrow"/></svg></button>
+        </div>
       </div>
 
       <div class="rp-panel" data-panel="sesiones" data-mode="ext" hidden>
-        <div class="pills modes" role="group" aria-label="Lugar de la sesión">
-          <button type="button" aria-pressed="true" data-mode="ext" data-label="Exteriores">Exteriores</button>
-          <button type="button" aria-pressed="false" data-mode="est" data-label="Estudio">Estudio</button>
-        </div>
-        <p class="rp-note"><b>Aquí no pagas nada.</b> Elegir un paquete solo me dice qué buscas para tu <span data-txt="tipo">evento</span>. El adelanto del 50% lo vemos recién cuando te confirme la fecha.</p>
+        <div class="picker"><div class="pick-modes modes" role="group" aria-label="Lugar de la sesión">
+          <button type="button" aria-pressed="true" data-mode="ext" data-label="Exteriores"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>Exteriores</button>
+          <button type="button" aria-pressed="false" data-mode="est" data-label="Estudio"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.74V17h8v-2.26A7 7 0 0 0 12 2z"/></svg>Estudio</button>
+        </div></div>
         <div class="rp-grid">
           <div class="rp-card" data-name="Esencial">
             <h3>Esencial</h3>
             <div class="price"><span class="x-only">S/ 320</span><span class="s-only">S/ 470</span><small> / sesión</small></div>
-          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 256</b></span><span class="s-only"><b>S/ 376</b></span><span>en octubre</span></div>
             <ul class="incl"><li>45 minutos de sesión</li><li>12 fotos con edición profesional</li><li>Hasta 5 personas</li></ul>
             <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Esencial · Exteriores" data-value="320" data-currency="PEN">Elegir Esencial</a>
           </div>
           <div class="rp-card featured" data-name="Clásica">
             <h3>Clásica</h3>
             <div class="price"><span class="x-only">S/ 450</span><span class="s-only">S/ 600</span><small> / sesión</small></div>
-          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 360</b></span><span class="s-only"><b>S/ 480</b></span><span>en octubre</span></div>
             <ul class="incl"><li>60 minutos de sesión</li><li>20 fotos con edición profesional</li><li>Hasta 6 personas</li></ul>
             <a href="#opciones" class="btn btn-primary rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Clásica · Exteriores" data-value="450" data-currency="PEN">Elegir Clásica</a>
           </div>
           <div class="rp-card" data-name="Recuerdo">
             <h3>Recuerdo</h3>
             <div class="price"><span class="x-only">S/ 720</span><span class="s-only">S/ 950</span><small> / sesión</small></div>
-          <div class="price-promo"><span class="promo-tag">-20%</span><span class="x-only"><b>S/ 576</b></span><span class="s-only"><b>S/ 760</b></span><span>en octubre</span></div>
             <ul class="incl"><li>90 minutos de sesión</li><li>30 fotos con edición profesional</li><li>7 personas o más</li><li>Photobook de tapa dura 15x20</li></ul>
             <a href="#opciones" class="btn btn-ghost rp-pick" data-track="initiate-checkout" data-track-location="reservar-package" data-destination="#opciones" data-package="Recuerdo · Exteriores" data-value="720" data-currency="PEN">Elegir Recuerdo</a>
           </div>
         </div>
         <div class="carousel-dots rp-dots" role="group" aria-label="Elegir paquete"></div>
-        <p class="rp-foot">Todas incluyen las fotos con retoque básico y galería digital. <a href="/sesiones-familiares#paquetes">Ver todo lo que incluye cada una</a></p>
       </div>
 
-      <p class="rp-changes">¿Quieres cambiar algo de un paquete? <a href="https://wa.me/51989789691?text=Hola%20Arian%2C%20quiero%20reservar%20pero%20me%20gustar%C3%ADa%20cambiar%20algo%20de%20un%20paquete." target="_blank" rel="noopener" data-track="contact" data-track-location="reservar-package-changes" data-destination="whatsapp">Escríbeme por WhatsApp</a></p>
+      <p class="rp-changes nocharge"><span class="nc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><span><b>No se te hará ningún cargo por esta elección.</b> Es solo para que tu primer mensaje ya me diga qué buscas.</span></p>
     </div>
   </section>
 
@@ -905,11 +969,21 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
       <span class="eyebrow">Paso 3 de 3</span>
       <h2 class="step3-title">¡Perfecto! ¿Por dónde prefieres que conversemos?</h2>
       <p class="chosen"><span>Fecha: <b data-sum-date></b></span><span>Paquete: <b data-chosen-name></b> <span data-chosen-price></span></span></p>
-      <p class="lead step3-lead">Te confirmo si tu fecha está libre por llamada o por WhatsApp, como te quede mejor.</p>
+      <p class="lead step3-lead">Te confirmo si tu fecha está libre por WhatsApp o por llamada, como te quede mejor.</p>
       <p class="back-link"><a href="#paso-2" data-go="2">Cambiar paquete</a></p>
     </div>
     <div class="wrap options-grid">
       <article class="option main reveal">
+        <span class="ico" style="background:#25A35A"><svg><use href="#i-wa"/></svg></span>
+        <h2>Escríbeme por WhatsApp</h2>
+        <p>Escríbeme y te digo si tu fecha está libre. Si estoy en una sesión o en un evento, te respondo apenas termine.</p>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>El mensaje ya lleva tu fecha y tu paquete</li>
+          <li><svg><use href="#i-check"/></svg><span>Puedes mandarme fotos o ideas de tu <span data-txt="tipo">evento</span></span></li>
+        </ul>
+        <a href="https://wa.me/51989789691?text=Hola%20Arian%2C%20quiero%20reservar%20una%20fecha.%20%C2%BFMe%20cuentas%20la%20disponibilidad%3F" class="btn btn-primary" target="_blank" rel="noopener" data-track="contact" data-track-location="reservar-whatsapp" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+      </article>
+      <article class="option reveal">
         <span class="ribbon">Lo más rápido</span>
         <span class="ico" style="background:var(--green-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span>
         <h2>Agenda una llamada</h2>
@@ -919,21 +993,11 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
           <li><svg><use href="#i-check"/></svg>Eliges el día y la hora en el calendario</li>
           <li><svg><use href="#i-check"/></svg>Tu fecha y tu paquete ya me llegan anotados</li>
         </ul>
-        <a href="https://cal.com/arian-alpiste-sarmiento-gzfq0v" data-cal-link="arian-alpiste-sarmiento-gzfq0v/15min" data-cal-namespace="15min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}' class="btn btn-primary" data-track="meeting-intent" data-track-location="reservar-call" data-destination="cal.com">Agendar mi llamada <svg><use href="#i-arrow"/></svg></a>
-      </article>
-      <article class="option reveal">
-        <span class="ico" style="background:#25A35A"><svg><use href="#i-wa"/></svg></span>
-        <h2>Escríbeme por WhatsApp</h2>
-        <p>Escríbeme si te queda más cómodo. Si estoy en una sesión o en un evento, te respondo apenas termine.</p>
-        <ul>
-          <li><svg><use href="#i-check"/></svg>El mensaje ya lleva tu fecha y tu paquete</li>
-          <li><svg><use href="#i-check"/></svg><span>Puedes mandarme fotos o ideas de tu <span data-txt="tipo">evento</span></span></li>
-        </ul>
-        <a href="https://wa.me/51989789691?text=Hola%20Arian%2C%20quiero%20reservar%20una%20fecha.%20%C2%BFMe%20cuentas%20la%20disponibilidad%3F" class="btn btn-ghost" target="_blank" rel="noopener" data-track="contact" data-track-location="reservar-whatsapp" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+        <a href="https://cal.com/arian-alpiste-sarmiento-gzfq0v" data-cal-link="arian-alpiste-sarmiento-gzfq0v/15min" data-cal-namespace="15min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}' class="btn btn-ghost" data-track="meeting-intent" data-track-location="reservar-call" data-destination="cal.com">Agendar mi llamada <svg><use href="#i-arrow"/></svg></a>
       </article>
     </div>
     </div>
-    <div class="wrap"><div class="carousel-dots" role="group" aria-label="Elegir opción"><button aria-label="Agendar llamada" aria-current="true"></button><button aria-label="WhatsApp"></button></div></div>
+    <div class="wrap"><div class="carousel-dots" role="group" aria-label="Elegir opción"><button aria-label="WhatsApp" aria-current="true"></button><button aria-label="Agendar llamada"></button></div></div>
   </section>
 
   <section class="confirm" data-confetti="12">
@@ -1074,17 +1138,24 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     });
     // Paso 2: paquetes
     var tabs=s2.querySelectorAll('[data-tab]'), panels=s2.querySelectorAll('[data-panel]');
-    function show(tb){ tabs.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.tab===tb) }); panels.forEach(function(p){ p.hidden=p.dataset.panel!==tb }); document.querySelectorAll('[data-txt="tipo"]').forEach(function(e){ e.textContent = tb==='sesiones' ? 'sesión' : 'evento' }) }
-    tabs.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.tab) }) });
-    if(sesiones) show('sesiones');
-    var VALUES={'Básico':{foto:450,video:650},'Estándar':{foto:600,video:850},'Premium':{foto:850,video:1400},'Esencial':{ext:320,est:470},'Clásica':{ext:450,est:600},'Recuerdo':{ext:720,est:950}};
+    function show(tb){ panels.forEach(function(p){ p.hidden=p.dataset.panel!==tb }); document.querySelectorAll('[data-txt="tipo"]').forEach(function(e){ e.textContent = tb==='sesiones' ? 'sesión' : 'evento' }) }
+    function pickTab(b){
+      tabs.forEach(function(x){ x.setAttribute('aria-pressed', x===b) });
+      show(b.dataset.tab);
+      if(b.dataset.event){ var p=s2.querySelector('[data-panel="eventos"]'); p.dataset.event=b.dataset.event; var g=p.querySelector('.rp-grid'); if(g) g.scrollLeft=0; if(p._carouselUpd) p._carouselUpd(); }
+      if(typeof resetPick==='function') resetPick();
+      if(typeof alignCards==='function') setTimeout(alignCards,0);
+    }
+    tabs.forEach(function(b){ b.addEventListener('click', function(){ pickTab(b) }) });
+    if(sesiones) pickTab(s2.querySelector('[data-tab="sesiones"]'));
+    var VALUES={'Mini':{foto:170,video:240},'Básico':{foto:250,video:380},'Estándar':{foto:330,video:550},'Premium':{foto:410,video:720},'Esencial':{ext:320,est:470},'Clásica':{ext:450,est:600},'Recuerdo':{ext:720,est:950}};
     function syncPanel(p){
       var mode=p.dataset.mode, label=p.querySelector('.modes button[data-mode="'+mode+'"]').dataset.label;
       p.querySelectorAll('.rp-pick').forEach(function(a){ var name=a.closest('.rp-card').dataset.name; a.dataset.package=name+' · '+label; a.dataset.value=String(VALUES[name][mode]) });
     }
     panels.forEach(function(p){
-      p.querySelectorAll('.modes button').forEach(function(b){ b.addEventListener('click', function(){
-        p.querySelectorAll('.modes button').forEach(function(x){ x.setAttribute('aria-pressed', x===b) });
+      p.querySelectorAll('.modes:not(.evtype) button').forEach(function(b){ b.addEventListener('click', function(){
+        p.querySelectorAll('.modes:not(.evtype) button').forEach(function(x){ x.setAttribute('aria-pressed', x===b) });
         p.dataset.mode=b.dataset.mode; syncPanel(p);
       }) });
       syncPanel(p);
@@ -1094,35 +1165,80 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
       var grid=p.querySelector('.rp-grid'), dotsBox=p.querySelector('.rp-dots'); if(!grid||!dotsBox) return;
       var cards=[].slice.call(grid.children);
       cards.forEach(function(c,i){
-        var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label', c.dataset.name);
+        var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label', c.dataset.name); if(c.classList.contains('b-only')) b.classList.add('b-only');
         b.addEventListener('click', function(){ grid.scrollTo({left:c.offsetLeft-grid.offsetLeft-16, behavior:'smooth'}) });
         dotsBox.appendChild(b);
       });
-      var dots=[].slice.call(dotsBox.children);
+      var allDots=[].slice.call(dotsBox.children);
       function upd(){
-        var max=grid.scrollWidth-grid.clientWidth, step=(cards[1].offsetLeft-cards[0].offsetLeft)||1;
-        var i=Math.round(grid.scrollLeft/step); if(max>0&&grid.scrollLeft>=max-4) i=cards.length-1;
+        var vis=cards.filter(function(c){ return c.offsetParent }), dots=allDots.filter(function(d,j){ return cards[j].offsetParent });
+        if(vis.length<2) return;
+        var max=grid.scrollWidth-grid.clientWidth, step=(vis[1].offsetLeft-vis[0].offsetLeft)||1;
+        var i=Math.round(grid.scrollLeft/step); if(max>0&&grid.scrollLeft>=max-4) i=vis.length-1;
         dots.forEach(function(d,j){ d.setAttribute('aria-current', j===i) });
       }
+      p._carouselUpd=upd;
       grid.addEventListener('scroll', function(){ requestAnimationFrame(upd) }, {passive:true});
       upd();
     });
+    // Alinea precio, duración y texto para que los beneficios empiecen a la misma altura
+    function alignCards(){ panels.forEach(function(p){ if(p.hidden) return; var cs=[].slice.call(p.querySelectorAll('.rp-card')).filter(function(c){ return c.offsetParent });
+      ['.price','.hours','.plan-sub'].forEach(function(sel){ var els=cs.map(function(c){ return c.querySelector(sel) }).filter(Boolean); els.forEach(function(e){ e.style.minHeight='' }); var h=Math.max.apply(null, els.map(function(e){ return e.offsetHeight }).concat([0])); els.forEach(function(e){ e.style.minHeight=h+'px' }); }); }); }
+    window.addEventListener('resize', alignCards); if(document.fonts) document.fonts.ready.then(alignCards);
+    document.querySelectorAll('[data-go="2"], #ir-paso-2, .pick-modes button').forEach(function(el){ el.addEventListener('click', function(){ setTimeout(alignCards,0); resetPick() }) });
     var wa=s3.querySelector('a[href*="wa.me/"]'), cal=s3.querySelector('[data-cal-link]');
+    // Extras opcionales del paso 3: se suman al total y van en el mensaje
+    var xbox=document.getElementById('extras'), xs={time:0,print:0,book:false,usb:false};
+    var soles=function(n){ return 'S/ '+(n%1? n.toFixed(2) : String(n)) };
+    function timeTxt(n){ if(!n) return '0 min'; var h=Math.floor(n/2); return h? h+(h>1?' h':' h')+(n%2?' 30':'') : '30 min' }
+    function updateMsg(){
+      var rate=data.video?90:45, ex=[];
+      if(xs.time) ex.push([timeTxt(xs.time)+' de tiempo extra', xs.time*rate]);
+      if(xs.book) ex.push(['photobook tapa dura 20x20', 210]);
+      if(xs.usb) ex.push(['USB físico personalizado', 95]);
+      if(xs.print) ex.push([(xs.print*10)+' fotos impresas 10x15', xs.print*25]);
+      var extra=ex.reduce(function(t,e){ return t+e[1] },0), total=data.base+extra;
+      if(xbox && !xbox.hidden){
+        document.getElementById('x-time-rate').textContent='S/ '+rate+' cada 30 min';
+        document.getElementById('x-time-n').textContent=timeTxt(xs.time);
+        document.getElementById('x-print-n').textContent=String(xs.print*10);
+        document.getElementById('x-time').classList.toggle('has', xs.time>0); document.getElementById('x-print').classList.toggle('has', xs.print>0);
+        document.querySelector('#x-time [data-d="-1"]').disabled=!xs.time; document.querySelector('#x-print [data-d="-1"]').disabled=!xs.print;
+        document.getElementById('x-break').textContent= extra ? 'Paquete '+soles(data.base)+' + extras '+soles(extra) : 'Paquete '+soles(data.base);
+        document.getElementById('x-sum').textContent='Total '+soles(total);
+      }
+      var fechaMsg = data.fecha==='por definir' ? ' (todavía no tengo la fecha exacta)' : ' para el '+data.fecha;
+      var msg='Hola Arian, quiero reservar '+(data.kind==='sesión'?'una ':'un ')+data.kind+fechaMsg+' con el paquete '+data.pkg+' ('+data.precioTxt+')';
+      if(ex.length) msg+='. Le sumo: '+ex.map(function(e){ return e[0] }).join(', ')+'. Total: '+soles(total);
+      msg+='. ¿Me confirmas la disponibilidad?';
+      if(wa){ wa.href='https://wa.me/51989789691?text='+encodeURIComponent(msg); }
+      document.querySelector('[data-chosen-price]').textContent='· '+data.precioTxt+(ex.length?' + extras = '+soles(total):'');
+      if(cal){ try{ var cfg=JSON.parse(cal.getAttribute('data-cal-config')||'{}'); cfg.notes='Paquete: '+data.paquete+' ('+data.precioTxt+')'+(ex.length?'. Extras: '+ex.map(function(e){return e[0]}).join(', ')+'. Total: '+soles(total):'')+'. Fecha tentativa: '+data.fecha+'.'; cal.setAttribute('data-cal-config', JSON.stringify(cfg)); }catch(_){} }
+    }
+    function resetPick(){ if(xbox) xbox.hidden=true; s2.querySelectorAll('.rp-card.picked').forEach(function(c){ c.classList.remove('picked') }); }
+    var xgo=document.getElementById('x-go'); if(xgo) xgo.addEventListener('click', function(){ go(3) });
+    if(xbox){
+      xbox.querySelectorAll('[data-x]').forEach(function(b){ b.addEventListener('click', function(){ var k=b.dataset.x; xs[k]=!xs[k]; b.setAttribute('aria-pressed', xs[k]); updateMsg() }) });
+      [['x-time','time',8],['x-print','print',20]].forEach(function(c){ document.querySelectorAll('#'+c[0]+' [data-d]').forEach(function(b){ b.addEventListener('click', function(){ xs[c[1]]=Math.max(0,Math.min(c[2], xs[c[1]]+Number(b.dataset.d))); updateMsg() }) }) });
+    }
     s2.querySelectorAll('.rp-pick').forEach(function(a){ a.addEventListener('click', function(e){
       e.preventDefault();  // el InitiateCheckout lo registra tracking.js igual
       var card=a.closest('.rp-card'), panel=a.closest('.rp-panel');
       s2.querySelectorAll('.rp-card').forEach(function(c){ c.classList.toggle('picked', c===card) });
       var vis=function(sel){ return [].filter.call(card.querySelectorAll(sel), function(x){ return x.offsetParent!==null }).map(function(x){ return x.textContent.trim() })[0]||'' };
       var normal=vis('.price > span'), oct=document.querySelector('.price-promo')? vis('.price-promo b') : '';
-      data.paquete=a.dataset.package; data.precio= oct ? oct+' en octubre (normal '+normal+')' : normal;
+      data.paquete=a.dataset.package+(panel.dataset.panel==='eventos' ? ' · '+(panel.dataset.event==='cumple'?'Cumpleaños':'Bautizo') : ''); data.precio= oct ? oct+' en octubre (normal '+normal+')' : normal;
       document.querySelector('[data-chosen-name]').textContent=data.paquete;
       document.querySelector('[data-chosen-price]').textContent='· '+data.precio;
-      var kind = panel.dataset.panel==='sesiones' ? 'sesión' : 'evento';
-      var fechaMsg = data.fecha==='por definir' ? ' (todavía no tengo la fecha exacta)' : ' para el '+data.fecha;
-      var msg='Hola Arian, quiero reservar mi '+kind+fechaMsg+' con el paquete '+data.paquete+' ('+(oct?oct+' en octubre':normal)+'). ¿Me confirmas la disponibilidad?';
-      if(wa) wa.href='https://wa.me/51989789691?text='+encodeURIComponent(msg);
-      if(cal){ try{ var cfg=JSON.parse(cal.getAttribute('data-cal-config')||'{}'); cfg.notes='Paquete: '+data.paquete+' ('+(oct?oct+' en octubre':normal)+'). Fecha tentativa: '+data.fecha+'.'; cal.setAttribute('data-cal-config', JSON.stringify(cfg)); }catch(_){} }
-      go(3);
+      data.kind = panel.dataset.panel==='sesiones' ? 'sesión' : (panel.dataset.event==='cumple' ? 'cumpleaños' : 'bautizo');
+      data.pkg=a.dataset.package; data.precioTxt=(oct?oct+' en octubre':normal); data.base=Number(a.dataset.value)||0; data.video=panel.dataset.mode==='video';
+      xs.time=0; xs.print=0; xs.book=false; xs.usb=false;
+      if(xbox){ xbox.querySelectorAll('[data-x]').forEach(function(b){ b.setAttribute('aria-pressed','false') }); }
+      if(panel.dataset.panel==='eventos' && xbox){
+        xbox.hidden=false; document.getElementById('x-pkg').textContent=card.dataset.name;
+        updateMsg();
+        requestAnimationFrame(function(){ xbox.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth', block:'start'}) });
+      } else { updateMsg(); go(3); }
     }) });
     // El botón «Reservar» de la barra vuelve al inicio del asistente
     document.querySelectorAll('header a[href="#paso-2"],header a[href="#paso-1"]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); go(s3.classList.contains('on')||s2.classList.contains('on')?(s3.classList.contains('on')?3:2):1) }) });
@@ -1163,20 +1279,6 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     const go=()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>{ i.loading='eager'; });
     ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
   });
-</script>
-<script>
-  // Aviso de promoción: se apaga solo al terminar; se puede cerrar y no vuelve a salir en esta visita
-  (function(){
-    if(Date.now()>=Date.parse('2026-11-01T00:00:00-05:00')){
-      document.querySelectorAll('.promo-bar,.price-promo,.money-promo').forEach(e=>e.remove());
-      // «desde S/ 450 S/ 350» vuelve a «desde S/ 450»
-      document.querySelectorAll('.service-meta s').forEach(s=>{ const st=s.nextElementSibling; if(st) st.textContent=s.textContent; s.remove(); });
-      return;
-    }
-    const bar=document.querySelector('.promo-bar'); if(!bar) return;
-    try{ if(sessionStorage.getItem('promo-cerrado')) bar.hidden=true }catch(e){}
-    bar.querySelector('.promo-close').addEventListener('click',()=>{ bar.hidden=true; try{sessionStorage.setItem('promo-cerrado','1')}catch(e){} });
-  })();
 </script>
 <script src="/js/tracking.js?v=20261010-pixel-temprano" defer></script>
 </body>
