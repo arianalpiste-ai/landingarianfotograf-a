@@ -1,0 +1,39 @@
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 90 612 612">
+  
+  <defs>
+    <style>
+      .st0 {
+        fill: #F7F3EC;
+      }
+
+      .st1, .st2 {
+        stroke: #132A45;
+      }
+
+      .st1, .st2, .st3 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .st1, .st3 {
+        stroke-width: 40px;
+      }
+
+      .st2 {
+        stroke-width: 30px;
+      }
+
+      .st3 {
+        stroke: #D9826A;
+      }
+    </style>
+  </defs>
+  <rect class="st0" y="90" width="612" height="612" rx="136" stroke="#E4DCCD" stroke-width="10"/>
+  <g transform="translate(316 372) scale(.84) translate(-316 -372)">
+    <path class="st1" d="M80.27,477.49c48.3-3.72,98.47-78.03,159.77-180.21,44.59-74.31,87.32-124.48,105.9-120.76,13,3.72-5.57,52.02-37.16,133.76-27.87,74.31-50.16,148.63-42.73,172.78"/>
+    <path class="st2" d="M91.41,403.18c44.59-44.59,143.05-52.02,241.52-50.16"/>
+    <path class="st3" d="M228.89,562.95c48.3-3.72,98.47-78.03,159.77-180.21,44.59-74.31,87.32-124.48,105.9-120.76,13,3.72-5.57,52.02-37.16,133.76-27.87,74.31-42.73,143.05-18.58,161.63,18.58,13,50.16-18.58,76.17-72.46"/>
+    <path class="st3" d="M240.04,488.64c44.59-44.59,143.05-52.02,241.52-50.16"/>
+  </g>
+</svg>
