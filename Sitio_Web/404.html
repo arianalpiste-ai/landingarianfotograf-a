@@ -564,6 +564,11 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .btn,summary,.pills button,label{font-weight:500}
   .logo,.logo-mark{font-family:"Bricolage Grotesque",system-ui,sans-serif}
   .post-hero h1,.blog-hero h1,.book-hero h1,.legal-hero h1,.simple h1,.price-table .money,.tool-step .num,.confirm-step .n,.next-step .n,.num404{font-weight:600}
+
+  /* ===== Logo manuscrito ===== */
+  .brand-img{display:block;height:46px;aspect-ratio:1134/319;background:var(--ink);-webkit-mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat;mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat}
+  footer .brand-img{height:72px;background:#FFFFFF}
+  @media(max-width:640px){ .brand-img{height:38px} footer .brand-img{height:60px} }
 </style>
 </head>
 <body>
@@ -596,7 +601,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 
 <header>
   <nav class="wrap nav" aria-label="Principal">
-    <a href="/" class="logo"><span class="logo-mark" aria-hidden="true"></span>Arian Alpiste</a>
+    <a href="/" class="logo"><span class="brand-img" role="img" aria-label="Arian Alpiste, fotografía y video"></span></a>
     <ul class="nav-links">
       <li><a href="/#servicios">Servicios</a></li>
       <li><a href="/#portfolio">Portafolio</a></li>
@@ -640,7 +645,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="/" class="logo"><span class="logo-mark" aria-hidden="true"></span>Arian Alpiste</a>
+        <a href="/" class="logo"><span class="brand-img" role="img" aria-label="Arian Alpiste, fotografía y video"></span></a>
         <p style="margin-top:12px;max-width:34ch">Fotografía de bautizos, cumpleaños y sesiones familiares en Lima.</p>
       </div>
       <ul class="foot-links">

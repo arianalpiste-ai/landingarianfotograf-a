@@ -767,6 +767,11 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .ev-ic svg{width:18px;height:18px}
   .ev-select{font:inherit;font-size:1.05rem;font-weight:500;color:var(--ink);min-height:54px;width:100%;padding:0 44px 0 54px;border:2px solid var(--mint-200);border-radius:var(--radius-sm);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231D4C8A' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center;-webkit-appearance:none;appearance:none;cursor:pointer}
   .ev-select:focus{outline:none;border-color:var(--green-600)}
+
+  /* ===== Logo manuscrito ===== */
+  .brand-img{display:block;height:46px;aspect-ratio:1134/319;background:var(--ink);-webkit-mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat;mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat}
+  footer .brand-img{height:72px;background:#FFFFFF}
+  @media(max-width:640px){ .brand-img{height:38px} footer .brand-img{height:60px} }
 </style>
 <script>
   document.documentElement.classList.add('js-wizard');
@@ -811,7 +816,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 
 <header>
   <nav class="wrap nav" aria-label="Principal">
-    <a href="/" class="logo"><span class="logo-mark" aria-hidden="true"></span>Arian Alpiste</a>
+    <a href="/" class="logo"><span class="brand-img" role="img" aria-label="Arian Alpiste, fotografía y video"></span></a>
     <ul class="nav-links">
       <li><a href="/#servicios">Servicios</a></li>
       <li><a href="/#portfolio">Portafolio</a></li>
@@ -1032,7 +1037,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="/" class="logo"><span class="logo-mark" aria-hidden="true"></span>Arian Alpiste</a>
+        <a href="/" class="logo"><span class="brand-img" role="img" aria-label="Arian Alpiste, fotografía y video"></span></a>
         <p style="margin-top:12px;max-width:34ch">Fotografía de bautizos, cumpleaños y sesiones familiares en Lima.</p>
       </div>
       <ul class="foot-links">
