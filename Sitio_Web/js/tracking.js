@@ -88,6 +88,36 @@
     try { return window.sessionStorage.getItem(PRICES_SEEN_KEY) === '1'; } catch (e) { return false; }
   }
 
+  // Origen de la visita, solo para el correo del formulario (no se envía a Meta ni a Analytics): UTM, si llegó con
+  // fbclid, sitio de referencia y página de entrada. Se guarda al entrar; solo se reemplaza si otra entrada trae
+  // UTM o fbclid nuevos (por ejemplo, vuelve a tocar un anuncio en la misma pestaña).
+  var ORIGIN_KEY = 'arian_origin';
+  function captureOrigin() {
+    try {
+      var query = new URLSearchParams(window.location.search);
+      var origin = {};
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (key) {
+        if (query.get(key)) origin[key] = query.get(key).slice(0, 100);
+      });
+      if (query.has('fbclid')) origin.fbclid = 'si';
+      var hasParams = Object.keys(origin).length > 0;
+      if (!hasParams && window.sessionStorage.getItem(ORIGIN_KEY)) return;
+      if (document.referrer) {
+        var host = new URL(document.referrer).hostname;
+        if (host && host.indexOf('arianalpiste.com') === -1) origin.referrer = host;
+      }
+      origin.landing = window.location.pathname;
+      window.sessionStorage.setItem(ORIGIN_KEY, JSON.stringify(origin));
+    } catch (e) {}
+  }
+  captureOrigin();
+  window.__arianOrigin = function () {
+    var origin = {};
+    try { origin = JSON.parse(window.sessionStorage.getItem(ORIGIN_KEY) || '{}') || {}; } catch (e) {}
+    origin.vio_precios = pricesSeen() ? 'si' : 'no';
+    return origin;
+  };
+
   if (body.dataset.contentType === 'portfolio') {
     trackStandard('ViewContent', {
       content_name: body.dataset.contentName || 'Portafolio',

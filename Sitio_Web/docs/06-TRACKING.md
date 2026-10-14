@@ -142,6 +142,13 @@ Mismo `js/tracking.js`, mismos nombres de evento. Lo nuevo:
   sesiones familiares («Sesiones familiares»).
 - **Formulario:** el navegador envía `_fbp` y `_fbc`; el servidor los agrega al `Lead` de Conversions API y usa como
   `event_source_url` la página real del envío.
+- **Origen en el correo del formulario** (desde el 13 oct 2026): `js/tracking.js` guarda al entrar (en `sessionStorage`,
+  clave `arian_origin`) los `utm_*`, si llegó con `fbclid` (solo «sí», nunca el valor), el sitio de referencia y la página
+  de entrada; `window.__arianOrigin()` los devuelve junto con `vio_precios` (`si`/`no`, el mismo dato que `saw_prices`).
+  El formulario los manda en `origen` y `functions/api/contacto.js` los limpia (lista cerrada de claves, 100 caracteres)
+  y los agrega al final del correo: Origen, ¿vio los precios?, campaña/anuncio y página de entrada. Es solo informativo:
+  no se envía a Meta, no cambia el `Lead` ni ningún `eventID`. Para que diga «Anuncio de pago» los anuncios deben llevar
+  `utm_medium` con `paid` (por ejemplo `paid_social`). `integrar.py` (`FORM_JS`) lleva el mismo cambio.
 - **`<noscript>` del Pixel** en las páginas nuevas, para navegadores sin JavaScript.
 - Google Tag Manager (`GTM-MKJXCMSL`) solo contiene Google Analytics; no carga el Pixel de Meta (revisado el 6 oct 2026).
 

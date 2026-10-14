@@ -1375,7 +1375,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     form.addEventListener('submit',e=>{
       e.preventDefault(); if(!form.reportValidity()) return;
       btn.disabled=true; btn.setAttribute('aria-busy','true'); status.className='form-status'; status.textContent='';
-      const data=Object.fromEntries(new FormData(form).entries()); data.fbp=cookie('_fbp'); data.fbc=cookie('_fbc');
+      const data=Object.fromEntries(new FormData(form).entries()); data.fbp=cookie('_fbp'); data.fbc=cookie('_fbc'); data.origen=(typeof window.__arianOrigin==='function')?window.__arianOrigin():{};
       fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
         .then(r=>{if(!r.ok) throw new Error('envío'); return r.json()})
         .then(res=>{

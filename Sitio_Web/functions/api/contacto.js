@@ -34,6 +34,30 @@ const clean = (value, maxLength) => typeof value === 'string'
   ? value.trim().slice(0, maxLength)
   : '';
 
+// Origen de la visita que manda el navegador (UTM, fbclid, referencia, página de entrada y si vio los precios).
+// Es solo informativo, para el correo: no se envía a Meta ni cambia ningún evento.
+const ORIGIN_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'referrer', 'landing', 'vio_precios'];
+
+const cleanOrigin = (value) => {
+  const origin = {};
+  if (value && typeof value === 'object') {
+    for (const key of ORIGIN_KEYS) {
+      const text = clean(value[key], 100);
+      if (text) origin[key] = text;
+    }
+  }
+  return origin;
+};
+
+const originLabel = (origin) => {
+  if (!Object.keys(origin).length) return 'Sin datos de origen';
+  if (/paid|cpc|ppc/i.test(origin.utm_medium || '')) return `Anuncio de pago${origin.utm_source ? ` (${origin.utm_source})` : ''}`;
+  if (origin.utm_source) return `Enlace con UTM (${origin.utm_source}${origin.utm_medium ? ` / ${origin.utm_medium}` : ''})`;
+  if (origin.fbclid) return 'Facebook o Instagram (clic con fbclid, sin UTM)';
+  if (origin.referrer) return `Referido desde ${origin.referrer}`;
+  return 'Directo o sin datos';
+};
+
 const escapeHtml = (value) => value.replace(/[&<>"']/g, (character) => ({
   '&': '&amp;',
   '<': '&lt;',
@@ -109,6 +133,7 @@ export async function onRequestPost(context) {
     empresa: clean(input.empresa, 100),
     mensaje: clean(input.mensaje, 2000)
   };
+  const origen = cleanOrigin(input.origen);
   // Cookies del Pixel que manda el navegador: mejoran la coincidencia del Lead en Meta.
   const fbp = /^fb\.\d\.\d+\.\d+$/.test(clean(input.fbp, 120)) ? clean(input.fbp, 120) : undefined;
   const fbc = /^fb\.\d\.\d+\.[\w-]+$/.test(clean(input.fbc, 500)) ? clean(input.fbc, 500) : undefined;
@@ -145,7 +170,12 @@ export async function onRequestPost(context) {
           <p><strong>Evento:</strong> ${safe.evento}</p>
           <p><strong>Fecha tentativa:</strong> ${safe.fecha || 'No indicada'}</p>
           <p><strong>Empresa:</strong> ${safe.empresa || 'No indicada'}</p>
-          <p><strong>Mensaje:</strong><br>${safe.mensaje.replace(/\n/g, '<br>') || 'Sin mensaje adicional'}</p>`
+          <p><strong>Mensaje:</strong><br>${safe.mensaje.replace(/\n/g, '<br>') || 'Sin mensaje adicional'}</p>
+          <hr>
+          <p><strong>Origen:</strong> ${escapeHtml(originLabel(origen))}</p>
+          <p><strong>¿Vio los precios antes de escribir?:</strong> ${origen.vio_precios === 'si' ? 'Sí' : origen.vio_precios === 'no' ? 'No' : 'Sin dato'}</p>
+          <p><strong>Campaña / anuncio:</strong> ${escapeHtml([origen.utm_campaign, origen.utm_content].filter(Boolean).join(' · ') || 'Sin dato')}</p>
+          <p><strong>Página de entrada:</strong> ${escapeHtml(origen.landing || 'Sin dato')}</p>`
       })
     });
   } catch (error) {
