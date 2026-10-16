@@ -877,3 +877,164 @@
 .brand-img{display:block;height:46px;aspect-ratio:1134/319;background:var(--ink);-webkit-mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat;mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat}
 footer .brand-img{height:72px;background:#FFFFFF}
 @media(max-width:640px){ .brand-img{height:38px} footer .brand-img{height:60px} }
+
+/* ===== Paleta Champaña (la de la página de bodas), para los posts de bodas ===== */
+[data-theme="champana-aire"]{--mint-50:#FFFDF9;--mint-100:#FFFDF9;--mint-200:#E6DCCB;--aqua:#F1E3C6;--pink-100:#FFFDF9;--pink-200:#EFE9DF;--green-700:#2E241A;--green-600:#94743F;--green-500:#B08D57;--ink:#2E241A;--ink-soft:#6B5E4E;--coral:#94743F;--sun:#C9A66B;--sky:#B08D57}
+[data-theme="champana-aire"] body,[data-theme="champana-aire"] .post-hero,[data-theme="champana-aire"] .post-body{background:#FFFDF9}
+[data-theme="champana-aire"] .prose p{color:#4A3E31}
+[data-theme="champana-aire"] .post-hero h1 span{color:#94743F}
+[data-theme="champana-aire"] .price-badge .ico,[data-theme="champana-aire"] .pick .ico,[data-theme="champana-aire"] .pick .rec{background:#F4EDE2;color:#7A5C2E}
+[data-theme="champana-aire"] .toc{background:#F7F1E7}
+[data-theme="champana-aire"] .tip{background:#F4EDE2}
+[data-theme="champana-aire"] .tip .ico{color:#94743F}
+[data-theme="champana-aire"] .price-table tr.featured{background:#F7F1E7}
+[data-theme="champana-aire"] .inline-cta .btn-primary{background:#C9A66B;color:#2E241A}
+[data-theme="champana-aire"] .inline-cta .btn-primary:hover{background:#D9BB85}
+[data-theme="champana-aire"] .post-cta{background:#EFE9DF}
+[data-theme="champana-aire"] .author-box img{border-color:#EFE9DF}
+[data-theme="champana-aire"] .logo-mark::after{color:#C9A66B}
+[data-theme="champana-aire"] .prose .inline-cta p{color:rgba(255,253,249,.85)}
+
+/* Temas del blog: chips para pasar de un tema a otro */
+.blog-cats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:26px}
+.blog-cats a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--mint-200);background:#fff;color:var(--ink-soft);font-size:.9rem;font-weight:500;text-decoration:none;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.blog-cats a[aria-current="page"]{background:var(--green-700);border-color:var(--green-700);color:#fff}
+@media(hover:hover) and (pointer:fine){ .blog-cats a:not([aria-current]):hover{border-color:var(--green-700);color:var(--green-700)} }
+.blog-crumbs{justify-content:center}
+[data-theme="champana-aire"] .blog-hero,[data-theme="champana-aire"] .blog-list{background:#FFFDF9}
+
+/* ===== Blog de bodas: mismo menú, pie, letras y botones que /bodas ===== */
+[data-theme="champana-aire"]{--radius-sm:4px;--radius:8px;--radius-lg:10px}
+header.hd{background:rgba(255,253,249,.92);border-bottom:1px solid rgba(46,36,26,.1)}
+header.hd .brand-img{height:50px;background:#2E241A}
+header.hd .nav-links{gap:34px}
+header.hd .nav-links a{display:inline-flex;align-items:center;min-height:44px;padding:0;font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2E241A;position:relative;text-decoration:none}
+header.hd .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:10px;height:1px;background:#94743F;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.23,1,.32,1)}
+.hd-cta{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 22px;border:1px solid #2E241A;border-radius:999px;color:#2E241A;text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:background-color .2s ease,color .2s ease,transform .16s ease-out}
+.hd-cta:active{transform:scale(.97)}
+@media(hover:hover) and (pointer:fine){ header.hd .nav-links a:hover::after{transform:scaleX(1)} .hd-cta:hover{background:#2E241A;color:#FFFDF9} }
+header.hd .menu-btn{color:#2E241A}
+header.hd .mobile-menu{background:#FFFDF9;border-top:1px solid rgba(46,36,26,.1);box-shadow:0 18px 30px -20px rgba(46,36,26,.35);padding:4px 20px 24px}
+header.hd .mobile-menu li a{min-height:54px;font-weight:500;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:#2E241A;border-bottom:1px solid rgba(46,36,26,.1)}
+.hd-cta-full{width:100%;min-height:48px;margin-top:8px}
+@media(max-width:640px){ header.hd .brand-img{height:40px} }
+footer.ft{background:#2E241A;color:rgba(255,253,249,.72);padding:64px 0 36px;font-size:.9rem}
+.ft-in{display:flex;flex-direction:column;align-items:center;text-align:center}
+footer.ft .brand-img{height:84px;background:#FFFDF9}
+.ft-tag{margin:14px 0 0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:1.25rem;color:rgba(255,253,249,.8)}
+.ft-links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 30px;list-style:none;padding:0;margin:30px 0 0}
+.ft-links a{display:inline-flex;align-items:center;min-height:44px;color:#FFFDF9;text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase}
+.ft-social{display:flex;gap:6px;margin-top:14px}
+.ft-social a{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:rgba(255,253,249,.75)}
+.ft-social svg{width:18px;height:18px}
+.ft-copy{margin:30px 0 0;padding-top:24px;border-top:1px solid rgba(255,253,249,.14);width:100%;font-size:.78rem;letter-spacing:.04em;color:rgba(255,253,249,.55)}
+.ft-copy a{color:inherit}
+@media(hover:hover) and (pointer:fine){ .ft-links a:hover{color:#C9A66B} .ft-social a:hover{color:#FFFDF9;background:rgba(255,253,249,.08)} }
+@media(max-width:520px){ .ft-links{gap:0 18px} .ft-links a{font-size:.66rem;letter-spacing:.16em} }
+/* Letras: títulos finos de Lexend y acentos en cursiva dorada, como la portada de /bodas */
+[data-theme="champana-aire"] .post-hero h1,[data-theme="champana-aire"] .blog-hero h1{font-weight:300;letter-spacing:-.03em}
+[data-theme="champana-aire"] .post-hero h1 span,[data-theme="champana-aire"] .blog-hero h1 span{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;color:#94743F;background:none;letter-spacing:0;font-size:1.1em}
+[data-theme="champana-aire"] .eyebrow{font-family:var(--font-body);font-weight:500;letter-spacing:.24em;color:#94743F}
+[data-theme="champana-aire"] .eyebrow::before{display:none}
+[data-theme="champana-aire"] .prose h2,[data-theme="champana-aire"] .post-cta h2{font-weight:500;letter-spacing:-.01em}
+[data-theme="champana-aire"] .post-cta h2 span{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;color:#94743F;background:none}
+[data-theme="champana-aire"] .prose h3{font-weight:500}
+[data-theme="champana-aire"] .btn{border-radius:999px;font-size:.74rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+[data-theme="champana-aire"] .btn svg{display:none}
+[data-theme="champana-aire"] .btn-primary{background:#2E241A;color:#FFFDF9}
+[data-theme="champana-aire"] .btn-ghost{border-color:#2E241A;color:#2E241A}
+[data-theme="champana-aire"] .post-card .cat{color:#94743F;letter-spacing:.2em}
+[data-theme="champana-aire"] .post-cover .blob{display:none}
+
+/* ===== Portada general del blog (/blog/): destacado + últimos + una fila por tema ===== */
+.bx{background:#FBFAF7;padding:40px 0 var(--section-space)}
+.bx-head{margin-bottom:22px}
+.bx-head h1{margin-top:8px;font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:700;letter-spacing:-.02em;max-width:24ch}
+.bx-top{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);gap:clamp(20px,3vw,36px);align-items:start;padding-bottom:40px;border-bottom:1px solid var(--mint-200)}
+.bx-feat{position:relative;display:block;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/2;text-decoration:none;color:#fff;background:#E9EEF4}
+.bx-feat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1)}
+.bx-feat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,35,0) 40%,rgba(10,20,35,.72) 100%)}
+.bx-feat-text{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(18px,3vw,30px)}
+.bx-feat h2{margin:12px 0 8px;color:#fff;font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:600;line-height:1.2;max-width:26ch}
+.bx-feat .bx-meta{color:rgba(255,255,255,.85)}
+.bx-latest h2{font-size:1.3rem;font-weight:700;margin:2px 0 14px}
+.bx-mini{display:grid;grid-template-columns:84px minmax(0,1fr);gap:14px;align-items:center;padding:10px 0;text-decoration:none;color:var(--ink)}
+.bx-mini + .bx-mini{border-top:1px solid var(--mint-200)}
+.bx-mini img{width:84px;height:84px;object-fit:cover;border-radius:12px}
+.bx-mini h3{font-size:.98rem;font-weight:600;line-height:1.3;margin:0 0 6px}
+.bx-meta{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft)}
+.bx-meta i{font-style:normal;opacity:.6}
+.bx-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;background:#fff;color:var(--ink);font-size:.74rem;font-weight:600}
+.bx-pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.bx-eventos::before{background:#2C65B0}.bx-sesiones::before{background:#55763A}.bx-bodas::before{background:#94743F}
+.bx-row{padding-top:42px}
+.bx-row-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.bx-row-head h2{font-size:clamp(1.3rem,2.2vw,1.6rem);font-weight:700}
+.bx-row-tools{display:flex;align-items:center;gap:14px}
+.bx-all{font-size:.88rem;font-weight:600;color:var(--green-700);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+.bx-arrows{display:flex;gap:8px}
+.bx-arrows button{width:42px;height:42px;border-radius:50%;border:1px solid var(--mint-200);background:#fff;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:background-color .2s ease,opacity .2s ease}
+.bx-arrows button svg{width:18px;height:18px}
+.bx-prev svg{transform:rotate(180deg)}
+.bx-arrows button:disabled{opacity:.35;cursor:default}
+.bx-track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/3);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.bx-track::-webkit-scrollbar{display:none}
+.bx-card{scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border:1px solid var(--mint-200);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .25s ease,box-shadow .25s ease}
+.bx-card img{width:100%;aspect-ratio:3/2;height:auto;object-fit:cover}
+.bx-card > div{padding:16px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.bx-card .bx-pill{align-self:flex-start;background:#F4F6F9}
+.bx-card h3{font-size:1.08rem;font-weight:600;line-height:1.3;margin:0}
+.bx-card p{font-size:.9rem;line-height:1.55;color:var(--ink-soft);margin:0;flex:1}
+@media(hover:hover) and (pointer:fine){
+  .bx-feat:hover img{transform:scale(1.03)}
+  .bx-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .bx-mini:hover h3,.bx-card:hover h3{color:var(--green-700)}
+  .bx-arrows button:not(:disabled):hover{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+}
+@media(max-width:900px){
+  .bx-top{grid-template-columns:1fr}
+  .bx-feat{aspect-ratio:4/3}
+  .bx-track{grid-auto-columns:78%}
+}
+@media(max-width:520px){ .bx{padding-top:24px} .bx-feat{aspect-ratio:4/5} .bx-row-head h2{font-size:1.2rem} }
+/* Portada del blog: paleta principal (blanco y celeste) y espacios más compactos */
+.bx{background:#FFFFFF;padding:28px 0 64px}
+.bx-head{margin-bottom:18px}
+.bx-top{padding:0 0 30px;border-bottom-color:#DCEBF8}
+.bx-row{padding:30px 0 0}
+.bx-row-head{margin-bottom:14px}
+.bx-feat{background:#E6F1FC}
+.bx-feat::after{background:linear-gradient(180deg,rgba(19,42,69,0) 40%,rgba(19,42,69,.78) 100%)}
+.bx-mini + .bx-mini{border-top-color:#DCEBF8}
+.bx-card{border-color:#DCEBF8}
+.bx-card .bx-pill{background:#EEF6FD}
+.bx-arrows button{border-color:#DCEBF8}
+@media(max-width:520px){ .bx{padding:20px 0 48px} .bx-top{padding-bottom:24px} .bx-row{padding-top:24px} }
+.bx-row-head h2 a{display:inline-flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
+.bx-row-head h2 svg{width:20px;height:20px;color:var(--green-700);transition:transform .2s ease}
+@media(hover:hover) and (pointer:fine){ .bx-row-head h2 a:hover{color:var(--green-700)} .bx-row-head h2 a:hover svg{transform:translateX(4px)} }
+
+/* Transición suave entre páginas (por ejemplo, del blog de bodas a la portada del blog):
+   la página que se va se desvanece y la nueva aparece subiendo apenas.
+   Solo en navegadores que la soportan (Chrome, Edge, Safari reciente); en los demás se navega normal. */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vtOut .16s ease-out both}
+::view-transition-new(root){animation:vtIn .26s cubic-bezier(.23,1,.32,1) both}
+@keyframes vtOut{to{opacity:0}}
+@keyframes vtIn{from{opacity:0;transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
+/* Cabecera de fila: solo el título es enlace, hover sutil; flechas solo en escritorio */
+.bx-row-head h2 a{gap:6px;white-space:nowrap;text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:5px;transition:text-decoration-color .2s ease}
+.bx-row-head h2 svg{width:16px;height:16px;transition:transform .2s ease}
+@media(hover:hover) and (pointer:fine){ .bx-row-head h2 a:hover{color:inherit;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent)} .bx-row-head h2 a:hover svg{transform:translateX(3px)} }
+@media(min-width:901px){ .bx-arrows.bx-few{display:none} }
+@media(max-width:720px){ .bx-track{grid-auto-columns:100%} .bx-arrows button{width:38px;height:38px} }
+/* Cuarta tarjeta: ver todos los posts de la categoría */
+.bx-seeall{--c:#2C65B0;background:color-mix(in srgb,var(--c) 6%,#fff)}
+.bx-seeall-sesiones{--c:#55763A}.bx-seeall-bodas{--c:#94743F}
+.bx-seeall > div{justify-content:center;align-items:center;text-align:center;gap:12px;padding:32px 24px;min-height:100%}
+.bx-seeall h3{color:var(--c)}
+.bx-seeall p{flex:0}
+.bx-seeall-ico{width:52px;height:52px;border-radius:50%;border:1px solid color-mix(in srgb,var(--c) 35%,transparent);display:grid;place-items:center;color:var(--c);transition:transform .25s ease,background-color .25s ease}
+.bx-seeall-ico svg{width:20px;height:20px}
+@media(hover:hover) and (pointer:fine){ .bx-seeall:hover h3{color:var(--c)} .bx-seeall:hover .bx-seeall-ico{transform:translateX(4px);background:#fff} }

@@ -885,6 +885,17 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .brand-img{display:block;height:46px;aspect-ratio:1134/319;background:var(--ink);-webkit-mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat;mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat}
   footer .brand-img{height:72px;background:#FFFFFF}
   @media(max-width:640px){ .brand-img{height:38px} footer .brand-img{height:60px} }
+
+  /* Transición suave entre páginas (por ejemplo, del blog de bodas a la portada del blog):
+     la página que se va se desvanece y la nueva aparece subiendo apenas.
+     Solo en navegadores que la soportan (Chrome, Edge, Safari reciente); en los demás se navega normal. */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:vtOut .16s ease-out both}
+  ::view-transition-new(root){animation:vtIn .26s cubic-bezier(.23,1,.32,1) both}
+  @keyframes vtOut{to{opacity:0}}
+  @keyframes vtIn{from{opacity:0;transform:translateY(8px)}}
+  @media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
+  
   .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   .form-status{font-size:.92rem;font-weight:700;min-height:1.2em}
   .form-status.is-success{color:var(--green-600)}
