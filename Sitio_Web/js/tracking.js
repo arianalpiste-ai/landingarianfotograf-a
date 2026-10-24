@@ -63,9 +63,34 @@
     window.fbq(method, name, parameters || {}, id ? { eventID: id } : undefined);
   }
 
-  function trackStandard(name, parameters, id) { send('track', name, parameters, id); }
+  // Línea de servicio de la página (eventos, sesiones o bodas), para separar en Meta de dónde viene cada evento.
+  // Páginas de servicio por su ruta; el blog por la paleta de su categoría; /reservar queda «general»
+  // salvo en los botones de paquete, que mandan la suya (ver el clic más abajo).
+  function serviceLine() {
+    var path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+    if (path === '/bodas') return 'bodas';
+    if (path === '/sesiones-familiares') return 'sesiones';
+    if (path === '/' || path === '/index') return 'eventos';
+    var themed = document.querySelector('[data-theme]');
+    var theme = themed ? themed.getAttribute('data-theme') : '';
+    if (path.indexOf('/blog') === 0) {
+      if (theme === 'champana-aire') return 'bodas';
+      if (theme === 'bosque-aire') return 'sesiones';
+      if (path === '/blog') return 'general';
+      return 'eventos';
+    }
+    return 'general';
+  }
 
-  function trackCustom(name, parameters, id) { send('trackCustom', name, parameters, id); }
+  function withService(parameters) {
+    var p = parameters || {};
+    if (!p.service_line) p.service_line = serviceLine();
+    return p;
+  }
+
+  function trackStandard(name, parameters, id) { send('track', name, withService(parameters), id); }
+
+  function trackCustom(name, parameters, id) { send('trackCustom', name, withService(parameters), id); }
 
   if (isProduction) {
     loadPixel();
@@ -177,6 +202,9 @@
       page_path: window.location.pathname
     };
     if (link.dataset.package) parameters.package_name = link.dataset.package;
+    // En /reservar el paquete elegido dice si es de eventos o de sesiones.
+    var panel = link.closest('[data-panel]');
+    if (panel && (panel.dataset.panel === 'eventos' || panel.dataset.panel === 'sesiones')) parameters.service_line = panel.dataset.panel;
     if (link.dataset.value) {
       parameters.value = Number(link.dataset.value);
       parameters.currency = link.dataset.currency || 'PEN';
