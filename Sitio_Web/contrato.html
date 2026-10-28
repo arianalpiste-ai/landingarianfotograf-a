@@ -638,12 +638,15 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .doc-t th,.doc-t td{border:1px solid #E1ECF7;padding:8px 10px;text-align:left}
   .doc-t th{background:#EEF6FD}
 
-  .sig-box{position:relative;margin-top:10px;border:1.5px dashed #9EBFE3;border-radius:14px;background:#FBFDFF;height:180px;touch-action:none}
-  .sig-box canvas{display:block;width:100%;height:100%;border-radius:14px;cursor:crosshair}
-  .sig-ph{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#9EBFE3;font-size:.95rem;pointer-events:none;transition:opacity .2s ease}
+  .sig-box{position:relative;margin-top:10px;border:1.5px dashed #9EBFE3;border-radius:14px;background:#FBFDFF;height:200px;touch-action:none;overflow:hidden}
+  .sig-box canvas{display:block;width:100%;height:100%;cursor:crosshair;touch-action:none}
+  .sig-box::after{content:"";position:absolute;left:8%;right:8%;bottom:28%;border-bottom:1px solid #C9DCF0;pointer-events:none}
+  .sig-ph{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);color:#9EBFE3;font-size:.95rem;pointer-events:none;transition:opacity .2s ease}
   .sig-box.signed .sig-ph{opacity:0}
   .sig-box.invalid{border-color:#D9467A}
-  .sig-clear{position:absolute;right:8px;top:8px;border:0;background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:.8rem;color:var(--ink-soft);box-shadow:0 1px 4px rgba(19,42,69,.12);cursor:pointer}
+  .sig-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px}
+  .sig-clear{border:1px solid #C9DCF0;background:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:.82rem;color:var(--ink-soft);cursor:pointer}
+  .sig-clear:active{transform:scale(.97)}
 
   .ck{display:flex;gap:12px;align-items:flex-start;margin-top:16px;font-size:.9rem;line-height:1.5;cursor:pointer}
   .ck input{flex:none;width:20px;height:20px;margin-top:2px;accent-color:var(--green-700)}
@@ -870,8 +873,8 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
       <div class="sig-box">
         <canvas id="sig" aria-label="Recuadro para firmar" role="img"></canvas>
         <span class="sig-ph" aria-hidden="true">Firma aquí</span>
-        <button type="button" class="sig-clear" id="sig-clear">Borrar</button>
       </div>
+      <div class="sig-tools"><span class="hint" style="margin:0">Si no te gustó, bórrala y firma de nuevo.</span><button type="button" class="sig-clear" id="sig-clear">Borrar firma</button></div>
 
       <label class="ck"><input type="checkbox" name="acepto" required><span>Leí y acepto este contrato y la <a href="/privacidad" target="_blank" rel="noopener">Política de privacidad</a>.</span></label>
       <label class="ck opt"><input type="checkbox" name="publicidad"><span>Acepto que mis datos se usen para medir anuncios (opcional).</span></label>
@@ -1037,7 +1040,9 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
       panes.forEach(function(p){ p.hidden = +p.dataset.step!==n });
       dots.forEach(function(d){ var k=+d.dataset.go; d.classList.toggle('on',k===n); d.classList.toggle('done',k!==n && k<=hecho+1); if(k===n) d.setAttribute('aria-current','step'); else d.removeAttribute('aria-current') });
       if(n===4) size();
-      var top=document.querySelector('.ct-steps').getBoundingClientRect().top+scrollY-90;
+      // En el paso 4 el recuadro de la firma queda arriba, lejos del aviso de cookies que aparece abajo en el celular
+      var ref=n===4 ? document.querySelector('[data-step="4"] .ct-card') : document.querySelector('.ct-steps');
+      var top=ref.getBoundingClientRect().top+scrollY-(n===4?84:90);
       window.scrollTo({top:top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
     }
     function avisar(faltan){
@@ -1052,28 +1057,61 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     form.querySelectorAll('[data-prev]').forEach(function(b){ b.addEventListener('click',function(){ ir(paso-1) }) });
     dots.forEach(function(d){ d.addEventListener('click',function(){ var k=+d.dataset.go; if(k!==paso && k<=hecho+1) ir(k) }) });
 
-    // Firma con el dedo o el mouse
-    var box=document.querySelector('.sig-box'), cv=document.getElementById('sig'), ctx=cv.getContext('2d'), drawing=false, signed=false, last=null;
+    // Firma con el dedo o el mouse. Se guardan los trazos como puntos (no como imagen): así nada se pierde si la
+    // pantalla cambia de tamaño (la barra del navegador en el celular) y la firma se exporta completa, aunque el
+    // dedo se haya salido del recuadro, recortada justo alrededor de los trazos.
+    var box=document.querySelector('.sig-box'), cv=document.getElementById('sig'), ctx=cv.getContext('2d');
+    var trazos=[], actual_=null, signed=false, ancho=0;
+    var INK='#132A45', GROSOR=2.4;
+    function dibujar(g, lista, k, dx, dy){
+      g.lineCap='round'; g.lineJoin='round'; g.strokeStyle=INK; g.fillStyle=INK; g.lineWidth=GROSOR*k;
+      lista.forEach(function(t){
+        if(t.length===1){ g.beginPath(); g.arc((t[0].x+dx)*k,(t[0].y+dy)*k,GROSOR*k/2,0,7); g.fill(); return; }
+        g.beginPath(); g.moveTo((t[0].x+dx)*k,(t[0].y+dy)*k);
+        for(var n=1;n<t.length;n++) g.lineTo((t[n].x+dx)*k,(t[n].y+dy)*k);
+        g.stroke();
+      });
+    }
     function size(){
       var r=cv.getBoundingClientRect(); if(!r.width) return;
-      var dpr=window.devicePixelRatio||1, img=signed?cv.toDataURL():null;
+      // En el celular la altura de la ventana cambia al hacer scroll: solo se redibuja si cambió el ancho del recuadro
+      if(Math.round(r.width)===ancho && cv.height) return;
+      ancho=Math.round(r.width);
+      var dpr=window.devicePixelRatio||1;
       cv.width=r.width*dpr; cv.height=r.height*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-      ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#132A45';
-      if(img){ var i=new Image(); i.onload=function(){ ctx.drawImage(i,0,0,r.width,r.height) }; i.src=img; }
+      dibujar(ctx,trazos,1,0,0);
     }
     window.addEventListener('resize',size);
     var pos=function(e){ var r=cv.getBoundingClientRect(); return {x:e.clientX-r.left,y:e.clientY-r.top} };
-    cv.addEventListener('pointerdown',function(e){ drawing=true; last=pos(e); cv.setPointerCapture(e.pointerId); ctx.beginPath(); ctx.arc(last.x,last.y,1.1,0,7); ctx.fillStyle='#132A45'; ctx.fill(); });
-    cv.addEventListener('pointermove',function(e){ if(!drawing) return; var p=pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last=p; if(!signed){ signed=true; box.classList.add('signed'); box.classList.remove('invalid') } });
-    var stop=function(){ drawing=false };
+    cv.addEventListener('pointerdown',function(e){
+      e.preventDefault(); cv.setPointerCapture(e.pointerId);
+      actual_=[pos(e)]; trazos.push(actual_); dibujar(ctx,[actual_],1,0,0);
+    });
+    cv.addEventListener('pointermove',function(e){
+      if(!actual_) return;
+      var p=pos(e), q=actual_[actual_.length-1];
+      actual_.push(p);
+      ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle=INK; ctx.lineWidth=GROSOR;
+      ctx.beginPath(); ctx.moveTo(q.x,q.y); ctx.lineTo(p.x,p.y); ctx.stroke();
+      if(!signed && actual_.length>2){ signed=true; box.classList.add('signed'); box.classList.remove('invalid') }
+    });
+    var stop=function(){ actual_=null };
     cv.addEventListener('pointerup',stop); cv.addEventListener('pointercancel',stop);
-    document.getElementById('sig-clear').addEventListener('click',function(){ ctx.clearRect(0,0,cv.width,cv.height); signed=false; box.classList.remove('signed') });
+    document.getElementById('sig-clear').addEventListener('click',function(){
+      trazos=[]; actual_=null; signed=false; box.classList.remove('signed');
+      var dpr=window.devicePixelRatio||1; ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,cv.width,cv.height); ctx.setTransform(dpr,0,0,dpr,0,0);
+    });
 
-    // Firma en JPEG con fondo blanco y ancho fijo: liviana y lista para el PDF del contrato
+    // Firma en JPEG con fondo blanco, recortada alrededor de los trazos (con margen) y a 600 px de ancho máximo
     function firmaJpg(){
-      var w=600, h=Math.round(w*cv.height/cv.width), c=document.createElement('canvas'); c.width=w; c.height=h;
-      var g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,w,h); g.drawImage(cv,0,0,w,h);
-      return c.toDataURL('image/jpeg',0.85);
+      var minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
+      trazos.forEach(function(t){ t.forEach(function(p){ if(p.x<minX)minX=p.x; if(p.x>maxX)maxX=p.x; if(p.y<minY)minY=p.y; if(p.y>maxY)maxY=p.y; }) });
+      var pad=GROSOR*4, bw=Math.max(40,maxX-minX+pad*2), bh=Math.max(20,maxY-minY+pad*2);
+      var k=Math.min(600/bw, 3), w=Math.round(bw*k), h=Math.round(bh*k);
+      var c=document.createElement('canvas'); c.width=w; c.height=h;
+      var g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,w,h);
+      dibujar(g,trazos,k,pad-minX,pad-minY);
+      return c.toDataURL('image/jpeg',0.88);
     }
     // Enviar: el servidor valida todo de nuevo, calcula el precio, guarda el contrato, manda los correos y avisa a Meta.
     var iniciado=Date.now(), enviando=false, btn=form.querySelector('.ct-submit');

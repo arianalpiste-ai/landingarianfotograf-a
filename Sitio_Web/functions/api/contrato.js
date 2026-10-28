@@ -57,7 +57,7 @@ export async function onRequestPost(context) {
   if (d.nombre.length < 3) faltan.push('tu nombre completo');
   if (!EMAIL_PATTERN.test(d.correo)) faltan.push('un correo válido');
   if (d.celular.replace(/\D/g, '').length < 9) faltan.push('un celular válido');
-  if (!SIGNATURE_PATTERN.test(input.firma || '') || input.firma.length < 2000) faltan.push('tu firma');
+  if (!SIGNATURE_PATTERN.test(input.firma || '') || input.firma.length < 800) faltan.push('tu firma');
   if (input.acepta_privacidad !== 'si') faltan.push('aceptar el contrato y la Política de privacidad');
   if (faltan.length) return json({ ok: false, error: `Falta completar: ${faltan.join(', ')}.` }, 400);
 
