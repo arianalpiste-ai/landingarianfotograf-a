@@ -71,6 +71,7 @@
     if (path === '/bodas') return 'bodas';
     if (path === '/sesiones-familiares') return 'sesiones';
     if (path === '/' || path === '/index') return 'eventos';
+    if (path === '/contrato' || path === '/gracias/contrato') return 'eventos';  // por ahora el contrato es solo de eventos
     var themed = document.querySelector('[data-theme]');
     var theme = themed ? themed.getAttribute('data-theme') : '';
     if (path.indexOf('/blog') === 0) {
@@ -186,6 +187,14 @@
       content_category: 'blog'
     }, eventId('blog-view'));
   }
+
+  // Contrato firmado (/gracias/contrato): Purchase del navegador con el mismo ID que manda el servidor.
+  document.addEventListener('meta:purchase', function (event) {
+    if (!event.detail || !event.detail.eventId) return;
+    var p = { content_name: 'Contrato firmado', currency: 'PEN' };
+    if (event.detail.value) p.value = Number(event.detail.value);
+    trackStandard('Purchase', p, event.detail.eventId);
+  });
 
   document.addEventListener('meta:lead', function (event) {
     if (!event.detail || !event.detail.eventId) return;

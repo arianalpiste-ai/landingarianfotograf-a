@@ -48,7 +48,9 @@ export async function sendCapiEvent(env, {
         event_source_url: eventSourceUrl,
         user_data: cleanUserData,
         custom_data: customData
-      }]
+      }],
+      // Solo durante pruebas: con META_TEST_EVENT_CODE definido, los eventos aparecen en «Probar eventos» de Meta
+      ...(env.META_TEST_EVENT_CODE ? { test_event_code: env.META_TEST_EVENT_CODE } : {})
     })
   });
   const body = await readJson(response);

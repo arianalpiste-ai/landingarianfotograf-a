@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="es" data-theme="cielo-aire">
+<head>
+<!-- Etiquetas diferidas, para no frenar la portada en celular: el Meta Pixel (fbevents.js) y GTM (GA4) se
+     descargan al terminar de cargar la página, apenas el navegador queda libre (máx. 0,8 s), o con la primera
+     interacción (scroll, toque, tecla), lo que pase primero. Un solo disparador: ninguno se carga dos veces.
+     El dataLayer y la cola del Pixel existen desde ya: ningún evento se pierde mientras la persona siga en la página. -->
+<script>
+window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+(function(w,d){
+  var q=[],done=false,ok=false,ev=['scroll','pointerdown','keydown','touchstart'];
+  // Consentimiento (js/consent.js): sin un «Aceptar» guardado, ni el Pixel ni GTM se descargan; la cola espera.
+  try{ ok=localStorage.getItem('aa-cookies')==='acepta'; }catch(e){}
+  function flush(){ if(done&&ok) q.splice(0).forEach(function(f){f()}); }
+  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); flush(); }
+  w.__afterLoad=w.__afterIdle=function(f){ done&&ok?f():q.push(f); };
+  w.__tagsNow=run;
+  w.__cookiesOk=function(){ return ok; };
+  w.__acceptCookies=function(){ ok=true; flush(); };
+  ev.forEach(function(e){w.addEventListener(e,run,{passive:true})});
+  w.addEventListener('load',function(){ 'requestIdleCallback' in w?requestIdleCallback(run,{timeout:800}):setTimeout(run,200); });
+  w.__afterLoad(function(){ var j=d.createElement('script'); j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=GTM-MKJXCMSL'; d.head.appendChild(j); });
+})(window,document);
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contrato de cobertura de eventos | Arian Alpiste Fotografía</title>
+<meta name="description" content="Contrato de servicio fotográfico para bautizos y cumpleaños con Arian Alpiste.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Lexend+Deca:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Paleta — inspirada en la referencia: menta + verde profundo + rosa + toques de confeti */
+    --mint-50:#F3FAF7;
+    --mint-100:#E4F3EC;
+    --mint-200:#C9E9DD;
+    --aqua:#BFEAE6;
+    --pink-100:#FBE9EA;
+    --pink-200:#F6D3D7;
+    --green-700:#1F5C4C;   /* primario (botones) */
+    --green-600:#2C7562;
+    --green-500:#4E9A84;   /* banda verde */
+    --ink:#16302A;         /* texto principal */
+    --ink-soft:#4B635C;    /* texto secundario */
+    --white:#FFFFFF;
+    --coral:#F2785C;
+    --sun:#F5C04A;
+    --navy:#2F3A8F;
+    --berry:#D9467A;
+    --sky:#5CB8E6;
+
+    --radius-sm:12px;
+    --radius:20px;
+    --radius-lg:32px;
+    --shadow:0 10px 30px -12px rgba(22,48,42,.18);
+    --shadow-lg:0 24px 60px -20px rgba(22,48,42,.28);
+    --maxw:1180px;
+    /* Espacio entre secciones: cambia SOLO este valor y se ajusta toda la página */
+    --section-space:clamp(96px,9vw,136px);
+    --header-h:76px;
+    --font-head:"Lexend Deca", system-ui, sans-serif;
+    --font-body:"Poppins", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html{overflow-x:clip;-webkit-tap-highlight-color:transparent}
+  a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
+  body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--mint-50);line-height:1.6;font-size:17px;overflow-x:hidden;overflow-x:clip}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--font-head);line-height:1.08;margin:0;letter-spacing:-.02em}
+  h1{font-size:clamp(2.4rem,5.6vw,4.2rem);font-weight:800}
+  h2{font-size:clamp(1.9rem,3.8vw,2.9rem);font-weight:700}
+  h3{font-size:1.25rem;font-weight:700}
+  p{margin:0}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{position:relative;padding:var(--section-space) 0}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-600);margin-bottom:14px}
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral)}
+  .lead{color:var(--ink-soft);font-size:1.1rem;max-width:56ch}
+  .center{text-align:center}
+  .center .lead{margin-left:auto;margin-right:auto}
+
+  /* Botones */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font-weight:700;font-size:.98rem;text-decoration:none;cursor:pointer;border:2px solid transparent;transition:transform .2s ease, background .2s ease, box-shadow .2s ease, color .2s ease}
+  .btn-primary{background:var(--green-700);color:var(--white)}
+  .btn-primary:hover{background:var(--green-600);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .btn-ghost{border-color:var(--green-700);color:var(--green-700);background:transparent}
+  .btn-ghost:hover{background:var(--green-700);color:var(--white)}
+  .btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+  .btn svg{width:18px;height:18px}
+
+  /* Confeti */
+  .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .confetti i{position:absolute;display:block;border-radius:2px;opacity:.9}
+  .confetti i.dot{border-radius:50%}
+  section > .wrap{position:relative;z-index:1}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--mint-50) 85%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(31,92,76,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+  .logo{font-family:var(--font-head);font-weight:800;font-size:1.5rem;text-decoration:none;color:var(--green-700);display:flex;align-items:center;gap:10px}
+  /* Logo: iniciales "aa" (Arian Alpiste) */
+  .logo-mark{display:inline-flex;align-items:baseline;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:24px;line-height:1;letter-spacing:-.14em;padding:7px calc(9px + .14em) 9px 9px;border-radius:12px;background:var(--green-700);color:#fff}
+  .logo-mark::before{content:"a"}
+  .logo-mark::after{content:"a";color:#FF9A7E}
+  .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+  .nav-links a{text-decoration:none;font-weight:500;color:var(--ink-soft);font-size:.96rem;padding:8px 0;transition:color .2s}
+  .nav-links a:hover{color:var(--green-700)}
+  .nav-cta{display:flex;gap:10px}
+  .nav-cta .btn{min-height:44px;padding:0 20px;font-size:.9rem}
+  .menu-btn{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;color:var(--green-700)}
+  .mobile-menu{background:var(--white);border-top:1px solid var(--mint-200);padding:8px 16px 20px;box-shadow:var(--shadow)}
+  .mobile-menu ul{list-style:none;margin:0 0 16px;padding:0}
+  .mobile-menu li a{display:flex;align-items:center;min-height:52px;text-decoration:none;font-weight:700;font-size:1.05rem;border-bottom:1px solid var(--mint-200)}
+  .mobile-menu .btn{width:100%}
+
+  /* HERO */
+  .hero{min-height:calc(100svh - var(--header-h));display:flex;align-items:center;padding:48px 0 var(--section-space);background:linear-gradient(180deg,var(--mint-100),var(--mint-50))}
+  .hero > .wrap{width:100%}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+  .hero .hero-title{font-family:var(--font-head);font-weight:800;font-size:clamp(2.4rem,5.6vw,4.2rem);line-height:1.08;letter-spacing:-.02em;margin:0;color:var(--ink)}
+  .hero h1.eyebrow{font-family:var(--font-body);line-height:1.6;letter-spacing:.12em}
+  .hero .hero-title span{color:var(--green-600);position:relative;white-space:nowrap}
+  .hero .hero-title span::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.28em;background:var(--sun);opacity:.55;z-index:-1;border-radius:6px}
+  .hero .lead{margin:22px 0 32px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:nowrap}
+  .hero-actions .btn{white-space:nowrap;padding:0 20px}
+  .br-sm{display:none}
+  .hero-stats{display:flex;gap:32px;margin-top:40px;flex-wrap:wrap}
+  .hero-stats strong{font-family:var(--font-head);font-size:1.8rem;display:block;color:var(--green-700)}
+  .hero-stats span{font-size:.9rem;color:var(--ink-soft)}
+  .hero-visual{position:relative;aspect-ratio:1/1;max-width:520px;justify-self:center;width:100%}
+  .hero-circle{position:absolute;inset:8% 0 0 8%;border-radius:50%;background:var(--aqua)}
+  .hero-photo{position:absolute;inset:0 6% 6% 0;border-radius:50% 50% 46% 54% / 58% 52% 48% 42%;overflow:hidden;box-shadow:var(--shadow-lg)}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+  .badge-float{position:absolute;background:var(--white);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;font-size:.88rem;font-weight:500}
+  .badge-float b{display:block;font-family:var(--font-head);font-size:1rem}
+  .badge-float .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+  .badge-1{left:-6%;top:4%}
+  .badge-1 .ico{background:var(--pink-200);color:var(--berry)}
+  .badge-2{right:-4%;bottom:2%}
+  .badge-2 .ico{background:#FFF1CC;color:#A86F00}
+
+  /* SERVICIOS — tarjeta grande con 3 */
+  .services-card{margin-top:52px;background:var(--white);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .service{display:flex;flex-direction:column;gap:14px}
+  .service-img{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3.3}
+  .service-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .service:hover .service-img img{transform:scale(1.05)}
+  .service-tag{position:absolute;top:12px;left:12px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--white)}
+  .service p{color:var(--ink-soft);font-size:.96rem}
+  .service-meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:12px;border-top:1px dashed var(--mint-200);font-size:.9rem}
+  .service-meta strong{color:var(--coral)}
+  .service-meta a{font-weight:700;color:var(--green-700);text-decoration:none}
+  .carousel-dots{display:none;justify-content:center;gap:4px;margin-top:4px}
+  .carousel-dots button{width:28px;height:28px;border:0;background:none;padding:0;cursor:pointer;display:grid;place-items:center}
+  .carousel-dots button::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--mint-200);transition:width .25s ease, background .25s ease}
+  .carousel-dots button[aria-current="true"]::before{width:22px;background:var(--green-700)}
+
+  /* SOBRE MÍ — split con mancha rosa */
+  .about{background:var(--white)}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .split .lead{margin:20px 0 28px}
+  .checklist{list-style:none;padding:0;margin:0 0 32px;display:grid;gap:12px}
+  .checklist li{display:flex;gap:12px;align-items:flex-start}
+  .checklist svg{flex:none;width:24px;height:24px;color:var(--green-600);margin-top:2px}
+  .about-visual{position:relative;max-width:480px;justify-self:center;width:100%}
+  .blob-pink{position:absolute;inset:-6% -8% 10% 14%;background:var(--pink-200);border-radius:42% 58% 36% 64% / 52% 38% 62% 48%;transform:rotate(-6deg)}
+  .about-photo{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow-lg)}
+  .about-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+  .sticker{position:absolute;right:-18px;bottom:28px;background:var(--sun);color:var(--ink);font-family:var(--font-head);font-weight:800;font-size:.95rem;width:108px;height:108px;border-radius:50%;display:grid;place-items:center;text-align:center;line-height:1.15;transform:rotate(10deg);box-shadow:var(--shadow)}
+
+  /* PORTFOLIO — banda verde */
+  .portfolio{padding-bottom:0;background:var(--mint-50)}
+  .portfolio-stage{position:relative;margin-top:52px;padding-bottom:var(--section-space)}
+  .portfolio-stage::before{content:"";position:absolute;left:0;right:0;top:150px;bottom:0;background:var(--green-500)}
+  .gallery{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:32px 24px}
+  .gallery .shot{width:calc((100% - 48px)/3)}
+  .shot{margin:0}
+  .shot .frame{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow-lg);border:6px solid var(--white)}
+  .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .shot:hover img{transform:scale(1.05)}
+  .shot figcaption{color:var(--white);margin-top:18px}
+  .shot figcaption small{opacity:.8;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+  .shot figcaption h3{margin:4px 0 6px}
+  .shot figcaption p{opacity:.88;font-size:.95rem}
+  .shot[hidden]{display:none}
+  .shot.pop{animation:pop .45s ease both}
+  @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+  .portfolio-more{position:relative;text-align:center;margin-top:44px}
+  .btn-light{background:var(--white);color:var(--green-700)}
+  .btn-light:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .pills{position:relative;display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:28px auto 0;background:var(--aqua);padding:6px;border-radius:999px;width:max-content;max-width:100%}
+  .pills button{border:0;background:transparent;font:inherit;font-weight:700;font-size:.92rem;color:var(--green-700);padding:0 20px;min-height:44px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+  .pills button[aria-pressed="true"],.pills button:hover{background:var(--green-700);color:var(--white)}
+
+  /* PROCESO */
+  .process{background:var(--pink-100)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;counter-reset:step}
+  .step{background:var(--white);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow);position:relative}
+  .step::before{counter-increment:step;content:counter(step);font-family:var(--font-head);font-weight:800;font-size:1.1rem;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;color:var(--white)}
+  .step:nth-child(1)::before{background:var(--coral)}
+  .step:nth-child(2)::before{background:var(--sky)}
+  .step:nth-child(3)::before{background:var(--sun);color:var(--ink)}
+  .step:nth-child(4)::before{background:var(--green-600)}
+  .step p{color:var(--ink-soft);font-size:.95rem;margin-top:8px}
+
+  /* PAQUETES */
+  .pricing{background:var(--mint-100)}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;align-items:stretch}
+  .plan{background:var(--white);border-radius:var(--radius-lg);padding:34px 30px;display:flex;flex-direction:column;border:2px solid transparent;box-shadow:var(--shadow);transition:transform .25s ease}
+  .plan:hover{transform:translateY(-4px)}
+  .plan.featured{border-color:var(--green-700);position:relative}
+  .plan.featured .ribbon{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--coral);color:var(--white);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+  .plan .price{font-family:var(--font-head);font-size:2.6rem;font-weight:800;color:var(--green-700);margin:14px 0 4px}
+  .plan .price small{font-size:1rem;color:var(--ink-soft);font-weight:500}
+  .plan > p{color:var(--ink-soft);font-size:.95rem}
+  .plan ul{list-style:none;padding:0;margin:22px 0 28px;display:grid;gap:8px;font-size:.95rem;line-height:1.45}
+  .plan li{display:flex;gap:10px}
+  .plan li svg{flex:none;width:20px;height:20px;color:var(--green-600);margin-top:1px}
+  .plan li b{font-weight:700;color:var(--green-700)}
+  .plan .btn{margin-top:auto}
+  .pricing[data-mode="foto"] .v-only,.pricing[data-mode="video"] .f-only{display:none!important}
+  .mode-switch{margin-top:24px}
+  .family-chip{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:6px 18px 6px 6px;background:#FFF1C9;border:1px solid #FFE08A;border-radius:999px;text-decoration:none;color:var(--ink);font-size:.95rem;transition:transform .2s ease, box-shadow .2s ease}
+  .family-chip:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .family-chip .ico{flex:none;width:34px;height:34px;border-radius:50%;background:var(--sky);color:var(--white);display:grid;place-items:center}
+  .family-chip .ico svg{width:18px;height:18px}
+  .family-chip b{color:var(--green-700)}
+  .family-chip .sm{display:none}
+  .inline-link{color:var(--green-700);font-weight:700;text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:3px}
+  .inline-link:hover{text-decoration-color:var(--green-700)}
+  .plans-foot{text-align:center;margin-top:36px;color:var(--ink-soft);font-size:.95rem}
+  .plans-foot a{font-weight:700;color:var(--green-700);text-decoration:none}
+
+  /* TESTIMONIOS */
+  .testimonials{background:var(--white)}
+  .quotes{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:stretch}
+  .quote-photo{border-radius:var(--radius-lg);overflow:hidden;position:relative;background:var(--sun);min-height:100%}
+  .quote-photo img{position:absolute;inset:0;object-position:50% 70%}
+  .quote-photo img{width:100%;height:100%;object-fit:cover}
+  .quote-list{display:grid;gap:18px;margin-top:28px}
+  .quote{display:flex;gap:16px;padding:20px;border-radius:var(--radius);background:var(--mint-50);border:1px solid var(--mint-200)}
+  .quote img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none}
+  .quote p{font-size:.98rem}
+  .quote cite{display:block;font-style:normal;font-weight:700;font-size:.88rem;margin-top:6px;color:var(--green-700)}
+  .quote cite span{font-weight:500;color:var(--ink-soft)}
+  .quote img.logo-avatar{background:#F5ECE6;border:1px solid var(--mint-200)}
+  .stars{display:flex;gap:2px;color:var(--sun);margin-bottom:4px}
+  .stars svg{width:16px;height:16px}
+
+  /* FAQ */
+  .faq{background:var(--mint-50)}
+  .faq-list{max-width:780px;margin:48px auto 0;display:grid;gap:14px}
+  details{background:var(--white);border-radius:var(--radius);padding:4px 24px;box-shadow:0 2px 0 var(--mint-200)}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;font-weight:700;font-size:1.04rem}
+  summary::-webkit-details-marker{display:none}
+  summary .plus{flex:none;width:36px;height:36px;border-radius:50%;background:var(--aqua);color:var(--green-700);display:grid;place-items:center;transition:transform .25s ease, background .2s}
+  details[open] summary .plus{transform:rotate(45deg);background:var(--green-700);color:var(--white)}
+  details p{color:var(--ink-soft);padding:0 0 20px}
+  .faq-answer{color:var(--ink-soft);padding:0 0 20px}
+  .faq-answer p{padding:0 0 8px}
+  .faq-answer ul{margin:0;padding-left:20px;display:grid;gap:8px}
+  .faq-answer b{color:var(--ink)}
+
+  /* CTA / CONTACTO */
+  .contact{background:var(--pink-100)}
+  .contact-card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);display:grid;grid-template-columns:1fr 1.1fr;overflow:hidden}
+  .contact-info{background:var(--green-700);color:var(--white);padding:48px 44px;position:relative;overflow:hidden}
+  .contact-info .lead{color:rgba(255,255,255,.85);margin:16px 0 32px}
+  .contact-info .eyebrow{color:var(--aqua)}
+  .contact-lines{display:grid;gap:16px}
+  .contact-lines a{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:500}
+  .contact-lines .ico{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.12);display:grid;place-items:center;flex:none}
+  .contact-lines svg{width:20px;height:20px}
+  .contact-info::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--green-600);right:-70px;bottom:-70px;z-index:0}
+  .contact-info > *{position:relative;z-index:1}
+  .contact-lines a{word-break:break-word}
+  form{padding:44px;display:grid;gap:18px}
+  .field{display:grid;gap:6px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  label{font-weight:700;font-size:.9rem}
+  input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--mint-50);border:2px solid var(--mint-200);border-radius:var(--radius-sm);padding:12px 14px;min-height:48px;transition:border-color .2s, background .2s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green-600);background:var(--white)}
+  textarea{min-height:110px;resize:vertical}
+  .help{font-size:.82rem;color:var(--ink-soft)}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(255,255,255,.8);padding:56px 0 32px;font-size:.94rem}
+  .foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+  footer .logo{color:var(--white)}
+  footer .logo-mark{background:var(--green-600)}
+  .foot-links{display:flex;gap:24px;flex-wrap:wrap;list-style:none;padding:0;margin:0;min-height:44px;align-items:center}
+  .foot-links a{text-decoration:none;white-space:nowrap}
+  .foot-links a:hover{color:var(--white)}
+  .social{display:flex;gap:10px}
+  .social a{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:background .2s}
+  .social a:hover{background:var(--green-600)}
+  .social svg{width:20px;height:20px}
+  .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:24px;font-size:.84rem;color:rgba(255,255,255,.55)}
+
+  /* Reveal al hacer scroll */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  /* La primera sección (portada) se ve desde el primer pintado: sin esperar a los scripts ni a la animación */
+  main > section:first-of-type .reveal,main > article > section:first-of-type .reveal{opacity:1;transform:none;transition:none}
+
+
+  /* ===== PALETAS =====
+     Activa:   CIELO AIRE  (portada blanca, secciones alternan blanco / celeste / amarillo)
+     Guardada: BOSQUE AIRE (portada blanca, secciones crema / salvia / beige) — para fechas especiales.
+     Para cambiar: en la etiqueta <html> de arriba pon data-theme="bosque-aire" en vez de "cielo-aire". */
+  [data-theme="bosque-aire"]{--mint-50:#FFFFFF;--mint-100:#FFFFFF;--mint-200:#E9E7D6;--aqua:#E5DFB0;--pink-100:#FFFFFF;--pink-200:#EFD3B5;--green-700:#3D5A2A;--green-600:#55763A;--green-500:#6E8F4E;--ink:#25301C;--ink-soft:#5A6450}
+  [data-theme="cielo-aire"]{--mint-50:#FFFFFF;--mint-100:#FFFFFF;--mint-200:#DCEBF8;--aqua:#C9E5FA;--pink-100:#FFFFFF;--pink-200:#FFE7A3;--green-700:#1D4C8A;--green-600:#2C65B0;--green-500:#3F7DC4;--ink:#132A45;--ink-soft:#4A5F78}
+  /* Aire: hero blanco + cada sección con su color */
+  [data-theme="bosque-aire"] .hero{background:#FFFFFF}
+  [data-theme="bosque-aire"] #servicios{background:#F7F6EC}
+  [data-theme="bosque-aire"] #sobre-mi{background:#E8EFDC}
+  [data-theme="bosque-aire"] #portfolio{background:#F7F6EC}
+  [data-theme="bosque-aire"] .process{background:#F6E9D9}
+  [data-theme="bosque-aire"] #paquetes{background:#EEECD8}
+  [data-theme="bosque-aire"] #testimonios{background:#E8EFDC}
+  [data-theme="bosque-aire"] #faq{background:#F7F6EC}
+  [data-theme="bosque-aire"] #contacto{background:#F6E9D9}
+  [data-theme="cielo-aire"] .hero{background:#FFFFFF}
+  [data-theme="cielo-aire"] #servicios{background:#E6F1FC}
+  [data-theme="cielo-aire"] #sobre-mi{background:#FFFFFF}
+  [data-theme="cielo-aire"] #portfolio{background:#E6F1FC}
+  [data-theme="cielo-aire"] .process{background:#FFFFFF}
+  [data-theme="cielo-aire"] #paquetes{background:#FFFFFF}
+  [data-theme="cielo-aire"] #testimonios{background:#E6F1FC}
+  [data-theme="cielo-aire"] #faq{background:#E6F1FC}
+  [data-theme="cielo-aire"] #contacto{background:#FFF1C9}
+  [data-theme="cielo-aire"] #faq details{background:#FFFFFF}
+  /* Cómo funciona sobre blanco: tarjetas celestes con barra de color */
+  [data-theme="cielo-aire"] .process .step{background:#EEF6FD;box-shadow:none;border:1px solid #DCEBF8;overflow:hidden}
+  [data-theme="cielo-aire"] .process .step::after{content:"";position:absolute;left:0;right:0;top:0;height:5px}
+  [data-theme="cielo-aire"] .process .step:nth-child(1)::after{background:var(--coral)}
+  [data-theme="cielo-aire"] .process .step:nth-child(2)::after{background:var(--sky)}
+  [data-theme="cielo-aire"] .process .step:nth-child(3)::after{background:var(--sun)}
+  [data-theme="cielo-aire"] .process .step:nth-child(4)::after{background:var(--green-600)}
+  [data-theme="cielo-aire"] #paquetes .plan{border-color:#DCEBF8}
+  [data-theme="cielo-aire"] #paquetes .plan.featured{border-color:var(--green-700)}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .nav-links,.nav-cta .btn-ghost{display:none}
+    .menu-btn{display:grid;place-items:center}
+    .hero-grid,.split,.quotes,.contact-card{grid-template-columns:1fr}
+    /* Testimonios móvil: título → foto → comentarios */
+    .quotes{gap:0}
+    .quotes > .reveal:last-child{display:contents}
+    .quotes .eyebrow{order:1;justify-self:start}
+    .quotes h2{order:2}
+    .quote-photo{order:3;min-height:0;aspect-ratio:4/3;margin-top:24px}
+    .quote-list{order:4;margin-top:24px}
+    .hero-visual{max-width:420px}
+    .services-card,.plans{grid-template-columns:1fr}
+    .gallery .shot{width:calc((100% - 24px)/2)}
+    .steps{grid-template-columns:1fr 1fr}
+    /* Sobre mí: título → foto → texto */
+    .about .split{display:flex;flex-direction:column;align-items:stretch;gap:0}
+    .about .split > .reveal:first-child{display:contents}
+    .about .eyebrow{order:1;align-self:flex-start}
+    .about h2{order:2}
+    .about-visual{order:3;max-width:400px;align-self:center;margin:28px auto 32px}
+    .about .lead{order:4;margin-top:0}
+    .about .checklist{order:5}
+    .about .hero-actions{order:6}
+  }
+  @media (max-width:640px){
+    body{font-size:16px}
+    :root{--section-space:72px}
+    .wrap{padding:0 16px}
+    /* Barra superior compacta */
+    .nav{height:64px;gap:8px}
+    .logo{font-size:1.2rem;gap:8px}
+    .logo-mark{font-size:21px;padding:6px calc(8px + .14em) 8px 8px;border-radius:10px}
+    .nav-cta .btn{min-height:40px;padding:0 16px;font-size:.85rem}
+    .hide-sm{display:none}
+    .menu-btn{margin-right:-8px}
+    .steps,.row{grid-template-columns:1fr}
+    .portfolio-stage::before{top:70px}
+    /* Portafolio: carrusel deslizable */
+    .gallery{flex-wrap:nowrap;justify-content:flex-start;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;padding:6px 16px 8px;margin:0 -16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .gallery::-webkit-scrollbar{display:none}
+    .gallery .shot{width:auto;flex:0 0 84%;scroll-snap-align:start}
+    .shot .frame{border-width:5px;border-radius:22px}
+    .shot figcaption{margin-top:12px}
+    .portfolio .carousel-dots{position:relative;margin-top:14px}
+    .portfolio .carousel-dots button::before{background:rgba(255,255,255,.45)}
+    .portfolio .carousel-dots button[aria-current="true"]::before{background:var(--white)}
+    /* Hero móvil: foto compacta arriba, texto, botones en fila y datos en tarjeta */
+    .hero{min-height:0;display:block;padding:20px 0 var(--section-space)}
+    /* Orden: título centrado → foto → texto, botones y datos */
+    .hero-grid{display:flex;flex-direction:column;align-items:stretch;gap:0}
+    .hero-grid > .reveal:first-child{display:contents}
+    .hero .eyebrow{order:1;align-self:center;margin-bottom:10px;font-size:.68rem;letter-spacing:.06em;white-space:nowrap}
+    .hero .hero-title{order:2;text-align:center;font-size:clamp(1.45rem,8.2vw,2.2rem)}
+    .br-lg{display:none}
+    .br-sm{display:inline}
+    .hero-visual{order:3;max-width:280px;margin:24px auto 22px;align-self:center}
+    .hero .lead{order:4}
+    .hero .hero-actions{order:5}
+    .hero-stats{order:6}
+    .hero .lead{margin:0 auto 22px;font-size:1rem;text-align:center}
+    .badge-1{left:-4%;top:2%}
+    .badge-2{right:-4%;bottom:0}
+    .badge-float{padding:6px 10px;font-size:.64rem;gap:6px;border-radius:12px;line-height:1.3}
+    .badge-float b{font-size:.72rem}
+    .badge-float .ico{width:24px;height:24px;border-radius:8px}
+    .badge-float .ico svg{width:13px;height:13px}
+    .sticker{right:0}
+    .contact-info,form{padding:32px 22px}
+    .contact-info::after{width:140px;height:140px;right:-60px;bottom:-60px}
+    .foot-links{flex-wrap:nowrap;gap:14px;font-size:.86rem;width:100%;justify-content:space-between}
+    /* Servicios: carrusel deslizable */
+    .services-card{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;background:none;box-shadow:none;border-radius:0;padding:6px 16px 22px;margin:32px -16px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .services-card::-webkit-scrollbar{display:none}
+    .services-card .service{flex:0 0 84%;scroll-snap-align:start;background:var(--white);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .carousel-dots{display:flex}
+    /* Cómo funciona: carrusel deslizable */
+    .steps{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;padding:6px 16px 22px;margin:32px -16px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .steps::-webkit-scrollbar{display:none}
+    .steps .step{flex:0 0 78%;scroll-snap-align:start}
+    /* Paquetes: carrusel deslizable */
+    .plans{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;padding:22px 16px 22px;margin:20px -16px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch}
+    .plans::-webkit-scrollbar{display:none}
+    .plans .plan{flex:0 0 86%;scroll-snap-align:start;padding:28px 22px}
+    .plan:hover{transform:none}
+    .plans-foot{margin-top:20px}
+    .family-chip{font-size:.92rem;white-space:nowrap}
+    .family-chip .lg{display:none}
+    .family-chip .sm{display:inline}
+          .pills{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}
+    .pills::-webkit-scrollbar{display:none}
+    .pills{gap:2px}
+    .pills button{padding:0 10px;flex:1 0 auto;font-size:.84rem}
+    .hero .hero-actions{flex-wrap:nowrap}
+    .hero .hero-actions .btn-primary{flex:1}
+    .btn-wa{width:52px;padding:0!important;flex:none}
+    .btn-wa .btn-label{display:none}
+    .btn-wa svg{width:22px;height:22px}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:24px;background:var(--white);border-radius:18px;box-shadow:var(--shadow);padding:14px 4px;text-align:center}
+    .hero-stats > div + div{border-left:1px solid var(--mint-200)}
+    .hero-stats strong{font-size:1.35rem}
+    .hero-stats span{font-size:.74rem;line-height:1.25;display:block;padding:0 4px}
+    #sobre-mi .hero-actions{flex-wrap:wrap}
+  }
+  @media (max-width:360px){.foot-links{gap:8px;font-size:.76rem}}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+  /* ===== Páginas cortas (gracias / 404) ===== */
+  .simple{min-height:calc(100svh - var(--header-h));display:flex;align-items:center;padding:56px 0 var(--section-space);background:#FFFFFF;text-align:center}
+  .simple .wrap{width:100%}
+  .simple h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;max-width:16ch;margin:0 auto}
+  .simple h1 span{color:var(--green-600);position:relative;white-space:nowrap}
+  .simple h1 span::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.28em;background:var(--sun);opacity:.55;z-index:-1;border-radius:6px}
+  .simple .lead{margin:18px auto 0;max-width:52ch}
+  .simple .hero-actions{justify-content:center;margin-top:30px;flex-wrap:wrap}
+  .big-ico{width:96px;height:96px;border-radius:30px;background:var(--green-700);color:#fff;display:grid;place-items:center;margin:0 auto 24px;box-shadow:var(--shadow-lg);position:relative}
+  .big-ico svg{width:46px;height:46px}
+  .big-ico::after{content:"";position:absolute;right:-8px;top:-8px;width:22px;height:22px;border-radius:50%;background:var(--sun)}
+  .next-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:40px auto 0;text-align:left}
+  .next-step{background:#EEF6FD;border:1px solid #DCEBF8;border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
+  .next-step::before{content:"";position:absolute;left:0;right:0;top:0;height:5px}
+  .next-step:nth-child(1)::before{background:var(--coral)}
+  .next-step:nth-child(2)::before{background:var(--sky)}
+  .next-step:nth-child(3)::before{background:var(--sun)}
+  .next-step b{display:block;font-family:var(--font-head);font-size:1.05rem;margin-bottom:6px}
+  .next-step p{color:var(--ink-soft);font-size:.93rem}
+  .next-step .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--green-700);color:#fff;font-weight:800;font-size:.85rem;margin-bottom:10px}
+  .num404{font-family:var(--font-head);font-weight:800;font-size:clamp(5rem,16vw,9rem);line-height:1;color:var(--green-700);display:inline-flex;align-items:center;gap:.08em;margin-bottom:10px}
+  .num404 .zero{width:.78em;height:.78em;border-radius:50%;background:var(--sun);display:grid;place-items:center;color:var(--green-700)}
+  .num404 .zero svg{width:.42em;height:.42em}
+  @media (max-width:640px){
+    .simple{min-height:0;padding:40px 0 64px}
+    .next-steps{grid-template-columns:1fr;gap:18px;margin-top:36px}
+    .next-step{display:flex;gap:14px;align-items:flex-start;padding:22px 20px 20px}
+    .next-step b{margin-bottom:8px}
+    .simple .hero-actions{margin-top:40px}
+    .next-step .n{flex:none;margin:0}
+    .simple .hero-actions{flex-direction:column;align-items:stretch}
+  }
+  /* Sobre mí en celular: foto más chica para que respire a los lados */
+  @media (max-width:640px){
+    .about-visual{width:80%;max-width:300px;margin:28px auto 36px}
+    /* Testimonios en celular: foto y cajitas más compactas */
+    .quote-photo{width:92%;justify-self:center}
+    .quote-list{width:92%;justify-self:center;gap:14px}
+    .quote{padding:16px;gap:12px}
+    .quote img{width:42px;height:42px}
+    .quote p{font-size:.92rem}
+    .quote cite{font-size:.82rem}
+  }
+  /* ===== iPad ===== */
+  .logo,.nav-cta .btn{white-space:nowrap}
+  @media (min-width:641px) and (max-width:1180px){.nav-cta{margin-left:auto}}
+  /* iPad horizontal / iPad Pro (981–1180 px): diseño de escritorio con menú ☰ y más margen */
+  @media (min-width:981px) and (max-width:1180px){
+    .wrap{padding:0 40px}
+    .nav-links,.nav-cta .btn-ghost{display:none}
+    .menu-btn{display:grid;place-items:center}
+    .hero-grid{gap:40px}
+    .hero-visual{max-width:440px}
+    .badge-1{left:-2%}
+    .badge-2{right:2%}
+    .services-card{padding:24px;gap:22px}
+    .plans{gap:18px}
+    .plan{padding:30px 24px}
+  }
+  /* iPad vertical (641–980 px): portada centrada, carruseles de 2 tarjetas y anchos moderados */
+  @media (min-width:641px) and (max-width:980px){
+    :root{--section-space:96px}
+    .wrap{padding:0 40px}
+    .hero{min-height:0;display:block;padding:40px 0 var(--section-space)}
+    .hero-grid{display:flex;flex-direction:column;align-items:stretch;gap:0}
+    .hero-grid > .reveal:first-child{display:contents}
+    .hero .eyebrow{order:1;align-self:center}
+    .hero .hero-title{order:2;text-align:center}
+    .hero-visual{order:3;max-width:380px;margin:36px auto 32px;align-self:center}
+    .hero .lead{order:4;text-align:center;margin:0 auto 28px;max-width:56ch}
+    .hero .hero-actions{order:5;justify-content:center}
+    .hero-stats{order:6;justify-content:center;gap:48px}
+    .hero-stats > div{text-align:center}
+    /* Servicios y paquetes: carrusel con 2 tarjetas a la vista */
+    .services-card{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 40px;background:none;box-shadow:none;border-radius:0;padding:6px 40px 22px;margin:40px -40px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .services-card::-webkit-scrollbar{display:none}
+    .services-card .service{flex:0 0 46%;scroll-snap-align:start;background:var(--white);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .plans{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 40px;padding:22px 40px 22px;margin:28px -40px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:stretch}
+    .plans::-webkit-scrollbar{display:none}
+    .plans .plan{flex:0 0 46%;scroll-snap-align:start;padding:28px 24px}
+    .plan:hover{transform:none}
+    .carousel-dots{display:flex}
+    /* Testimonios y Sobre mí: columnas centradas, sin ocupar todo el ancho */
+    .quote-photo{width:100%;max-width:560px;justify-self:center}
+    .quote-list{width:100%;max-width:560px;justify-self:center}
+    .about-visual{max-width:360px}
+    .about .lead,.about .checklist{max-width:620px}
+  }
+  /* Pantallas muy altas: la portada no pasa de 900 px para que no quede flotando en el vacío */
+  @media (min-width:981px){.hero{min-height:min(calc(100svh - var(--header-h)),900px)}}
+  /* Tablets grandes en vertical (iPad Pro 11" y 13"): portada centrada como en iPad vertical */
+  @media (min-width:981px) and (max-width:1180px) and (orientation:portrait){
+    .hero{min-height:0;display:block;padding:56px 0 var(--section-space)}
+    .hero-grid{display:flex;flex-direction:column;align-items:stretch;gap:0}
+    .hero-grid > .reveal:first-child{display:contents}
+    .hero .eyebrow{order:1;align-self:center}
+    .hero .hero-title{order:2;text-align:center}
+    .hero-visual{order:3;max-width:440px;margin:40px auto 36px;align-self:center}
+    .hero .lead{order:4;text-align:center;margin:0 auto 28px;max-width:56ch}
+    .hero .hero-actions{order:5;justify-content:center}
+    .hero-stats{order:6;justify-content:center;gap:56px}
+    .hero-stats > div{text-align:center}
+  }
+
+  /* ===== LETRA (oct 2026): Lexend Deca en títulos + Poppins en textos, como referencia wedly.cl =====
+     El logo "aa Arian Alpiste" se queda en Bricolage. Los grosores bajan de 800/700 a 600. */
+  body{font-size:16px}
+  h1,h2,h3,.hero .hero-title{font-weight:600;letter-spacing:-.01em}
+  .plan .price,.sticker,.hero-stats strong,.badge-float b,.step::before{font-weight:600}
+  .btn,summary,.pills button,label{font-weight:500}
+  .logo,.logo-mark{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .post-hero h1,.blog-hero h1,.book-hero h1,.legal-hero h1,.simple h1,.price-table .money,.tool-step .num,.confirm-step .n,.next-step .n,.num404{font-weight:600}
+
+  /* ===== Logo manuscrito ===== */
+  .brand-img{display:block;height:46px;aspect-ratio:1134/319;background:var(--ink);-webkit-mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat;mask:url(/img/logo-arian-alpiste.png) center/contain no-repeat}
+  footer .brand-img{height:72px;background:#FFFFFF}
+  @media(max-width:640px){ .brand-img{height:38px} footer .brand-img{height:60px} }
+
+  /* ===== Contrato digital ===== */
+  .ct [hidden]{display:none!important}
+  .ct-header .nav{justify-content:center}
+  .ct-header .nav-links,.ct-header .nav-cta,.ct-header .menu-btn{display:none}
+  .ct{background:#F5F9FE}
+  .ct-narrow{max-width:760px}
+  .ct-hero{padding:48px 0 28px;background:#FFFFFF;text-align:center}
+  .ct-hero h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:700}
+  .ct-hero h1 span{color:var(--green-600)}
+  .ct-hero .lead{margin:14px auto 0;font-size:1rem}
+  .ct-steps{display:flex;justify-content:center;gap:18px;list-style:none;padding:0;margin:22px 0 0;font-size:.88rem;color:var(--ink-soft)}
+  .ct-steps li{display:flex;align-items:center;gap:8px}
+  .ct-steps b,.ct-card .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--green-700);color:#fff;font-size:.8rem;font-family:var(--font-head)}
+  #ct-form{padding-top:28px;padding-bottom:72px;display:grid;gap:18px}
+  .ct-card{margin:0;border:1px solid var(--mint-200);border-radius:var(--radius);background:#fff;padding:22px 22px 24px;min-width:0}
+  .ct-card legend,.ct-card .legend{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;font-size:1.15rem;padding:0;margin:0 0 14px;float:left;width:100%;letter-spacing:-.01em}
+  .ct-card legend + *{clear:both}
+  .ct-field{display:block;margin-top:14px}
+  .ct-label{display:block;font-size:.86rem;font-weight:600;margin-bottom:6px}
+  .ct-label em{font-weight:400;color:var(--ink-soft);font-style:normal}
+  .ct input[type=text],.ct input[type=email],.ct input[type=tel],.ct input[type=date],.ct input[type=time],.ct textarea{width:100%;min-height:48px;padding:11px 14px;border:1px solid #C9DCF0;border-radius:12px;font:inherit;font-size:16px;color:var(--ink);background:#fff;transition:border-color .2s ease,box-shadow .2s ease}
+  .ct textarea{resize:vertical;min-height:72px}
+  .ct input:focus,.ct textarea:focus{outline:none;border-color:var(--green-600);box-shadow:0 0 0 3px rgba(44,101,176,.15)}
+  .ct .invalid{border-color:#D9467A!important}
+  .ct-row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .hint{font-size:.84rem;color:var(--ink-soft);margin-top:6px}
+  .hint.center{text-align:center;margin-top:12px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+  .seg{display:inline-flex;background:#EEF4FB;border-radius:999px;padding:4px;gap:4px;flex-wrap:wrap}
+  .seg label{position:relative;cursor:pointer}
+  .seg input{position:absolute;opacity:0;pointer-events:none}
+  .seg span{display:block;padding:9px 18px;border-radius:999px;font-weight:600;font-size:.92rem;color:var(--ink-soft);transition:background-color .2s ease,color .2s ease}
+  .seg input:checked + span{background:#fff;color:var(--green-700);box-shadow:0 2px 8px -2px rgba(19,42,69,.18)}
+  .seg input:focus-visible + span{outline:3px solid var(--coral);outline-offset:2px}
+
+  .pk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .pk{position:relative;cursor:pointer}
+  .pk input{position:absolute;opacity:0;pointer-events:none}
+  .pk > span{display:block;height:100%;border:1px solid #C9DCF0;border-radius:14px;padding:12px 14px;transition:border-color .2s ease,background-color .2s ease}
+  .pk b{display:block;font-family:var(--font-head);font-size:1rem}
+  .pk small{display:block;color:var(--ink-soft);font-size:.8rem;line-height:1.4;margin-top:2px}
+  .pk .pr{display:block;font-weight:600;color:var(--green-700);margin-top:6px}
+  .pk input:checked + span{border-color:var(--green-700);background:#EEF6FD;box-shadow:inset 0 0 0 1px var(--green-700)}
+  .pk input:focus-visible + span{outline:3px solid var(--coral);outline-offset:2px}
+  .pk-empty{color:var(--ink-soft);font-size:.9rem}
+
+  .ct-total{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;background:#FFF6DA;border-radius:14px;padding:14px}
+  .ct-total span{display:block;font-size:.78rem;color:var(--ink-soft)}
+  .ct-total b{font-family:var(--font-head);font-size:1.15rem}
+
+  .ct-doc .doc{max-height:440px;overflow:auto;border:1px solid #E1ECF7;border-radius:14px;padding:4px 18px 18px;margin-top:12px;font-size:.92rem;line-height:1.65;background:#FCFDFF;overscroll-behavior:contain}
+  .doc h3{font-size:.98rem;margin:20px 0 6px;color:var(--green-700)}
+  .doc p{margin:0 0 8px}
+  .doc mark{background:#E3F0FC;color:var(--ink);border-radius:4px;padding:0 4px;font-weight:600}
+  .doc mark.todo{background:#FFE3A3}
+  .doc-t{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:.88rem}
+  .doc-t th,.doc-t td{border:1px solid #E1ECF7;padding:8px 10px;text-align:left}
+  .doc-t th{background:#EEF6FD}
+
+  .sig-box{position:relative;margin-top:10px;border:1.5px dashed #9EBFE3;border-radius:14px;background:#FBFDFF;height:180px;touch-action:none}
+  .sig-box canvas{display:block;width:100%;height:100%;border-radius:14px;cursor:crosshair}
+  .sig-ph{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#9EBFE3;font-size:.95rem;pointer-events:none;transition:opacity .2s ease}
+  .sig-box.signed .sig-ph{opacity:0}
+  .sig-box.invalid{border-color:#D9467A}
+  .sig-clear{position:absolute;right:8px;top:8px;border:0;background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:.8rem;color:var(--ink-soft);box-shadow:0 1px 4px rgba(19,42,69,.12);cursor:pointer}
+
+  .ck{display:flex;gap:12px;align-items:flex-start;margin-top:16px;font-size:.9rem;line-height:1.5;cursor:pointer}
+  .ck input{flex:none;width:20px;height:20px;margin-top:2px;accent-color:var(--green-700)}
+  .ck.opt{color:var(--ink-soft)}
+  .ck.invalid span{color:#B0245A}
+  .ct-error{margin-top:14px;background:#FDECF2;color:#8E1D48;border-radius:12px;padding:10px 14px;font-size:.9rem}
+  .ct-submit{width:100%;margin-top:18px;min-height:52px;font-size:1rem}
+  .ct-submit:active{transform:scale(.98)}
+
+
+  .ct-doc .doc{max-height:none;overflow:visible}
+  .ct-steps li{cursor:default;opacity:.55;transition:opacity .2s ease}
+  .ct-steps li.on{opacity:1}.ct-steps li.done{opacity:1;cursor:pointer}
+  .ct-steps li.done b{background:var(--green-500)}
+  .nav-step{display:flex;justify-content:space-between;gap:12px;margin-top:16px}
+  .nav-step [data-next]{margin-left:auto}
+  .nav-step .btn{min-height:50px}
+  .step-pane{animation:paneIn .28s cubic-bezier(.23,1,.32,1) both}
+  @keyframes paneIn{from{opacity:0;transform:translateY(8px)}}
+  @media(prefers-reduced-motion:reduce){.step-pane{animation:none}}
+  #ct-form{display:block}.step-pane > * + *{margin-top:18px}
+  .ct-error{margin-top:14px}
+  @media(max-width:640px){ .nav-step .btn{flex:1} .seg span{padding:9px 10px} }
+  @media(max-width:640px){
+    .ct-hero{padding:32px 0 20px}
+    .ct-steps{gap:10px;font-size:.8rem}
+    .ct-card{padding:18px 16px 20px}
+    .ct-row{grid-template-columns:1fr}
+    .ct-total{grid-template-columns:1fr 1fr} .pk-grid{grid-template-columns:1fr 1fr}
+    .ct-total div:first-child{grid-column:1/-1}
+    .seg{display:flex}.seg label{flex:1;text-align:center}
+    .ct-doc .doc{max-height:380px;padding:2px 14px 14px}
+  }
+</style>
+</head>
+<body data-content-name="Contrato">
+
+
+<!-- SVG sprite de iconos (estilo Lucide) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" opacity=".18" fill="currentColor" stroke="none"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.5 5c2 0 3.5 1.2 4.3 2.4h2.4C14 6.2 15.5 5 17.5 5 21 5 23.1 8.5 21.6 11.8 19.5 16.4 12 21 12 21z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-baby" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 0 0 5 0"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9.5" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5.5 5.8"/></symbol>
+  <symbol id="i-cake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V13a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M4 16c1.3 0 1.3 1 2.7 1s1.3-1 2.6-1 1.3 1 2.7 1 1.3-1 2.7-1 1.3 1 2.6 1 1.4-1 2.7-1"/><path d="M2 21h20M8 11V8M12 11V8M16 11V8M8 4.5a1 1 0 0 0 0 1.5M12 4.5a1 1 0 0 0 0 1.5M16 4.5a1 1 0 0 0 0 1.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.6-4.7A9 9 0 1 1 7.8 19.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<header class="ct-header">
+  <nav class="wrap nav" aria-label="Principal">
+    <a href="/" class="logo"><span class="brand-img" role="img" aria-label="Arian Alpiste, fotografía y video"></span></a>
+    <ul class="nav-links">
+      <li><a href="/#servicios">Servicios</a></li>
+      <li><a href="/#portfolio">Portafolio</a></li>
+      <li><a href="/#paquetes">Paquetes</a></li>
+      <li><a href="/#sobre-mi">Sobre mí</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://wa.link/4jqx34" class="btn btn-ghost" target="_blank" rel="noopener" data-track="contact" data-track-location="page" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+      <a href="/reservar" class="btn btn-primary" data-track="high-intent" data-track-location="page" data-destination="reservar">Reservar<span class="hide-sm"> mi fecha</span></a>
+    </div>
+    <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><svg width="26" height="26"><use href="#i-menu"/></svg></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <ul>
+      <li><a href="/#servicios">Servicios</a></li>
+      <li><a href="/#portfolio">Portafolio</a></li>
+      <li><a href="/#paquetes">Paquetes</a></li>
+      <li><a href="/#sobre-mi">Sobre mí</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+    </ul>
+    <a href="https://wa.link/4jqx34" class="btn btn-ghost" target="_blank" rel="noopener" data-track="contact" data-track-location="mobile-menu" data-destination="whatsapp"><svg><use href="#i-wa"/></svg>Escríbeme por WhatsApp</a>
+  </div>
+</header>
+<main class="ct">
+  <section class="ct-hero">
+    <div class="wrap ct-narrow">
+      <span class="eyebrow">Contrato de servicio fotográfico</span>
+      <h1>Tu contrato de <span>cobertura de eventos</span></h1>
+      <p class="lead">Gracias por confiar en mí para cubrir tu evento. Este contrato es para cuidar mi trabajo y tu evento: dice qué voy a hacer, cuánto cuesta y cómo cuidamos tu fecha. Se acepta con tu firma en el último paso o al pagar el adelanto.</p>
+      <ol class="ct-steps" aria-label="Pasos">
+        <li data-go="1"><b>1</b> Evento</li>
+        <li data-go="2"><b>2</b> Datos</li>
+        <li data-go="3"><b>3</b> Contrato</li>
+        <li data-go="4"><b>4</b> Firma</li>
+      </ol>
+    </div>
+  </section>
+
+  <form id="ct-form" class="wrap ct-narrow" novalidate>
+    <!-- Campo trampa: las personas no lo ven; si viene lleno, es un robot -->
+    <div class="hp" aria-hidden="true"><label>Sitio web<input type="text" name="sitio" tabindex="-1" autocomplete="off"></label></div>
+
+    <div class="step-pane" data-step="1">
+    <fieldset class="ct-card">
+      <legend><span class="n">1</span> Tu evento</legend>
+
+      <div class="ct-field">
+        <span class="ct-label">Tipo de evento</span>
+        <div class="seg" role="radiogroup" aria-label="Tipo de evento">
+          <label><input type="radio" name="evento" value="Bautizo" required><span>Bautizo</span></label>
+          <label><input type="radio" name="evento" value="Cumpleaños"><span>Cumpleaños</span></label>
+          <label><input type="radio" name="evento" value="Otro"><span>Otro</span></label>
+        </div>
+        <label class="ct-field" data-otro hidden><span class="ct-label">¿Qué evento es?</span><input type="text" name="evento_otro" maxlength="80" placeholder="Baby shower, aniversario, gender reveal…"></label>
+      </div>
+
+      <div class="ct-field">
+        <span class="ct-label">¿Con video?</span>
+        <div class="seg" role="radiogroup" aria-label="Modalidad">
+          <label><input type="radio" name="modo" value="solo foto" checked><span>Solo foto</span></label>
+          <label><input type="radio" name="modo" value="foto y video"><span>Foto y video</span></label>
+        </div>
+      </div>
+      <div class="ct-field">
+        <span class="ct-label">Paquete</span>
+        <div class="pk-grid" id="pk-grid" role="radiogroup" aria-label="Paquete"></div>
+      </div>
+
+
+      <div class="ct-row">
+        <label class="ct-field"><span class="ct-label">Fecha del evento</span><input type="date" name="fecha" required></label>
+        <label class="ct-field"><span class="ct-label">Hora de llegada</span><input type="time" name="hora" required></label>
+      </div>
+      <label class="ct-field"><span class="ct-label">Dirección exacta y distrito</span><input type="text" name="direccion" maxlength="200" placeholder="Av. ..., San Miguel" required></label>
+      <label class="ct-field"><span class="ct-label">Otros acuerdos <em>(opcional)</em></span><textarea name="acuerdos" rows="2" maxlength="600" placeholder="Lo que conversamos por WhatsApp, si cambia algo del paquete"></textarea></label>
+
+      <div class="ct-total" aria-live="polite">
+        <div><span>Precio total</span><b data-out="total">—</b></div>
+        <div><span>Adelanto (50 %)</span><b data-out="adelanto">—</b></div>
+        <div><span>Saldo el día del evento</span><b data-out="saldo">—</b></div>
+      </div>
+    </fieldset>
+
+    <div class="nav-step"><button type="button" class="btn btn-primary" data-next>Siguiente <svg><use href="#i-arrow"/></svg></button></div>
+    </div>
+
+    <div class="step-pane" data-step="2" hidden>
+    <fieldset class="ct-card">
+      <legend><span class="n">2</span> Tus datos</legend>
+      <label class="ct-field"><span class="ct-label">Nombre completo</span><input type="text" name="nombre" autocomplete="name" maxlength="120" required></label>
+      <div class="ct-row">
+        <label class="ct-field"><span class="ct-label">Correo</span><input type="email" name="correo" autocomplete="email" inputmode="email" maxlength="160" required></label>
+        <label class="ct-field"><span class="ct-label">Celular o WhatsApp</span><input type="tel" name="celular" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="987 654 321" required></label>
+      </div>
+    </fieldset>
+
+    <div class="nav-step"><button type="button" class="btn btn-ghost" data-prev>Atrás</button><button type="button" class="btn btn-primary" data-next>Siguiente <svg><use href="#i-arrow"/></svg></button></div>
+    </div>
+
+    <div class="step-pane" data-step="3" hidden>
+    <section class="ct-card ct-doc" aria-labelledby="doc-t">
+      <h2 id="doc-t" class="legend"><span class="n">3</span> Lee tu contrato</h2>
+      <p class="hint">Revisa tus datos <mark>resaltados</mark>: salen de lo que llenaste en los pasos 1 y 2. Si algo está mal, vuelve con «Atrás» y corrígelo.</p>
+      <div class="doc">
+        <h3>01 · Las partes</h3>
+        <p>Este contrato es entre Arian Leonel Alpiste Sarmiento (Arian Alpiste · Fotografía y video), a quien en este contrato llamo «yo» o «el fotógrafo», y <mark data-f="nombre">tu nombre</mark>, con correo electrónico <mark data-f="correo">tu correo</mark> y teléfono o WhatsApp <mark data-f="celular">tu celular</mark>, a quien llamo «tú» o «el cliente».</p>
+        <h3>02 · El servicio</h3>
+        <p>Contratas conmigo el paquete <mark data-f="paquete">elige un paquete</mark> para tu <mark data-f="evento">evento</mark> del día <mark data-f="fecha">fecha</mark>. La hora de llegada acordada es <mark data-f="hora">hora</mark> y el evento es en <mark data-f="direccion">dirección</mark>. La cobertura dura <mark data-f="horas">—</mark> y entrego <mark data-f="fotos">—</mark>. ¿Incluye video? <mark data-f="video">—</mark>.</p>
+        <p data-show="acuerdos">Otros acuerdos: <mark data-f="acuerdos"></mark></p>
+        <h3>03 · Entrega del material</h3>
+        <p>Te entrego las fotos editadas en JPG, con el lado largo de 2048 píxeles, listas para compartir en redes e imprimir en tamaños pequeños.</p>
+        <p>Elijo y edito las mejores fotos de tu evento para que recibas una entrega cuidada. Por eso entrego las fotos ya editadas, no los archivos originales (RAW) ni las fotos sin editar.</p>
+        <p>Plazo de entrega: <mark data-f="plazo">máximo 5 días para las fotos</mark> desde el evento, normalmente antes.</p>
+        <p>Las fotos se entregan en una galería digital privada, disponible para descarga durante 30 días. Guardo una copia de respaldo durante esos mismos 30 días. Después ya no tengo la obligación de conservarlas, así que descárgalas y guárdalas.</p>
+        <h3>04 · Precio y pagos</h3>
+        <p>Precio total <mark data-f="total">—</mark>. Adelanto (50 %) <mark data-f="adelanto">—</mark>. Saldo (50 %) <mark data-f="saldo">—</mark>.</p>
+        <p>Para guardar tu fecha se deposita el 50 % del total dentro de las <mark>24 horas</mark> siguientes a la firma de este contrato. La fecha queda confirmada cuando recibo el adelanto y te envío la confirmación; si no lo recibo a tiempo, la fecha vuelve a quedar disponible.</p>
+        <p>El 50 % restante se paga el día del evento, al terminar el trabajo. Medios de pago: Yape, Plin o transferencia bancaria; los datos te llegan en el correo de confirmación.</p>
+        <p>Las fotos se entregan cuando el saldo está pagado al 100 %. Las reservas se realizan con al menos 3 días de anticipación y están sujetas a disponibilidad.</p>
+        <h3>05 · Cancelación y reprogramación</h3>
+        <p>Si necesitas cancelar el servicio, el adelanto se maneja según el aviso que me des:</p>
+        <table class="doc-t"><thead><tr><th>Aviso antes del evento</th><th>Qué pasa con el adelanto</th></tr></thead><tbody><tr><td>7 días o más</td><td>Se reembolsa el 50 % del adelanto</td></tr><tr><td>Menos de 7 días</td><td>No se reembolsa</td></tr></tbody></table>
+        <p>El reembolso se realiza por el mismo medio en que se pagó, dentro de los 5 días hábiles siguientes a la confirmación de la cancelación.</p>
+        <p>Puedes reprogramar tu fecha avisando con al menos 3 días de anticipación, sujeto a mi disponibilidad. El adelanto se mantiene a favor de la nueva fecha. Si avisas con menos de 3 días, se aplica la tabla de arriba.</p>
+        <h3>06 · Si yo no puedo asistir</h3>
+        <p>Si por enfermedad, accidente u otro imprevisto grave no puedo realizar la cobertura, me comprometo a conseguir un fotógrafo de reemplazo. Si no es posible o no te convence, te devuelvo el 100 % de lo pagado.</p>
+        <h3>07 · Horario, retraso y horas extra</h3>
+        <p>Las horas contratadas se cuentan desde la hora acordada de llegada, aunque el evento empiece más tarde o tú llegues tarde. El tiempo no se extiende por retrasos.</p>
+        <p>Si el evento se extiende, las horas extra se activan solas apenas se pasa el tiempo contratado, sin que yo tenga que avisarte ni pedirte permiso en ese momento. Cada hora o fracción se cobra aparte: S/ 90 por hora de solo foto y S/ 180 por hora de foto y video. Las horas extra se pagan junto con el saldo, al terminar.</p>
+        <h3>08 · Edición y retoques</h3>
+        <p>Cada foto entregada incluye edición de color, exposición y encuadre. Los retoques complejos, como quitar personas u objetos del fondo o hacer retoques avanzados, se cotizan antes de hacerlos y se cobran aparte.</p>
+        <h3>09 · Lugar y movilidad</h3>
+        <p>La movilidad está incluida en Pueblo Libre, San Miguel y Magdalena. En otros distritos la movilidad tiene un costo adicional, que te informaré antes de que realices el adelanto.</p>
+        <h3>10 · Lluvia, clima e imprevistos</h3>
+        <p>Si el evento es al aire libre y hay lluvia u otro clima que impida trabajar, podemos reprogramar sin costo o continuar en un espacio techado, lo que prefieras. Debemos decidirlo juntos con la mayor anticipación posible el mismo día.</p>
+        <p>Hay cosas fuera de mi control (caso fortuito o fuerza mayor), como un corte de luz, el cierre del local o la falla de un equipo o de una tarjeta de memoria. Si algo así afecta el trabajo, te aviso de inmediato y reprogramamos sin costo; si no es posible, te devuelvo lo que corresponda a lo que no pueda cumplir. Mi responsabilidad por estas causas llega hasta el monto que pagaste por el servicio.</p>
+        <h3>11 · Cuidado de mi equipo</h3>
+        <p>Mis cámaras son mi herramienta de trabajo. Si en el evento habrá láseres, pirotecnia, chispas, humo o cualquier otro efecto que pueda dañarlas, avísame antes para tomar precauciones. Si el riesgo es alto, puedo dejar de fotografiar ese momento para proteger el equipo.</p>
+        <p>Si, aun con precauciones, mi equipo se daña por esos efectos, por el local o por algún invitado, te pido apoyo para cubrir la reparación o la reposición. Lo conversamos con calma.</p>
+        <h3>12 · Fotos con niños y uso de imágenes</h3>
+        <p>Al contratar, la persona que reserva declara ser mayor de edad y contar con la autorización de los padres o tutores para fotografiar a los niños presentes en el evento.</p>
+        <p>Podré usar algunas de las fotos del evento en mi portafolio, redes sociales y publicidad, salvo que me indiques lo contrario antes del evento o después, por escrito. Si prefieres privacidad, no se publicará nada. Con tu firma autorizas el uso de tu imagen, y la de los niños a tu cargo, para este fin.</p>
+        <h3>13 · Uso de tus fotos</h3>
+        <p>Tus fotos están hechas para que las disfrutes: compártelas, imprímelas y publícalas en tus redes todas las veces que quieras. Como en todo trabajo fotográfico, conservo los derechos de autor; solo si algún día quieres usarlas con fines comerciales (por ejemplo, en la publicidad de una marca), escríbeme: lo acordamos por escrito, con su costo, dónde se usarán y por cuánto tiempo.</p>
+        <h3>14 · Colaboración el día del evento</h3>
+        <p>Haré todo lo posible por capturar los momentos importantes. Para ello es útil que me avises con tiempo de los momentos clave (cantada, torta, vals, familia) y de cualquier cambio de último momento. Por circunstancias fuera de mi control (como cortes de luz, restricciones del local o personas que se nieguen a ser fotografiadas) puede que alguna toma no sea posible.</p>
+        <h3>15 · Ley aplicable y aceptación</h3>
+        <p>Confío en que cualquier duda la resolvamos conversando. Si alguna vez no fuera posible, este contrato se rige por las leyes del Perú y se verá ante los jueces de Lima.</p>
+        <p>Este documento es un contrato y obliga a los dos. Se acepta con tu firma en esta página o, si no lo firmas, al pagar el adelanto.</p>
+        <p>Tus datos personales de este contrato (nombre, correo y teléfono) se tratan como explica la <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</p>
+      </div>
+    </section>
+
+    <div class="nav-step"><button type="button" class="btn btn-ghost" data-prev>Atrás</button><button type="button" class="btn btn-primary" data-next>Ya lo leí, firmar <svg><use href="#i-arrow"/></svg></button></div>
+    </div>
+
+    <div class="step-pane" data-step="4" hidden>
+    <fieldset class="ct-card">
+      <legend><span class="n">4</span> Firma</legend>
+      <p class="hint">Firma con el dedo o el mouse dentro del recuadro.</p>
+      <div class="sig-box">
+        <canvas id="sig" aria-label="Recuadro para firmar" role="img"></canvas>
+        <span class="sig-ph" aria-hidden="true">Firma aquí</span>
+        <button type="button" class="sig-clear" id="sig-clear">Borrar</button>
+      </div>
+
+      <label class="ck"><input type="checkbox" name="acepto" required><span>Leí y acepto este contrato y la <a href="/privacidad" target="_blank" rel="noopener">Política de privacidad</a>.</span></label>
+      <label class="ck opt"><input type="checkbox" name="publicidad"><span>Acepto que mis datos se usen para medir anuncios (opcional).</span></label>
+
+      <button type="submit" class="btn btn-primary ct-submit">Firmar y enviar contrato</button>
+      <p class="hint center">Al enviar, te llega una copia a tu correo y yo te escribo por WhatsApp para coordinar el adelanto.</p>
+    </fieldset>
+    <div class="nav-step"><button type="button" class="btn btn-ghost" data-prev>Atrás</button></div>
+    </div>
+    <p class="ct-error" id="ct-error" role="alert" hidden></p>
+  </form>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="/" class="logo"><span class="brand-img" role="img" aria-label="Arian Alpiste, fotografía y video"></span></a>
+        <p style="margin-top:12px;max-width:34ch">Fotografía de bautizos, cumpleaños y sesiones familiares en Lima.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="/sesiones-familiares">Sesiones<span class="hide-sm"> familiares</span></a></li>
+        <li><a href="/#paquetes">Paquetes</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+        <li><a href="/privacidad">Privacidad</a></li>
+      </ul>
+      <div class="social">
+        <a href="https://instagram.com/arianalpiste" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61591928847612" target="_blank" rel="noopener" aria-label="Facebook"><svg><use href="#i-fb"/></svg></a>
+        <a href="https://wa.link/4jqx34" target="_blank" rel="noopener" aria-label="WhatsApp" data-track="contact" data-track-location="footer" data-destination="whatsapp"><svg><use href="#i-wa"/></svg></a>
+        <a href="mailto:hola@arianalpiste.com" aria-label="Correo"><svg><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+    <p class="copy">© 2026 Arian Alpiste · Lima, Perú</p>
+  </div>
+</footer>
+
+<script>
+  // Confeti decorativo (posiciones pseudo-aleatorias estables)
+  (function(){
+    const colors=['--coral','--sun','--navy','--berry','--sky','--green-600'];
+    let seed=7; const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+    document.querySelectorAll('[data-confetti]').forEach(sec=>{
+      // En celular: menos confeti y solo en los bordes, para que no tape el texto
+      const small=innerWidth<641, n=small?Math.ceil(+sec.dataset.confetti*.45):+sec.dataset.confetti, box=document.createElement('div');
+      box.className='confetti'; box.setAttribute('aria-hidden','true');
+      for(let i=0;i<n;i++){
+        const p=document.createElement('i'), dot=rnd()<.3, s=dot?6+rnd()*6:4+rnd()*3;
+        if(dot)p.className='dot';
+        const x=small?(rnd()<.5?rnd()*4:96+rnd()*3):rnd()*100;
+        p.style.cssText=`left:${x}%;top:${rnd()*100}%;width:${s}px;height:${dot?s:s*2.6}px;background:var(${colors[Math.floor(rnd()*colors.length)]});transform:rotate(${rnd()*180}deg)`;
+        box.appendChild(p);
+      }
+      sec.prepend(box);
+    });
+  })();
+
+  // Menú móvil
+  (function(){
+    const btn=document.querySelector('.menu-btn'), menu=document.getElementById('mobile-menu');
+    const set=open=>{menu.hidden=!open;btn.setAttribute('aria-expanded',open);btn.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú')};
+    btn.addEventListener('click',()=>set(menu.hidden));
+    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+    addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+  })();
+
+  // Aparición al hacer scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script>
+  // Fotos de más abajo: el navegador espera a que llegues para pedirlas (en iPhone casi al borde) y se ven vacías un momento.
+  // Cuando la página ya cargó, se piden todas en segundo plano para que estén listas al hacer scroll o deslizar los carruseles.
+  window.addEventListener('load',()=>{
+    const go=()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>{ i.loading='eager'; });
+    ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
+  });
+</script>
+<script>window.CONTRATO={"version": "eventos-2026-10-27", "hash": "ef70728908856845dce1f1a7e87d8ac376de0926a24b096505b7f4842ddb69bc", "paquetes": [{"id": "Mini", "horas": {"Bautizo": "1 hora (ceremonia)"}, "fotos": "hasta 35 fotos editadas", "precios": {"solo foto": 170, "foto y video": 240}}, {"id": "Básico", "horas": {"Bautizo": "2 horas (ceremonia y recepción)", "Cumpleaños": "2 horas de fiesta", "Otro": "2 horas de evento"}, "fotos": "hasta 60 fotos editadas", "precios": {"solo foto": 250, "foto y video": 380}}, {"id": "Estándar", "horas": {"Bautizo": "3 horas (ceremonia y recepción)", "Cumpleaños": "3 horas de fiesta", "Otro": "3 horas de evento"}, "fotos": "fotos editadas sin límite", "precios": {"solo foto": 330, "foto y video": 550}}, {"id": "Premium", "horas": {"Bautizo": "4 horas (ceremonia y recepción)", "Cumpleaños": "4 horas de fiesta", "Otro": "4 horas de evento"}, "fotos": "fotos editadas sin límite", "precios": {"solo foto": 410, "foto y video": 720}}], "plazos": {"solo foto": "máximo 5 días para las fotos", "foto y video": "máximo 5 días para las fotos y 7 días para el video"}, "eventos": ["Bautizo", "Cumpleaños", "Otro"]};</script>
+<script>
+  // Contrato digital: paquetes y precios iguales a los de la página de inicio (PACKAGE_VALUES en integrar.py).
+  // «Otro» evento usa los precios y horas de cumpleaños.
+  (function(){
+    // Paquetes, precios y plazos: los inyecta integrar.py desde contrato-eventos.json (lo mismo que usa el servidor).
+    var C=window.CONTRATO||{paquetes:[],plazos:{}}, PAQ=C.paquetes;
+    var form=document.getElementById('ct-form'), grid=document.getElementById('pk-grid'), err=document.getElementById('ct-error');
+    var soles=function(n){ return 'S/ '+n.toLocaleString('es-PE',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2}) };
+    var val=function(n){ var el=form.elements[n]; return el ? (el.value||'').trim() : '' };
+    var fechaTxt=function(v){ if(!v) return ''; var d=new Date(v+'T12:00:00'); return d.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long',year:'numeric'}) };
+    var evNombre=function(){ var e=val('evento'); return e==='Otro' ? (val('evento_otro')||'evento') : e };
+
+    function renderPaquetes(){
+      var ev=val('evento'), prev=(form.querySelector('input[name=paquete]:checked')||{}).value, video=val('modo')==='foto y video';
+      form.querySelector('[data-otro]').hidden = ev!=='Otro';
+      if(!ev){ grid.innerHTML='<p class="pk-empty">Primero elige el tipo de evento.</p>'; return; }
+      grid.innerHTML=PAQ.filter(function(p){ return p.horas[ev] }).map(function(p){
+        return '<label class="pk"><input type="radio" name="paquete" value="'+p.id+'"'+(prev===p.id?' checked':'')+'><span><b>'+p.id+'</b><small>'+p.horas[ev]+'</small><span class="pr">'+soles(p.precios[video?'foto y video':'solo foto'])+'</span></span></label>';
+      }).join('');
+    }
+
+    function actual(){
+      var ev=val('evento'), id=(form.querySelector('input[name=paquete]:checked')||{}).value, p=PAQ.find(function(x){ return x.id===id });
+      if(!p || !ev || !p.horas[ev]) return null;
+      var video=val('modo')==='foto y video', total=p.precios[video?'foto y video':'solo foto'];
+      return { p:p, ev:ev, video:video, total:total, nombre:p.id+' · '+(video?'Foto y video':'Solo foto') };
+    }
+
+    function pintar(){
+      var a=actual();
+      var datos={
+        nombre:val('nombre'), correo:val('correo'), celular:val('celular'),
+        evento:val('evento') ? evNombre().toLowerCase() : '', fecha:fechaTxt(val('fecha')), hora:val('hora'), direccion:val('direccion'), acuerdos:val('acuerdos'),
+        paquete:a?a.nombre:'', horas:a?a.p.horas[a.ev]:'', fotos:a?a.p.fotos:'', video:a?(a.video?'Sí':'No'):'',
+        plazo: C.plazos[a&&a.video?'foto y video':'solo foto'],
+        total:a?soles(a.total):'', adelanto:a?soles(a.total/2):'', saldo:a?soles(a.total/2):''
+      };
+      document.querySelectorAll('.doc [data-f]').forEach(function(m){
+        if(!m.dataset.ph) m.dataset.ph=m.textContent;
+        m.textContent=datos[m.dataset.f]||m.dataset.ph;
+      });
+      document.querySelectorAll('[data-show]').forEach(function(el){ el.hidden=!datos[el.dataset.show] });
+      ['total','adelanto','saldo'].forEach(function(k){ document.querySelector('[data-out='+k+']').textContent=datos[k]||'—' });
+      return a;
+    }
+
+    form.addEventListener('change',function(e){
+      if(e.target.name==='evento'||e.target.name==='modo') renderPaquetes();
+      pintar();
+    });
+    form.addEventListener('input',pintar);
+    renderPaquetes(); pintar();
+
+    // Validación por paso: devuelve lo que falta
+    var marcar=function(el){ (el.closest('.ck')||el).classList.add('invalid') };
+    function revisar(n){
+      form.querySelectorAll('[data-step="'+n+'"] .invalid').forEach(function(el){ el.classList.remove('invalid') });
+      var faltan=[];
+      var campo=function(name,txt,ok){ var el=form.elements[name]; if(ok===undefined) ok=!!el.value.trim(); if(!ok){ marcar(el); faltan.push(txt) } };
+      if(n===1){
+        if(!val('evento')) faltan.push('el tipo de evento');
+        if(val('evento')==='Otro') campo('evento_otro','qué evento es');
+        if(!actual()) faltan.push('el paquete');
+        campo('fecha','la fecha'); campo('hora','la hora de llegada'); campo('direccion','la dirección');
+      }
+      if(n===2){
+        campo('nombre','tu nombre completo');
+        campo('correo','un correo válido', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('correo')));
+        campo('celular','un celular válido', val('celular').replace(/\D/g,'').length>=9);
+      }
+      if(n===4){
+        if(!signed){ box.classList.add('invalid'); faltan.push('tu firma') }
+        if(!form.elements.acepto.checked){ marcar(form.elements.acepto); faltan.push('aceptar el contrato') }
+      }
+      return faltan;
+    }
+
+    // Pasos: Siguiente valida el paso actual; Atrás y los pasos ya hechos se pueden visitar sin perder nada.
+    var paso=1, hecho=0, panes=form.querySelectorAll('.step-pane'), dots=document.querySelectorAll('.ct-steps [data-go]');
+    function ir(n){
+      paso=n; err.hidden=true;
+      panes.forEach(function(p){ p.hidden = +p.dataset.step!==n });
+      dots.forEach(function(d){ var k=+d.dataset.go; d.classList.toggle('on',k===n); d.classList.toggle('done',k!==n && k<=hecho+1); if(k===n) d.setAttribute('aria-current','step'); else d.removeAttribute('aria-current') });
+      if(n===4) size();
+      var top=document.querySelector('.ct-steps').getBoundingClientRect().top+scrollY-90;
+      window.scrollTo({top:top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    }
+    function avisar(faltan){
+      err.textContent='Falta completar: '+faltan.join(', ')+'.'; err.hidden=false;
+      var p=form.querySelector('[data-step="'+paso+'"]'); p.appendChild(err);
+      (p.querySelector('.invalid')||err).scrollIntoView({behavior:'smooth',block:'center'});
+    }
+    form.querySelectorAll('[data-next]').forEach(function(b){ b.addEventListener('click',function(){
+      var faltan=revisar(paso); if(faltan.length){ avisar(faltan); return; }
+      hecho=Math.max(hecho,paso); ir(paso+1);
+    }) });
+    form.querySelectorAll('[data-prev]').forEach(function(b){ b.addEventListener('click',function(){ ir(paso-1) }) });
+    dots.forEach(function(d){ d.addEventListener('click',function(){ var k=+d.dataset.go; if(k!==paso && k<=hecho+1) ir(k) }) });
+
+    // Firma con el dedo o el mouse
+    var box=document.querySelector('.sig-box'), cv=document.getElementById('sig'), ctx=cv.getContext('2d'), drawing=false, signed=false, last=null;
+    function size(){
+      var r=cv.getBoundingClientRect(); if(!r.width) return;
+      var dpr=window.devicePixelRatio||1, img=signed?cv.toDataURL():null;
+      cv.width=r.width*dpr; cv.height=r.height*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#132A45';
+      if(img){ var i=new Image(); i.onload=function(){ ctx.drawImage(i,0,0,r.width,r.height) }; i.src=img; }
+    }
+    window.addEventListener('resize',size);
+    var pos=function(e){ var r=cv.getBoundingClientRect(); return {x:e.clientX-r.left,y:e.clientY-r.top} };
+    cv.addEventListener('pointerdown',function(e){ drawing=true; last=pos(e); cv.setPointerCapture(e.pointerId); ctx.beginPath(); ctx.arc(last.x,last.y,1.1,0,7); ctx.fillStyle='#132A45'; ctx.fill(); });
+    cv.addEventListener('pointermove',function(e){ if(!drawing) return; var p=pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last=p; if(!signed){ signed=true; box.classList.add('signed'); box.classList.remove('invalid') } });
+    var stop=function(){ drawing=false };
+    cv.addEventListener('pointerup',stop); cv.addEventListener('pointercancel',stop);
+    document.getElementById('sig-clear').addEventListener('click',function(){ ctx.clearRect(0,0,cv.width,cv.height); signed=false; box.classList.remove('signed') });
+
+    // Enviar: el servidor valida todo de nuevo, calcula el precio, guarda el contrato, manda los correos y avisa a Meta.
+    var iniciado=Date.now(), enviando=false, btn=form.querySelector('.ct-submit');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(paso!==4 || enviando) return;
+      var faltan=revisar(4); if(faltan.length){ avisar(faltan); return; }
+      var a=actual(), modo=a.video?'foto y video':'solo foto';
+      var datos={
+        evento:val('evento'), evento_otro:val('evento_otro'), paquete:a.p.id, modo:modo,
+        fecha:val('fecha'), hora:val('hora'), direccion:val('direccion'), acuerdos:val('acuerdos'),
+        nombre:val('nombre'), correo:val('correo'), celular:val('celular'),
+        acepta_privacidad:form.elements.acepto.checked?'si':'', acepta_meta:form.elements.publicidad.checked?'si':'',
+        firma:cv.toDataURL('image/png'), version:C.version, hash:C.hash,
+        sitio:val('sitio'), tiempo:Math.round((Date.now()-iniciado)/1000)
+      };
+      // Cookies del Pixel (solo existen si aceptó las cookies): mejoran la coincidencia del Purchase en Meta
+      document.cookie.split(';').forEach(function(c){ var kv=c.trim().split('='); if(kv[0]==='_fbp') datos.fbp=kv[1]; if(kv[0]==='_fbc') datos.fbc=kv[1]; });
+      enviando=true; btn.disabled=true; btn.textContent='Enviando…'; err.hidden=true;
+      fetch('/api/contrato',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(datos)})
+        .then(function(r){ return r.json().catch(function(){ return {ok:false} }) })
+        .then(function(res){
+          if(!res.ok) throw new Error(res.error||'No se pudo enviar el contrato.');
+          try{ sessionStorage.setItem('ct_firmado', JSON.stringify({ eventId:res.eventId, valor:res.valor, nombre:val('nombre').split(' ')[0], paquete:a.nombre, evento:evNombre(), fecha:fechaTxt(val('fecha')) })); }catch(_){}
+          location.href='/gracias/contrato';
+        })
+        .catch(function(x){
+          enviando=false; btn.disabled=false; btn.textContent='Firmar y enviar contrato';
+          avisar([]); err.textContent=(x&&x.message)||'No se pudo enviar el contrato. Inténtalo de nuevo o escríbeme por WhatsApp.';
+        });
+    });
+    ir(1); window.scrollTo(0,0);
+  })();
+</script>
+<script src="/js/consent.js?v=20261028c" defer></script>
+<script src="/js/tracking.js?v=20261027-consentimiento" defer></script>
+</body>
+</html>

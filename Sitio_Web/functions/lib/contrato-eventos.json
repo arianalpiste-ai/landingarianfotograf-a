@@ -1,0 +1,269 @@
+{
+ "version": "eventos-2026-10-27",
+ "titulo": "Contrato de servicio fotográfico · Cobertura de eventos",
+ "intro": "Gracias por confiar en mí para cubrir tu evento. Este contrato es para cuidar mi trabajo y tu evento: dice qué voy a hacer, cuánto cuesta y cómo cuidamos tu fecha. Se acepta con tu firma en el último paso o al pagar el adelanto.",
+ "campos": {
+  "nombre": "tu nombre",
+  "correo": "tu correo",
+  "celular": "tu celular",
+  "paquete": "elige un paquete",
+  "evento": "evento",
+  "fecha": "fecha",
+  "hora": "hora",
+  "direccion": "dirección",
+  "horas": "—",
+  "fotos": "—",
+  "video": "—",
+  "plazo": "máximo 5 días para las fotos",
+  "total": "—",
+  "adelanto": "—",
+  "saldo": "—",
+  "acuerdos": ""
+ },
+ "eventos": [
+  "Bautizo",
+  "Cumpleaños",
+  "Otro"
+ ],
+ "paquetes": [
+  {
+   "id": "Mini",
+   "horas": {
+    "Bautizo": "1 hora (ceremonia)"
+   },
+   "fotos": "hasta 35 fotos editadas",
+   "precios": {
+    "solo foto": 170,
+    "foto y video": 240
+   }
+  },
+  {
+   "id": "Básico",
+   "horas": {
+    "Bautizo": "2 horas (ceremonia y recepción)",
+    "Cumpleaños": "2 horas de fiesta",
+    "Otro": "2 horas de evento"
+   },
+   "fotos": "hasta 60 fotos editadas",
+   "precios": {
+    "solo foto": 250,
+    "foto y video": 380
+   }
+  },
+  {
+   "id": "Estándar",
+   "horas": {
+    "Bautizo": "3 horas (ceremonia y recepción)",
+    "Cumpleaños": "3 horas de fiesta",
+    "Otro": "3 horas de evento"
+   },
+   "fotos": "fotos editadas sin límite",
+   "precios": {
+    "solo foto": 330,
+    "foto y video": 550
+   }
+  },
+  {
+   "id": "Premium",
+   "horas": {
+    "Bautizo": "4 horas (ceremonia y recepción)",
+    "Cumpleaños": "4 horas de fiesta",
+    "Otro": "4 horas de evento"
+   },
+   "fotos": "fotos editadas sin límite",
+   "precios": {
+    "solo foto": 410,
+    "foto y video": 720
+   }
+  }
+ ],
+ "plazos": {
+  "solo foto": "máximo 5 días para las fotos",
+  "foto y video": "máximo 5 días para las fotos y 7 días para el video"
+ },
+ "clausulas": [
+  {
+   "titulo": "01 · Las partes",
+   "bloques": [
+    {
+     "texto": "Este contrato es entre Arian Leonel Alpiste Sarmiento (Arian Alpiste · Fotografía y video), a quien en este contrato llamo «yo» o «el fotógrafo», y {nombre}, con correo electrónico {correo} y teléfono o WhatsApp {celular}, a quien llamo «tú» o «el cliente»."
+    }
+   ]
+  },
+  {
+   "titulo": "02 · El servicio",
+   "bloques": [
+    {
+     "texto": "Contratas conmigo el paquete {paquete} para tu {evento} del día {fecha}. La hora de llegada acordada es {hora} y el evento es en {direccion}. La cobertura dura {horas} y entrego {fotos}. ¿Incluye video? {video}."
+    },
+    {
+     "texto": "Otros acuerdos: {acuerdos}",
+     "si": "acuerdos"
+    }
+   ]
+  },
+  {
+   "titulo": "03 · Entrega del material",
+   "bloques": [
+    {
+     "texto": "Te entrego las fotos editadas en JPG, con el lado largo de 2048 píxeles, listas para compartir en redes e imprimir en tamaños pequeños."
+    },
+    {
+     "texto": "Elijo y edito las mejores fotos de tu evento para que recibas una entrega cuidada. Por eso entrego las fotos ya editadas, no los archivos originales (RAW) ni las fotos sin editar."
+    },
+    {
+     "texto": "Plazo de entrega: {plazo} desde el evento, normalmente antes."
+    },
+    {
+     "texto": "Las fotos se entregan en una galería digital privada, disponible para descarga durante 30 días. Guardo una copia de respaldo durante esos mismos 30 días. Después ya no tengo la obligación de conservarlas, así que descárgalas y guárdalas."
+    }
+   ]
+  },
+  {
+   "titulo": "04 · Precio y pagos",
+   "bloques": [
+    {
+     "texto": "Precio total {total}. Adelanto (50 %) {adelanto}. Saldo (50 %) {saldo}."
+    },
+    {
+     "texto": "Para guardar tu fecha se deposita el 50 % del total dentro de las [[24 horas]] siguientes a la firma de este contrato. La fecha queda confirmada cuando recibo el adelanto y te envío la confirmación; si no lo recibo a tiempo, la fecha vuelve a quedar disponible."
+    },
+    {
+     "texto": "El 50 % restante se paga el día del evento, al terminar el trabajo. Medios de pago: Yape, Plin o transferencia bancaria; los datos te llegan en el correo de confirmación."
+    },
+    {
+     "texto": "Las fotos se entregan cuando el saldo está pagado al 100 %. Las reservas se realizan con al menos 3 días de anticipación y están sujetas a disponibilidad."
+    }
+   ]
+  },
+  {
+   "titulo": "05 · Cancelación y reprogramación",
+   "bloques": [
+    {
+     "texto": "Si necesitas cancelar el servicio, el adelanto se maneja según el aviso que me des:"
+    },
+    {
+     "tabla": [
+      [
+       "Aviso antes del evento",
+       "Qué pasa con el adelanto"
+      ],
+      [
+       "7 días o más",
+       "Se reembolsa el 50 % del adelanto"
+      ],
+      [
+       "Menos de 7 días",
+       "No se reembolsa"
+      ]
+     ]
+    },
+    {
+     "texto": "El reembolso se realiza por el mismo medio en que se pagó, dentro de los 5 días hábiles siguientes a la confirmación de la cancelación."
+    },
+    {
+     "texto": "Puedes reprogramar tu fecha avisando con al menos 3 días de anticipación, sujeto a mi disponibilidad. El adelanto se mantiene a favor de la nueva fecha. Si avisas con menos de 3 días, se aplica la tabla de arriba."
+    }
+   ]
+  },
+  {
+   "titulo": "06 · Si yo no puedo asistir",
+   "bloques": [
+    {
+     "texto": "Si por enfermedad, accidente u otro imprevisto grave no puedo realizar la cobertura, me comprometo a conseguir un fotógrafo de reemplazo. Si no es posible o no te convence, te devuelvo el 100 % de lo pagado."
+    }
+   ]
+  },
+  {
+   "titulo": "07 · Horario, retraso y horas extra",
+   "bloques": [
+    {
+     "texto": "Las horas contratadas se cuentan desde la hora acordada de llegada, aunque el evento empiece más tarde o tú llegues tarde. El tiempo no se extiende por retrasos."
+    },
+    {
+     "texto": "Si el evento se extiende, las horas extra se activan solas apenas se pasa el tiempo contratado, sin que yo tenga que avisarte ni pedirte permiso en ese momento. Cada hora o fracción se cobra aparte: S/ 90 por hora de solo foto y S/ 180 por hora de foto y video. Las horas extra se pagan junto con el saldo, al terminar."
+    }
+   ]
+  },
+  {
+   "titulo": "08 · Edición y retoques",
+   "bloques": [
+    {
+     "texto": "Cada foto entregada incluye edición de color, exposición y encuadre. Los retoques complejos, como quitar personas u objetos del fondo o hacer retoques avanzados, se cotizan antes de hacerlos y se cobran aparte."
+    }
+   ]
+  },
+  {
+   "titulo": "09 · Lugar y movilidad",
+   "bloques": [
+    {
+     "texto": "La movilidad está incluida en Pueblo Libre, San Miguel y Magdalena. En otros distritos la movilidad tiene un costo adicional, que te informaré antes de que realices el adelanto."
+    }
+   ]
+  },
+  {
+   "titulo": "10 · Lluvia, clima e imprevistos",
+   "bloques": [
+    {
+     "texto": "Si el evento es al aire libre y hay lluvia u otro clima que impida trabajar, podemos reprogramar sin costo o continuar en un espacio techado, lo que prefieras. Debemos decidirlo juntos con la mayor anticipación posible el mismo día."
+    },
+    {
+     "texto": "Hay cosas fuera de mi control (caso fortuito o fuerza mayor), como un corte de luz, el cierre del local o la falla de un equipo o de una tarjeta de memoria. Si algo así afecta el trabajo, te aviso de inmediato y reprogramamos sin costo; si no es posible, te devuelvo lo que corresponda a lo que no pueda cumplir. Mi responsabilidad por estas causas llega hasta el monto que pagaste por el servicio."
+    }
+   ]
+  },
+  {
+   "titulo": "11 · Cuidado de mi equipo",
+   "bloques": [
+    {
+     "texto": "Mis cámaras son mi herramienta de trabajo. Si en el evento habrá láseres, pirotecnia, chispas, humo o cualquier otro efecto que pueda dañarlas, avísame antes para tomar precauciones. Si el riesgo es alto, puedo dejar de fotografiar ese momento para proteger el equipo."
+    },
+    {
+     "texto": "Si, aun con precauciones, mi equipo se daña por esos efectos, por el local o por algún invitado, te pido apoyo para cubrir la reparación o la reposición. Lo conversamos con calma."
+    }
+   ]
+  },
+  {
+   "titulo": "12 · Fotos con niños y uso de imágenes",
+   "bloques": [
+    {
+     "texto": "Al contratar, la persona que reserva declara ser mayor de edad y contar con la autorización de los padres o tutores para fotografiar a los niños presentes en el evento."
+    },
+    {
+     "texto": "Podré usar algunas de las fotos del evento en mi portafolio, redes sociales y publicidad, salvo que me indiques lo contrario antes del evento o después, por escrito. Si prefieres privacidad, no se publicará nada. Con tu firma autorizas el uso de tu imagen, y la de los niños a tu cargo, para este fin."
+    }
+   ]
+  },
+  {
+   "titulo": "13 · Uso de tus fotos",
+   "bloques": [
+    {
+     "texto": "Tus fotos están hechas para que las disfrutes: compártelas, imprímelas y publícalas en tus redes todas las veces que quieras. Como en todo trabajo fotográfico, conservo los derechos de autor; solo si algún día quieres usarlas con fines comerciales (por ejemplo, en la publicidad de una marca), escríbeme: lo acordamos por escrito, con su costo, dónde se usarán y por cuánto tiempo."
+    }
+   ]
+  },
+  {
+   "titulo": "14 · Colaboración el día del evento",
+   "bloques": [
+    {
+     "texto": "Haré todo lo posible por capturar los momentos importantes. Para ello es útil que me avises con tiempo de los momentos clave (cantada, torta, vals, familia) y de cualquier cambio de último momento. Por circunstancias fuera de mi control (como cortes de luz, restricciones del local o personas que se nieguen a ser fotografiadas) puede que alguna toma no sea posible."
+    }
+   ]
+  },
+  {
+   "titulo": "15 · Ley aplicable y aceptación",
+   "bloques": [
+    {
+     "texto": "Confío en que cualquier duda la resolvamos conversando. Si alguna vez no fuera posible, este contrato se rige por las leyes del Perú y se verá ante los jueces de Lima."
+    },
+    {
+     "texto": "Este documento es un contrato y obliga a los dos. Se acepta con tu firma en esta página o, si no lo firmas, al pagar el adelanto."
+    },
+    {
+     "texto": "Tus datos personales de este contrato (nombre, correo y teléfono) se tratan como explica la <a href=\"https://arianalpiste.com/privacidad\" target=\"_blank\" rel=\"noopener\">política de privacidad</a>."
+    }
+   ]
+  }
+ ],
+ "hash": "ef70728908856845dce1f1a7e87d8ac376de0926a24b096505b7f4842ddb69bc"
+}
