@@ -1069,6 +1069,12 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     cv.addEventListener('pointerup',stop); cv.addEventListener('pointercancel',stop);
     document.getElementById('sig-clear').addEventListener('click',function(){ ctx.clearRect(0,0,cv.width,cv.height); signed=false; box.classList.remove('signed') });
 
+    // Firma en JPEG con fondo blanco y ancho fijo: liviana y lista para el PDF del contrato
+    function firmaJpg(){
+      var w=600, h=Math.round(w*cv.height/cv.width), c=document.createElement('canvas'); c.width=w; c.height=h;
+      var g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,w,h); g.drawImage(cv,0,0,w,h);
+      return c.toDataURL('image/jpeg',0.85);
+    }
     // Enviar: el servidor valida todo de nuevo, calcula el precio, guarda el contrato, manda los correos y avisa a Meta.
     var iniciado=Date.now(), enviando=false, btn=form.querySelector('.ct-submit');
     form.addEventListener('submit',function(e){
@@ -1081,7 +1087,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
         fecha:val('fecha'), hora:val('hora'), direccion:val('direccion'), acuerdos:val('acuerdos'),
         nombre:val('nombre'), correo:val('correo'), celular:val('celular'),
         acepta_privacidad:form.elements.acepto.checked?'si':'', acepta_meta:form.elements.publicidad.checked?'si':'',
-        firma:cv.toDataURL('image/png'), version:C.version, hash:C.hash,
+        firma:firmaJpg(), version:C.version, hash:C.hash,
         sitio:val('sitio'), tiempo:Math.round((Date.now()-iniciado)/1000)
       };
       // Cookies del Pixel (solo existen si aceptó las cookies): mejoran la coincidencia del Purchase en Meta
