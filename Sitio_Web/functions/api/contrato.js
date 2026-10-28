@@ -1,69 +1,23 @@
-import { normalizeEmail, normalizePhone, sendCapiEvent } from '../lib/meta-capi.js';
-import CONTRATO from '../lib/contrato-eventos.json';
+import { CONTRATO, PRIVACY_VERSION, OWNER_EMAIL, SITE, escapeHtml, soles, valoresDe, pdfBase64, sendEmail, wrapEmail, pagoHtml, tokenFor } from '../lib/contrato-comun.js';
 
-// Contrato digital (/contrato): valida, calcula el precio con la lista oficial, guarda el contrato en D1 (binding DB),
-// manda una copia al cliente y otra a Arian por Resend, y avisa a Meta con un Purchase.
-// Meta solo recibe correo y celular (cifrados) si la persona marcó la casilla opcional, igual que en /api/contacto.
-// El texto del contrato y los paquetes salen de lib/contrato-eventos.json, que genera integrar.py.
+// Contrato digital (/contrato), paso 1 de 2: firma del cliente.
+// Valida, calcula el precio con la lista oficial y guarda el contrato en D1 (binding DB) como «pendiente».
+// Manda al cliente su copia en PDF (solo con su firma, marcada pendiente) con los datos del adelanto, y a Arian
+// un aviso con el enlace para revisar y confirmar. Nada lleva la firma de Arian ni avisa a Meta hasta que él
+// confirma en /api/contrato-revisar.
 
-const PRODUCTION_HOSTS = new Set(['arianalpiste.com', 'www.arianalpiste.com']);
-// Versión de la Política de privacidad aceptada (la misma que registra /api/contacto). Cambiarla cuando cambie /privacidad.
-const PRIVACY_VERSION = '27 de octubre de 2026';
-const OWNER_EMAIL = 'hola@arianalpiste.com';
 const MAX_PER_HOUR = 5;          // contratos por IP en una hora
 const MIN_SECONDS = 20;          // nadie llena y firma un contrato en menos tiempo
-
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const TIME_PATTERN = /^\d{2}:\d{2}$/;
-const SIGNATURE_PATTERN = /^data:image\/png;base64,[A-Za-z0-9+/=]+$/;
+const SIGNATURE_PATTERN = /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/;
 
 const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' }
 });
-
 const clean = (value, max) => typeof value === 'string' ? value.trim().replace(/\s+/g, ' ').slice(0, max) : '';
-const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[c]);
-const soles = (n) => 'S/ ' + n.toLocaleString('es-PE', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
-const fechaLarga = (iso) => new Date(iso + 'T12:00:00-05:00').toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Lima' });
-
-// Texto del contrato con los datos de la persona: {campo} → valor, [[texto]] → texto resaltado.
-function renderContrato(valores) {
-  // Los enlaces del texto (por ejemplo, a la Política de privacidad) van como texto con la dirección al lado.
-  const inline = (text) => escapeHtml(text.replace(/<a href="([^"]+)"[^>]*>(.*?)<\/a>/g, '$2 ($1)'))
-    .replace(/\{(\w+)\}/g, (_, k) => `<strong>${escapeHtml(valores[k] || '')}</strong>`)
-    .replace(/\[\[(.+?)\]\]/g, '<strong>$1</strong>');
-  const html = [`<p>${escapeHtml(CONTRATO.intro)}</p>`];
-  for (const c of CONTRATO.clausulas) {
-    html.push(`<h3 style="margin:20px 0 6px;font-size:15px;color:#1D4C8A">${escapeHtml(c.titulo)}</h3>`);
-    for (const b of c.bloques) {
-      if (b.si && !valores[b.si]) continue;
-      if (b.tabla) {
-        const [head, ...rows] = b.tabla;
-        html.push('<table style="border-collapse:collapse;margin:6px 0 10px;font-size:14px">'
-          + '<tr>' + head.map((h) => `<th style="border:1px solid #DCEBF8;padding:6px 10px;text-align:left;background:#EEF6FD">${escapeHtml(h)}</th>`).join('') + '</tr>'
-          + rows.map((r) => '<tr>' + r.map((d) => `<td style="border:1px solid #DCEBF8;padding:6px 10px">${escapeHtml(d)}</td>`).join('') + '</tr>').join('')
-          + '</table>');
-      } else {
-        html.push(`<p style="margin:0 0 8px">${inline(b.texto)}</p>`);
-      }
-    }
-  }
-  return html.join('\n');
-}
-
-async function sendEmail(env, { to, replyTo, subject, html, attachments }) {
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': crypto.randomUUID() },
-    body: JSON.stringify({
-      from: env.CONTACT_FROM || 'Web Arian Alpiste <contacto@formularios.arianalpiste.com>',
-      to: [to], reply_to: replyTo, subject, html, attachments
-    })
-  });
-  if (!response.ok) throw new Error(`Resend ${response.status}: ${await response.text()}`);
-}
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -72,7 +26,7 @@ export async function onRequestPost(context) {
   if (origin && origin !== (env.ALLOWED_ORIGIN || url.origin)) return json({ ok: false, error: 'Origen no permitido.' }, 403);
   if (!(request.headers.get('Content-Type') || '').includes('application/json')) return json({ ok: false, error: 'Formato no permitido.' }, 415);
 
-  // La firma en PNG ocupa la mayor parte: 400 KB alcanzan de sobra
+  // La firma ocupa la mayor parte: 400 KB alcanzan de sobra
   const raw = await request.text();
   if (raw.length > 400000) return json({ ok: false, error: 'La firma es demasiado grande. Bórrala y firma de nuevo.' }, 413);
   let input;
@@ -107,83 +61,73 @@ export async function onRequestPost(context) {
   if (input.acepta_privacidad !== 'si') faltan.push('aceptar el contrato y la Política de privacidad');
   if (faltan.length) return json({ ok: false, error: `Falta completar: ${faltan.join(', ')}.` }, 400);
 
-  const aceptaMeta = input.acepta_meta === 'si';
   const ip = request.headers.get('CF-Connecting-IP') || '';
   const userAgent = (request.headers.get('User-Agent') || '').slice(0, 400);
   const ahora = new Date();
-  const ahoraLima = ahora.toLocaleString('es-PE', { timeZone: 'America/Lima', dateStyle: 'long', timeStyle: 'medium' });
 
   // Límite por IP
   const desde = new Date(ahora.getTime() - 3600 * 1000).toISOString();
   const { n } = await env.DB.prepare('SELECT COUNT(*) AS n FROM contratos WHERE ip = ? AND creado_en > ?').bind(ip, desde).first();
   if (n >= MAX_PER_HOUR) return json({ ok: false, error: 'Recibí varios contratos desde tu conexión. Escríbeme por WhatsApp y lo vemos.' }, 429);
 
-  // Precio con la lista oficial: nunca el que manda el navegador
-  const total = paquete.precios[d.modo];
-  const eventoTxt = d.evento === 'Otro' ? d.evento_otro : d.evento;
-  const valores = {
-    nombre: d.nombre, correo: d.correo, celular: d.celular, evento: eventoTxt.toLowerCase(), fecha: fechaLarga(d.fecha), hora: d.hora,
-    direccion: d.direccion, acuerdos: d.acuerdos, paquete: `${paquete.id} · ${d.modo === 'foto y video' ? 'Foto y video' : 'Solo foto'}`,
-    horas: paquete.horas[d.evento], fotos: paquete.fotos, video: d.modo === 'foto y video' ? 'Sí' : 'No', plazo: CONTRATO.plazos[d.modo],
-    total: soles(total), adelanto: soles(total / 2), saldo: soles(total / 2)
-  };
+  // Cookies del Pixel (solo existen si aceptó las cookies); se guardan para el Purchase que sale al confirmar
+  const fbp = /^fb\.\d\.\d+\.\d+$/.test(clean(input.fbp, 120)) ? clean(input.fbp, 120) : null;
+  const fbc = /^fb\.\d\.\d+\.[\w-]+$/.test(clean(input.fbc, 500)) ? clean(input.fbc, 500) : null;
 
   const id = crypto.randomUUID();
-  const eventId = `contrato-${id}`;
-  await env.DB.prepare(`INSERT INTO contratos (id, creado_en, nombre, correo, celular, evento, paquete, modo, precio, fecha_evento, hora, direccion, acuerdos,
-      acepta_privacidad, acepta_meta, privacidad_version, contrato_version, contrato_hash, ip, user_agent, firma_png, event_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?)`)
-    .bind(id, ahora.toISOString(), d.nombre, d.correo, d.celular, eventoTxt, paquete.id, d.modo, total, d.fecha, d.hora, d.direccion, d.acuerdos,
-      aceptaMeta ? 1 : 0, PRIVACY_VERSION, CONTRATO.version, CONTRATO.hash, ip, userAgent, input.firma, eventId)
+  const row = {
+    id, creado_en: ahora.toISOString(), nombre: d.nombre, correo: d.correo, celular: d.celular,
+    evento: d.evento === 'Otro' ? d.evento_otro : d.evento, evento_tipo: d.evento, paquete: paquete.id, modo: d.modo,
+    precio: paquete.precios[d.modo], fecha_evento: d.fecha, hora: d.hora, direccion: d.direccion, acuerdos: d.acuerdos,
+    acepta_meta: input.acepta_meta === 'si' ? 1 : 0, contrato_hash: CONTRATO.hash, ip, user_agent: userAgent,
+    firma_png: input.firma, event_id: `contrato-${id}`, estado: 'pendiente', revisado_en: null, fbp, fbc
+  };
+  await env.DB.prepare(`INSERT INTO contratos (id, creado_en, nombre, correo, celular, evento, evento_tipo, paquete, modo, precio, fecha_evento, hora,
+      direccion, acuerdos, acepta_privacidad, acepta_meta, privacidad_version, contrato_version, contrato_hash, ip, user_agent, firma_png, event_id, estado, fbp, fbc)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente', ?, ?)`)
+    .bind(row.id, row.creado_en, row.nombre, row.correo, row.celular, row.evento, row.evento_tipo, row.paquete, row.modo, row.precio,
+      row.fecha_evento, row.hora, row.direccion, row.acuerdos, row.acepta_meta, PRIVACY_VERSION, CONTRATO.version, row.contrato_hash,
+      row.ip, row.user_agent, row.firma_png, row.event_id, row.fbp, row.fbc)
     .run();
 
-  // Correos: copia al cliente (con los datos de pago) y aviso a Arian (con el registro completo)
-  const contratoHtml = renderContrato(valores);
-  const firma = [{ filename: 'firma.png', content: input.firma.split(',')[1] }];
-  const pago = env.PAGO_DATOS ? `<p style="margin:0 0 8px"><strong>Datos para el adelanto (${escapeHtml(valores.adelanto)}, dentro de las 24 horas):</strong><br>${escapeHtml(env.PAGO_DATOS).replace(/\n/g, '<br>')}</p>` : '';
-  const registro = `<p style="font-size:13px;color:#4A5F78">Aceptado el ${escapeHtml(ahoraLima)} (hora de Lima) · Versión del contrato ${escapeHtml(CONTRATO.version)} · Huella ${CONTRATO.hash.slice(0, 16)} · Política de privacidad del ${PRIVACY_VERSION} · N.º ${id.slice(0, 8)}</p>`;
-  const wrap = (inner) => `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#132A45;max-width:640px">${inner}</div>`;
-  const errores = [];
+  const v = valoresDe(row);
+  let adjunto = [];
+  try { adjunto = [{ filename: `Contrato-Arian-Alpiste-${id.slice(0, 8)}-pendiente.pdf`, content: pdfBase64(row) }]; }
+  catch (e) { console.error('PDF del contrato', e); }
+
+  // Copia al cliente: su PDF (pendiente de mi firma) y los datos del adelanto
+  let clienteOk = true;
   try {
     await sendEmail(env, {
-      to: d.correo, replyTo: OWNER_EMAIL, subject: `Tu contrato con Arian Alpiste · ${valores.paquete} · ${valores.fecha}`, attachments: firma,
-      html: wrap(`<p>Hola, ${escapeHtml(d.nombre.split(' ')[0])}:</p><p>Gracias por firmar. Aquí está tu contrato completo, con los datos que llenaste. Guárdalo.</p>
-        <p style="margin:0 0 8px"><strong>${escapeHtml(valores.paquete)}</strong> para tu ${escapeHtml(valores.evento)} del ${escapeHtml(valores.fecha)} · Total ${escapeHtml(valores.total)}</p>
-        ${pago}<p>Cuando hagas el adelanto, mándame el comprobante por WhatsApp al +51 989 789 691 y te confirmo la fecha.</p>
-        <hr style="border:0;border-top:1px solid #DCEBF8;margin:20px 0">${contratoHtml}<hr style="border:0;border-top:1px solid #DCEBF8;margin:20px 0">${registro}`)
+      to: row.correo, replyTo: OWNER_EMAIL, subject: `Recibí tu contrato · ${v.paquete} · ${v.fecha}`, attachments: adjunto,
+      html: wrapEmail(`<p>Hola, ${escapeHtml(row.nombre.split(' ')[0])}:</p>
+        <p>Gracias por firmar. Te adjunto tu copia del contrato en PDF, con tu firma. Lo reviso y te envío el contrato firmado también por mí.</p>
+        <p style="margin:0 0 8px"><strong>${escapeHtml(v.paquete)}</strong> para tu ${escapeHtml(v.evento)} del ${escapeHtml(v.fecha)} a las ${escapeHtml(row.hora)} · Total ${escapeHtml(v.total)}</p>
+        ${pagoHtml(env, row)}
+        <p>Cuando hagas el adelanto, mándame el comprobante por WhatsApp al +51 989 789 691.</p>
+        <p style="font-size:13px;color:#4A5F78">Contrato N.º ${id.slice(0, 8)}</p>`)
     });
-  } catch (e) { console.error('Correo al cliente', e); errores.push('cliente'); }
+  } catch (e) { console.error('Correo al cliente', e); clienteOk = false; }
+
+  // Aviso a Arian con el enlace para revisar y confirmar
+  const link = `${SITE}/api/contrato-revisar?id=${id}&t=${await tokenFor(env, id)}`;
   try {
     await sendEmail(env, {
-      to: OWNER_EMAIL, replyTo: d.correo, subject: `Contrato firmado: ${d.nombre} · ${valores.paquete} · ${valores.fecha}`, attachments: firma,
-      html: wrap(`<p><strong>${escapeHtml(d.nombre)}</strong> firmó el contrato.</p>
-        <p style="margin:0 0 8px">${escapeHtml(valores.paquete)} · ${escapeHtml(eventoTxt)} · ${escapeHtml(valores.fecha)} a las ${escapeHtml(d.hora)} · ${escapeHtml(d.direccion)}<br>
-        Total ${escapeHtml(valores.total)} · Adelanto ${escapeHtml(valores.adelanto)} · Correo ${escapeHtml(d.correo)} · Celular ${escapeHtml(d.celular)}</p>
-        ${d.acuerdos ? `<p style="margin:0 0 8px"><strong>Otros acuerdos:</strong> ${escapeHtml(d.acuerdos)}</p>` : ''}
+      to: OWNER_EMAIL, replyTo: row.correo, subject: `Revisar contrato: ${row.nombre} · ${v.paquete} · ${v.fecha}`, attachments: adjunto,
+      html: wrapEmail(`<p><strong>${escapeHtml(row.nombre)}</strong> firmó el contrato. Revisa los datos y confírmalo para enviarle la versión firmada por ti.</p>
+        <p style="margin:0 0 8px">${escapeHtml(v.paquete)} · ${escapeHtml(row.evento)} · ${escapeHtml(v.fecha)} a las ${escapeHtml(row.hora)}<br>
+        ${escapeHtml(row.direccion)}<br>Total ${escapeHtml(v.total)} · Adelanto ${escapeHtml(v.adelanto)}<br>
+        Correo ${escapeHtml(row.correo)} · Celular ${escapeHtml(row.celular)}</p>
+        ${row.acuerdos ? `<p style="margin:0 0 8px"><strong>Otros acuerdos:</strong> ${escapeHtml(row.acuerdos)}</p>` : ''}
+        <p style="margin:18px 0"><a href="${link}" style="display:inline-block;background:#1D4C8A;color:#fff;text-decoration:none;font-weight:bold;padding:12px 22px;border-radius:999px">Revisar y confirmar</a></p>
         <p style="margin:0 0 8px"><strong>Registro de consentimiento</strong> (guarda este correo como prueba)<br>
-        Contrato y Política de privacidad: aceptados · Uso para anuncios en Meta: ${aceptaMeta ? 'Sí, aceptado' : 'No aceptado'}<br>
+        Contrato y Política de privacidad (versión del ${PRIVACY_VERSION}): aceptados · Uso para anuncios en Meta: ${row.acepta_meta ? 'Sí, aceptado' : 'No aceptado'}<br>
         IP: ${escapeHtml(ip || 'Sin dato')} · Navegador: ${escapeHtml(userAgent || 'Sin dato')}</p>
-        ${errores.length ? '<p style="color:#B0245A"><strong>Ojo:</strong> no se pudo enviar la copia al cliente. Reenvíale este correo.</p>' : ''}
-        <hr style="border:0;border-top:1px solid #DCEBF8;margin:20px 0">${contratoHtml}<hr style="border:0;border-top:1px solid #DCEBF8;margin:20px 0">${registro}`)
+        ${clienteOk ? '' : '<p style="color:#B0245A"><strong>Ojo:</strong> no se pudo enviar la copia al cliente. Escríbele por WhatsApp.</p>'}
+        <p style="font-size:13px;color:#4A5F78">Contrato N.º ${id.slice(0, 8)} · Versión ${escapeHtml(CONTRATO.version)}</p>`)
     });
   } catch (e) { console.error('Correo a Arian', e); }
 
-  // Meta: Purchase desde el servidor, con el mismo ID que el de la página de gracias (Meta junta los dos en uno).
-  // En vistas previas y pruebas locales no se envía. Sin la casilla opcional, va sin correo ni celular.
-  if (PRODUCTION_HOSTS.has(url.hostname)) {
-    const fbp = /^fb\.\d\.\d+\.\d+$/.test(clean(input.fbp, 120)) ? clean(input.fbp, 120) : undefined;
-    const fbc = /^fb\.\d\.\d+\.[\w-]+$/.test(clean(input.fbc, 500)) ? clean(input.fbc, 500) : undefined;
-    const userData = { client_ip_address: ip || undefined, client_user_agent: userAgent || undefined, fbp, fbc };
-    if (aceptaMeta) {
-      userData.em = [await normalizeEmail(d.correo)];
-      userData.ph = [await normalizePhone(d.celular, env.PHONE_DEFAULT_COUNTRY_CODE || '51')];
-    }
-    const send = sendCapiEvent(env, {
-      eventName: 'Purchase', eventId, actionSource: 'website', eventSourceUrl: 'https://arianalpiste.com/contrato', userData,
-      customData: { value: total, currency: 'PEN', content_name: 'Contrato firmado', content_ids: [paquete.id], content_type: 'product', service_line: 'eventos' }
-    }).catch((e) => console.error('Meta CAPI (contrato)', e));
-    context.waitUntil ? context.waitUntil(send) : await send;
-  }
-
-  return json({ ok: true, eventId, valor: total });
+  // Sin eventId: la página de gracias no manda Purchase. Meta recibe la venta cuando Arian confirma.
+  return json({ ok: true, eventId: null, valor: row.precio });
 }
