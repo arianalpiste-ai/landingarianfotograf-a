@@ -1,4 +1,4 @@
-// Aviso de cookies: barra delgada abajo («Configurar» y «Aceptar») y ventana de preferencias con
+// Aviso de cookies: barra ancha abajo («Rechazar» y «Aceptar») y ventana de preferencias con
 // dos grupos: Necesarias (siempre activas) y Medición y publicidad (apagada hasta que la persona la active).
 // Sin un «Aceptar» guardado, el disparador del <head> (__afterLoad) no descarga ni el Meta Pixel
 // (fbevents.js) ni GTM (GA4): los eventos quedan en cola en la página y no salen.
@@ -35,15 +35,18 @@
   }
 
   var css = '' +
-    // Tarjeta flotante abajo, con «Configurar cookies» y «Aceptar» del mismo tamaño
-    '.ck-bar{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:2147483000;' +
-    'max-width:560px;margin:0 auto;background:#fff;color:' + INK + ';border:1px solid rgba(31,42,68,.14);border-radius:16px;' +
-    'box-shadow:0 12px 40px rgba(31,42,68,.18);padding:18px 20px;font:inherit;font-size:.92rem;line-height:1.5}' +
+    // Barra ancha abajo: título y texto a la izquierda, «Rechazar» y «Aceptar» a la derecha
+    '.ck-bar{position:fixed;left:0;right:0;bottom:0;z-index:2147483000;background:#FAFAFA;color:' + INK + ';' +
+    'border-top:1px solid rgba(31,42,68,.1);border-radius:14px 14px 0 0;box-shadow:0 -8px 30px rgba(31,42,68,.1);' +
+    'padding:20px 24px calc(20px + env(safe-area-inset-bottom,0px));font:inherit;line-height:1.5}' +
     '.ck-bar[hidden],.ck-modal[hidden]{display:none}' +
-    '.ck-bar p{margin:0}' +
-    '.ck-bar-actions{display:flex;gap:10px;margin-top:14px}' +
-    '.ck-bar .ck-btn{flex:1;min-height:44px;font-size:.92rem}' +
-    '@media (max-width:420px){.ck-bar{padding:16px}.ck-bar .ck-btn{padding:8px 10px;font-size:.86rem;white-space:nowrap}}' +
+    '.ck-bar-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px}' +
+    '.ck-bar b{display:block;font-size:1.02rem;font-weight:700;margin-bottom:4px}' +
+    '.ck-bar p{margin:0;font-size:.88rem;color:#4A5468;max-width:62ch}' +
+    '.ck-bar-actions{display:flex;gap:12px;flex:none}' +
+    '.ck-bar .ck-btn{min-height:44px;min-width:120px;font-size:.9rem}' +
+    '@media (max-width:720px){.ck-bar{padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px))}' +
+    '.ck-bar-in{flex-direction:column;align-items:stretch;gap:14px}.ck-bar .ck-btn{flex:1;min-width:0}}' +
     '.ck-btn{font:inherit;font-weight:600;font-size:.88rem;min-height:40px;padding:8px 22px;border-radius:999px;cursor:pointer;' +
     'border:1.5px solid ' + INK + ';background:' + INK + ';color:#fff}' +
     '.ck-btn.ghost{background:#fff;color:' + INK + '}' +
@@ -107,16 +110,17 @@
     bar.setAttribute('aria-label', 'Aviso de cookies');
     bar.hidden = true;
     bar.innerHTML =
-      '<p>Uso cookies para medir visitas y anuncios. Solo se activan si aceptas.</p>' +
-      '<div class="ck-bar-actions">' +
-      '<button type="button" class="ck-btn ghost" data-ck="config">Configurar cookies</button>' +
+      '<div class="ck-bar-in"><div>' +
+      '<b>Uso cookies</b>' +
+      '<p>Uso cookies de Meta y Google Analytics para medir las visitas y mis anuncios. Puedes aceptarlas o rechazarlas.</p>' +
+      '</div><div class="ck-bar-actions">' +
+      '<button type="button" class="ck-btn ghost" data-ck="rechaza">Rechazar</button>' +
       '<button type="button" class="ck-btn" data-ck="acepta">Aceptar</button>' +
-      '</div>';
+      '</div></div>';
     bar.addEventListener('click', function (event) {
       var button = event.target.closest('[data-ck]');
       if (!button) return;
-      if (button.getAttribute('data-ck') === 'config') openModal();
-      else choose('acepta');
+      choose(button.getAttribute('data-ck') === 'acepta' ? 'acepta' : 'rechaza');
     });
     document.body.appendChild(bar);
     return bar;
