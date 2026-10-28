@@ -31,7 +31,7 @@ export function valoresDe(row) {
 }
 
 export function registroTexto(row) {
-  const partes = [`Contrato N.º ${String(row.id).slice(0, 8)}`, `Firmado por el cliente el ${horaLima(row.creado_en)} (hora de Lima), desde la IP ${row.ip || 'sin dato'}`];
+  const partes = [`Contrato N.º ${String(row.id).slice(0, 8)}`, `Firmado por el cliente el ${horaLima(row.creado_en)} (hora de Lima)`];
   if (row.estado === 'confirmado' && row.revisado_en) partes.push(`Confirmado y firmado por el fotógrafo el ${horaLima(row.revisado_en)}`);
   partes.push(`Versión del contrato ${CONTRATO.version}, huella ${String(row.contrato_hash).slice(0, 16)}`);
   return partes.join(' · ');
