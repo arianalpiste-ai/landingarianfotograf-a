@@ -233,9 +233,11 @@
 
     // Si el clic cambia de página en la misma pestaña (por ejemplo «Reservar mi fecha») y el archivo de Meta
     // todavía no llegó, se espera un momento (máximo 1,2 s) para que el evento salga antes de navegar.
+    // Sin consentimiento de cookies el Pixel nunca llega (js/consent.js): no se espera.
     var sameTab = !link.target || link.target === '_self';
     var href = link.getAttribute('href') || '';
-    if (sameTab && !pixelReady() && href.charAt(0) !== '#' && !link.hasAttribute('data-cal-link') &&
+    var cookiesOk = typeof window.__cookiesOk !== 'function' || window.__cookiesOk();
+    if (sameTab && cookiesOk && !pixelReady() && href.charAt(0) !== '#' && !link.hasAttribute('data-cal-link') &&
         !event.defaultPrevented && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       event.preventDefault();
       if (typeof window.__tagsNow === 'function') window.__tagsNow();

@@ -8,10 +8,15 @@
 <script>
 window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
 (function(w,d){
-  var q=[],done=false,ev=['scroll','pointerdown','keydown','touchstart'];
-  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); q.splice(0).forEach(function(f){f()}); }
-  w.__afterLoad=w.__afterIdle=function(f){ done?f():q.push(f); };
+  var q=[],done=false,ok=false,ev=['scroll','pointerdown','keydown','touchstart'];
+  // Consentimiento (js/consent.js): sin un «Aceptar» guardado, ni el Pixel ni GTM se descargan; la cola espera.
+  try{ ok=localStorage.getItem('aa-cookies')==='acepta'; }catch(e){}
+  function flush(){ if(done&&ok) q.splice(0).forEach(function(f){f()}); }
+  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); flush(); }
+  w.__afterLoad=w.__afterIdle=function(f){ done&&ok?f():q.push(f); };
   w.__tagsNow=run;
+  w.__cookiesOk=function(){ return ok; };
+  w.__acceptCookies=function(){ ok=true; flush(); };
   ev.forEach(function(e){w.addEventListener(e,run,{passive:true})});
   w.addEventListener('load',function(){ 'requestIdleCallback' in w?requestIdleCallback(run,{timeout:800}):setTimeout(run,200); });
   w.__afterLoad(function(){ var j=d.createElement('script'); j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=GTM-MKJXCMSL'; d.head.appendChild(j); });
@@ -21,13 +26,13 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Política de Privacidad | Arian Alpiste Fotografía</title>
-<meta name="description" content="Política de privacidad de Arian Alpiste Fotografía: datos que recopilamos, para qué los usamos, con quién se comparten y cómo controlar las cookies.">
+<meta name="description" content="Política de privacidad de Arian Alpiste Fotografía: qué datos recopilo, para qué los uso, con quién se comparten, cuánto tiempo los guardo, tus derechos y cómo controlar las cookies.">
 <link rel="canonical" href="https://arianalpiste.com/privacidad">
 <meta property="og:url" content="https://arianalpiste.com/privacidad">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_PE">
 <meta property="og:title" content="Política de Privacidad | Arian Alpiste Fotografía">
-<meta property="og:description" content="Qué datos recopilamos, para qué los usamos y con quién se comparten.">
+<meta property="og:description" content="Qué datos recopilo, para qué los uso, con quién se comparten y cómo ejercer tus derechos.">
 <meta property="og:image" content="https://res.cloudinary.com/kxitlq1g/image/upload/f_jpg,q_auto,c_fill,g_faces,w_1200,h_630/landing/fotografia-bautizo-lima-hero">
 <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
@@ -487,6 +492,9 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   .legal-block h2{font-size:1.35rem;display:flex;align-items:center;gap:12px;margin-bottom:10px}
   .legal-block h2 .n{flex:none;width:34px;height:34px;border-radius:11px;background:var(--green-700);color:#fff;display:grid;place-items:center;font-size:.95rem}
   .legal-block p{color:var(--ink-soft)}
+  .legal-block p + p,.legal-block p + ul,.legal-block ul + p{margin-top:10px}
+  .legal-block ul{margin:0;padding-left:20px;color:var(--ink-soft);display:grid;gap:6px}
+  .legal-block .btn{margin:14px 0 6px;font-family:inherit;cursor:pointer}
   .legal-block a{color:var(--green-700);font-weight:700}
   .legal-contact{background:#FFF1C9;padding:64px 0;text-align:center}
   .legal-contact h2{font-size:clamp(1.6rem,3vw,2.2rem)}
@@ -594,10 +602,6 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKJXCMSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- Meta Pixel (noscript): solo para navegadores sin JavaScript; el Pixel principal vive en js/tracking.js -->
-<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1595821982250654&ev=PageView&noscript=1"></noscript>
 
 
 <!-- SVG sprite de iconos (estilo Lucide) -->
@@ -653,8 +657,8 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     <div class="wrap">
       <span class="eyebrow">Privacidad</span>
       <h1>Política de privacidad</h1>
-      <p class="lead">Esta política explica qué información se recopila cuando visitas arianalpiste.com o te comunicas con Arian Alpiste Fotografía, y cómo se utiliza.</p>
-      <span class="updated"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Última actualización: 6 de octubre de 2026</span>
+      <p class="lead">Aquí te cuento qué información recopilo cuando visitas arianalpiste.com o me escribes, para qué la uso, cuánto tiempo la guardo y cómo puedes pedirme que la corrija o la borre.</p>
+      <span class="updated"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Última actualización: 27 de octubre de 2026</span>
     </div>
   </section>
 
@@ -662,37 +666,81 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     <div class="wrap">
       <h2>En resumen</h2>
       <div class="summary-grid">
-        <div class="summary-card reveal"><span class="ico" style="background:var(--coral)"><svg><use href="#i-mail"/></svg></span><h3>Qué datos</h3><p>Lo que nos escribes (nombre, correo, teléfono y detalles del evento) y datos de navegación del Pixel de Meta.</p></div>
-        <div class="summary-card reveal"><span class="ico" style="background:var(--sky)"><svg><use href="#i-check"/></svg></span><h3>Para qué</h3><p>Responder tus consultas, coordinar reservas y medir y mostrar anuncios en Meta.</p></div>
-        <div class="summary-card reveal"><span class="ico" style="background:var(--green-600)"><svg><use href="#i-users"/></svg></span><h3>Con quién</h3><p>Meta, Resend (correo del formulario), WhatsApp, Cal.com, Cloudinary (imágenes) y Google Tag Manager.</p></div>
+        <div class="summary-card reveal"><span class="ico" style="background:var(--coral)"><svg><use href="#i-mail"/></svg></span><h3>Qué datos</h3><p>Lo que me escribes (nombre, correo, celular y detalles del evento) y, solo si aceptas las cookies, datos de navegación.</p></div>
+        <div class="summary-card reveal"><span class="ico" style="background:var(--sky)"><svg><use href="#i-check"/></svg></span><h3>Para qué</h3><p>Responder tus consultas, coordinar tu reserva y, si lo aceptas, medir mis anuncios en Meta.</p></div>
+        <div class="summary-card reveal"><span class="ico" style="background:var(--green-600)"><svg><use href="#i-users"/></svg></span><h3>Tus derechos</h3><p>Puedes pedirme ver, corregir o borrar tus datos escribiendo a hola@arianalpiste.com.</p></div>
       </div>
-      <div class="carousel-dots" role="group" aria-label="Elegir resumen"><button aria-label="Qué datos" aria-current="true"></button><button aria-label="Para qué"></button><button aria-label="Con quién"></button></div>
+      <div class="carousel-dots" role="group" aria-label="Elegir resumen"><button aria-label="Qué datos" aria-current="true"></button><button aria-label="Para qué"></button><button aria-label="Tus derechos"></button></div>
     </div>
   </section>
 
   <section class="legal">
     <div class="wrap legal-layout">
-      <nav class="toc" aria-label="Contenido"><b>Contenido</b><ol><li><a href="#datos">Datos que recopilamos</a></li><li><a href="#uso">Para qué usamos los datos</a></li><li><a href="#terceros">Con quién se comparten</a></li><li><a href="#cookies">Cookies y opciones de control</a></li><li><a href="#contacto">Contacto</a></li></ol></nav>
+      <nav class="toc" aria-label="Contenido"><b>Contenido</b><ol><li><a href="#responsable">Quién es responsable</a></li><li><a href="#datos">Datos que recopilo</a></li><li><a href="#uso">Para qué los uso</a></li><li><a href="#terceros">Con quién se comparten</a></li><li><a href="#cookies">Cookies</a></li><li><a href="#plazos">Cuánto tiempo los guardo</a></li><li><a href="#derechos">Tus derechos</a></li><li><a href="#contacto">Contacto</a></li></ol></nav>
       <div class="legal-body">
+        <article class="legal-block reveal" id="responsable">
+          <h2><span class="n">1</span>Quién es responsable</h2>
+          <p>El responsable de tus datos es Arian Alpiste, fotógrafo en Lima, Perú. Puedes escribirme a <a href="mailto:hola@arianalpiste.com">hola@arianalpiste.com</a>.</p>
+          <p>Trato tus datos de acuerdo con la Ley N.º 29733, Ley de Protección de Datos Personales del Perú, y su reglamento.</p>
+        </article>
         <article class="legal-block reveal" id="datos">
-          <h2><span class="n">1</span>Datos que recopilamos</h2>
-          <p>Podemos recopilar datos técnicos de navegación mediante el Pixel de Meta, como páginas visitadas e interacciones con enlaces. Cuando completas el formulario o reservas una llamada, también podemos medir la conversión desde el servidor mediante la API de conversiones de Meta (Conversions API). Asimismo, tratamos los datos que entregas voluntariamente, como tu nombre, correo electrónico, teléfono y detalles del evento.</p>
+          <h2><span class="n">2</span>Datos que recopilo</h2>
+          <ul>
+            <li><strong>Los que me das:</strong> tu nombre, correo, celular y los detalles de tu evento cuando llenas el formulario, me escribes por WhatsApp o agendas una llamada en Cal.com.</li>
+            <li><strong>Datos de navegación, solo si aceptas las cookies:</strong> páginas que visitas e interacciones con enlaces, medidos con el Pixel de Meta y Google Analytics.</li>
+            <li><strong>Datos técnicos:</strong> al visitar el sitio, los servicios que lo hacen funcionar pueden registrar tu dirección IP y el tipo de navegador.</li>
+          </ul>
+          <p>Para enviar el formulario tienes que aceptar esta política. Guardo la fecha, la hora y lo que aceptaste como registro de tu consentimiento.</p>
         </article>
         <article class="legal-block reveal" id="uso">
-          <h2><span class="n">2</span>Para qué usamos los datos</h2>
-          <p>Usamos esta información para responder consultas, coordinar reservas, medir los resultados de la publicidad y mostrar anuncios relevantes en los servicios de Meta Ads.</p>
+          <h2><span class="n">3</span>Para qué los uso</h2>
+          <ul>
+            <li>Responder tus consultas y coordinar tu reserva.</li>
+            <li>Si aceptas las cookies, medir las visitas al sitio y mostrar mis anuncios en Facebook e Instagram.</li>
+            <li>Si marcas la casilla opcional del formulario, avisar a Meta que llegó una consulta, con tu correo y celular cifrados, para medir mis anuncios. Si no la marcas, Meta no recibe esos datos.</li>
+          </ul>
         </article>
         <article class="legal-block reveal" id="terceros">
-          <h2><span class="n">3</span>Con quién se comparten</h2>
-          <p>Los datos de medición publicitaria pueden compartirse con Meta Platforms, Inc., proveedor de Facebook e Instagram. El formulario usa Resend para entregar tu consulta por correo. Los datos proporcionados mediante servicios externos también están sujetos a las políticas de esos servicios, como WhatsApp y Cal.com. Las imágenes del sitio se cargan desde Cloudinary, y usamos Google Tag Manager para gestionar las herramientas de medición; al visitar el sitio, estos servicios pueden registrar datos técnicos como tu dirección IP y el tipo de navegador.</p>
+          <h2><span class="n">4</span>Con quién se comparten</h2>
+          <p>Uso estos servicios para que el sitio funcione y para comunicarme contigo:</p>
+          <ul>
+            <li><strong>Meta Platforms</strong> (Facebook, Instagram y WhatsApp): mensajes y medición de anuncios.</li>
+            <li><strong>Google</strong> (Google Tag Manager y Google Analytics): medición de visitas.</li>
+            <li><strong>Resend:</strong> me entrega por correo lo que escribes en el formulario.</li>
+            <li><strong>Cal.com:</strong> agenda de llamadas.</li>
+            <li><strong>Cloudinary:</strong> carga de las imágenes del sitio.</li>
+          </ul>
+          <p>Estos servicios guardan los datos en servidores fuera del Perú, principalmente en Estados Unidos. Cada uno tiene su propia política de privacidad. No vendo tus datos a nadie.</p>
         </article>
         <article class="legal-block reveal" id="cookies">
-          <h2><span class="n">4</span>Cookies y opciones de control</h2>
-          <p>Puedes limitar o desactivar cookies desde la configuración de privacidad de tu navegador. Ten en cuenta que el procedimiento depende del navegador y del dispositivo que utilices.</p>
+          <h2><span class="n">5</span>Cookies</h2>
+          <p>Las cookies de Meta y Google Analytics solo se activan si las aceptas en el aviso que aparece al entrar. Si las rechazas, el sitio funciona igual. Puedes cambiar tu elección cuando quieras:</p>
+          <button type="button" class="btn btn-primary" data-cookie-settings>Cambiar mis preferencias de cookies</button>
+          <p>También puedes borrar o bloquear cookies desde la configuración de tu navegador.</p>
+        </article>
+        <article class="legal-block reveal" id="plazos">
+          <h2><span class="n">6</span>Cuánto tiempo guardo tus datos</h2>
+          <ul>
+            <li><strong>Si me escribiste pero no contrataste:</strong> guardo tu consulta durante 1 año, por si vuelves a escribirme. Después la borro.</li>
+            <li><strong>Si contrataste una sesión o cobertura:</strong> guardo tus datos de contacto y los del servicio mientras trabajamos juntos. Los datos de tus recibos por honorarios los conservo durante el plazo que exige la ley tributaria.</li>
+            <li><strong>Tus fotos:</strong> después de entregarte la galería, la guardo 1 mes como respaldo. Pasado ese plazo la borro, así que te recomiendo descargarla y guardarla.</li>
+            <li><strong>Fotos en mi portafolio:</strong> las que publico con tu permiso se mantienen mientras estén publicadas. Puedes pedirme que las retire.</li>
+          </ul>
+        </article>
+        <article class="legal-block reveal" id="derechos">
+          <h2><span class="n">7</span>Tus derechos</h2>
+          <p>En cualquier momento puedes pedirme:</p>
+          <ul>
+            <li><strong>Acceso:</strong> saber qué datos tengo sobre ti.</li>
+            <li><strong>Rectificación:</strong> corregirlos o actualizarlos.</li>
+            <li><strong>Cancelación:</strong> borrarlos, salvo los que la ley me obliga a conservar.</li>
+            <li><strong>Oposición:</strong> que deje de usarlos para algo en particular, por ejemplo para medir anuncios.</li>
+          </ul>
+          <p>Escríbeme a <a href="mailto:hola@arianalpiste.com">hola@arianalpiste.com</a> indicando qué necesitas. Si no estás conforme con mi respuesta, puedes acudir a la Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y Derechos Humanos.</p>
         </article>
         <article class="legal-block reveal" id="contacto">
-          <h2><span class="n">5</span>Contacto</h2>
-          <p>Si tienes preguntas sobre esta política o el tratamiento de tus datos, escribe a <a href="mailto:hola@arianalpiste.com">hola@arianalpiste.com</a>.</p>
+          <h2><span class="n">8</span>Contacto</h2>
+          <p>Si tienes preguntas sobre esta política o sobre tus datos, escríbeme a <a href="mailto:hola@arianalpiste.com">hola@arianalpiste.com</a>.</p>
         </article>
       </div>
     </div>
@@ -782,6 +830,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
   });
 </script>
-<script src="/js/tracking.js?v=20261023-servicio" defer></script>
+<script src="/js/consent.js?v=20261028b" defer></script>
+<script src="/js/tracking.js?v=20261027-consentimiento" defer></script>
 </body>
 </html>

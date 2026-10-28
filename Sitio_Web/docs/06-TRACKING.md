@@ -191,3 +191,12 @@ Un solo disparador para las dos etiquetas: `load` + `requestIdleCallback` (timeo
 primera interacción. `window.__afterLoad` y `window.__afterIdle` son la misma cola (se mantiene el nombre viejo por
 compatibilidad) y `run()` se ejecuta una sola vez, así que GTM y fbevents.js se insertan una única vez.
 GA4 agrupa sus envíos unos segundos (o los manda al cerrar la página): es su comportamiento normal.
+
+## Consentimiento de cookies y del formulario (octubre de 2026)
+
+- **Aviso de cookies** (`js/consent.js`, en todas las páginas): «Aceptar» o «Rechazar», guardado en `localStorage` (`aa-cookies` = `acepta`/`rechaza`, más `aa-cookies-fecha`). El disparador del `<head>` (`__afterLoad`) no descarga ni `fbevents.js` ni `gtm.js` hasta que hay un «Aceptar»: los eventos esperan en la cola de la página y, si la persona rechaza, nunca salen. Al aceptar se llama a `__acceptCookies()` y la cola se vacía en ese momento.
+- Si alguien rechaza después de haber aceptado, se borran `_fbp`, `_fbc` y `_ga*` y se recarga la página. Cualquier elemento con `data-cookie-settings` vuelve a abrir el aviso (está en `/privacidad#cookies`).
+- Se quitaron los `<noscript>` del Pixel y de GTM: sin JavaScript no hay forma de pedir consentimiento.
+- `tracking.js` ya no retiene los clics que cambian de página si no hay consentimiento (el Pixel nunca va a llegar).
+- **Formulario** (inicio y sesiones familiares): casilla obligatoria `acepta_privacidad` y opcional `acepta_meta`. `functions/api/contacto.js` rechaza el envío sin la primera y solo manda el Lead por Conversions API si la segunda está marcada. El correo incluye el registro de consentimiento (versión de la política, fecha y hora de Lima, página e IP). Al cambiar `/privacidad`, actualizar `PRIVACY_VERSION`.
+- **Pendiente:** el webhook de Cal.com (`cal-webhook.js`) sigue enviando Lead y Schedule a Meta sin una casilla de consentimiento propia.

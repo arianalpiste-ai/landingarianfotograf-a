@@ -8,10 +8,15 @@
 <script>
 window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
 (function(w,d){
-  var q=[],done=false,ev=['scroll','pointerdown','keydown','touchstart'];
-  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); q.splice(0).forEach(function(f){f()}); }
-  w.__afterLoad=w.__afterIdle=function(f){ done?f():q.push(f); };
+  var q=[],done=false,ok=false,ev=['scroll','pointerdown','keydown','touchstart'];
+  // Consentimiento (js/consent.js): sin un «Aceptar» guardado, ni el Pixel ni GTM se descargan; la cola espera.
+  try{ ok=localStorage.getItem('aa-cookies')==='acepta'; }catch(e){}
+  function flush(){ if(done&&ok) q.splice(0).forEach(function(f){f()}); }
+  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); flush(); }
+  w.__afterLoad=w.__afterIdle=function(f){ done&&ok?f():q.push(f); };
   w.__tagsNow=run;
+  w.__cookiesOk=function(){ return ok; };
+  w.__acceptCookies=function(){ ok=true; flush(); };
   ev.forEach(function(e){w.addEventListener(e,run,{passive:true})});
   w.addEventListener('load',function(){ 'requestIdleCallback' in w?requestIdleCallback(run,{timeout:800}):setTimeout(run,200); });
   w.__afterLoad(function(){ var j=d.createElement('script'); j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=GTM-MKJXCMSL'; d.head.appendChild(j); });
@@ -43,10 +48,6 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 <link rel="stylesheet" href="/blog/blog.css?v=20261016-vt">
 </head>
 <body data-content-type="article" data-content-name="Sesión de fotos de Halloween en Lima: 10 ideas de disfraces para tu familia" data-content-id="sesion-fotos-halloween-familia-lima">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKJXCMSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- Meta Pixel (noscript): solo para navegadores sin JavaScript; el Pixel principal vive en js/tracking.js -->
-<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1595821982250654&ev=PageView&noscript=1"></noscript>
 
 
 <!-- SVG sprite de iconos (estilo Lucide) -->
@@ -451,6 +452,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
   });
 </script>
-<script src="/js/tracking.js?v=20261023-servicio" defer></script>
+<script src="/js/consent.js?v=20261028b" defer></script>
+<script src="/js/tracking.js?v=20261027-consentimiento" defer></script>
 </body>
 </html>

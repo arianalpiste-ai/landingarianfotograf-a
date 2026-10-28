@@ -8,10 +8,15 @@
 <script>
 window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
 (function(w,d){
-  var q=[],done=false,ev=['scroll','pointerdown','keydown','touchstart'];
-  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); q.splice(0).forEach(function(f){f()}); }
-  w.__afterLoad=w.__afterIdle=function(f){ done?f():q.push(f); };
+  var q=[],done=false,ok=false,ev=['scroll','pointerdown','keydown','touchstart'];
+  // Consentimiento (js/consent.js): sin un «Aceptar» guardado, ni el Pixel ni GTM se descargan; la cola espera.
+  try{ ok=localStorage.getItem('aa-cookies')==='acepta'; }catch(e){}
+  function flush(){ if(done&&ok) q.splice(0).forEach(function(f){f()}); }
+  function run(){ if(done) return; done=true; ev.forEach(function(e){w.removeEventListener(e,run,{passive:true})}); flush(); }
+  w.__afterLoad=w.__afterIdle=function(f){ done&&ok?f():q.push(f); };
   w.__tagsNow=run;
+  w.__cookiesOk=function(){ return ok; };
+  w.__acceptCookies=function(){ ok=true; flush(); };
   ev.forEach(function(e){w.addEventListener(e,run,{passive:true})});
   w.addEventListener('load',function(){ 'requestIdleCallback' in w?requestIdleCallback(run,{timeout:800}):setTimeout(run,200); });
   w.__afterLoad(function(){ var j=d.createElement('script'); j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=GTM-MKJXCMSL'; d.head.appendChild(j); });
@@ -527,6 +532,11 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green-600);background:var(--white)}
   textarea{min-height:110px;resize:vertical}
   .help{font-size:.82rem;color:var(--ink-soft)}
+  /* Consentimiento del formulario: la de privacidad es obligatoria; la de Meta, opcional */
+  .consent{display:grid;gap:10px}
+  .consent label{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.88rem;line-height:1.45;color:var(--ink-soft);cursor:pointer}
+  .consent input{flex:none;width:20px;height:20px;min-height:0;margin:1px 0 0;padding:0;accent-color:var(--green-600);cursor:pointer}
+  .consent a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 
   /* FOOTER */
   footer{background:var(--ink);color:rgba(255,255,255,.8);padding:56px 0 32px;font-size:.94rem}
@@ -952,10 +962,6 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 </script>
 </head>
 <body data-content-type="service" data-content-name="Cobertura de eventos">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKJXCMSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- Meta Pixel (noscript): solo para navegadores sin JavaScript; el Pixel principal vive en js/tracking.js -->
-<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1595821982250654&ev=PageView&noscript=1"></noscript>
 
 
 <!-- SVG sprite de iconos (estilo Lucide) -->
@@ -1312,6 +1318,10 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
               <select id="f-type" name="evento" required><option>Bautizo</option><option>Cumpleaños</option><option>Sesión familiar</option><option>Otro</option></select></div>
           </div>
           <div class="field"><label for="f-msg">Cuéntame un poco</label><textarea id="f-msg" name="mensaje" maxlength="2000"></textarea><span class="help">Edades de los peques, fecha aproximada, ideas…</span></div>
+          <div class="consent">
+            <label><input type="checkbox" name="acepta_privacidad" value="si" required><span>Leí y acepto la <a href="/privacidad" target="_blank" rel="noopener">Política de privacidad</a>.</span></label>
+            <label><input type="checkbox" name="acepta_meta" value="si"><span>Acepto que mis datos se usen para medir anuncios (opcional).</span></label>
+          </div>
           <button class="btn btn-primary" type="submit">Enviar mensaje <svg><use href="#i-arrow"/></svg></button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
@@ -1333,6 +1343,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contacto">Contacto</a></li>
         <li><a href="/privacidad">Privacidad</a></li>
+        <li><a href="/assets/docs/terminos-y-condiciones-arian-alpiste.pdf" target="_blank" rel="noopener">Términos</a></li>
       </ul>
       <div class="social">
         <a href="https://instagram.com/arianalpiste" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
@@ -1464,6 +1475,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,800);
   });
 </script>
-<script src="/js/tracking.js?v=20261023-servicio" defer></script>
+<script src="/js/consent.js?v=20261028b" defer></script>
+<script src="/js/tracking.js?v=20261027-consentimiento" defer></script>
 </body>
 </html>

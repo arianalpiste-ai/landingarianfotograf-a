@@ -30,6 +30,9 @@ const json = (body, status = 200) => new Response(JSON.stringify(body), {
   }
 });
 
+// Versión de la Política de privacidad que acepta quien envía el formulario. Cambiarla cuando cambie /privacidad.
+const PRIVACY_VERSION = '27 de octubre de 2026';
+
 const clean = (value, maxLength) => typeof value === 'string'
   ? value.trim().slice(0, maxLength)
   : '';
@@ -134,9 +137,17 @@ export async function onRequestPost(context) {
     mensaje: clean(input.mensaje, 2000)
   };
   const origen = cleanOrigin(input.origen);
+  // Consentimiento: la privacidad es obligatoria; Meta solo recibe el Lead si la persona marcó la casilla opcional.
+  const aceptaPrivacidad = input.acepta_privacidad === 'si';
+  const aceptaMeta = input.acepta_meta === 'si';
+  const aceptadoEn = new Date().toLocaleString('es-PE', { timeZone: 'America/Lima', dateStyle: 'long', timeStyle: 'medium' });
   // Cookies del Pixel que manda el navegador: mejoran la coincidencia del Lead en Meta.
   const fbp = /^fb\.\d\.\d+\.\d+$/.test(clean(input.fbp, 120)) ? clean(input.fbp, 120) : undefined;
   const fbc = /^fb\.\d\.\d+\.[\w-]+$/.test(clean(input.fbc, 500)) ? clean(input.fbc, 500) : undefined;
+
+  if (!aceptaPrivacidad) {
+    return respond({ ok: false, error: 'Debes aceptar la Política de privacidad.' }, 400);
+  }
 
   if (submission.nombre.length < 2 || !EMAIL_PATTERN.test(submission.email) ||
       !EVENT_TYPES.has(submission.evento) || (submission.fecha && !DATE_PATTERN.test(submission.fecha))) {
@@ -175,7 +186,14 @@ export async function onRequestPost(context) {
           <p><strong>Origen:</strong> ${escapeHtml(originLabel(origen))}</p>
           <p><strong>¿Vio los precios antes de escribir?:</strong> ${origen.vio_precios === 'si' ? 'Sí' : origen.vio_precios === 'no' ? 'No' : 'Sin dato'}</p>
           <p><strong>Campaña / anuncio:</strong> ${escapeHtml([origen.utm_campaign, origen.utm_content].filter(Boolean).join(' · ') || 'Sin dato')}</p>
-          <p><strong>Página de entrada:</strong> ${escapeHtml(origen.landing || 'Sin dato')}</p>`
+          <p><strong>Página de entrada:</strong> ${escapeHtml(origen.landing || 'Sin dato')}</p>
+          <hr>
+          <p><strong>Registro de consentimiento</strong> (guarda este correo como prueba)</p>
+          <p><strong>Política de privacidad:</strong> aceptada (versión del ${PRIVACY_VERSION})</p>
+          <p><strong>Uso para anuncios en Meta:</strong> ${aceptaMeta ? 'Sí, aceptado' : 'No aceptado'}</p>
+          <p><strong>Fecha y hora:</strong> ${escapeHtml(aceptadoEn)} (hora de Lima)</p>
+          <p><strong>Desde la página:</strong> ${escapeHtml(sourcePage(request))}</p>
+          <p><strong>IP:</strong> ${escapeHtml(request.headers.get('CF-Connecting-IP') || 'Sin dato')}</p>`
       })
     });
   } catch (error) {
@@ -189,7 +207,7 @@ export async function onRequestPost(context) {
   }
 
   const eventId = `contacto-${crypto.randomUUID()}`;
-  if (!PRODUCTION_HOSTS.has(requestUrl.hostname)) return respond({ ok: true, eventId });
+  if (!PRODUCTION_HOSTS.has(requestUrl.hostname) || !aceptaMeta) return respond({ ok: true, eventId });
   try {
     const hashedEmail = await normalizeEmail(submission.email);
     const hashedPhone = await normalizePhone(submission.celular, env.PHONE_DEFAULT_COUNTRY_CODE || '51');
