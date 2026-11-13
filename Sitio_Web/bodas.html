@@ -836,6 +836,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
   [data-theme="champana-aire"] #paquetes .tier-hours{display:block;margin-top:12px;font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#94743F}
   [data-theme="champana-aire"] #paquetes .tier ul{margin:22px 0 0;gap:0;font-size:.93rem;color:var(--ink-soft)}
   [data-theme="champana-aire"] #paquetes .tier li{display:block;padding:10px 0;border-top:1px solid rgba(46,36,26,.08)}
+  [data-theme="champana-aire"] #paquetes .tier-text{margin:22px 0 0;padding-top:14px;border-top:1px solid rgba(46,36,26,.08);font-size:.93rem;line-height:1.7;color:var(--ink-soft)}
   [data-theme="champana-aire"] #paquetes .tiers-foot{margin-top:52px;text-align:center}
   [data-theme="champana-aire"] #paquetes .tiers-from{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:1.6rem;color:var(--ink)}
   [data-theme="champana-aire"] #paquetes .tiers-from span{font-family:var(--font-head);font-style:normal;font-weight:500;font-size:1.25rem}
@@ -847,7 +848,7 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
     [data-theme="champana-aire"] #paquetes .tier:nth-child(3){border-left:0}
     [data-theme="champana-aire"] #paquetes .tier:nth-child(n+3){border-top:1px solid rgba(148,116,63,.3)}
     [data-theme="champana-aire"] #paquetes .tier h3{font-size:1.75rem}
-    [data-theme="champana-aire"] #paquetes .tier ul{font-size:.86rem}
+    [data-theme="champana-aire"] #paquetes .tier ul,[data-theme="champana-aire"] #paquetes .tier-text{font-size:.86rem}
   }
 
   /* ===== Testimonios: una cita a la vez ===== */
@@ -1172,38 +1173,22 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
         <article class="plan tier reveal" data-track-offer>
           <h3>Premium</h3>
           <span class="tier-hours">Hasta 10 horas</span>
-          <ul>
-            <li>Hasta 10 h de cobertura.</li>
-            <li>Foto + video.</li>
-            <li>Cobertura completa del día.</li>
-          </ul>
+          <p class="tier-text">Su historia en fotos y en video: cada mirada, cada risa y cada abrazo del día, guardados de principio a fin.</p>
         </article>
         <article class="plan tier reveal">
           <h3>Completo</h3>
           <span class="tier-hours">Hasta 9 horas</span>
-          <ul>
-            <li>Hasta 9 h de cobertura.</li>
-            <li>Solo foto.</li>
-            <li>De los preparativos a la fiesta.</li>
-          </ul>
+          <p class="tier-text">En fotos y en video, desde los nervios de los preparativos hasta la última canción de la fiesta, para volver a vivirlo cuando quieran.</p>
         </article>
         <article class="plan tier reveal">
           <h3>Esencial</h3>
           <span class="tier-hours">Hasta 6 horas</span>
-          <ul>
-            <li>Hasta 6 h de cobertura.</li>
-            <li>Solo foto.</li>
-            <li>Preparativos, ceremonia y recepción.</li>
-          </ul>
+          <p class="tier-text">Solo fotos de los momentos que más se recuerdan: el último detalle antes de salir, el instante del sí y los primeros brindis como pareja.</p>
         </article>
         <article class="plan tier reveal">
           <h3>Íntimo</h3>
           <span class="tier-hours">Hasta 3 horas</span>
-          <ul>
-            <li>Hasta 3 h de cobertura.</li>
-            <li>Solo foto.</li>
-            <li>Ceremonia civil, sesión y brindis.</li>
-          </ul>
+          <p class="tier-text">Solo fotos de un día sencillo y lleno de cariño: su ceremonia civil, una sesión para ustedes dos y el brindis con su gente.</p>
         </article>
       </div>
       <div class="carousel-dots" role="group" aria-label="Elegir paquete" hidden><button aria-label="Premium" aria-current="true"></button><button aria-label="Completo"></button><button aria-label="Esencial"></button><button aria-label="Íntimo"></button></div>
