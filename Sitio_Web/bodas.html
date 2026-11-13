@@ -976,6 +976,9 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 
   /* ===== Nosotros: dos retratos ===== */
   @media(min-width:861px){ #sobre-mi .am-grid{grid-template-columns:minmax(0,6fr) minmax(0,5fr);max-width:1120px} }
+  .am-grid.am-solo,#sobre-mi .am-grid.am-solo{grid-template-columns:1fr;max-width:640px;text-align:center}
+  .am-solo .am-text p{margin-left:auto;margin-right:auto}
+  .am-solo .am-actions{justify-content:center}
   .am-duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px);align-items:start}
   .am-duo .am-photo{margin:0;aspect-ratio:3/4}
   .am-duo .am-photo:nth-child(2){margin-top:clamp(28px,4vw,56px)}
@@ -1230,11 +1233,13 @@ window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Dat
 
   <!-- SOBRE MÍ -->
   <section id="sobre-mi" class="about">
-    <div class="wrap am-grid">
+    <div class="wrap am-grid am-solo">
+      <!-- Fotos de Arian y Martín ocultas por ahora (2026-11-12); para volver a mostrarlas, quitar este comentario y la clase am-solo
       <div class="am-duo reveal">
         <figure class="am-photo"><div class="am-crop"><img src="img/arian-alpiste-fotografo-bodas-lima-1400.webp" srcset="img/arian-alpiste-fotografo-bodas-lima-800.webp 800w, img/arian-alpiste-fotografo-bodas-lima-1400.webp 1400w" sizes="(max-width: 860px) 45vw, 320px" alt="Arian Alpiste, fotógrafo de bodas en Lima" loading="lazy" width="933" height="1400" style="transform:translateX(2%) scale(1.3);transform-origin:44% 32%"></div><figcaption>Arian Alpiste</figcaption></figure>
         <figure class="am-photo"><img src="img/martin-arevalo-fotografo-bodas-lima-1400.webp" srcset="img/martin-arevalo-fotografo-bodas-lima-800.webp 800w, img/martin-arevalo-fotografo-bodas-lima-1400.webp 1400w" sizes="(max-width: 860px) 45vw, 320px" alt="Martín Arévalo, fotógrafo de bodas en Lima" loading="lazy" width="781" height="1400" style="object-position:50% 35%"><figcaption>Martín Arévalo</figcaption></figure>
       </div>
+      -->
       <div class="am-text reveal">
         <span class="eyebrow">Nosotros · Fotógrafos de bodas en Lima</span>
         <h2 class="am-title">Somos Arian y Martín.</h2>
